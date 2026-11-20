@@ -1,0 +1,18 @@
+{
+  "name": "notes-site",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "check": "node scripts/build.mjs --check",
+    "test": "node --test",
+    "serve": "node scripts/build.mjs && node scripts/serve.mjs",
+    "demo": "node scripts/build.mjs --root=tests/fixtures/site --out=../../../dist && node scripts/serve.mjs"
+  },
+  "dependencies": {
+    "js-yaml": "4.1.0"
+  }
+}
