@@ -8,6 +8,7 @@ prerequisites: []
 related: [types-of-databases, dbms-architecture, data-models, levels-of-abstraction]
 tags: [interview]
 syllabus: [UDSII-002]
+unit: 1
 time: 10 min
 status: draft
 sources:
@@ -40,17 +41,22 @@ A **database system** is the whole package. ==A database system consists of the 
 
 ### Q2. Why not just use files?
 
-Before DBMSs, each department wrote its own programs and kept its own files. This **file-processing system** causes eight problems (the full list is in Key facts):
+Before DBMSs, each department wrote its own programs and kept its own files. This is a **file-processing system**. It causes eight problems (full list in Key facts). The first four are about the data itself:
 
-- **Redundancy and inconsistency:** ==Redundancy is storing the same data more than once; inconsistency is when those copies disagree.== Your phone number in three files is redundancy; the old number still in the exam file is inconsistency.
-- **Hard to access data:** every new question, such as "students with fees pending and attendance below 75%", needs a new program.
+- **Redundancy and inconsistency:** ==Redundancy is storing the same data more than once; inconsistency is when those copies disagree.== Your phone number in three files is redundancy; the old number left in the exam file is inconsistency.
+- **Hard to access data:** every new question, such as "fees pending and attendance below 75%", needs a new program.
 - **Data isolation:** data is scattered across files in different formats, so combining it is painful.
-- **Integrity problems:** rules such as "marks must be between 0 and 100" are buried in program code and easy to break.
-- **Atomicity problems:** a crash halfway through a task leaves half-finished work, for example money taken from a student's account but the fee not marked as paid (see [[acid-properties]]).
+
+### Q3. What other problems do files cause?
+
+The other four are about rules, failures, sharing and safety:
+
+- **Integrity problems:** rules such as "marks must be 0 to 100" are buried in program code and easy to break.
+- **Atomicity problems:** a crash halfway through a task leaves half-finished work, such as money taken but the fee not marked paid (see [[acid-properties]]).
 - **Concurrent-access problems:** two people editing the same file at once can overwrite each other's changes.
 - **Security problems:** it is hard to let the library see names but not marks.
 
-### Q3. What does a DBMS actually do?
+### Q4. What does a DBMS actually do?
 
 A DBMS sits between users (or apps) and the stored data. Its main jobs:
 
@@ -64,11 +70,15 @@ A DBMS sits between users (or apps) and the stored data. Its main jobs:
 
 Apps no longer need to know how data is laid out on disk; they simply ask the DBMS. This separation is called **data independence** (see [[levels-of-abstraction]]).
 
-### Q4. What are the advantages and disadvantages?
+### Q5. What are the advantages and disadvantages?
 
-**Advantages:** controlled redundancy, consistent data, easy sharing, quick answers to new questions, rules enforced in one place, safe multi-user access, better security, and backup and recovery.
-
-**Disadvantages:** the software, hardware and trained staff cost money; it adds complexity; and for a tiny single-user task it is heavier than a simple file.
+| Advantages | Disadvantages |
+|---|---|
+| Controlled redundancy, consistent data | Cost of software, hardware and trained staff |
+| Easy sharing; quick answers to new questions | More complexity to set up and manage |
+| Rules enforced in one place | Heavier than a simple file for a tiny, single-user task |
+| Safe multi-user access, better security | |
+| Backup and recovery | |
 
 ## Analogy and real-life example
 
@@ -82,6 +92,8 @@ IRCTC Tatkal booking shows this at scale. Thousands of people try to book the la
 
 ```mermaid
 flowchart TB
+  accTitle: File processing versus the database approach
+  accDescr: In file processing, the admissions, exam and library programs each keep their own separate file. In the database approach, all three programs go through one DBMS to one shared database.
   subgraph FP["File-processing approach"]
     A1[Admissions program] --> F1[(admissions.xlsx)]
     A2[Exam program] --> F2[(exam.xlsx)]

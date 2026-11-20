@@ -8,6 +8,7 @@ prerequisites: [what-is-dbms]
 related: [nosql-databases, data-warehouse, dbms-architecture]
 tags: [interview]
 syllabus: [UDSII-002]
+unit: 1
 time: 10 min
 status: draft
 sources:
@@ -55,11 +56,14 @@ Every database has one answer to each question. Your college ERP is multiuser, c
 
 ### Q4. What are the types by usage?
 
-- **Operational database:** ==An operational database records day-to-day transactions as they happen.== Examples: a UPI payment, a seat booking, a new admission. It handles many small reads and writes every second. These are also called **OLTP** (online transaction processing) systems.
-- **Analytical database:** ==An analytical database stores historical data for reports and decisions.== It is mostly read, rarely changed. It answers questions like "Which city's sales grew fastest in three years?" A **data warehouse** is the classic analytical database (see [[data-warehouse]]). This work is called **OLAP** (online analytical processing).
-
-> [!beyond] Beyond the syllabus
-> In data careers, the analytical side is where most of the work happens. Data analysts and data scientists rarely query the live operational database; they work on copies in a warehouse or a "data lake", built by data engineers using pipelines that move data every night or even every few minutes.
+- **Operational database:** ==An operational database records day-to-day transactions as they happen.==
+  - Examples: a UPI payment, a seat booking, a new admission.
+  - Many small reads and writes every second.
+  - Called **OLTP** (online transaction processing).
+- **Analytical database:** ==An analytical database stores historical data for reports and decisions.==
+  - Example question: "Which city's sales grew fastest in three years?"
+  - Mostly read, rarely changed.
+  - Called **OLAP** (online analytical processing). A **data warehouse** is the classic example (see [[data-warehouse]]).
 
 ### Q5. What are the types by structure?
 
@@ -73,10 +77,15 @@ Semi-structured and very large data sets are often kept in **NoSQL databases**, 
 
 One UPI payment touches several types. When you pay, the bank's **operational, multiuser, distributed** database records it within seconds. Every night, the day's payments are copied into an **analytical** database. Next morning, analysts ask "Which merchants grew fastest this month?" there, not on the live system, so payments never slow down because of a report.
 
+> [!beyond] Beyond the syllabus
+> In data careers, the analytical side is where most of the work happens. Data analysts and data scientists rarely query the live operational database; they work on copies in a warehouse or a "data lake", built by data engineers using pipelines that move data every night or even every few minutes.
+
 ## Diagram
 
 ```mermaid
 flowchart LR
+  accTitle: Four ways to classify databases
+  accDescr: Databases are classified by users (single-user or multiuser), by location (centralised, distributed or cloud), by usage (operational or analytical) and by structure (structured, semi-structured or unstructured).
   T[Types of databases] --> U[By users]
   T --> L[By location]
   T --> P[By usage]
