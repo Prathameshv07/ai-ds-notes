@@ -40,6 +40,10 @@ export const REQUIRED_SECTIONS = {
   paper: [],
 };
 
+// Section 10: REGISTRY.md summary column for written notes = first sentence of "In one line",
+// trimmed to about this many characters.
+export const REGISTRY_SUMMARY_MAX = 120;
+
 // Section 8.1: "Self-check: 3–5 questions"
 export const SELF_CHECK_MIN = 3;
 export const SELF_CHECK_MAX = 5;

@@ -290,3 +290,48 @@ test('a repository with no content/ yet still builds an empty site', () => {
   const m = JSON.parse(fs.readFileSync(path.join(root, 'dist/data/manifest.json'), 'utf8'));
   assert.deepEqual(m.notes, {});
 });
+
+test('registry: written rows get summary (first sentence of "In one line") and prerequisites', () => {
+  const long = 'A database management system is software that stores, organises and protects shared data for many users at once, safely and efficiently';
+  const root = tree({
+    'content/concepts/databases/aa.md': note('aa').replace('## In one line\n\nPlaceholder.', '## In one line\n\nStores **shared** data, see [[bb|the bb note]]. Second sentence is ignored.'),
+    'content/concepts/databases/bb.md': note('bb', { prerequisites: ['aa', 'cc'] }).replace('## In one line\n\nPlaceholder.', `## In one line\n\n${long}.`),
+    'content/concepts/databases/cc.md': note('cc'),
+  });
+  build({ root });
+  const reg = fs.readFileSync(path.join(root, 'REGISTRY.md'), 'utf8');
+  assert.match(reg, /\| id \| title \| subject \| type \| status \| summary \| prerequisites \|/);
+  assert.match(reg, /\| aa \| Title aa \| databases \| theory \| draft \| Stores shared data, see the bb note \|  \|/);
+  const bb = reg.split('\n').find((l) => l.startsWith('| bb |'));
+  const summary = bb.split(' | ')[5];
+  assert.ok(summary.endsWith('…') && summary.length <= 121, `trimmed summary: ${summary}`);
+  assert.ok(bb.endsWith('| aa, cc |'));
+  const m = JSON.parse(fs.readFileSync(path.join(root, 'dist/data/manifest.json'), 'utf8'));
+  assert.equal(m.notes.aa.summary, 'Stores shared data, see the bb note');
+});
+
+test('registry: planned rows keep hand-typed summary and prerequisites; old 5-column rows still parse', () => {
+  const root = validTree();
+  fs.writeFileSync(path.join(root, 'REGISTRY.md'),
+    '| id | title | subject | type | status | summary | prerequisites |\n|---|---|---|---|---|---|---|\n' +
+    '| future-note | Future Note | databases | theory | planned | Covers: a, b \\| c, and d | aa, bb |\n' +
+    '| old-style | Old Style | ml | theory | planned |\n');
+  const r = build({ root });
+  assert.deepEqual(errors(r), []);
+  const reg = fs.readFileSync(path.join(root, 'REGISTRY.md'), 'utf8');
+  assert.match(reg, /\| future-note \| Future Note \| databases \| theory \| planned \| Covers: a, b \\\| c, and d \| aa, bb \|/);
+  assert.match(reg, /\| old-style \| Old Style \| ml \| theory \| planned \|  \|  \|/);
+  // a second build leaves the file unchanged
+  build({ root });
+  assert.equal(fs.readFileSync(path.join(root, 'REGISTRY.md'), 'utf8'), reg);
+});
+
+test('summary keeps maths subscripts and snake_case, drops emphasis markers', () => {
+  const root = tree({
+    'content/concepts/databases/aa.md': note('aa').replace('## In one line\n\nPlaceholder.',
+      '## In one line\n\nThe mean $x_i$ of _each_ user_id is **bold**.'),
+  });
+  build({ root });
+  const m = JSON.parse(fs.readFileSync(path.join(root, 'dist/data/manifest.json'), 'utf8'));
+  assert.equal(m.notes.aa.summary, 'The mean $x_i$ of each user_id is bold');
+});

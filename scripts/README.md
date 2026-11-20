@@ -24,9 +24,16 @@ a hyphen different) gives a warning, as a second check against typos.
 
 ## Registry (plan 10)
 
-- Rows for written notes are generated from each note's front matter.
-- Planned rows are typed by hand and kept exactly as written. Each must have a
-  title, a known subject and a known type, or the build fails.
+Columns: `id | title | subject | type | status | summary | prerequisites`.
+
+- Rows for written notes are generated from each note:
+  - `summary` is the first sentence of its "In one line" section, as plain text,
+    trimmed to about 120 characters (`REGISTRY_SUMMARY_MAX` in `config.mjs`);
+  - `prerequisites` are the IDs from its front matter, comma-separated.
+- Planned rows are typed by hand and kept exactly as written, including their
+  `summary` (written as `Covers: …`) and `prerequisites`. Each must have a title, a
+  known subject and a known type, or the build fails. Old 5-column rows still work;
+  their two new columns are simply empty.
 - When a planned note is written, the generated row replaces the planned one. The
   build warns if the title or subject differ.
 - A non-planned ID whose note file disappears fails the build.
