@@ -174,14 +174,16 @@ body[data-page="home"] main, body[data-page="path"] main{ max-width:calc(var(--m
 .note-section[data-level="U"]{ --c:var(--lvl-U); }
 .note-section[data-level="R"]{ --c:var(--lvl-R); }
 .note-section[data-level="P"]{ --c:var(--lvl-P); }
-.note-body h2{
-  display:flex; align-items:center; gap:.6rem; font-size:1.35rem; margin:0 0 .7rem;
+.note-body h2, .slide h2, .notebook-page h2{
+  display:flex; flex-wrap:wrap; align-items:center; gap:.6rem; font-size:1.35rem; margin:0 0 .7rem;
   padding-bottom:.45rem; border-bottom:1px solid var(--line); scroll-margin-top:4.5rem;
 }
 .note-body h3{ display:flex; align-items:baseline; gap:.4rem; font-size:1.1rem; margin:1.5rem 0 .4rem; scroll-margin-top:4.5rem; }
 .note-body h4{ display:flex; align-items:baseline; gap:.4rem; font-size:1rem; margin:1.2rem 0 .3rem; scroll-margin-top:4.5rem; }
 .note-body h2:target, .note-body h3:target{ animation:flash 1.6s ease-out; }
 @keyframes flash{ from{ background:color-mix(in srgb, var(--accent) 22%, transparent); } to{ background:transparent; } }
+.note-body h2 .h-text, .slide h2 .h-text, .notebook-page h2 .h-text{ flex:1 1 9rem; min-width:0; }
+.slide h3, .notebook-page h3{ display:flex; align-items:baseline; gap:.4rem; }
 .sec-icon{
   display:grid; place-items:center; width:2rem; height:2rem; flex:none; border-radius:50%;
   color:var(--c); background:color-mix(in srgb, var(--c) 14%, transparent);
@@ -256,6 +258,10 @@ summary.callout-title{ cursor:pointer; list-style:none; }
 summary.callout-title::-webkit-details-marker{ display:none; }
 summary.callout-title::after{ content:"Show"; margin-left:auto; flex:none; font-size:.75rem; font-weight:500; color:var(--muted); }
 details[open] > summary.callout-title::after{ content:"Hide"; }
+/* A closed answer never shows its title: "Answer: B" would give the answer away. */
+.ans-closed{ display:none; color:var(--ink); }
+details.ans-hide:not([open]) > summary .ans-closed{ display:inline; }
+details.ans-hide:not([open]) > summary .callout-title-text{ display:none; }
 .callout-body{ padding:0 .9rem .3rem 2.5rem; }
 .callout-body > :first-child{ margin-top:0; }
 .callout-body .callout{ margin:.6rem 0 .8rem; }
@@ -298,6 +304,113 @@ details.callout:not([open]) > .callout-title{ padding-bottom:.6rem; }
 
 .print-only{ display:none; }
 
+/* ---------- write-down marking and beyond the syllabus (plan 8.5) ---------- */
+mark.wd{
+  background:color-mix(in srgb, var(--lvl-M) 20%, transparent); color:inherit;
+  border-bottom:2px solid color-mix(in srgb, var(--lvl-M) 60%, transparent);
+  padding:.05em .2em; border-radius:3px; box-decoration-break:clone; -webkit-box-decoration-break:clone;
+}
+.wd-pen{ width:.85em; height:.85em; margin-right:.25em; color:var(--lvl-M); vertical-align:-.08em; }
+.wd-chip{
+  display:inline-flex; align-items:center; gap:.25rem; flex:none; margin-left:auto;
+  font-family:'IBM Plex Sans', sans-serif; font-size:.66rem; font-weight:600; letter-spacing:.04em; text-transform:uppercase;
+  color:var(--lvl-M); background:color-mix(in srgb, var(--lvl-M) 12%, transparent); border-radius:99px; padding:.12rem .5rem;
+}
+.wd-chip .icon{ width:.95em; height:.95em; }
+.wd-chip + .lvl-chip{ margin-left:0; }
+.callout-label{
+  margin-left:auto; flex:none; font-size:.68rem; font-weight:600; text-transform:uppercase; letter-spacing:.05em;
+  color:var(--muted); border:1px dashed var(--line); border-radius:99px; padding:.05rem .5rem; align-self:center;
+}
+.callout-beyond{ background:transparent; border-style:dashed; border-left-style:solid; opacity:.92; }
+.callout-beyond .callout-title-text, .callout-beyond .callout-body{ color:var(--muted); }
+summary.callout-title .callout-label{ margin-left:auto; }
+summary.callout-title .callout-label ~ *{ margin-left:.6rem; }
+.btn-accent{ background:var(--accent); color:var(--accent-ink); border-color:var(--accent); }
+.btn-accent:hover{ color:var(--accent-ink); filter:brightness(1.08); }
+.classroom-actions{ margin-top:.5rem; }
+
+/* ---------- classroom overlays: present mode and notebook view ---------- */
+html.overlay-open, html.overlay-open body{ overflow:hidden; }
+.present, .notebook{
+  position:fixed; inset:0; z-index:100; background:var(--paper); color:var(--ink);
+  display:flex; flex-direction:column; outline:none;
+}
+.present{ font-size:clamp(16px, calc(.75vw + .95vh + 3px), 38px); }
+.present-progress{ height:4px; background:var(--line); flex:none; }
+.present-progress span{ display:block; height:100%; width:0; background:var(--accent); transition:width .25s; }
+.present-stage{ flex:1; min-height:0; display:flex; }
+.slide{
+  flex:1; min-width:0; overflow:auto; padding:3.5vh max(5vw, 1.2rem) 2.5vh;
+  display:flex; flex-direction:column;
+}
+.slide > *{ width:100%; max-width:62em; margin-left:auto; margin-right:auto; }
+.slide .note-section{ margin-top:0; }
+.slide h2{ font-size:1.7em; margin:0 0 .6em; padding-bottom:.35em; border-bottom:1px solid var(--line); }
+.slide h2 .sec-icon{ width:1.5em; height:1.5em; }
+.slide h2 .sec-icon .icon{ width:.8em; height:.8em; }
+.slide h2 .wd-chip, .slide h2 .lvl-chip{ font-size:.38em; }
+.slide h3{ font-size:1.2em; }
+.slide .h-continued{ opacity:.75; }
+.part-count{ font-family:'IBM Plex Sans', sans-serif; font-size:.5em; color:var(--muted); font-weight:500; }
+.slide .diagram{ background:#FBFCFA; }
+.slide pre.mermaid svg{ max-height:62vh; width:auto !important; max-width:100%; }
+.slide .math-display .katex{ font-size:1.25em; }
+.slide pre{ font-size:.8em; }
+.slide .callout-body{ padding-left:2.2em; }
+.slide-ticket .quiz-options{ grid-template-columns:repeat(auto-fit, minmax(14em, 1fr)); }
+.step-pending{ visibility:hidden; }
+.slide-cover{ justify-content:center; }
+.slide-cover{ display:grid; grid-template-columns:minmax(0, 1.3fr) minmax(0, 1fr); align-items:center; gap:4vw; }
+.slide-cover > *{ max-width:none; margin:0; }
+.cover-subject{ color:var(--accent); font-weight:600; margin:0 0 .4em; font-size:.9em; }
+.slide-cover h1{ font-size:2.6em; margin:0 0 .3em; }
+.cover-meta{ color:var(--muted); display:flex; align-items:center; gap:.35em; margin:0; }
+.cover-qr{ text-align:center; }
+.qr-box{ display:inline-grid; place-items:center; padding:1em; background:#fff; border-radius:12px; border:1px solid var(--line); }
+.qr-box img, .qr-box canvas{ display:block; }
+.cover-qr-hint{ margin:.7em 0 .2em; font-size:.8em; }
+.cover-url{ margin:0; font-size:.55em; color:var(--muted); word-break:break-all; }
+.ticket-lead{ color:var(--muted); margin:-.2em 0 .8em; }
+.ticket-shuffle{ margin-left:auto; font-size:.45em; font-family:'IBM Plex Sans', sans-serif; }
+.present-bar{
+  flex:none; display:flex; align-items:center; gap:.4rem; padding:.45rem .8rem; font-size:15px;
+  background:var(--surface); border-top:1px solid var(--line);
+}
+.present-count{ font-family:'IBM Plex Mono', monospace; font-size:.85rem; color:var(--muted); min-width:4.2em; text-align:center; }
+.present-gap{ flex:1; }
+.pbtn{
+  display:inline-flex; align-items:center; justify-content:center; gap:.35rem; min-width:2.4rem; height:2.4rem; padding:0 .6rem;
+  border:1px solid var(--line); border-radius:8px; background:var(--surface); font-size:.85rem;
+}
+.pbtn:hover:not(:disabled){ border-color:var(--accent); color:var(--accent); }
+.pbtn:disabled{ opacity:.4; cursor:default; }
+.pbtn[aria-pressed="true"]{ background:var(--accent); color:var(--accent-ink); border-color:var(--accent); }
+@media (max-width:700px){
+  .pbtn-text span{ display:none; }
+  .slide-cover{ grid-template-columns:1fr; text-align:center; }
+  .cover-meta{ justify-content:center; }
+}
+
+.notebook-bar{
+  flex:none; display:flex; align-items:center; justify-content:space-between; gap:1rem;
+  padding:.5rem .9rem; background:var(--surface); border-bottom:1px solid var(--line);
+}
+.notebook-title{ display:flex; align-items:center; gap:.5rem; font-weight:600; min-width:0; }
+.notebook-title span{ white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+.notebook-title .icon{ color:var(--lvl-M); }
+.notebook-page{
+  flex:1; overflow:auto; padding:3vh max(5vw, 1rem) 6vh;
+  font-size:clamp(17px, calc(.7vw + .9vh + 4px), 34px);
+}
+.notebook-page > *{ max-width:58em; margin-left:auto; margin-right:auto; }
+.notebook-page h2{ font-size:1.45em; }
+.notebook-page h3{ font-size:1.05em; color:var(--muted); margin:1.6em 0 .3em; }
+.notebook-page .note-section{ margin-top:1.6em; }
+.notebook-lines ul{ margin:.2em 0; padding-left:1.2em; }
+.notebook-lines li{ margin:.35em 0; }
+.notebook-page pre.mermaid svg{ max-height:65vh; width:auto !important; max-width:100%; }
+
 /* ---------- small screens ---------- */
 @media (max-width:600px){
   h1{ font-size:1.55rem; }
@@ -336,5 +449,8 @@ details.callout:not([open]) > .callout-title{ padding-bottom:.6rem; }
   .answer-key h2{ display:block; font-size:1.3rem; border-bottom:1px solid var(--line); }
   .answer-key li{ margin-bottom:.6rem; }
   .key-body > :first-child{ margin-top:.2rem; }
+  mark.wd{ -webkit-print-color-adjust:exact; print-color-adjust:exact; }
+  .wd-chip{ -webkit-print-color-adjust:exact; print-color-adjust:exact; }
+  .classroom-actions, .present, .notebook{ display:none !important; }
   .print-footer{ margin-top:2rem; padding-top:.6rem; border-top:1px solid var(--line); font-size:.8rem; color:var(--muted); }
 }

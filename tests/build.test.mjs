@@ -259,7 +259,7 @@ test('build copies the reader engine and adds site data to the manifest', () => 
   fs.mkdirSync(path.join(root, 'content/assets/img/databases'), { recursive: true });
   fs.writeFileSync(path.join(root, 'content/assets/img/databases/er.png'), 'x');
   build({ root });
-  for (const f of ['index.html', 'path.html', 'note.html', 'assets/reader.js', 'assets/notes.css', 'assets/icons.js', 'assets/sections.js', '.nojekyll']) {
+  for (const f of ['index.html', 'path.html', 'note.html', 'assets/reader.js', 'assets/notes.css', 'assets/icons.js', 'assets/sections.js', 'assets/classroom.js', '.nojekyll']) {
     assert.ok(fs.existsSync(path.join(root, 'dist', f)), `${f} missing from dist`);
   }
   const m = JSON.parse(fs.readFileSync(path.join(root, 'dist/data/manifest.json'), 'utf8'));
@@ -334,4 +334,24 @@ test('summary keeps maths subscripts and snake_case, drops emphasis markers', ()
   build({ root });
   const m = JSON.parse(fs.readFileSync(path.join(root, 'dist/data/manifest.json'), 'utf8'));
   assert.equal(m.notes.aa.summary, 'The mean $x_i$ of each user_id is bold');
+});
+
+test('syllabus field, ==highlights== and [!beyond] checks', () => {
+  const body = (extra) => note('aa', { body: extra })
+    .replace('## In one line\n\nPlaceholder.', '## In one line\n\n==Do not highlight here.==');
+  let root = tree({ 'content/concepts/databases/aa.md': body('==one== ==two== ==three== ==four== ==five== ==six== and `==code==`\n\n> [!beyond] Extra\n> Placeholder.') });
+  let w = warnings(build({ root }));
+  assert.ok(w.some((x) => x.includes('already a write-down section')), 'highlight in a write-down section warns');
+  assert.ok(w.some((x) => x.includes('6 ==highlights==')), 'more than 5 highlights warns (code ignored)');
+  assert.ok(w.some((x) => x.includes('uses [!beyond] but has no "syllabus"')), '[!beyond] without syllabus warns');
+
+  root = tree({ 'content/concepts/databases/aa.md': note('aa', { body: '==one==\n\n> [!beyond] Extra\n> Placeholder.', extra: { syllabus: '[UDSII-002]' } }) });
+  const r = build({ root });
+  assert.deepEqual(errors(r), []);
+  assert.ok(!warnings(r).some((x) => /beyond|highlight/.test(x)));
+  const m = JSON.parse(fs.readFileSync(path.join(root, 'dist/data/manifest.json'), 'utf8'));
+  assert.deepEqual(m.notes.aa.syllabus, ['UDSII-002']);
+
+  root = tree({ 'content/concepts/databases/aa.md': note('aa', { extra: { syllabus: 'UDSII-002' } }) });
+  assert.ok(errors(build({ root })).some((x) => x.includes('syllabus must be a list')));
 });

@@ -8,6 +8,7 @@ prerequisites: [fixture-beta, fixture-planned]
 related: [fixture-gamma]
 tags: [interview]
 time: 10 min
+syllabus: [UDSII-002]
 status: draft
 sources:
   - "Placeholder source"
@@ -21,6 +22,8 @@ Inline maths $x_i^2 + y_{ij}$ and a price of 5 dollars stays plain.
 
 ## Explained                        <!-- required · U · Q&A style -->
 ### Q1. What is the placeholder?
+==A placeholder definition line with $x_i$ to copy.==
+
 Display maths on its own lines:
 
 $$
@@ -34,6 +37,8 @@ $$
 | 2 | placeholder | text |
 
 ### Q3. How does it work?
+Placeholder sentence with ==a short highlighted rule== inside it.
+
 1. First step
 2. Second step
    - nested point
@@ -80,6 +85,9 @@ Placeholder exercise.
 ## Think deeper                     <!-- R · trade-offs, "what if", design -->
 > [!example]+ An open foldable example
 > Placeholder.
+
+> [!beyond] Beyond the syllabus
+> Placeholder extra-depth content with ==a highlight that Notebook view must skip==.
 
 ## Self-check                       <!-- required · M/U/R · 3–5 questions -->
 > [!quiz] Q1. Which normal form removes partial dependency?

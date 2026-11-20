@@ -291,6 +291,17 @@
           },
           renderer(t) { return t.display ? `<span class="math-display">${katexHtml(t.text, true)}</span>` : katexHtml(t.text, false); },
         },
+        { // ==write this down== (Obsidian highlight): a highlighted line with a pen icon
+          name: 'writeDown', level: 'inline',
+          start(src) { const i = src.indexOf('=='); return i < 0 ? undefined : i; },
+          tokenizer(src) {
+            const m = src.match(/^==(?=\S)([^=\n]*?\S)==/);
+            if (m) return { type: 'writeDown', raw: m[0], tokens: this.lexer.inlineTokens(m[1]) };
+          },
+          renderer(t) {
+            return `<mark class="wd" title="Write this down">${icon('pen-line', 'wd-pen')}${this.parser.parseInline(t.tokens)}</mark>`;
+          },
+        },
         { // ![[image.png]] embeds and [[note-id|text]] links
           name: 'wikilink', level: 'inline',
           start(src) { const i = src.search(/!?\[\[/); return i < 0 ? undefined : i; },
@@ -341,14 +352,20 @@
       if (bodyHtml.trim()) first.innerHTML = bodyHtml; else first.remove();
 
       const style = CALLOUT_STYLES[type] || CALLOUT_STYLES.note;
+      // "Answer: B" in a closed answer's title would give the answer away, so it shows only once opened.
+      const hidesAnswer = type === 'answer' && fold === '-' && /answer\s*:/i.test(titleHtml.replace(/<[^>]+>/g, ''));
       if (!titleHtml) titleHtml = type[0].toUpperCase() + type.slice(1);
       const box = document.createElement(fold ? 'details' : 'div');
-      box.className = 'callout callout-' + style.color + (type === 'quiz' ? ' quiz' : '') + (type === 'answer' ? ' callout-answer' : '');
+      box.className = 'callout callout-' + style.color + (type === 'quiz' ? ' quiz' : '') + (type === 'answer' ? ' callout-answer' : '') + (type === 'beyond' ? ' callout-beyond' : '');
       box.dataset.callout = type;
       if (fold === '+') box.open = true;
+      if (hidesAnswer) box.classList.add('ans-hide');
       const title = document.createElement(fold ? 'summary' : 'div');
       title.className = 'callout-title';
-      title.innerHTML = `${icon(style.icon)}<span class="callout-title-text">${titleHtml}</span>`;
+      title.innerHTML = `${icon(style.icon)}` +
+        (hidesAnswer ? '<span class="ans-closed">Show answer</span>' : '') +
+        `<span class="callout-title-text">${titleHtml}</span>` +
+        (style.label ? `<span class="callout-label">${esc(style.label)}</span>` : '');
       const body = document.createElement('div');
       body.className = 'callout-body';
       while (bq.firstChild) body.appendChild(bq.firstChild);
@@ -459,6 +476,10 @@
       if (st) {
         sec.dataset.level = st.level;
         h2.insertAdjacentHTML('afterbegin', `<span class="sec-icon">${icon(st.icon)}</span>`);
+        if (st.writeDown) {
+          sec.classList.add('write-down');
+          h2.insertAdjacentHTML('beforeend', `<span class="wd-chip" title="Write this down in your notebook">${icon('pen-line')}<span>Write down</span></span>`);
+        }
         if (LEVEL_NAMES[st.level]) h2.insertAdjacentHTML('beforeend', `<span class="lvl-chip" title="Level of teaching">${LEVEL_NAMES[st.level]}</span>`);
       }
     });
@@ -640,6 +661,7 @@
       n.time ? icon('clock') + esc(n.time) : '',
       n.level ? esc(n.level[0].toUpperCase() + n.level.slice(1)) : '',
       n.type && n.type !== 'theory' ? esc(n.type[0].toUpperCase() + n.type.slice(1)) : '',
+      (n.syllabus || []).length ? `<span title="Syllabus course codes">Syllabus: ${n.syllabus.map(esc).join(', ')}</span>` : '',
     ].filter(Boolean).join('<span class="dot">·</span>');
 
     app.innerHTML = `
@@ -654,6 +676,11 @@
               <button type="button" class="btn" id="shareBtn">${icon('share-2')}Share</button>
               <button type="button" class="btn" id="qrBtn">${icon('qr-code')}QR code</button>
               <button type="button" class="btn" id="printBtn">${icon('printer')}Print</button>
+            </div>
+            <div class="note-actions classroom-actions" aria-label="Classroom">
+              <button type="button" class="btn btn-accent" id="presentBtn">${icon('presentation')}Present</button>
+              <button type="button" class="btn" id="notebookBtn">${icon('notebook-text')}Notebook</button>
+              <button type="button" class="btn" id="whiteboardBtn">${icon('pen-tool')}Whiteboard</button>
             </div>
           </header>
           ${toc ? `<details class="toc-inline"><summary>${icon('list')}Contents</summary>${toc}</details>` : ''}
@@ -675,6 +702,12 @@
     document.getElementById('shareBtn').addEventListener('click', () => shareLink(noteUrl, document.title));
     document.getElementById('qrBtn').addEventListener('click', () => showQr(noteUrl, n.title));
     document.getElementById('printBtn').addEventListener('click', () => window.print());
+    // Classroom tools live in classroom.js; they read what they need from window.Sutra.
+    window.Sutra = { icon, esc, loadScript, LIBS, toast, note: n, noteUrl, subjectTitle: subjectTitle(n.subject) };
+    const classroom = (fn) => () => (window.SutraClassroom ? window.SutraClassroom[fn]() : toast('Still loading, try again'));
+    document.getElementById('presentBtn').addEventListener('click', classroom('present'));
+    document.getElementById('notebookBtn').addEventListener('click', classroom('notebook'));
+    document.getElementById('whiteboardBtn').addEventListener('click', () => window.open('https://excalidraw.com/', '_blank', 'noopener'));
     setupTocTracking();
     setupPrint();
 

@@ -40,6 +40,12 @@ export const REQUIRED_SECTIONS = {
   paper: [],
 };
 
+// Section 8.5 and 11: write-down marking. These sections count as write-down automatically
+// (never highlight inside them); elsewhere ==highlights== mark lines to copy, at most a few per note.
+// Keep in step with writeDown in engine/assets/sections.js.
+export const WRITE_DOWN_SECTIONS = ['In one line', 'Key facts and formulas', 'Diagram'];
+export const HIGHLIGHT_MAX = 5;
+
 // Section 10: REGISTRY.md summary column for written notes = first sentence of "In one line",
 // trimmed to about this many characters.
 export const REGISTRY_SUMMARY_MAX = 120;

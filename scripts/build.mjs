@@ -265,6 +265,7 @@ export function build(opts = {}) {
       return [];
     };
     const tags = list('tags');
+    const syllabus = list('syllabus'); // optional course codes, e.g. [UDSII-002] (plan Section 8.5)
     const prerequisites = list('prerequisites');
     const related = list('related');
     for (const t of tags) if (!C.TAGS.includes(t)) error(f, `unknown tag "${t}" (allowed: ${C.TAGS.join(', ')})`);
@@ -320,10 +321,28 @@ export function build(opts = {}) {
       }
     }
 
+    // write-down marking and [!beyond] (plan Sections 8.5 and 11)
+    const wdSections = new Set(C.WRITE_DOWN_SECTIONS.map(norm));
+    let highlights = 0, beyond = false;
+    for (const sec of scan.sections) {
+      for (const l of sec.lines) {
+        if (l.inCode) continue;
+        const text = l.text.replace(/`[^`\n]*`/g, '');
+        const n = (text.match(/==(?=\S)[^=\n]*?\S==/g) || []).length;
+        if (n && wdSections.has(norm(sec.name))) {
+          warn(f, `line ${l.line}: "## ${sec.name}" is already a write-down section; don't highlight inside it`);
+        } else highlights += n;
+        if (/^\s*>\s*\[!beyond\]/i.test(l.text)) beyond = true;
+      }
+    }
+    if (highlights > C.HIGHLIGHT_MAX) warn(f, `${highlights} ==highlights==; the style guide asks for at most ${C.HIGHLIGHT_MAX} short lines`);
+    if (beyond && !syllabus.length) warn(f, 'uses [!beyond] but has no "syllabus" field, so "beyond the syllabus" has no meaning here');
+
     notes.set(id, {
       id, path: f, fm, tags, prerequisites, related,
       headings: scan.headings, bodyLinks: scan.links, text: scan.text, cards, quizCount,
       summary: oneLineSummary(scan),
+      syllabus,
     });
   }
 
@@ -532,7 +551,7 @@ export function build(opts = {}) {
   for (const n of notes.values()) {
     notesOut[n.id] = {
       title: n.fm.title, subject: n.fm.subject, level: n.fm.level, type: n.fm.type, status: n.fm.status,
-      time: n.fm.time ?? null, summary: n.summary, tags: n.tags, prerequisites: n.prerequisites, related: n.related,
+      time: n.fm.time ?? null, summary: n.summary, syllabus: n.syllabus, tags: n.tags, prerequisites: n.prerequisites, related: n.related,
       path: n.path, headings: n.headings, flashcards: n.cards.length, quizzes: n.quizCount,
       backlinks: [...(backlinks.get(n.id) ?? [])].sort(),
     };

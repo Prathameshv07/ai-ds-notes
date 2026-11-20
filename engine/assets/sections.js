@@ -5,17 +5,21 @@
      M = Memory, U = Understanding, R = Reflective,
      P = Practice (self-check, viva and interview questions), N = neutral (no chip).
    Section names are matched case-insensitively; text in brackets is ignored,
-   so "Concepts used (links)" matches "Concepts used". Unknown sections get no icon. */
+   so "Concepts used (links)" matches "Concepts used". Unknown sections get no icon.
+
+   writeDown: true marks the sections students copy into their notebooks (plan Section 8.5).
+   They get a pen icon and appear in Notebook view, together with ==highlighted== lines.
+   Keep this list in step with WRITE_DOWN_SECTIONS in scripts/config.mjs. */
 var SECTION_STYLES = {
   // theory (8.1)
   'why should you care?':           { icon: 'lightbulb',              level: 'U' },
-  'in one line':                    { icon: 'anchor',                 level: 'M' },
+  'in one line':                    { icon: 'anchor',                 level: 'M', writeDown: true },
   'explained':                      { icon: 'message-circle-question', level: 'U' },
   'analogy and real-life example':  { icon: 'puzzle',                 level: 'U' },
-  'diagram':                        { icon: 'workflow',               level: 'U' },
+  'diagram':                        { icon: 'workflow',               level: 'U', writeDown: true },
   'worked example':                 { icon: 'notebook-pen',           level: 'U' },
   'try it':                         { icon: 'pencil',                 level: 'U' },
-  'key facts and formulas':         { icon: 'star',                   level: 'M' },
+  'key facts and formulas':         { icon: 'star',                   level: 'M', writeDown: true },
   'common mistakes':                { icon: 'triangle-alert',         level: 'R' },
   'think deeper':                   { icon: 'brain',                  level: 'R' },
   'self-check':                     { icon: 'list-checks',            level: 'P' },
@@ -57,4 +61,5 @@ var CALLOUT_STYLES = {
   quote:     { icon: 'quote',          color: 'grey'   },
   quiz:      { icon: 'list-checks',    color: 'blue'   },
   answer:    { icon: 'circle-check',   color: 'green'  },
+  beyond:    { icon: 'telescope',      color: 'grey', label: 'Not in syllabus' }, // content outside the note's syllabus
 };
