@@ -18,10 +18,11 @@
 | quartiles-and-percentiles | Quartiles and Percentiles | prob-stats | theory | planned | Covers: quartiles, deciles, percentiles, IQR, five-number summary, 1.5 IQR outlier rule | central-tendency |
 | skewness-and-kurtosis | Skewness and Kurtosis | prob-stats | theory | planned | Covers: shape of a distribution, positive and negative skew, mean-median-mode order, types of kurtosis | central-tendency, dispersion |
 | acid-properties | ACID Properties | databases | theory | planned | Covers: transactions, atomicity, consistency, isolation, durability |  |
-| data-models | Data Models | databases | theory | planned | Covers: what a data model is, why it matters, building blocks, business rules | what-is-dbms |
+| data-models | Data Models | databases | theory | draft | A data model is a simple, usually graphical, picture of real-world data: what things exist, what we store about them… | what-is-dbms |
 | databases-intro | Databases & SQL: Start Here | databases | intro | draft |  |  |
 | dbms-architecture | DBMS Architecture | databases | theory | draft | DBMS architecture describes the parts of a database system, the people who use and run it, and how a request travels… | what-is-dbms |
-| levels-of-abstraction | Levels of Data Abstraction | databases | theory | planned | Covers: physical, logical and view levels, schemas, data independence | data-models |
+| er-model | Entity-Relationship Model | databases | theory | planned | Covers: entities, attributes, relationships, connectivity, cardinality, weak entities, ER diagrams | data-models |
+| levels-of-abstraction | Levels of Data Abstraction | databases | theory | draft | A DBMS describes data at three levels (physical, logical and view), so that each user sees only what they need and… | data-models |
 | normalization | Normalization | databases | theory | planned | Covers: anomalies, need for normalization, 1NF, 2NF, 3NF, BCNF, denormalization |  |
 | nosql-databases | NoSQL Databases | databases | theory | planned | Covers: key-value, document, column-family and graph stores; when to choose NoSQL | types-of-databases |
 | types-of-databases | Types of Databases | databases | theory | draft | Databases are classified by how many users they serve, where the data is kept, what the data is used for, and how… | what-is-dbms |
