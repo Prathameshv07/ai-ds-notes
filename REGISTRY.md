@@ -7,6 +7,16 @@
 
 | id | title | subject | type | status | summary | prerequisites |
 |---|---|---|---|---|---|---|
+| central-tendency | Measures of Central Tendency | prob-stats | theory | planned | Covers: mean, median, mode, weighted mean, choosing the right average, effect of outliers |  |
+| central-tendency-practical | Central Tendency Practical | prob-stats | practical | planned | Covers: mean, median and mode of a business dataset in Python on Colab (ABA practical 3) | central-tendency |
+| correlation | Correlation | prob-stats | theory | planned | Covers: Pearson's r, strength and direction, scatter-plot patterns, correlation vs causation | covariance |
+| correlation-practical | Correlation Practical | prob-stats | practical | planned | Covers: correlation analysis of business variables in Python on Colab (ABA practical 7) | correlation |
+| covariance | Covariance | prob-stats | theory | planned | Covers: how two variables vary together, sign and meaning, why its size is hard to read | dispersion |
+| dispersion | Measures of Dispersion | prob-stats | theory | planned | Covers: range, variance, standard deviation, coefficient of variation | central-tendency |
+| dispersion-practical | Dispersion Practical | prob-stats | practical | planned | Covers: variance and standard deviation of a business dataset in Python on Colab (ABA practical 4) | dispersion |
+| prob-stats-intro | Why Probability & Statistics? | prob-stats | intro | draft |  |  |
+| quartiles-and-percentiles | Quartiles and Percentiles | prob-stats | theory | planned | Covers: quartiles, deciles, percentiles, IQR, five-number summary, 1.5 IQR outlier rule | central-tendency |
+| skewness-and-kurtosis | Skewness and Kurtosis | prob-stats | theory | planned | Covers: shape of a distribution, positive and negative skew, mean-median-mode order, types of kurtosis | central-tendency, dispersion |
 | acid-properties | ACID Properties | databases | theory | planned | Covers: transactions, atomicity, consistency, isolation, durability |  |
 | data-models | Data Models | databases | theory | planned | Covers: what a data model is, why it matters, building blocks, business rules | what-is-dbms |
 | databases-intro | Databases & SQL: Start Here | databases | intro | draft |  |  |
