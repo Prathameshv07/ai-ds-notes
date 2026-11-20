@@ -4,8 +4,9 @@ title: Databases & SQL
 type: subject
 ---
 ## Basics
-1. [[what-is-dbms]]
-2. [[types-of-databases]]
-3. [[dbms-architecture]]
-4. [[data-models]]
-5. [[levels-of-abstraction]]
+1. [[databases-intro]]
+2. [[what-is-dbms]]
+3. [[types-of-databases]]
+4. [[dbms-architecture]]
+5. [[data-models]]
+6. [[levels-of-abstraction]]
