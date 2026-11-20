@@ -64,6 +64,8 @@ code, pre, kbd{ font-family:'IBM Plex Mono', ui-monospace, monospace; }
   position:sticky; top:0; z-index:20;
 }
 .brand-link{ text-decoration:none; color:inherit; min-width:0; }
+.header-actions{ display:flex; align-items:center; gap:.8rem; flex:none; }
+.header-link{ font-size:.85rem; text-decoration:none; white-space:nowrap; }
 .brand{ font-weight:600; font-size:1rem; line-height:1.3; }
 .brand small{ display:block; font-weight:400; color:var(--muted); font-size:.75rem; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
 .icon-btn{
@@ -174,7 +176,7 @@ body[data-page="home"] main, body[data-page="path"] main{ max-width:calc(var(--m
 .note-section[data-level="U"]{ --c:var(--lvl-U); }
 .note-section[data-level="R"]{ --c:var(--lvl-R); }
 .note-section[data-level="P"]{ --c:var(--lvl-P); }
-.note-body h2, .slide h2, .notebook-page h2{
+.note-body h2, .slide h2, .notebook-page h2, .pd-note h2{
   display:flex; flex-wrap:wrap; align-items:center; gap:.6rem; font-size:1.35rem; margin:0 0 .7rem;
   padding-bottom:.45rem; border-bottom:1px solid var(--line); scroll-margin-top:4.5rem;
 }
@@ -182,8 +184,8 @@ body[data-page="home"] main, body[data-page="path"] main{ max-width:calc(var(--m
 .note-body h4{ display:flex; align-items:baseline; gap:.4rem; font-size:1rem; margin:1.2rem 0 .3rem; scroll-margin-top:4.5rem; }
 .note-body h2:target, .note-body h3:target{ animation:flash 1.6s ease-out; }
 @keyframes flash{ from{ background:color-mix(in srgb, var(--accent) 22%, transparent); } to{ background:transparent; } }
-.note-body h2 .h-text, .slide h2 .h-text, .notebook-page h2 .h-text{ flex:1 1 9rem; min-width:0; }
-.slide h3, .notebook-page h3{ display:flex; align-items:baseline; gap:.4rem; }
+.note-body h2 .h-text, .slide h2 .h-text, .notebook-page h2 .h-text, .pd-note h2 .h-text{ flex:1 1 9rem; min-width:0; }
+.slide h3, .notebook-page h3, .pd-note h3{ display:flex; align-items:baseline; gap:.4rem; }
 .sec-icon{
   display:grid; place-items:center; width:2rem; height:2rem; flex:none; border-radius:50%;
   color:var(--c); background:color-mix(in srgb, var(--c) 14%, transparent);
@@ -238,6 +240,14 @@ pre code{ background:none; border:0; padding:0; }
 
 /* diagrams */
 .diagram{ overflow-x:auto; margin:1rem 0; padding:.8rem; background:#FBFCFA; color-scheme:light; border:1px solid var(--line); border-radius:var(--radius); text-align:center; }
+/* Until a diagram is drawn (or if it can't be), its alt text shows instead of the Mermaid source. */
+.diagram:not(.is-drawn) pre.mermaid{ height:0; overflow:hidden; padding:0; margin:0; visibility:hidden; }
+.diagram.is-drawn .diagram-fallback{ display:none; }
+.diagram-fallback{ display:flex; gap:.5rem; align-items:flex-start; text-align:left; color:#3b443f; font-size:.9rem; padding:.3rem; }
+.diagram-fallback .icon{ margin-top:.2em; color:#1F5E52; }
+.diagram-caption, .figure-img figcaption{ margin-top:.5rem; font-size:.82rem; color:#5B655F; font-style:italic; }
+.figure-img{ margin:1rem 0; text-align:center; }
+.figure-img figcaption{ color:var(--muted); }
 pre.mermaid{ margin:0; background:none; font-family:'IBM Plex Sans', sans-serif; color:var(--muted); white-space:pre-wrap; }
 pre.mermaid svg{ max-width:100%; height:auto; }
 
@@ -329,6 +339,64 @@ summary.callout-title .callout-label ~ *{ margin-left:.6rem; }
 .btn-accent{ background:var(--accent); color:var(--accent-ink); border-color:var(--accent); }
 .btn-accent:hover{ color:var(--accent-ink); filter:brightness(1.08); }
 .classroom-actions{ margin-top:.5rem; }
+
+/* ---------- v2.2 / v2.3 additions ---------- */
+.updated{ white-space:nowrap; }
+.feedback{ display:flex; flex-wrap:wrap; align-items:center; gap:.45rem; margin:1.6rem 0 0; font-size:.9rem; color:var(--muted); }
+.feedback .icon{ color:var(--accent); }
+.card-kicker{ font-size:.72rem; font-weight:600; letter-spacing:.06em; text-transform:uppercase; color:var(--accent); margin:0 0 .1rem; }
+.intro-card{ margin:0 0 1.2rem; border-left:4px solid var(--accent); }
+.intro-card.is-planned{ opacity:.75; }
+.intro-card .card-icon{ color:var(--accent); }
+.print-bar{
+  display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:.6rem;
+  margin:1rem 0 .2rem; padding:.55rem .8rem; background:var(--surface); border:1px dashed var(--line); border-radius:var(--radius); font-size:.85rem;
+}
+.print-bar-text{ display:inline-flex; align-items:center; gap:.4rem; color:var(--muted); }
+.btn:disabled{ opacity:.5; cursor:default; }
+.btn:disabled:hover{ border-color:var(--line); color:var(--ink); }
+.sel-note, .sel-group{ width:1.05rem; height:1.05rem; accent-color:var(--accent); flex:none; margin:0; cursor:pointer; }
+.sel-gap{ width:1.05rem; flex:none; }
+.stage h2{ display:flex; align-items:center; gap:.5rem; }
+.stage-practicals h2 .icon{ color:var(--lvl-R); }
+.pr-num{
+  display:inline-block; margin-right:.45rem; font-size:.72rem; font-weight:600; letter-spacing:.03em; vertical-align:.1em;
+  color:var(--lvl-R); border:1px solid color-mix(in srgb, var(--lvl-R) 45%, transparent); border-radius:99px; padding:.02rem .45rem;
+}
+.subj-chip{ font-size:.72rem; color:var(--muted); border:1px solid var(--line); border-radius:99px; padding:.02rem .45rem; margin-right:.2rem; }
+.badge-new{ color:var(--co-green); margin-left:0; }
+.badge-updated{ color:var(--co-blue); margin-left:0; }
+.cont{ font-weight:400; font-size:.8em; color:var(--muted); }
+.kp-lines{ line-height:2; }
+
+/* print dialog */
+.print-dialog{ border:1px solid var(--line); border-radius:var(--radius); background:var(--surface); color:var(--ink); padding:1rem 1.2rem; width:min(27rem, calc(100vw - 2rem)); }
+.print-dialog::backdrop{ background:rgba(0,0,0,.45); }
+.print-dialog fieldset{ border:0; padding:0; margin:1rem 0 0; }
+.print-dialog legend{ font-size:.78rem; color:var(--muted); margin-bottom:.35rem; padding:0; }
+.print-dialog .opt{ display:flex; gap:.6rem; align-items:flex-start; padding:.55rem .7rem; border:1px solid var(--line); border-radius:8px; cursor:pointer; }
+.print-dialog .opt + .opt{ margin-top:.45rem; }
+.print-dialog .opt:has(input:checked){ border-color:var(--accent); background:color-mix(in srgb, var(--accent) 7%, var(--surface)); }
+.print-dialog .opt input{ margin-top:.25rem; accent-color:var(--accent); }
+.print-dialog .opt b{ display:flex; align-items:center; gap:.35rem; }
+.print-dialog .opt small{ display:block; color:var(--muted); font-size:.8rem; margin-top:.1rem; }
+.print-dialog .segmented label{ flex:1; position:relative; text-align:center; cursor:pointer; }
+.print-dialog .segmented label + label{ border-left:1px solid var(--line); }
+.print-dialog .segmented input{ position:absolute; opacity:0; inset:0; cursor:pointer; }
+.print-dialog .segmented span{ display:block; padding:.45rem; font-size:.9rem; }
+.print-dialog .segmented input:checked + span{ background:var(--accent); color:var(--accent-ink); }
+.print-dialog .segmented input:focus-visible + span{ outline:2px solid var(--accent); outline-offset:-3px; }
+.print-hint{ display:flex; gap:.45rem; align-items:flex-start; font-size:.8rem; color:var(--muted); margin:1rem 0 0; }
+.print-hint .icon{ margin-top:.15em; }
+.dialog-actions{ display:flex; justify-content:flex-end; gap:.5rem; margin-top:1.1rem; }
+
+/* print document (Notebook sheet, Print selected): drawn off screen, shown only when printing */
+#printDoc{ position:absolute; left:-10000px; top:0; width:46rem; }
+.pd-head h1{ font-size:1.5rem; margin:0; }
+.pd-head p{ margin:.1rem 0 .6rem; color:var(--muted); font-size:.85rem; }
+.pd-note .note-section{ margin-top:1rem; }
+.pd-note h2{ font-size:1.25rem; margin:0 0 .5rem; padding-bottom:.35rem; border-bottom:1px solid var(--line); }
+.pd-note h3{ font-size:1rem; margin:1rem 0 .3rem; }
 
 /* ---------- classroom overlays: present mode and notebook view ---------- */
 html.overlay-open, html.overlay-open body{ overflow:hidden; }
@@ -423,6 +491,14 @@ html.overlay-open, html.overlay-open body{ overflow:hidden; }
 
 /* ---------- print (Ctrl+P, also used for PDFs) ---------- */
 @media print{
+  body.printing-doc > *:not(#printDoc){ display:none !important; }
+  body.printing-doc #printDoc{ position:static; width:auto; }
+  .print-doc-full .pd-note + .pd-note{ break-before:page; }
+  .print-doc-notebook .pd-note + .pd-note{ margin-top:1.4rem; padding-top:1rem; border-top:1px solid var(--line); }
+  .pd-head{ break-after:avoid; }
+  .pd-footer{ display:block !important; }
+  .print-dialog, .print-bar, .feedback, .header-actions, .sel-note, .sel-group{ display:none !important; }
+  .diagram-fallback{ display:none; }
   :root, :root[data-theme="dark"]{
     --paper:#fff; --surface:#fff; --ink:#111; --muted:#555; --line:#ccc; --accent:#1F5E52; --code-bg:#f6f6f6;
     --lvl-M:#9A5B07; --lvl-U:#1F5E52; --lvl-R:#6D3FC9; --lvl-P:#1D4ED8;

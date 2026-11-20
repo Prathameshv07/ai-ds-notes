@@ -4,9 +4,12 @@ title: Databases & SQL
 type: subject
 ---
 ## Basics
-1. [[fixture-beta]]
-2. [[fixture-alpha]]
+1. [[databases-intro]]
+2. [[fixture-beta]]
+3. [[fixture-alpha]]
 
 ## Design
-3. [[fixture-planned]]
-4. [[fixture-gamma]]
+4. [[fixture-planned]]
+
+## Practicals
+5. [[fixture-gamma]]

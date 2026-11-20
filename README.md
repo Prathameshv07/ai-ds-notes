@@ -24,6 +24,8 @@ content/               notes (read-only for the engine; see the plan, Section 7.
 engine/                the reader, copied into dist/ by the build
   index.html             home: career paths and subjects
   path.html              ?subject=<id> (grouped by level headings) or ?course=<id> (stages)
+  syllabus.html          ?code=<course code>: notes for one university course, by unit
+  whats-new.html         notes added or changed recently (from git history)
   note.html              ?id=<note-id>: one note
   assets/reader.js       the shared engine (rendering, navigation, settings, share, QR, print)
   assets/notes.css       styles, including dark mode and print
@@ -66,15 +68,39 @@ tests/                 build tests; fixtures/site/ holds placeholder notes for t
 - Libraries (marked, KaTeX, Mermaid, highlight.js, qrcodejs) load from cdnjs only when a note
   needs them, to keep data use low.
 
+## Pages and print (plan v2.2, v2.3)
+
+- **Subject page:** the intro note (`type: intro`, ID `<subject>-intro`) leads as a "Start here"
+  card. Level headings (`## Basics`, `## Practicals`…) become groups; practicals show
+  "Practical N" from their `practical:` field. Tick notes (or a whole group) and press
+  **Print selected** to print them as one document.
+- **Syllabus pages:** one per course code found in notes' `syllabus:` field, notes from every
+  subject grouped by `unit:` (theory in subject order, then practicals by number; notes without a
+  unit go to "Other notes"). Linked from the home page. Course names and unit titles are in
+  `COURSES` in `scripts/config.mjs`; add an entry when a new course starts (the build warns).
+- **Print** (button on each note, and Print selected): **Notebook sheet** (default; write-down
+  parts only) or **Full note** (answers in a key at the end), page size **A4 or A5**, with a
+  one-line booklet hint. The last choice is remembered. Ctrl+P prints the note as shown.
+- **Last updated** under each note's title and the **What's new** page come from git history
+  (the GitHub Action fetches the full history for this).
+- **"Was this clear?"** link at the end of every note, once `FEEDBACK` in `scripts/config.mjs`
+  has the form link and its note-ID field (instructions in that file). Hidden until then.
+- **Alt text:** a diagram's `accTitle` is shown as its caption, and `accTitle`/`accDescr` replace
+  the diagram while it loads or if it can't be drawn. A picture on its own line gets its alt text
+  as a caption. The build warns about diagrams or pictures without alt text.
+
 ## Classroom (Phase 1.5)
 
 Buttons under each note's title:
 
-- **Present:** full-screen slides, one per `##` section (a long section is split at its `###`
-  questions; a slide that is still too tall shrinks its text a little). The first slide shows the
+- **Present:** full-screen slides, one per `##` section. Slides never scroll: a long section is
+  split at its `###` questions, text may shrink to 70%, and anything still too tall continues on
+  "(continued)" slides, split between paragraphs, list items, table rows or callout parts. Slides
+  are rebuilt when the window size changes (e.g. entering full screen). **Key points** (K) shows
+  only headings, highlights, lists, tables, boxes, formulas and diagrams. The first slide shows the
   note's QR code; the last is an **exit ticket** with two random Self-check questions (tap to see
   the answer; "Other questions" picks two more). Self-check, Flashcards and Sources are not slides.
-  Keys: → / Space next, ← back, Home / End, **R** step-by-step on/off, **F** full screen, **Esc** exit.
+  Keys: → / Space next, ← back, Home / End, **K** key points, **R** step by step, **F** full screen, **Esc** exit.
   On a phone or tablet: swipe, or tap the right/left side.
 - **Step by step** (in present mode): list items appear one at a time. The choice is remembered.
 - **Notebook:** only the write-down parts, projector-sized, as a dictation sheet: "In one line",

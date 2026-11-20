@@ -7,6 +7,9 @@ type: practical
 prerequisites: [fixture-alpha]
 time: 15 min
 status: reviewed
+practical: 2
+syllabus: [UDSVI-006]
+unit: 2
 sources: ["Placeholder"]
 ---
 ## Aim

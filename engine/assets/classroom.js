@@ -17,6 +17,8 @@
   'use strict';
 
   const REVEAL_KEY = 'notes_present_reveal_v1';
+  const KEYPOINTS_KEY = 'notes_present_keypoints_v1';
+  const MIN_SCALE = 0.7; // text may shrink to 70% before a slide is split further (plan 12)
   // Sections left out of the slides: Self-check becomes the exit ticket; flashcards and
   // sources are for students' own study, not for teaching from.
   const SKIP_SECTIONS = ['self-check', 'flashcards', 'sources'];
@@ -24,8 +26,8 @@
   const S = () => window.Sutra;
   const article = () => document.querySelector('.note-body');
 
-  function readReveal() { try { return localStorage.getItem(REVEAL_KEY) === '1'; } catch (e) { return false; } }
-  function saveReveal(on) { try { localStorage.setItem(REVEAL_KEY, on ? '1' : '0'); } catch (e) { /* ignore */ } }
+  const readFlag = (k) => { try { return localStorage.getItem(k) === '1'; } catch (e) { return false; } };
+  const saveFlag = (k, on) => { try { localStorage.setItem(k, on ? '1' : '0'); } catch (e) { /* ignore */ } };
 
   // A copy of part of the note, without the page-only controls and without duplicate heading IDs.
   function cleanCopy(node) {
@@ -114,53 +116,165 @@
     return el;
   }
 
-  // Build the slides. Sections that overflow are split at ### headings, packing as many
-  // groups per slide as fit, measured in the real slide area.
-  function buildSlides(stage) {
+  // ---- Key points (plan 12): only headings, ==highlights==, lists, tables, callouts and diagrams.
+  // Paragraphs and code are hidden; a paragraph with highlights keeps just its highlighted lines.
+  // Display maths stays too: formulas are key points.
+  function keyPointsOnly(sec) {
+    const keep = (el) => el.matches('h2, h3, h4, ul, ol, .table-wrap, table, .callout, .diagram, figure, .math-display, .flashcards');
+    [...sec.children].forEach((el) => {
+      if (keep(el)) return;
+      const marks = [...el.querySelectorAll('mark.wd')];
+      if (marks.length) {
+        const p = document.createElement('p');
+        p.className = 'kp-lines';
+        marks.forEach((m, i) => { if (i) p.appendChild(document.createElement('br')); p.appendChild(m.cloneNode(true)); });
+        el.replaceWith(p);
+      } else el.remove();
+    });
+    // a ### heading left with nothing under it is dropped too
+    [...sec.querySelectorAll(':scope > h3')].forEach((h) => {
+      const next = h.nextElementSibling;
+      if (!next || /^H[23]$/.test(next.tagName)) h.remove();
+    });
+    return [...sec.children].some((el) => el.tagName !== 'H2');
+  }
+
+  // ---- Splitting one block too tall for a slide on its own, at natural boundaries:
+  // list items, table rows (header repeated), callout body blocks, or sentences of a paragraph.
+  function splitBlock(el) {
+    const halves = (items, make) => {
+      if (items.length < 2) return null;
+      const mid = Math.ceil(items.length / 2);
+      return [make(items.slice(0, mid), 0), make(items.slice(mid), mid)];
+    };
+    if (el.matches('ul, ol')) {
+      return halves([...el.children], (lis, offset) => {
+        const l = el.cloneNode(false);
+        if (el.tagName === 'OL') l.start = (el.start || 1) + offset;
+        lis.forEach((li) => l.appendChild(li.cloneNode(true)));
+        return l;
+      });
+    }
+    if (el.matches('.table-wrap')) {
+      const body = el.querySelector('tbody');
+      if (!body) return null;
+      return halves([...body.rows], (rows) => {
+        const w = el.cloneNode(true);
+        w.querySelector('tbody').replaceChildren(...rows.map((r) => r.cloneNode(true)));
+        return w;
+      });
+    }
+    if (el.matches('div.callout')) {
+      const parts = [...el.querySelector('.callout-body').children];
+      return halves(parts, (kids, offset) => {
+        const c = el.cloneNode(true);
+        c.querySelector('.callout-body').replaceChildren(...kids.map((k) => k.cloneNode(true)));
+        if (offset) c.querySelector('.callout-title-text').insertAdjacentHTML('beforeend', ' <span class="cont">(continued)</span>');
+        return c;
+      });
+    }
+    if (el.tagName === 'P') {
+      const sentences = el.innerHTML.split(/(?<=[.!?])\s+(?=[A-Z0-9<])/);
+      return halves(sentences, (ss) => { const p = el.cloneNode(false); p.innerHTML = ss.join(' '); return p; });
+    }
+    return null;
+  }
+
+  // Build the slides from the rendered note (plan 12, "No scrolling slides"):
+  // 1. a section that fits (text may shrink to 70%) is one slide;
+  // 2. otherwise its ### questions are packed onto slides, a question moving whole to a new
+  //    slide when it fits there;
+  // 3. a question still too tall is split at block boundaries onto "continued" slides, and a single
+  //    block still too tall is split inside (list items, table rows, callout parts, sentences).
+  function buildSlides(stage, keyPoints) {
     const art = article();
     const slides = [titleSlide()];
-    const fits = (el) => { stage.replaceChildren(el); return el.scrollHeight <= el.clientHeight + 2; };
+    const fitsAt = (slide, scale) => {
+      slide.style.fontSize = scale === 1 ? '' : scale + 'em';
+      stage.replaceChildren(slide);
+      const ok = slide.scrollHeight <= slide.clientHeight;
+      slide.style.fontSize = '';
+      return ok;
+    };
 
     art.querySelectorAll(':scope > .note-section').forEach((sec) => {
       if (SKIP_SECTIONS.includes(sec.dataset.section)) return;
       const copy = cleanCopy(sec);
+      if (keyPoints && !keyPointsOnly(copy)) return; // nothing key in this section: no slide
       const whole = document.createElement('div');
       whole.className = 'slide';
       whole.appendChild(copy);
-      const groups = groupsOf(copy);
-      if (groups.length < 2 || fits(whole)) { slides.push(whole); return; }
+      if (fitsAt(whole, MIN_SCALE)) { slides.push(whole); return; }
 
-      const heading = groups[0].find((n) => n.tagName === 'H2');
+      const heading = copy.querySelector(':scope > h2');
       const parts = [];
       let cur = null;
-      const start = (first) => {
+      const newSlide = () => {
         const slide = document.createElement('div');
         slide.className = 'slide';
         const shell = sectionShell(copy);
-        if (!first && heading) { const h = heading.cloneNode(true); h.classList.add('h-continued'); shell.appendChild(h); }
+        if (heading) {
+          const h = heading.cloneNode(true);
+          if (parts.length) h.classList.add('h-continued');
+          shell.appendChild(h);
+        }
         slide.appendChild(shell);
-        return { slide, shell, count: 0 };
+        cur = { slide, shell, blocks: 0 };
+        parts.push(cur);
       };
-      groups.forEach((g, gi) => {
-        if (!cur) cur = start(gi === 0);
-        const added = g.map((n) => n);
-        added.forEach((n) => cur.shell.appendChild(n));
-        cur.count++;
-        if (cur.count > 1 && !fits(cur.slide)) {
-          added.forEach((n) => n.remove());
-          parts.push(cur);
-          cur = start(false);
-          added.forEach((n) => cur.shell.appendChild(n));
-          cur.count = 1;
+      const continuedH3 = (h3) => {
+        const h = h3.cloneNode(true);
+        const t = h.querySelector('.h-text') || h;
+        t.insertAdjacentHTML('beforeend', ' <span class="cont">(continued)</span>');
+        return h;
+      };
+
+      // Place one block on the current slide; move it on, or split it, when it doesn't fit.
+      const place = (block, h3) => {
+        cur.shell.appendChild(block);
+        cur.blocks++;
+        if (fitsAt(cur.slide, 1)) return;
+        if (cur.blocks > 1) {
+          block.remove(); cur.blocks--;
+          newSlide();
+          if (h3) cur.shell.appendChild(continuedH3(h3));
+          cur.shell.appendChild(block); cur.blocks++;
+          if (fitsAt(cur.slide, 1)) return;
         }
+        if (fitsAt(cur.slide, MIN_SCALE)) return;
+        const pieces = splitBlock(block);
+        if (!pieces) return; // cannot be split: fitText shrinks it further when shown
+        block.remove(); cur.blocks--;
+        pieces.forEach((pc) => place(pc, h3));
+      };
+
+      // groups: the part before the first ###, then one group per ### question
+      const groups = [[]];
+      [...copy.children].forEach((ch) => {
+        if (ch.tagName === 'H2') return;
+        if (ch.tagName === 'H3') groups.push([]);
+        groups[groups.length - 1].push(ch);
       });
-      if (cur) parts.push(cur);
-      parts.forEach((p, i) => {
-        if (parts.length > 1) {
-          const h = p.shell.querySelector('h2 .h-text');
-          if (h) h.insertAdjacentHTML('beforeend', ` <span class="part-count">${i + 1}/${parts.length}</span>`);
+      newSlide();
+      groups.filter((g) => g.length).forEach((g) => {
+        const h3 = g[0].tagName === 'H3' ? g[0] : null;
+        g.forEach((n) => cur.shell.appendChild(n));
+        if (fitsAt(cur.slide, 1)) { cur.blocks += g.length; return; }
+        g.forEach((n) => n.remove());
+        if (cur.blocks > 0) newSlide();
+        g.forEach((n) => cur.shell.appendChild(n));
+        if (fitsAt(cur.slide, MIN_SCALE)) { cur.blocks += g.length; return; }
+        g.forEach((n) => n.remove());
+        if (h3) cur.shell.appendChild(h3);
+        g.filter((n) => n !== h3).forEach((n) => place(n, h3));
+      });
+      const real = parts.filter((pt) => pt.shell.children.length > 1);
+      real.forEach((pt, i) => {
+        if (real.length > 1) {
+          const h = pt.shell.querySelector('h2 .h-text');
+          if (h) h.insertAdjacentHTML('beforeend', ` <span class="part-count">${i + 1}/${real.length}</span>`);
         }
-        slides.push(p.slide);
+        slides.push(pt.slide);
       });
     });
 
@@ -170,14 +284,15 @@
     return slides;
   }
 
-  // A slide that is still too tall shrinks its text, down to 70%; beyond that it scrolls.
+  // Shrink a slide's text until it fits. Slides are built to fit at 70% or more; only a block
+  // that cannot be split (a very long code block, say) goes smaller, so a slide never scrolls.
   // (Hidden step items keep their space, so revealing never changes the size mid-slide.)
   function fitText(slide) {
     let scale = 1;
     slide.style.fontSize = '';
-    while (slide.scrollHeight > slide.clientHeight + 2 && scale > 0.71) {
+    while (slide.scrollHeight > slide.clientHeight && scale > 0.41) {
       scale -= 0.05;
-      slide.style.fontSize = scale + 'em';
+      slide.style.fontSize = scale.toFixed(2) + 'em';
     }
   }
 
@@ -197,6 +312,7 @@
         <span class="present-count" aria-live="polite"></span>
         <button type="button" class="pbtn" data-act="next" aria-label="Next slide">${icon('chevron-right')}</button>
         <span class="present-gap"></span>
+        <button type="button" class="pbtn pbtn-text" data-act="keypoints" aria-pressed="false" title="Show only headings, highlights, lists, tables, boxes and diagrams (K)">${icon('star')}<span>Key points</span></button>
         <button type="button" class="pbtn pbtn-text" data-act="reveal" aria-pressed="false" title="Show list items one at a time (R)">${icon('list-ordered')}<span>Step by step</span></button>
         <button type="button" class="pbtn pbtn-text" data-act="whiteboard" title="Open the Excalidraw whiteboard in a new tab">${icon('pen-tool')}<span>Whiteboard</span></button>
         <button type="button" class="pbtn" data-act="full" aria-label="Full screen (F)" title="Full screen (F)">${icon('maximize')}</button>
@@ -206,9 +322,22 @@
     const count = root.querySelector('.present-count');
     const bar = root.querySelector('.present-progress span');
     const revealBtn = root.querySelector('[data-act="reveal"]');
+    const kpBtn = root.querySelector('[data-act="keypoints"]');
 
-    P = { root, stage, slides: [], i: 0, shown: 0, reveal: readReveal(), fullOnOpen: false };
-    P.slides = buildSlides(stage);
+    P = { root, stage, slides: [], i: 0, shown: 0, reveal: readFlag(REVEAL_KEY), keyPoints: readFlag(KEYPOINTS_KEY), fullOnOpen: false };
+    P.slides = buildSlides(stage, P.keyPoints);
+    // Rebuild (for a new screen size, or the Key points switch) and stay on the same section.
+    P.rebuild = () => {
+      const was = P.slides[P.i];
+      const secName = was && was.querySelector('.note-section') ? was.querySelector('.note-section').dataset.section : null;
+      const wasLast = P.i === P.slides.length - 1;
+      P.slides = buildSlides(stage, P.keyPoints);
+      let i = 0;
+      if (wasLast) i = P.slides.length - 1;
+      else if (secName) { const k = P.slides.findIndex((sl) => sl.querySelector(`.note-section[data-section="${secName}"]`)); if (k >= 0) i = k; }
+      else if (P.i > 0) i = Math.min(P.i, P.slides.length - 1);
+      P.go(i, false);
+    };
 
     P.render = () => {
       const slide = P.slides[P.i];
@@ -220,6 +349,7 @@
       count.textContent = `${P.i + 1} / ${P.slides.length}`;
       bar.style.width = `${((P.i + 1) / P.slides.length) * 100}%`;
       revealBtn.setAttribute('aria-pressed', String(P.reveal));
+      kpBtn.setAttribute('aria-pressed', String(P.keyPoints));
       root.querySelector('[data-act="prev"]').disabled = P.i === 0 && P.shown === 0;
     };
     P.go = (i, showAll) => {
@@ -236,7 +366,11 @@
       if (P.reveal && P.shown > 0) { P.shown--; P.render(); return; }
       if (P.i > 0) P.go(P.i - 1, true);
     };
-    P.toggleReveal = () => { P.reveal = !P.reveal; saveReveal(P.reveal); P.shown = 0; P.render(); };
+    P.toggleReveal = () => { P.reveal = !P.reveal; saveFlag(REVEAL_KEY, P.reveal); P.shown = 0; P.render(); };
+    P.toggleKeyPoints = () => { P.keyPoints = !P.keyPoints; saveFlag(KEYPOINTS_KEY, P.keyPoints); P.rebuild(); };
+    let resizeTimer = null;
+    P.onResize = () => { clearTimeout(resizeTimer); resizeTimer = setTimeout(() => { if (P) P.rebuild(); }, 250); };
+    window.addEventListener('resize', P.onResize);
 
     root.querySelector('.present-bar').addEventListener('click', (e) => {
       const b = e.target.closest('[data-act]');
@@ -246,6 +380,7 @@
       if (act === 'prev') P.prev();
       else if (act === 'next') P.next();
       else if (act === 'reveal') P.toggleReveal();
+      else if (act === 'keypoints') P.toggleKeyPoints();
       else if (act === 'whiteboard') window.open('https://excalidraw.com/', '_blank', 'noopener');
       else if (act === 'full') toggleFullscreen();
       else if (act === 'exit') closePresent();
@@ -284,6 +419,7 @@
     else if (k === 'End') { e.preventDefault(); P.go(P.slides.length - 1, false); }
     else if (k === 'Escape') { e.preventDefault(); closePresent(); }
     else if (k === 'r' || k === 'R') P.toggleReveal();
+    else if (k === 'k' || k === 'K') P.toggleKeyPoints();
     else if (k === 'f' || k === 'F') toggleFullscreen();
   }
 
@@ -302,6 +438,7 @@
     document.removeEventListener('keydown', onPresentKey);
     document.removeEventListener('fullscreenchange', onFullscreenChange);
     const root = P.root;
+    window.removeEventListener('resize', P.onResize);
     P = null;
     if (document.fullscreenElement) document.exitFullscreen().catch(() => {});
     root.remove();
@@ -328,34 +465,7 @@
       <div class="notebook-page"></div>`;
     const page = root.querySelector('.notebook-page');
 
-    // Walk the note in order: write-down sections in full; elsewhere, only highlighted lines,
-    // grouped under their section (and question) heading. Content marked [!beyond] is left out.
-    art.querySelectorAll(':scope > .note-section').forEach((sec) => {
-      if (sec.classList.contains('write-down')) {
-        const c = cleanCopy(sec);
-        c.querySelectorAll('.callout-beyond').forEach((b) => b.remove());
-        page.appendChild(c);
-        return;
-      }
-      const groups = new Map();
-      sec.querySelectorAll('mark.wd').forEach((m) => {
-        if (m.closest('.callout-beyond')) return;
-        let label = sec.querySelector('h2 .h-text').textContent.trim();
-        let h3 = null;
-        for (let n = m.closest('.note-section > *'); n; n = n.previousElementSibling) { if (n.tagName === 'H3') { h3 = n; break; } }
-        if (h3) label += ' · ' + h3.querySelector('.h-text').textContent.trim();
-        if (!groups.has(label)) groups.set(label, []);
-        groups.get(label).push(m);
-      });
-      groups.forEach((marks, label) => {
-        const box = document.createElement('section');
-        box.className = 'note-section notebook-lines';
-        box.innerHTML = `<h3>${esc(label)}</h3><ul></ul>`;
-        const ul = box.querySelector('ul');
-        marks.forEach((m) => { const li = document.createElement('li'); li.appendChild(m.cloneNode(true)); ul.appendChild(li); });
-        page.appendChild(box);
-      });
-    });
+    S().writeDownParts(art).forEach((part) => page.appendChild(part));
     if (!page.children.length) page.innerHTML = '<p class="empty">This note has no write-down parts yet.</p>';
 
     root.querySelector('[data-act="close"]').addEventListener('click', closeNotebook);

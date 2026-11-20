@@ -173,6 +173,8 @@
     if (plannedNote(id)) return `<span class="wikilink planned" title="Planned: not written yet">${label}</span>`;
     return `<span class="wikilink missing" title="Unknown note">${label}</span>`;
   }
+  const fmtDate = (iso) => (iso ? new Date(iso).toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' }) : '');
+
   function badges(n) {
     let b = '';
     if (n.status === 'draft') b += `<span class="badge badge-draft" title="Draft: not yet reviewed by the author">Draft</span>`;
@@ -212,17 +214,39 @@
         <p class="sub">Pick a career; follow its stages from foundations to projects.</p>
         <div class="card-grid">${courseCards || '<p class="empty">Career paths will appear here soon.</p>'}</div></section>
       <section class="home-block"><h2>${icon('library')} Subjects</h2>
-        <div class="card-grid">${subjectCards || '<p class="empty">Subjects will appear here soon.</p>'}</div></section>`;
+        <div class="card-grid">${subjectCards || '<p class="empty">Subjects will appear here soon.</p>'}</div></section>
+      ${(M.syllabi || []).length ? `<section class="home-block"><h2>${icon('clipboard-list')} By syllabus</h2>
+        <p class="sub">Every note for one university course, from all subjects, unit by unit.</p>
+        <div class="card-grid">${M.syllabi.map((y) => {
+          const count = y.units.reduce((a, u) => a + u.items.length, 0);
+          return `<a class="card" href="syllabus.html?code=${encodeURIComponent(y.code)}"><div class="card-icon">${icon('clipboard-list')}</div>
+            <div class="card-body"><div class="card-kicker">${esc(y.code)}</div><div class="card-title">${esc(y.title)}</div>
+            ${y.programme ? `<div class="card-text">${esc(y.programme)}</div>` : ''}<div class="card-meta">${count} note${count === 1 ? '' : 's'}</div></div></a>`;
+        }).join('')}</div></section>` : ''}`;
   }
 
   // ---------------- subject / course page ----------------
 
-  function itemRow(id, i, course) {
+  function itemRow(id, i, course, selectable) {
     const n = M.notes[id];
     const meta = n ? `<span class="row-meta">${n.time ? icon('clock') + esc(n.time) : ''}${badges(n)}</span>`
       : `<span class="row-meta"><span class="badge badge-planned">Planned</span></span>`;
-    return `<li class="row${n ? '' : ' is-planned'}"><span class="row-num">${i + 1}</span>
-      <span class="row-title">${noteLink(id, null, course)}</span>${meta}</li>`;
+    const tick = selectable && n ? `<input type="checkbox" class="sel-note" value="${esc(id)}" aria-label="Select ${esc(n.title)} for printing">`
+      : (selectable ? '<span class="sel-gap"></span>' : '');
+    const pr = n && n.practical ? `<span class="pr-num" title="Practical number in the syllabus">Practical ${n.practical}</span>` : '';
+    return `<li class="row${n ? '' : ' is-planned'}">${tick}<span class="row-num">${i + 1}</span>
+      <span class="row-title">${pr}${noteLink(id, null, course)}</span>${meta}</li>`;
+  }
+
+  // The subject's intro note (plan 8.6), shown first as a "Start here" card.
+  function introCard(id) {
+    if (!id) return '';
+    const n = M.notes[id];
+    if (!n) return `<div class="card intro-card is-planned"><div class="card-icon">${icon('flag')}</div><div class="card-body">
+      <div class="card-title">Start here: ${esc(titleOf(id))} <span class="badge badge-planned">Planned</span></div></div></div>`;
+    return `<a class="card intro-card" href="${noteHref(id)}"><div class="card-icon">${icon('flag')}</div><div class="card-body">
+      <div class="card-kicker">Start here</div><div class="card-title">${esc(n.title)}${badges(n)}</div>
+      <div class="card-text">Why this subject matters, where it is used, and a map of the topics.</div></div></a>`;
   }
 
   function renderPath() {
@@ -232,12 +256,24 @@
       if (!s) return notice(`No subject called “${esc(sid)}”. <a href="index.html">Back to home</a>.`);
       document.title = `${s.title} · ${M.site.title}`;
       // Level headings in the subject index (## Basics, ## Design, ...) become groups; numbering runs on.
-      const groups = s.groups && s.groups.length ? s.groups : [{ title: null, items: s.order }];
+      // The intro note leads as a "Start here" card instead of a numbered row.
+      const groups = (s.groups && s.groups.length ? s.groups : [{ title: null, items: s.order }])
+        .map((g) => ({ title: g.title, items: g.items.filter((x) => x !== s.intro) })).filter((g) => g.items.length);
       let n = 0;
-      const lists = groups.map((g) => `<section class="stage">${g.title ? `<h2>${esc(g.title)}</h2>` : ''}
-          <ol class="rows">${g.items.map((id) => itemRow(id, n++, null)).join('')}</ol></section>`).join('');
+      const lists = groups.map((g, gi) => {
+        const canTick = g.items.some(written);
+        const isPr = norm(g.title || '') === 'practicals';
+        return `<section class="stage${isPr ? ' stage-practicals' : ''}" data-group="${gi}">${g.title ? `<h2>${canTick ? `<input type="checkbox" class="sel-group" aria-label="Select all of ${esc(g.title)} for printing">` : ''}${isPr ? icon('flask-conical') : ''}${esc(g.title)}</h2>` : ''}
+          <ol class="rows">${g.items.map((id) => itemRow(id, n++, null, true)).join('')}</ol></section>`;
+      }).join('');
+      const anyWritten = s.order.some((x) => written(x) && x !== s.intro);
       app.innerHTML = `<nav class="crumbs"><a href="index.html">Home</a></nav>
-        <h1>${esc(s.title)}</h1><p class="sub">${countWritten(s.order)} of ${s.order.length} notes written · recommended reading order</p>${lists}`;
+        <h1>${esc(s.title)}</h1><p class="sub">${countWritten(s.order)} of ${s.order.length} notes written · recommended reading order</p>
+        ${introCard(s.intro)}
+        ${anyWritten ? `<div class="print-bar"><span class="print-bar-text">${icon('printer')}Tick notes to print them as one document.</span>
+          <button type="button" class="btn" id="printSelBtn" disabled>${icon('printer')}Print selected</button></div>` : ''}
+        ${lists}`;
+      setupSelection();
       return;
     }
     const c = courseOf(cid);
@@ -254,13 +290,194 @@
       <p class="sub">${countWritten(ids)} of ${ids.length} notes written</p>${stages}`;
   }
 
+  function setupSelection() {
+    const btn = document.getElementById('printSelBtn');
+    if (!btn) return;
+    const notes = () => [...app.querySelectorAll('.sel-note')];
+    const refresh = () => {
+      const picked = notes().filter((c) => c.checked);
+      btn.disabled = !picked.length;
+      btn.innerHTML = `${icon('printer')}Print selected${picked.length ? ` (${picked.length})` : ''}`;
+      app.querySelectorAll('.stage').forEach((st) => {
+        const g = st.querySelector('.sel-group');
+        if (!g) return;
+        const inGroup = [...st.querySelectorAll('.sel-note')];
+        const on = inGroup.filter((c) => c.checked).length;
+        g.checked = on === inGroup.length && on > 0;
+        g.indeterminate = on > 0 && on < inGroup.length;
+      });
+    };
+    app.addEventListener('change', (e) => {
+      if (e.target.classList.contains('sel-group')) {
+        e.target.closest('.stage').querySelectorAll('.sel-note').forEach((c) => { c.checked = e.target.checked; });
+      }
+      refresh();
+    });
+    btn.addEventListener('click', () => printNotes(notes().filter((c) => c.checked).map((c) => c.value)));
+    refresh();
+  }
+
+  // ---------------- printing (plan 12: Notebook sheet or Full note, A4 or A5) ----------------
+
+  const PRINT_KEY = 'notes_print_v1';
+  function printDialog(heading) {
+    let saved = {};
+    try { saved = JSON.parse(localStorage.getItem(PRINT_KEY)) || {}; } catch (e) { /* ignore */ }
+    const mode = saved.mode === 'full' ? 'full' : 'notebook';
+    const size = saved.size === 'A5' ? 'A5' : 'A4';
+    const dlg = document.createElement('dialog');
+    dlg.className = 'print-dialog';
+    dlg.innerHTML = `<form method="dialog">
+      <div class="qr-head"><b>${esc(heading)}</b><button type="button" class="icon-btn" value="cancel" aria-label="Close">${icon('x')}</button></div>
+      <fieldset><legend>What to print</legend>
+        <label class="opt"><input type="radio" name="mode" value="notebook"${mode === 'notebook' ? ' checked' : ''}>
+          <span><b>${icon('notebook-text')}Notebook sheet</b><small>Only the parts to write down, about one page per note. A whole unit makes a revision sheet.</small></span></label>
+        <label class="opt"><input type="radio" name="mode" value="full"${mode === 'full' ? ' checked' : ''}>
+          <span><b>${icon('book-open')}Full note</b><small>Everything, with the answers in a key at the end.</small></span></label>
+      </fieldset>
+      <fieldset><legend>Page size</legend>
+        <div class="segmented">
+          <label><input type="radio" name="size" value="A4"${size === 'A4' ? ' checked' : ''}><span>A4</span></label>
+          <label><input type="radio" name="size" value="A5"${size === 'A5' ? ' checked' : ''}><span>A5</span></label>
+        </div>
+      </fieldset>
+      <p class="print-hint">${icon('info')}<span>Booklet: choose A5, then <i>Save as PDF</i>. Open the PDF in a PDF reader and print it with its <i>Booklet</i> option.</span></p>
+      <div class="dialog-actions"><button type="button" class="btn" value="cancel">Cancel</button>
+        <button type="submit" class="btn btn-accent" value="print">${icon('printer')}Print</button></div>
+    </form>`;
+    document.body.appendChild(dlg);
+    return new Promise((resolve) => {
+      const done = (val) => { dlg.close(); dlg.remove(); resolve(val); };
+      dlg.querySelectorAll('[value="cancel"]').forEach((b) => b.addEventListener('click', () => done(null)));
+      dlg.addEventListener('cancel', (e) => { e.preventDefault(); done(null); });
+      dlg.querySelector('form').addEventListener('submit', (e) => {
+        e.preventDefault();
+        const f = new FormData(e.target);
+        const val = { mode: f.get('mode'), size: f.get('size') };
+        try { localStorage.setItem(PRINT_KEY, JSON.stringify(val)); } catch (err) { /* ignore */ }
+        done(val);
+      });
+      dlg.showModal();
+    });
+  }
+
+  // A hidden print document: kept off screen (not display:none, so diagrams can be drawn into it)
+  // and, while printing, the only thing on the page.
+  function printDoc(mode) {
+    document.getElementById('printDoc')?.remove();
+    const doc = document.createElement('div');
+    doc.id = 'printDoc';
+    doc.className = `print-doc print-doc-${mode}`;
+    doc.setAttribute('aria-hidden', 'true');
+    document.body.appendChild(doc);
+    return doc;
+  }
+
+  function printPiece(doc, n, mode, article) {
+    const piece = document.createElement('section');
+    piece.className = 'pd-note';
+    const meta = [subjectTitle(n.subject), n.updated ? `Updated ${fmtDate(n.updated)}` : ''].filter(Boolean).map(esc).join(' · ');
+    piece.innerHTML = `<header class="pd-head"><h1>${esc(n.title)}</h1><p>${meta}</p></header>`;
+    if (mode === 'notebook') {
+      const parts = writeDownParts(article);
+      if (parts.length) parts.forEach((p) => piece.appendChild(p));
+      else piece.insertAdjacentHTML('beforeend', '<p class="empty">This note has no write-down parts yet.</p>');
+    } else {
+      const copy = cleanCopy(article);
+      piece.appendChild(copy);
+      copy.insertAdjacentHTML('beforeend', buildAnswerKey(article));
+    }
+    doc.appendChild(piece);
+  }
+
+  function runPrint(opts, doc) {
+    let style = document.getElementById('pageSizeStyle');
+    if (!style) { style = document.createElement('style'); style.id = 'pageSizeStyle'; document.head.appendChild(style); }
+    style.textContent = opts.size === 'A5'
+      ? '@media print { @page { size: A5 portrait; margin: 12mm 10mm 12mm 15mm; } html { font-size: 10pt !important; } }'
+      : '@media print { @page { size: A4 portrait; margin: 16mm 14mm 16mm 20mm; } }';
+    if (doc) {
+      doc.insertAdjacentHTML('beforeend', `<footer class="print-footer pd-footer">${esc(M.site.title)} · ${esc(location.href.split('#')[0])} · Licensed CC BY-NC-SA 4.0</footer>`);
+      document.body.classList.add('printing-doc');
+    }
+    window.addEventListener('afterprint', () => {
+      document.body.classList.remove('printing-doc');
+      if (doc) doc.remove();
+    }, { once: true });
+    window.print();
+  }
+
+  // Print one or more notes ("Print selected" on the subject page).
+  async function printNotes(ids) {
+    const opts = await printDialog(ids.length === 1 ? `Print ${titleOf(ids[0])}` : `Print ${ids.length} notes`);
+    if (!opts) return;
+    const doc = printDoc(opts.mode);
+    const stage = document.createElement('div');
+    stage.className = 'pd-stage';
+    doc.appendChild(stage);
+    for (let i = 0; i < ids.length; i++) {
+      const n = M.notes[ids[i]];
+      toast(`Preparing ${i + 1} of ${ids.length}…`);
+      let r;
+      try { r = await renderArticle(n); } catch (e) { toast(`Couldn't load ${n.title}`); continue; }
+      stage.replaceChildren(r.article);
+      await Promise.all([r.mermaidCount ? renderMermaid(r.article) : null, r.codeCount ? highlightCode(r.article) : null]);
+      printPiece(doc, n, opts.mode, r.article);
+    }
+    stage.remove();
+    runPrint(opts, doc);
+  }
+
+  // ---------------- syllabus pages (plan 12) ----------------
+
+  function renderSyllabus() {
+    const code = params.get('code');
+    const y = (M.syllabi || []).find((x) => x.code === code);
+    if (!y) return notice(`No syllabus page for “${esc(code || '')}”. <a href="index.html">Back to home</a>.`);
+    document.title = `${y.code} ${y.title} · ${M.site.title}`;
+    let k = 0;
+    const units = y.units.map((u) => `<section class="stage"><h2>${u.unit ? `Unit ${u.unit}` : ''}${u.unit && u.title ? ' · ' : ''}${esc(u.title)}</h2>
+      <ol class="rows">${u.items.map((id) => {
+        const n = M.notes[id];
+        const row = itemRow(id, k++, null, false);
+        return row.replace('<span class="row-meta">', `<span class="row-meta"><span class="subj-chip">${esc(subjectTitle(n.subject))}</span>`);
+      }).join('')}</ol></section>`).join('');
+    app.innerHTML = `<nav class="crumbs"><a href="index.html">Home</a></nav>
+      <p class="card-kicker">${esc(y.code)}</p><h1>${esc(y.title)}</h1>
+      ${y.programme ? `<p class="sub">${esc(y.programme)}</p>` : ''}
+      <p class="sub">Notes for this course from every subject, grouped by syllabus unit. Each note also lives in its own subject.</p>${units}`;
+  }
+
+  // ---------------- What's new (plan 12) ----------------
+
+  function renderWhatsNew() {
+    document.title = `What's new · ${M.site.title}`;
+    const rows = Object.entries(M.notes).filter(([, n]) => n.updated)
+      .sort((a, b) => new Date(b[1].updated) - new Date(a[1].updated)).slice(0, 50);
+    const byDay = new Map();
+    rows.forEach(([id, n]) => {
+      const day = fmtDate(n.updated);
+      if (!byDay.has(day)) byDay.set(day, []);
+      byDay.get(day).push([id, n]);
+    });
+    const days = [...byDay].map(([day, list]) => `<section class="stage"><h2>${esc(day)}</h2><ul class="rows">${list.map(([id, n]) => {
+      const isNew = !n.added || n.added === n.updated;
+      return `<li class="row"><span class="badge ${isNew ? 'badge-new' : 'badge-updated'}">${isNew ? 'New' : 'Updated'}</span>
+        <span class="row-title">${noteLink(id)}</span><span class="row-meta">${esc(subjectTitle(n.subject))}</span></li>`;
+    }).join('')}</ul></section>`).join('');
+    app.innerHTML = `<nav class="crumbs"><a href="index.html">Home</a></nav>
+      <h1>What's new</h1><p class="sub">Notes added or changed recently, newest first.</p>
+      ${days || '<p class="empty">Nothing yet. New and updated notes will appear here.</p>'}`;
+  }
+
   // ---------------- Markdown → HTML (note pages) ----------------
 
   let markedReady = false;
+  let noteDir = ''; // folder of the note being rendered, for relative image paths
   function setupMarked(notePath) {
+    noteDir = notePath.slice(0, notePath.lastIndexOf('/') + 1);
     if (markedReady) return;
     markedReady = true;
-    const noteDir = notePath.slice(0, notePath.lastIndexOf('/') + 1);
     const katexHtml = (tex, display) => {
       try { return window.katex.renderToString(tex, { displayMode: display, throwOnError: false }); }
       catch (e) { return `<code>${esc(tex)}</code>`; }
@@ -409,13 +626,24 @@
       const pre = code.parentElement;
       const lang = ((code.className.match(/language-(\S+)/) || [])[1] || '').toLowerCase();
       if (lang === 'mermaid') {
-        const wrap = document.createElement('div');
+        // accTitle / accDescr (plan 8.5) are the diagram's alt text. Mermaid puts them inside the
+        // drawn SVG for screen readers; the title is also shown as a caption, and both are shown
+        // in place of the diagram while it loads or if it can't be drawn (slow or no connection).
+        const src = code.textContent;
+        const accTitle = ((src.match(/^\s*accTitle\s*:\s*(.+)$/m) || [])[1] || '').trim();
+        let accDescr = ((src.match(/^\s*accDescr\s*:\s*(.+)$/m) || [])[1] || '').trim();
+        if (!accDescr) { const mm = src.match(/^\s*accDescr\s*\{([\s\S]*?)\}/m); if (mm) accDescr = mm[1].replace(/\s+/g, ' ').trim(); }
+        const wrap = document.createElement('figure');
         wrap.className = 'diagram';
         const m = document.createElement('pre');
         m.className = 'mermaid';
-        m.dataset.src = code.textContent;
-        m.textContent = code.textContent;
-        wrap.appendChild(m);
+        m.dataset.src = src;
+        m.textContent = src;
+        const fb = document.createElement('div');
+        fb.className = 'diagram-fallback';
+        fb.innerHTML = `${icon('workflow')}<span>${accTitle || accDescr ? `<b>Diagram: ${esc(accTitle || 'untitled')}</b>${accDescr ? ` ${esc(accDescr)}` : ''}` : 'Drawing the diagram…'}</span>`;
+        wrap.append(fb, m);
+        if (accTitle) wrap.insertAdjacentHTML('beforeend', `<figcaption class="diagram-caption">${esc(accTitle)}</figcaption>`);
         pre.replaceWith(wrap);
         mermaidCount++;
       } else if (lang === 'output') {
@@ -516,6 +744,64 @@
     });
   }
 
+  // A picture on its own line becomes a figure whose caption is its alt text (plan 8.5).
+  function captionImages(root) {
+    root.querySelectorAll('p > img').forEach((img) => {
+      const p = img.parentElement;
+      if (p.childNodes.length !== 1 && [...p.childNodes].some((c) => c !== img && (c.nodeType !== 3 || c.textContent.trim()))) return;
+      const fig = document.createElement('figure');
+      fig.className = 'figure-img';
+      fig.appendChild(img);
+      const alt = img.getAttribute('alt');
+      if (alt) fig.insertAdjacentHTML('beforeend', `<figcaption>${esc(alt)}</figcaption>`);
+      p.replaceWith(fig);
+    });
+  }
+
+  // A copy of part of a note without page-only controls or duplicate heading IDs
+  // (used by Notebook view, present mode and printing).
+  function cleanCopy(node) {
+    const c = node.cloneNode(true);
+    c.querySelectorAll('.anchor, .copy-btn').forEach((e) => e.remove());
+    c.querySelectorAll('[id]').forEach((e) => { if (!e.closest('svg')) e.removeAttribute('id'); });
+    c.querySelectorAll('details.callout-answer[open], .flashcard[open]').forEach((d) => { d.open = false; });
+    return c;
+  }
+
+  // The write-down parts of a rendered note, in note order (plan 8.5 and 12): the write-down sections
+  // in full, then elsewhere only ==highlighted== lines, grouped under their section and question.
+  // Anything inside a [!beyond] box is left out. Returns an array of elements.
+  function writeDownParts(art) {
+    const out = [];
+    art.querySelectorAll(':scope > .note-section').forEach((sec) => {
+      if (sec.classList.contains('write-down')) {
+        const c = cleanCopy(sec);
+        c.querySelectorAll('.callout-beyond').forEach((b) => b.remove());
+        out.push(c);
+        return;
+      }
+      const groups = new Map();
+      sec.querySelectorAll('mark.wd').forEach((m) => {
+        if (m.closest('.callout-beyond')) return;
+        let label = sec.querySelector('h2 .h-text').textContent.trim();
+        let h3 = null;
+        for (let n = m.closest('.note-section > *'); n; n = n.previousElementSibling) { if (n.tagName === 'H3') { h3 = n; break; } }
+        if (h3) label += ' · ' + h3.querySelector('.h-text').textContent.trim();
+        if (!groups.has(label)) groups.set(label, []);
+        groups.get(label).push(m);
+      });
+      groups.forEach((marks, label) => {
+        const box = document.createElement('section');
+        box.className = 'note-section notebook-lines';
+        box.innerHTML = `<h3>${esc(label)}</h3><ul></ul>`;
+        const ul = box.querySelector('ul');
+        marks.forEach((m) => { const li = document.createElement('li'); li.appendChild(m.cloneNode(true)); ul.appendChild(li); });
+        out.push(box);
+      });
+    });
+    return out;
+  }
+
   function buildToc(root) {
     const items = [...root.querySelectorAll('h2, h3')].map((h) =>
       `<li class="toc-${h.tagName.toLowerCase()}"><a href="#${h.id}">${esc(h.querySelector('.h-text').textContent)}</a></li>`).join('');
@@ -545,8 +831,10 @@
       await loadScript(LIBS.mermaid);
       // Diagrams always use the light theme on a light card, so they look the same in dark mode, print and projection.
       mermaid.initialize({ startOnLoad: false, securityLevel: 'strict', theme: 'default', fontFamily: 'IBM Plex Sans, sans-serif' });
-      await mermaid.run({ nodes }).catch((e) => console.warn('Mermaid could not draw a diagram', e));
+      await mermaid.run({ nodes, suppressErrors: true }).catch((e) => console.warn('Mermaid could not draw a diagram', e));
     } catch (e) { console.warn(e); }
+    // A drawn diagram replaces its fallback text; one that failed keeps the text (its alt text).
+    nodes.forEach((n) => { if (n.querySelector('svg')) n.closest('.diagram').classList.add('is-drawn'); });
   }
 
   async function highlightCode(root) {
@@ -588,6 +876,16 @@
       ${lead ? `<p>${lead}</p>` : ''}<ul>${ids.map((x) => `<li>${noteLink(x, null, course)}</li>`).join('')}</ul></aside>`;
   }
 
+  // "Was this clear?" (plan 12): one site-wide Google Form, with the note ID prefilled.
+  function feedbackLink(id) {
+    const fb = M.site.feedback;
+    if (!fb || !fb.formUrl) return '';
+    let url = fb.formUrl;
+    if (fb.noteField) url += (url.includes('?') ? '&' : '?') + 'usp=pp_url&' + encodeURIComponent(fb.noteField) + '=' + encodeURIComponent(id);
+    return `<p class="feedback">${icon('message-circle-question')}<span>Was this clear?</span>
+      <a href="${esc(url)}" target="_blank" rel="noopener">Tell us in a one-minute form</a></p>`;
+  }
+
   function showQr(url, title) {
     let dlg = document.getElementById('qrDialog');
     if (!dlg) {
@@ -610,6 +908,34 @@
     dlg.showModal();
   }
 
+  // Fetch one note's Markdown and turn it into an <article>, with every Section 8.5 block converted.
+  // Used by the note page and by "Print selected" on the subject page.
+  async function renderArticle(n) {
+    let text;
+    try {
+      const r = await fetch(n.path);
+      if (!r.ok) throw new Error('fetch');
+      text = await r.text();
+    } catch (e) { e.kind = 'fetch'; throw e; }
+    const body = text.replace(/^﻿/, '').replace(/\r\n?/g, '\n').replace(/^---\n[\s\S]*?\n---[ \t]*(?:\n|$)/, '');
+    const needs = [loadScript(LIBS.marked)];
+    if (/(?<!\\)\$/.test(body)) { loadCss(LIBS.katexCss); needs.push(loadScript(LIBS.katex)); }
+    try { await Promise.all(needs); } catch (e) { e.kind = 'libs'; throw e; }
+    setupMarked(n.path);
+
+    const article = document.createElement('article');
+    article.className = 'note-body';
+    article.innerHTML = marked.parse(body);
+    convertCallouts(article);
+    const { mermaidCount, codeCount } = convertCode(article);
+    addHeadingIds(article);
+    wrapSections(article);
+    convertFlashcards(article);
+    wrapTables(article);
+    captionImages(article);
+    return { article, mermaidCount, codeCount };
+  }
+
   async function renderNote() {
     const id = params.get('id');
     const course = params.get('course');
@@ -625,30 +951,13 @@
     document.title = `${n.title} · ${M.site.title}`;
     app.innerHTML = '<p class="loading">Loading…</p>';
 
-    let text;
-    try {
-      const r = await fetch(n.path);
-      if (!r.ok) throw new Error('fetch');
-      text = await r.text();
-    } catch (e) {
-      return notice(`Couldn't load this note. If you opened the file directly from your computer, run <code>npm run serve</code> instead.`);
+    let rendered;
+    try { rendered = await renderArticle(n); }
+    catch (e) {
+      return notice(e.kind === 'libs' ? 'Could not load the page libraries. Check your internet connection and reload.'
+        : `Couldn't load this note. If you opened the file directly from your computer, run <code>npm run serve</code> instead.`);
     }
-    const body = text.replace(/^﻿/, '').replace(/\r\n?/g, '\n').replace(/^---\n[\s\S]*?\n---[ \t]*(?:\n|$)/, '');
-
-    const needs = [loadScript(LIBS.marked)];
-    if (/(?<!\\)\$/.test(body)) { loadCss(LIBS.katexCss); needs.push(loadScript(LIBS.katex)); }
-    try { await Promise.all(needs); } catch (e) { return notice('Could not load the page libraries. Check your internet connection and reload.'); }
-    setupMarked(n.path);
-
-    const article = document.createElement('article');
-    article.className = 'note-body';
-    article.innerHTML = marked.parse(body);
-    convertCallouts(article);
-    const { mermaidCount, codeCount } = convertCode(article);
-    addHeadingIds(article);
-    wrapSections(article);
-    convertFlashcards(article);
-    wrapTables(article);
+    const { article, mermaidCount, codeCount } = rendered;
     const toc = buildToc(article);
 
     const subj = subjectOf(n.subject);
@@ -661,7 +970,9 @@
       n.time ? icon('clock') + esc(n.time) : '',
       n.level ? esc(n.level[0].toUpperCase() + n.level.slice(1)) : '',
       n.type && n.type !== 'theory' ? esc(n.type[0].toUpperCase() + n.type.slice(1)) : '',
-      (n.syllabus || []).length ? `<span title="Syllabus course codes">Syllabus: ${n.syllabus.map(esc).join(', ')}</span>` : '',
+      n.practical ? `<span>Practical ${n.practical}</span>` : '',
+      (n.syllabus || []).length ? `<span title="Syllabus course codes">Syllabus: ${n.syllabus.map((c) => `<a href="syllabus.html?code=${encodeURIComponent(c)}">${esc(c)}</a>`).join(', ')}${n.unit ? `, unit ${n.unit}` : ''}</span>` : '',
+      n.updated ? `<span class="updated" title="${n.added && n.added !== n.updated ? `Added ${esc(fmtDate(n.added))}` : 'Date added'}">Updated ${esc(fmtDate(n.updated))}</span>` : '',
     ].filter(Boolean).join('<span class="dot">·</span>');
 
     app.innerHTML = `
@@ -687,6 +998,7 @@
           ${linkBox('prereq', 'Before you start', 'footprints', n.prerequisites, 'Read these first if they are new to you.')}
           <div id="noteBody"></div>
           ${linkBox('related', 'See also', 'link', n.related)}
+          ${feedbackLink(id)}
           ${prevNext(id, course)}
           <footer class="print-only print-footer">${esc(M.site.title)} · ${esc(location.href.split('#')[0])} · Licensed CC BY-NC-SA 4.0</footer>
         </div>
@@ -701,9 +1013,16 @@
     const noteUrl = location.href.split('#')[0];
     document.getElementById('shareBtn').addEventListener('click', () => shareLink(noteUrl, document.title));
     document.getElementById('qrBtn').addEventListener('click', () => showQr(noteUrl, n.title));
-    document.getElementById('printBtn').addEventListener('click', () => window.print());
+    document.getElementById('printBtn').addEventListener('click', async () => {
+      const opts = await printDialog(`Print ${n.title}`);
+      if (!opts) return;
+      if (opts.mode === 'full') return runPrint(opts, null); // the page itself prints as the full note
+      const doc = printDoc('notebook');
+      printPiece(doc, n, 'notebook', article);
+      runPrint(opts, doc);
+    });
     // Classroom tools live in classroom.js; they read what they need from window.Sutra.
-    window.Sutra = { icon, esc, loadScript, LIBS, toast, note: n, noteUrl, subjectTitle: subjectTitle(n.subject) };
+    window.Sutra = { icon, esc, loadScript, LIBS, toast, note: n, noteUrl, subjectTitle: subjectTitle(n.subject), cleanCopy, writeDownParts };
     const classroom = (fn) => () => (window.SutraClassroom ? window.SutraClassroom[fn]() : toast('Still loading, try again'));
     document.getElementById('presentBtn').addEventListener('click', classroom('present'));
     document.getElementById('notebookBtn').addEventListener('click', classroom('notebook'));
@@ -756,6 +1075,8 @@
     if (page === 'home') renderHome();
     else if (page === 'path') renderPath();
     else if (page === 'note') return renderNote();
+    else if (page === 'whatsnew') renderWhatsNew();
+    else if (page === 'syllabus') renderSyllabus();
   }).catch((e) => {
     console.error(e);
     notice(`Couldn't load the site data. If you opened this file directly from your computer, run <code>npm run serve</code> and open <a href="http://localhost:8000">localhost:8000</a>.`);

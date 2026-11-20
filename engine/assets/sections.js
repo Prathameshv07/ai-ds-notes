@@ -40,6 +40,13 @@ var SECTION_STYLES = {
   'expected result':                { icon: 'flag',                   level: 'U' },
   'extensions':                     { icon: 'rocket',                 level: 'R' },
   'what interviewers ask about this': { icon: 'briefcase',            level: 'P' },
+  // subject intro note (8.6)
+  'why this subject matters':       { icon: 'lightbulb',              level: 'U' },
+  'a short story':                  { icon: 'book-open',              level: 'U' },
+  'where it is used today':         { icon: 'map',                    level: 'U' },
+  'what you will be able to do':    { icon: 'crosshair',              level: 'U' },
+  'careers that use it':            { icon: 'briefcase',              level: 'U' },
+  'map of the subject':             { icon: 'workflow',               level: 'U' },
 };
 
 var LEVEL_NAMES = { M: 'Memory', U: 'Understanding', R: 'Reflective', P: 'Practice' };

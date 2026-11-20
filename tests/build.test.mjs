@@ -6,6 +6,7 @@ import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
 import { build } from '../scripts/build.mjs';
+import { execFileSync } from 'node:child_process';
 
 function tree(files) {
   const root = fs.mkdtempSync(path.join(os.tmpdir(), 'notes-'));
@@ -259,7 +260,7 @@ test('build copies the reader engine and adds site data to the manifest', () => 
   fs.mkdirSync(path.join(root, 'content/assets/img/databases'), { recursive: true });
   fs.writeFileSync(path.join(root, 'content/assets/img/databases/er.png'), 'x');
   build({ root });
-  for (const f of ['index.html', 'path.html', 'note.html', 'assets/reader.js', 'assets/notes.css', 'assets/icons.js', 'assets/sections.js', 'assets/classroom.js', '.nojekyll']) {
+  for (const f of ['index.html', 'path.html', 'note.html', 'assets/reader.js', 'assets/notes.css', 'assets/icons.js', 'assets/sections.js', 'assets/classroom.js', 'whats-new.html', 'syllabus.html', '.nojekyll']) {
     assert.ok(fs.existsSync(path.join(root, 'dist', f)), `${f} missing from dist`);
   }
   const m = JSON.parse(fs.readFileSync(path.join(root, 'dist/data/manifest.json'), 'utf8'));
@@ -354,4 +355,95 @@ test('syllabus field, ==highlights== and [!beyond] checks', () => {
 
   root = tree({ 'content/concepts/databases/aa.md': note('aa', { extra: { syllabus: 'UDSII-002' } }) });
   assert.ok(errors(build({ root })).some((x) => x.includes('syllabus must be a list')));
+});
+
+const introNote = (subject, id = `${subject}-intro`) => `---\nid: ${id}\ntitle: Intro\nsubject: ${subject}\ntype: intro\nstatus: draft\ntime: 5 min\nsources: [x]\n---\n` +
+  ['Why this subject matters', 'A short story', 'Where it is used today', 'What you will be able to do', 'Careers that use it', 'Map of the subject', 'Sources']
+    .map((h) => `## ${h}\n\nPlaceholder.\n`).join('\n');
+
+test('intro notes: required sections, ID rule, no level needed, first in the index', () => {
+  let root = tree({
+    'content/concepts/databases/databases-intro.md': introNote('databases'),
+    'content/concepts/databases/aa.md': note('aa'),
+    'content/subjects/databases.md': subject('databases', ['aa', 'databases-intro']),
+  });
+  let r = build({ root });
+  assert.deepEqual(errors(r), []);
+  assert.ok(warnings(r).some((w) => w.includes('"databases-intro" should be first')));
+  const m = JSON.parse(fs.readFileSync(path.join(root, 'dist/data/manifest.json'), 'utf8'));
+  assert.equal(m.subjects[0].intro, 'databases-intro');
+
+  root = tree({ 'content/concepts/databases/db-start.md': introNote('databases', 'db-start') });
+  assert.ok(errors(build({ root })).some((e) => e.includes('must be "databases-intro"')));
+  root = tree({ 'content/concepts/databases/databases-intro.md': introNote('databases').replace('## A short story\n\nPlaceholder.\n', '') });
+  assert.ok(errors(build({ root })).includes('missing required section: ## A short story'));
+});
+
+test('alt text: diagrams need accTitle and accDescr, images need alt text', () => {
+  const md = note('aa', { body: '\n\n```mermaid\nflowchart LR\n  A --> B\n```\n\n```mermaid\nflowchart LR\n  accTitle: T\n  accDescr: D\n  A --> B\n```\n\n![](x.png) ![ok](y.png) ![[z.png]] ![[w.png|fine]]' });
+  const w = warnings(build({ root: tree({ 'content/concepts/databases/aa.md': md }) }));
+  assert.equal(w.filter((x) => x.includes('no accTitle or accDescr')).length, 1);
+  assert.equal(w.filter((x) => x.includes('image without alt text')).length, 1); // one line, two bad images
+});
+
+test('last updated and added dates come from git history', () => {
+  const root = validTree();
+  const git = (...a) => execFileSync('git', ['-C', root, ...a], { stdio: 'ignore' });
+  git('init', '-q'); git('config', 'user.email', 't@t'); git('config', 'user.name', 't');
+  git('add', '-A');
+  execFileSync('git', ['-C', root, '-c', 'commit.gpgsign=false', 'commit', '-q', '-m', 'first'], { stdio: 'ignore', env: { ...process.env, GIT_COMMITTER_DATE: '2026-01-01T10:00:00+05:30' } });
+  fs.appendFileSync(path.join(root, 'content/concepts/databases/bb.md'), '\n');
+  git('add', '-A');
+  execFileSync('git', ['-C', root, '-c', 'commit.gpgsign=false', 'commit', '-q', '-m', 'second'], { stdio: 'ignore', env: { ...process.env, GIT_COMMITTER_DATE: '2026-02-01T10:00:00+05:30' } });
+  build({ root });
+  const m = JSON.parse(fs.readFileSync(path.join(root, 'dist/data/manifest.json'), 'utf8'));
+  assert.ok(m.notes.bb.updated.startsWith('2026-02-01'), m.notes.bb.updated);
+  assert.ok(m.notes.bb.added < m.notes.bb.updated);
+  assert.equal(m.notes.aa.updated, m.notes.aa.added);
+});
+
+test('a note outside git has no dates; feedback link is off until configured', () => {
+  const root = validTree();
+  build({ root });
+  const m = JSON.parse(fs.readFileSync(path.join(root, 'dist/data/manifest.json'), 'utf8'));
+  assert.equal(m.notes.aa.updated, null);
+  assert.equal(m.site.feedback, null);
+});
+
+test('unit and practical fields, Practicals heading and syllabus pages', () => {
+  const prac = (id, n, extra = '') => `---\nid: ${id}\ntitle: P${n}\nsubject: databases\nlevel: core\ntype: practical\nstatus: draft\ntime: 5 min\nsources: [x]\n${extra}---\n` +
+    ['Aim', 'Code', 'Output', 'Explanation', 'Viva questions', 'Sources'].map((h) => `## ${h}\n\nPlaceholder.\n`).join('\n');
+  const root = tree({
+    'content/concepts/databases/aa.md': note('aa', { extra: { syllabus: '[UDSVI-006]', unit: 2 } }),
+    'content/concepts/databases/bb.md': note('bb', { extra: { syllabus: '[UDSVI-006]', unit: 1 } }),
+    'content/concepts/databases/cc.md': note('cc', { extra: { syllabus: '[UDSVI-006]' } }),
+    'content/concepts/databases/two-practical.md': prac('two-practical', 2, 'practical: 2\nsyllabus: [UDSVI-006]\nunit: 2\n'),
+    'content/concepts/databases/one-practical.md': prac('one-practical', 1, 'practical: 1\nsyllabus: [UDSVI-006, XYZ-1]\nunit: 2\n'),
+    'content/subjects/databases.md': '---\nid: databases\ntitle: DB\ntype: subject\n---\n## Basics\n1. [[bb]]\n2. [[aa]]\n3. [[cc]]\n4. [[two-practical]]\n\n## Practicals\n5. [[one-practical]]\n',
+  });
+  const r = build({ root });
+  assert.deepEqual(errors(r), []);
+  const w = warnings(r);
+  assert.ok(w.some((x) => x.includes('practical "two-practical" should be listed under "## Practicals"')));
+  assert.ok(w.some((x) => x.includes('syllabus code "XYZ-1" has no name')));
+  const m = JSON.parse(fs.readFileSync(path.join(root, 'dist/data/manifest.json'), 'utf8'));
+  assert.equal(m.notes['one-practical'].practical, 1);
+  const aba = m.syllabi.find((y) => y.code === 'UDSVI-006');
+  assert.equal(aba.title, 'Applied Business Analytics');
+  assert.deepEqual(aba.units.map((u) => [u.unit, u.items]), [
+    [1, ['bb']],
+    [2, ['aa', 'one-practical', 'two-practical']], // theory first, then practicals by number
+    [null, ['cc']], // no unit: "Other notes", last
+  ]);
+  assert.equal(aba.units[0].title, 'Introduction to Business Analytics');
+  assert.equal(m.syllabi.find((y) => y.code === 'XYZ-1').title, 'XYZ-1');
+});
+
+test('unit and practical must be whole numbers; practical warnings', () => {
+  let root = tree({ 'content/concepts/databases/aa.md': note('aa', { extra: { unit: 'one' } }) });
+  assert.ok(errors(build({ root })).some((e) => e.includes('unit must be a whole number')));
+  root = tree({ 'content/concepts/databases/aa.md': note('aa', { extra: { practical: 3, unit: 1 } }) });
+  const w = warnings(build({ root }));
+  assert.ok(w.some((x) => x.includes('"practical" is only for practical notes')));
+  assert.ok(w.some((x) => x.includes('has a "unit" but no "syllabus"')));
 });

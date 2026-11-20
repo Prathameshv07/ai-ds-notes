@@ -17,7 +17,7 @@ export const PATHS = [
 
 // Section 7.4 and 8.4
 export const LEVELS = ['foundation', 'core', 'advanced'];
-export const TYPES = ['theory', 'practical', 'project', 'paper'];
+export const TYPES = ['theory', 'practical', 'project', 'intro', 'paper'];
 export const TAGS = ['interview'];
 
 // Section 10
@@ -37,6 +37,11 @@ export const REQUIRED_SECTIONS = {
   ],
   practical: ['Aim', 'Code', 'Output', 'Explanation', 'Viva questions', 'Sources'],
   project: ['Problem', 'Steps', 'Expected result', 'What interviewers ask about this', 'Sources'],
+  // Section 8.6: subject intro note, ID <subject-id>-intro, first in the subject index.
+  intro: [
+    'Why this subject matters', 'A short story', 'Where it is used today',
+    'What you will be able to do', 'Careers that use it', 'Map of the subject', 'Sources',
+  ],
   paper: [],
 };
 
@@ -59,6 +64,35 @@ export const SELF_CHECK_MAX = 5;
 export const SITE = {
   title: 'Sutra',
   tagline: 'AI, ML and Data Science, one concept at a time',
+};
+
+// Section 12: "Was this clear?" link on every note, opening one Google Form with the note ID prefilled.
+// formUrl: the form's link ending in /viewform. noteField: the prefill field for the note ID, e.g.
+// 'entry.123456789' (Google Forms → ⋮ → Get pre-filled link, type anything in that field, copy the
+// link: the field ID is the "entry.…" part). Leave formUrl empty to hide the link.
+export const FEEDBACK = {
+  formUrl: '',
+  noteField: '',
+};
+
+// Section 12: syllabus pages, one per course code used in notes' "syllabus" field.
+// Names and unit titles come from the university syllabus. A code missing here still gets a page
+// (titled by its code) and the build warns, so add its entry when a new course starts.
+export const COURSES = {
+  'UDSII-002': {
+    title: 'Database Management System', programme: 'BSc Data Science · Semester II',
+    units: {
+      1: 'DBMS Fundamentals and Data Modelling', 2: 'ER Modelling and Advanced Design',
+      3: 'Normalization and Database Design', 4: 'Transactions, Performance and Security',
+    },
+  },
+  'UDSVI-006': {
+    title: 'Applied Business Analytics', programme: 'BSc Data Science · Semester VI (theory and practical)',
+    units: {
+      1: 'Introduction to Business Analytics', 2: 'Business Intelligence and Statistical Foundations',
+      3: 'Regression and Forecasting', 4: 'Optimization and Simulation Techniques',
+    },
+  },
 };
 
 // Display names for subjects (Section 5). A subject index file's own title takes priority.

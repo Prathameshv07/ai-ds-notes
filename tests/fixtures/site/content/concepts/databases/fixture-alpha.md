@@ -9,6 +9,7 @@ related: [fixture-gamma]
 tags: [interview]
 time: 10 min
 syllabus: [UDSII-002]
+unit: 1
 status: draft
 sources:
   - "Placeholder source"
@@ -43,9 +44,70 @@ Placeholder sentence with ==a short highlighted rule== inside it.
 2. Second step
    - nested point
 
+### Q4. A very long placeholder answer?
+Placeholder sentence 1 adds more words to make this paragraph long. Placeholder sentence 2 adds more words to make this paragraph long. Placeholder sentence 3 adds more words to make this paragraph long. Placeholder sentence 4 adds more words to make this paragraph long. Placeholder sentence 5 adds more words to make this paragraph long. Placeholder sentence 6 adds more words to make this paragraph long. Placeholder sentence 7 adds more words to make this paragraph long. Placeholder sentence 8 adds more words to make this paragraph long. Placeholder sentence 9 adds more words to make this paragraph long. Placeholder sentence 10 adds more words to make this paragraph long. Placeholder sentence 11 adds more words to make this paragraph long. Placeholder sentence 12 adds more words to make this paragraph long. Placeholder sentence 13 adds more words to make this paragraph long. Placeholder sentence 14 adds more words to make this paragraph long. Placeholder sentence 15 adds more words to make this paragraph long. Placeholder sentence 16 adds more words to make this paragraph long. Placeholder sentence 17 adds more words to make this paragraph long. Placeholder sentence 18 adds more words to make this paragraph long. Placeholder sentence 19 adds more words to make this paragraph long. Placeholder sentence 20 adds more words to make this paragraph long. Placeholder sentence 21 adds more words to make this paragraph long. Placeholder sentence 22 adds more words to make this paragraph long. Placeholder sentence 23 adds more words to make this paragraph long. Placeholder sentence 24 adds more words to make this paragraph long. Placeholder sentence 25 adds more words to make this paragraph long.
+
+- Placeholder list item number 1 with a few extra words so it takes a full line on a projector.
+- Placeholder list item number 2 with a few extra words so it takes a full line on a projector.
+- Placeholder list item number 3 with a few extra words so it takes a full line on a projector.
+- Placeholder list item number 4 with a few extra words so it takes a full line on a projector.
+- Placeholder list item number 5 with a few extra words so it takes a full line on a projector.
+- Placeholder list item number 6 with a few extra words so it takes a full line on a projector.
+- Placeholder list item number 7 with a few extra words so it takes a full line on a projector.
+- Placeholder list item number 8 with a few extra words so it takes a full line on a projector.
+- Placeholder list item number 9 with a few extra words so it takes a full line on a projector.
+- Placeholder list item number 10 with a few extra words so it takes a full line on a projector.
+- Placeholder list item number 11 with a few extra words so it takes a full line on a projector.
+- Placeholder list item number 12 with a few extra words so it takes a full line on a projector.
+- Placeholder list item number 13 with a few extra words so it takes a full line on a projector.
+- Placeholder list item number 14 with a few extra words so it takes a full line on a projector.
+- Placeholder list item number 15 with a few extra words so it takes a full line on a projector.
+- Placeholder list item number 16 with a few extra words so it takes a full line on a projector.
+- Placeholder list item number 17 with a few extra words so it takes a full line on a projector.
+- Placeholder list item number 18 with a few extra words so it takes a full line on a projector.
+- Placeholder list item number 19 with a few extra words so it takes a full line on a projector.
+- Placeholder list item number 20 with a few extra words so it takes a full line on a projector.
+- Placeholder list item number 21 with a few extra words so it takes a full line on a projector.
+- Placeholder list item number 22 with a few extra words so it takes a full line on a projector.
+- Placeholder list item number 23 with a few extra words so it takes a full line on a projector.
+- Placeholder list item number 24 with a few extra words so it takes a full line on a projector.
+- Placeholder list item number 25 with a few extra words so it takes a full line on a projector.
+- Placeholder list item number 26 with a few extra words so it takes a full line on a projector.
+- Placeholder list item number 27 with a few extra words so it takes a full line on a projector.
+- Placeholder list item number 28 with a few extra words so it takes a full line on a projector.
+
+| No. | Value | Note |
+|---|---|---|
+| 1 | placeholder value 1 | another placeholder cell |
+| 2 | placeholder value 2 | another placeholder cell |
+| 3 | placeholder value 3 | another placeholder cell |
+| 4 | placeholder value 4 | another placeholder cell |
+| 5 | placeholder value 5 | another placeholder cell |
+| 6 | placeholder value 6 | another placeholder cell |
+| 7 | placeholder value 7 | another placeholder cell |
+| 8 | placeholder value 8 | another placeholder cell |
+| 9 | placeholder value 9 | another placeholder cell |
+| 10 | placeholder value 10 | another placeholder cell |
+| 11 | placeholder value 11 | another placeholder cell |
+| 12 | placeholder value 12 | another placeholder cell |
+| 13 | placeholder value 13 | another placeholder cell |
+| 14 | placeholder value 14 | another placeholder cell |
+| 15 | placeholder value 15 | another placeholder cell |
+| 16 | placeholder value 16 | another placeholder cell |
+| 17 | placeholder value 17 | another placeholder cell |
+| 18 | placeholder value 18 | another placeholder cell |
+| 19 | placeholder value 19 | another placeholder cell |
+| 20 | placeholder value 20 | another placeholder cell |
+| 21 | placeholder value 21 | another placeholder cell |
+| 22 | placeholder value 22 | another placeholder cell |
+
 ## Diagram                          <!-- U · Mermaid -->
+![A placeholder picture for testing captions](../../assets/img/databases/fixture-picture.png)
+
 ```mermaid
 flowchart LR
+  accTitle: Normal forms
+  accDescr: A table moves from unnormalized to 1NF, then 2NF, then 3NF.
   A[Unnormalized] --> B[1NF] --> C[2NF] --> D[3NF]
 ```
 

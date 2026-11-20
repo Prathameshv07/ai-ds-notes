@@ -19,6 +19,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import crypto from 'node:crypto';
+import { execFileSync } from 'node:child_process';
 import { pathToFileURL, fileURLToPath } from 'node:url';
 import yaml from 'js-yaml';
 import * as C from './config.mjs';
@@ -45,6 +46,28 @@ function editDistance(a, b) {
     }
   }
   return d[a.length][b.length];
+}
+
+// Last-updated and added dates per note file, from git history (plan Section 12).
+// Returns Map(path relative to root → { updated, added }), ISO dates. Empty when git or history
+// is unavailable; the GitHub Action fetches the full history so the dates are right.
+function gitDates(root) {
+  const dates = new Map();
+  try {
+    const out = execFileSync('git', ['-C', root, 'log', '--relative', '--no-renames', '--format=@@%cI', '--name-status', '--', 'content/concepts'],
+      { encoding: 'utf8', stdio: ['ignore', 'pipe', 'ignore'], maxBuffer: 64 * 1024 * 1024 });
+    let cur = null;
+    for (const line of out.split('\n')) {
+      if (line.startsWith('@@')) { cur = line.slice(2).trim(); continue; }
+      const m = line.match(/^([AMD])\t(.+)$/);
+      if (!m || !cur) continue;
+      const d = dates.get(m[2]) || {};
+      if (!d.updated) d.updated = cur; // log is newest first
+      if (m[1] === 'A') d.added = cur; // keeps the oldest "added"
+      dates.set(m[2], d);
+    }
+  } catch (e) { /* not a git repository, or git missing */ }
+  return dates;
 }
 
 // Image files under content/assets, by file name, so ![[file.png]] embeds resolve like in Obsidian.
@@ -238,7 +261,13 @@ export function build(opts = {}) {
     const fileId = path.basename(file, '.md');
     const folder = path.basename(path.dirname(file));
 
-    for (const k of C.REQUIRED_FIELDS) if (fm[k] == null || fm[k] === '') error(f, `missing front matter field: ${k}`);
+    for (const k of C.REQUIRED_FIELDS) {
+      if (k === 'level' && fm.type === 'intro') continue; // an intro note covers the whole subject
+      if (fm[k] == null || fm[k] === '') error(f, `missing front matter field: ${k}`);
+    }
+    if (fm.type === 'intro' && fm.subject && String(fm.id ?? fileId) !== `${fm.subject}-intro`) {
+      error(f, `an intro note's ID must be "${fm.subject}-intro"`);
+    }
     for (const k of C.RECOMMENDED_FIELDS) if (fm[k] == null) warn(f, `missing recommended field: ${k}`);
 
     const id = String(fm.id ?? fileId);
@@ -266,6 +295,21 @@ export function build(opts = {}) {
     };
     const tags = list('tags');
     const syllabus = list('syllabus'); // optional course codes, e.g. [UDSII-002] (plan Section 8.5)
+    // unit (syllabus unit) and practical (practical number) are positive whole numbers (plan 7.4)
+    const wholeNumber = (key) => {
+      if (fm[key] == null) return null;
+      const v = Number(fm[key]);
+      if (!Number.isInteger(v) || v < 1) { error(f, `${key} must be a whole number such as 1, not "${fm[key]}"`); return null; }
+      return v;
+    };
+    const unit = wholeNumber('unit');
+    const practical = wholeNumber('practical');
+    if (unit != null && !syllabus.length) warn(f, 'has a "unit" but no "syllabus" field, so it appears on no syllabus page');
+    if (fm.type === 'practical') {
+      if (practical == null) warn(f, 'a practical note should give its number in the syllabus list: practical: <number>');
+      if (!String(fm.id ?? fileId).endsWith('-practical')) warn(f, 'a practical note\'s ID should end in "-practical", e.g. correlation-practical');
+    } else if (practical != null) warn(f, '"practical" is only for practical notes');
+    for (const code of syllabus) if (!C.COURSES[code]) warn(f, `syllabus code "${code}" has no name in COURSES (scripts/config.mjs); its page will show the code only`);
     const prerequisites = list('prerequisites');
     const related = list('related');
     for (const t of tags) if (!C.TAGS.includes(t)) error(f, `unknown tag "${t}" (allowed: ${C.TAGS.join(', ')})`);
@@ -335,6 +379,18 @@ export function build(opts = {}) {
         if (/^\s*>\s*\[!beyond\]/i.test(l.text)) beyond = true;
       }
     }
+    // alt text for every diagram and image (plan Sections 8.5, 11)
+    for (const m of body.matchAll(/^ {0,3}(`{3,}|~{3,})[ \t]*mermaid[ \t]*\n([\s\S]*?)^ {0,3}\1[ \t]*$/gm)) {
+      const missing = ['accTitle', 'accDescr'].filter((k) => !new RegExp(`^\\s*${k}\\s*[:{]`, 'm').test(m[2]));
+      if (missing.length) warn(f, `a Mermaid diagram has no ${missing.join(' or ')} (alt text)`);
+    }
+    for (const sec of scan.sections) {
+      for (const l of sec.lines) {
+        if (l.inCode) continue;
+        const t = l.text.replace(/`[^`\n]*`/g, '');
+        if (/!\[\s*\]\(/.test(t) || /!\[\[[^|\]]+\]\]/.test(t)) warn(f, `line ${l.line}: image without alt text`);
+      }
+    }
     if (highlights > C.HIGHLIGHT_MAX) warn(f, `${highlights} ==highlights==; the style guide asks for at most ${C.HIGHLIGHT_MAX} short lines`);
     if (beyond && !syllabus.length) warn(f, 'uses [!beyond] but has no "syllabus" field, so "beyond the syllabus" has no meaning here');
 
@@ -342,7 +398,7 @@ export function build(opts = {}) {
       id, path: f, fm, tags, prerequisites, related,
       headings: scan.headings, bodyLinks: scan.links, text: scan.text, cards, quizCount,
       summary: oneLineSummary(scan),
-      syllabus,
+      syllabus, unit, practical,
     });
   }
 
@@ -461,10 +517,20 @@ export function build(opts = {}) {
       const n = notes.get(nid);
       if (n && n.fm.subject !== id) warn(f, `"${nid}" belongs to subject "${n.fm.subject}"; a subject index lists its own notes`);
     }
+    for (const g of groups) {
+      const isPracticals = norm(g.title || '') === 'practicals';
+      for (const x of g.items) {
+        const t = notes.get(x)?.fm.type;
+        if (t === 'practical' && !isPracticals) warn(f, `practical "${x}" should be listed under "## Practicals"`);
+        if (isPracticals && t && t !== 'practical') warn(f, `"${x}" is a ${t} note but is listed under "## Practicals"`);
+      }
+    }
+    const intro = order.find((x) => notes.get(x)?.fm.type === 'intro');
+    if (intro && order[0] !== intro) warn(f, `the intro note "${intro}" should be first in the subject index`);
     for (const n of notes.values()) {
       if (n.fm.subject === id && !order.includes(n.id)) warn(f, `note "${n.id}" is missing from this index`);
     }
-    subjects.push({ id, title: fm.title ?? id, path: f, order, groups });
+    subjects.push({ id, title: fm.title ?? id, path: f, order, groups, intro: intro ?? null });
   }
   for (const s of new Set([...notes.values()].map((n) => n.fm.subject).filter(Boolean))) {
     if (!subjects.some((x) => x.id === s)) warn(`content/subjects/${s}.md`, `subject "${s}" has notes but no subject index`);
@@ -547,10 +613,13 @@ export function build(opts = {}) {
     if (notes.has(r.id)) continue;
     plannedOut[r.id] = { title: r.title, subject: r.subject, referencedBy: [...(planned.get(r.id) ?? [])] };
   }
+  const dates = gitDates(root);
   const notesOut = {};
   for (const n of notes.values()) {
     notesOut[n.id] = {
       title: n.fm.title, subject: n.fm.subject, level: n.fm.level, type: n.fm.type, status: n.fm.status,
+      updated: dates.get(n.path)?.updated ?? null, added: dates.get(n.path)?.added ?? null,
+      unit: n.unit, practical: n.practical,
       time: n.fm.time ?? null, summary: n.summary, syllabus: n.syllabus, tags: n.tags, prerequisites: n.prerequisites, related: n.related,
       path: n.path, headings: n.headings, flashcards: n.cards.length, quizzes: n.quizCount,
       backlinks: [...(backlinks.get(n.id) ?? [])].sort(),
@@ -559,14 +628,43 @@ export function build(opts = {}) {
   const subjectTitle = (id) => subjects.find((s) => s.id === id)?.title ?? C.SUBJECT_TITLES[id] ?? id;
   const manifest = {
     version: 1,
-    site: { ...C.SITE, built: new Date().toISOString() },
+    site: {
+      ...C.SITE, built: new Date().toISOString(),
+      feedback: C.FEEDBACK.formUrl ? { formUrl: C.FEEDBACK.formUrl, noteField: C.FEEDBACK.noteField } : null,
+    },
     subjectTitles: Object.fromEntries(C.SUBJECTS.map((id) => [id, subjectTitle(id)])),
     assets: listAssets(path.join(contentDir, 'assets'), root),
     notes: notesOut,
     planned: plannedOut,
-    subjects: subjects.map(({ id, title, path: p, order, groups }) => ({ id, title, path: p, order, groups })),
+    subjects: subjects.map(({ id, title, path: p, order, groups, intro }) => ({ id, title, path: p, order, groups, intro })),
     courses: courses.map(({ id, title, summary, path: p, stages }) => ({ id, title, summary, path: p, stages })),
   };
+  // Syllabus pages (plan 12): one per course code, notes from every subject grouped by unit.
+  // Within a unit: theory in subject-index order, then practicals by number.
+  const indexPos = new Map();
+  subjects.forEach((sub, si) => sub.order.forEach((x, i) => { if (!indexPos.has(x)) indexPos.set(x, si * 10000 + i); }));
+  const codes = [...new Set([...notes.values()].flatMap((n) => n.syllabus))].sort();
+  const syllabi = codes.map((code) => {
+    const info = C.COURSES[code] || {};
+    const members = [...notes.values()].filter((n) => n.syllabus.includes(code));
+    const units = new Map();
+    for (const n of members) {
+      const u = n.unit ?? 0;
+      if (!units.has(u)) units.set(u, []);
+      units.get(u).push(n);
+    }
+    const rank = (n) => [n.fm.type === 'intro' ? 0 : n.fm.type === 'practical' ? 2 : 1, n.fm.type === 'practical' ? (n.practical ?? 999) : (indexPos.get(n.id) ?? 1e9)];
+    return {
+      code, title: info.title ?? code, programme: info.programme ?? '',
+      units: [...units.keys()].sort((a, b) => (a || 1e9) - (b || 1e9)).map((u) => ({
+        unit: u || null,
+        title: u ? (info.units?.[u] ?? '') : 'Other notes',
+        items: units.get(u).sort((a, b) => { const ra = rank(a), rb = rank(b); return ra[0] - rb[0] || ra[1] - rb[1] || a.id.localeCompare(b.id); }).map((n) => n.id),
+      })),
+    };
+  });
+  manifest.syllabi = syllabi;
+
   const graph = {
     nodes: [
       ...[...notes.values()].map((n) => ({ id: n.id, title: n.fm.title, subject: n.fm.subject, status: n.fm.status })),

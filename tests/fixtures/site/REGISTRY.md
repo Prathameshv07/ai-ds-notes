@@ -7,6 +7,7 @@
 
 | id | title | subject | type | status | summary | prerequisites |
 |---|---|---|---|---|---|---|
+| databases-intro | Why Databases? | databases | intro | reviewed |  |  |
 | fixture-alpha | Fixture Alpha | databases | theory | draft | Inline maths $x_i^2 + y_{ij}$ and a price of 5 dollars stays plain | fixture-beta, fixture-planned |
 | fixture-beta | Fixture Beta | databases | theory | published | Placeholder |  |
 | fixture-gamma | Fixture Gamma (practical) | databases | practical | reviewed |  | fixture-alpha |
