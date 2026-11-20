@@ -40,6 +40,9 @@ var SECTION_STYLES = {
   'expected result':                { icon: 'flag',                   level: 'U' },
   'extensions':                     { icon: 'rocket',                 level: 'R' },
   'what interviewers ask about this': { icon: 'briefcase',            level: 'P' },
+  // class notes (plan Section 18)
+  'key points':                     { icon: 'star',                   level: 'M', writeDown: true },
+  'exam questions':                 { icon: 'clipboard-list',         level: 'P' },
   // subject intro note (8.6)
   'why this subject matters':       { icon: 'lightbulb',              level: 'U' },
   'a short story':                  { icon: 'book-open',              level: 'U' },

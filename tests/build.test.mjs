@@ -278,8 +278,8 @@ test('subject index level headings become groups; flat order kept for navigation
   const m = JSON.parse(fs.readFileSync(path.join(root, 'dist/data/manifest.json'), 'utf8'));
   assert.deepEqual(m.subjects[0].order, ['aa', 'bb', 'future-note']);
   assert.deepEqual(m.subjects[0].groups, [
-    { title: 'Basics', items: ['aa'] },
-    { title: 'Design', items: ['bb', 'future-note'] },
+    { title: 'Basics', sub: null, items: ['aa'] },
+    { title: 'Design', sub: null, items: ['bb', 'future-note'] },
   ]);
 });
 
@@ -425,7 +425,7 @@ test('unit and practical fields, Practicals heading and syllabus pages', () => {
   assert.deepEqual(errors(r), []);
   const w = warnings(r);
   assert.ok(w.some((x) => x.includes('practical "two-practical" should be listed under "## Practicals"')));
-  assert.ok(w.some((x) => x.includes('syllabus code "XYZ-1" has no name')));
+  assert.ok(w.some((x) => x.includes('syllabus code "XYZ-1" has no course name')));
   const m = JSON.parse(fs.readFileSync(path.join(root, 'dist/data/manifest.json'), 'utf8'));
   assert.equal(m.notes['one-practical'].practical, 1);
   const aba = m.syllabi.find((y) => y.code === 'UDSVI-006');
@@ -446,4 +446,67 @@ test('unit and practical must be whole numbers; practical warnings', () => {
   const w = warnings(build({ root }));
   assert.ok(w.some((x) => x.includes('"practical" is only for practical notes')));
   assert.ok(w.some((x) => x.includes('has a "unit" but no "syllabus"')));
+});
+
+// ---------- class-notes profile (plan Section 18) ----------
+
+const cnTheory = (id, subject, extra = '', drop = []) => `---\nid: ${id}\ntitle: T ${id}\nsubject: ${subject}\nunit: 1\ntype: theory\nsyllabus: [UITVI-001]\nstatus: draft\nsources: [x]\n${extra}---\n` +
+  ['Why should you care?', 'In one line', 'Explained', 'Analogy and real-life example', 'Key points', 'Exam questions', 'Sources']
+    .filter((h) => !drop.includes(h)).map((h) => `## ${h}\n\nPlaceholder.\n`).join('\n');
+const cnIndex = (subject, body) => `---\nid: ${subject}\ntitle: Subject ${subject}\ntype: index\nclass: Sem 6 BSc IT\n---\nSome prose.\n\n${body}`;
+
+test('class-notes profile: layout, _index.md, planned from index, unit titles, no registry', () => {
+  const root = tree({
+    'content/sec/sec-intro.md': introNote('sec').replace('status: draft', 'status: draft\nunit: 0\nsyllabus: [UITVI-001]'),
+    'content/sec/alpha.md': cnTheory('alpha', 'sec', '', []).replace('Placeholder.\n\n## Analogy', 'See [[beta]] and [[gamma-practical]].\n\n## Analogy'),
+    'content/sec/_index.md': cnIndex('sec', '## Start here\n\n0. [[sec-intro]]\n\n## Theory\n\n### Module 1\n\n**Unit 1 · Fundamentals (8 h)**\n1. [[alpha]]: what it is\n2. [[beta]]\n\n## Practicals\n\n**Unit 1 · Router security**\n1. [[gamma-practical]]\n'),
+    'content/assets/img/sec/.gitkeep': '',
+  });
+  const r = build({ root, profile: 'class-notes' });
+  assert.deepEqual(errors(r), []);
+  assert.ok(!fs.existsSync(path.join(root, 'REGISTRY.md')), 'no registry written');
+  const m = JSON.parse(fs.readFileSync(path.join(root, 'dist/data/manifest.json'), 'utf8'));
+  assert.equal(m.site.title, 'Sutra · Class Notes');
+  assert.equal(m.site.careerPaths, false);
+  assert.deepEqual(Object.keys(m.notes).sort(), ['alpha', 'sec-intro']);
+  assert.equal(m.planned.beta.title, 'Beta');
+  assert.deepEqual(m.planned['gamma-practical'].referencedBy.sort(), ['alpha', 'subject:sec']);
+  const s = m.subjects[0];
+  assert.equal(s.about, 'Sem 6 BSc IT');
+  assert.equal(s.intro, 'sec-intro');
+  assert.deepEqual(s.groups.map((g) => [g.title, g.sub]), [['Start here', null], ['Theory', 'Unit 1 · Fundamentals (8 h)'], ['Practicals', 'Unit 1 · Router security']]);
+  assert.equal(s.notes.alpha, 'what it is');
+  const y = m.syllabi.find((x) => x.code === 'UITVI-001');
+  assert.equal(y.title, 'Security in Computing');
+  assert.deepEqual(y.units.map((u) => [u.unit, u.title]), [[0, 'Introduction'], [1, 'Fundamentals']]);
+});
+
+test('class-notes profile: required sections and broken links name the file and the fix', () => {
+  const root = tree({
+    'content/sec/alpha.md': cnTheory('alpha', 'sec', '', ['Exam questions']).replace('## Sources', 'Typo [[betta]].\n\n## Sources'),
+    'content/sec/_index.md': cnIndex('sec', '## Theory\n1. [[alpha]]\n2. [[beta]]\n'),
+    'content/stray.md': '# x',
+  });
+  const r = build({ root, profile: 'class-notes' });
+  const e = r.problems.filter((p) => p.level === 'error');
+  const miss = e.find((p) => p.msg === 'missing required section: ## Exam questions');
+  assert.equal(miss.file, 'content/sec/alpha.md');
+  assert.match(miss.fix, /add a "## Exam questions" heading.*templates\/theory-note\.md/);
+  const broken = e.find((p) => p.msg.includes('broken link [[betta]]'));
+  assert.ok(broken.msg.includes('did you mean "beta"') && broken.msg.includes('_index.md'), broken.msg);
+  assert.equal(broken.fix, 'correct the ID');
+  assert.ok(r.problems.some((p) => p.file === 'content/stray.md' && p.fix.includes('content/<subject-id>/')));
+  // the main-site profile is unaffected by class-notes files: different layout, nothing found
+  assert.ok(warnings(build({ root })).some((w) => w.includes('no notes found')));
+});
+
+test('every error carries a fix', () => {
+  const root = tree({
+    'content/concepts/databases/aa.md': note('aa', { drop: ['Flashcards'], body: '[[Bad Link]] [[nope-x]]', extra: { unit: 'x', level: 'expert' } }),
+    'content/concepts/databases/bb.md': note('bb', { subject: 'ml' }),
+  });
+  const r = build({ root });
+  const noFix = r.problems.filter((p) => p.level === 'error' && !p.fix);
+  assert.deepEqual(noFix, []);
+  assert.ok(r.problems.filter((p) => p.level === 'error').length >= 5);
 });

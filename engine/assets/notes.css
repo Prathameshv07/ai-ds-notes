@@ -204,6 +204,7 @@ h2:hover .anchor, h3:hover .anchor, h4:hover .anchor, .anchor:focus{ opacity:1; 
 .wikilink{ text-decoration-thickness:1px; }
 .wikilink.planned{ color:var(--muted); text-decoration:underline dotted; cursor:help; }
 .wikilink.planned::after{ content:" (planned)"; font-size:.78em; }
+.row .wikilink.planned::after{ content:none; } /* rows already carry a Planned badge */
 .missing{ color:var(--co-red); }
 blockquote{ margin:1rem 0; padding:.2rem 1rem; border-left:3px solid var(--line); color:var(--muted); }
 hr{ border:0; border-top:1px solid var(--line); margin:2rem 0; }
@@ -359,6 +360,10 @@ summary.callout-title .callout-label ~ *{ margin-left:.6rem; }
 .sel-gap{ width:1.05rem; flex:none; }
 .stage h2{ display:flex; align-items:center; gap:.5rem; }
 .stage-practicals h2 .icon{ color:var(--lvl-R); }
+.row-note{ display:block; font-weight:400; font-size:.8rem; color:var(--muted); margin-top:.05rem; }
+.stage-sub{ margin-top:1rem; }
+.stage-sub h3{ display:flex; align-items:center; gap:.5rem; font-size:1rem; margin:0 0 .4rem; color:var(--ink); }
+.part-title{ margin-top:2rem !important; padding-top:.6rem; border-top:1px solid var(--line); }
 .pr-num{
   display:inline-block; margin-right:.45rem; font-size:.72rem; font-weight:600; letter-spacing:.03em; vertical-align:.1em;
   color:var(--lvl-R); border:1px solid color-mix(in srgb, var(--lvl-R) 45%, transparent); border-radius:99px; padding:.02rem .45rem;

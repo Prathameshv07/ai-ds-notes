@@ -207,12 +207,13 @@
     const subjectCards = M.subjects.map((s) => `<a class="card" href="path.html?subject=${encodeURIComponent(s.id)}">
         <div class="card-icon">${icon('library')}</div>
         <div class="card-body"><div class="card-title">${esc(s.title)}</div>
+          ${s.about ? `<div class="card-text">${esc(s.about)}</div>` : ''}
           <div class="card-meta">${countWritten(s.order)} of ${s.order.length} notes written</div></div></a>`).join('');
     app.innerHTML = `
       <section class="home-hero"><h1>${esc(M.site.title)}</h1><p class="sub">${esc(M.site.tagline)}</p></section>
-      <section class="home-block"><h2>${icon('route')} Career paths</h2>
+      ${M.site.careerPaths === false ? '' : `<section class="home-block"><h2>${icon('route')} Career paths</h2>
         <p class="sub">Pick a career; follow its stages from foundations to projects.</p>
-        <div class="card-grid">${courseCards || '<p class="empty">Career paths will appear here soon.</p>'}</div></section>
+        <div class="card-grid">${courseCards || '<p class="empty">Career paths will appear here soon.</p>'}</div></section>`}
       <section class="home-block"><h2>${icon('library')} Subjects</h2>
         <div class="card-grid">${subjectCards || '<p class="empty">Subjects will appear here soon.</p>'}</div></section>
       ${(M.syllabi || []).length ? `<section class="home-block"><h2>${icon('clipboard-list')} By syllabus</h2>
@@ -227,7 +228,7 @@
 
   // ---------------- subject / course page ----------------
 
-  function itemRow(id, i, course, selectable) {
+  function itemRow(id, i, course, selectable, note) {
     const n = M.notes[id];
     const meta = n ? `<span class="row-meta">${n.time ? icon('clock') + esc(n.time) : ''}${badges(n)}</span>`
       : `<span class="row-meta"><span class="badge badge-planned">Planned</span></span>`;
@@ -235,7 +236,7 @@
       : (selectable ? '<span class="sel-gap"></span>' : '');
     const pr = n && n.practical ? `<span class="pr-num" title="Practical number in the syllabus">Practical ${n.practical}</span>` : '';
     return `<li class="row${n ? '' : ' is-planned'}">${tick}<span class="row-num">${i + 1}</span>
-      <span class="row-title">${pr}${noteLink(id, null, course)}</span>${meta}</li>`;
+      <span class="row-title">${pr}${noteLink(id, null, course)}${note ? `<span class="row-note">${esc(note)}</span>` : ''}</span>${meta}</li>`;
   }
 
   // The subject's intro note (plan 8.6), shown first as a "Start here" card.
@@ -257,18 +258,28 @@
       document.title = `${s.title} · ${M.site.title}`;
       // Level headings in the subject index (## Basics, ## Design, ...) become groups; numbering runs on.
       // The intro note leads as a "Start here" card instead of a numbered row.
+      // A group may have a sub-heading (class notes: "Unit 1 · …" under ## Theory or ## Practicals);
+      // the ## heading is then shown once above its sub-groups.
       const groups = (s.groups && s.groups.length ? s.groups : [{ title: null, items: s.order }])
-        .map((g) => ({ title: g.title, items: g.items.filter((x) => x !== s.intro) })).filter((g) => g.items.length);
-      let n = 0;
+        .map((g) => ({ title: g.title, sub: g.sub || null, items: g.items.filter((x) => x !== s.intro) })).filter((g) => g.items.length);
+      const notesText = s.notes || {};
+      let n = 0, lastTitle;
       const lists = groups.map((g, gi) => {
         const canTick = g.items.some(written);
         const isPr = norm(g.title || '') === 'practicals';
-        return `<section class="stage${isPr ? ' stage-practicals' : ''}" data-group="${gi}">${g.title ? `<h2>${canTick ? `<input type="checkbox" class="sel-group" aria-label="Select all of ${esc(g.title)} for printing">` : ''}${isPr ? icon('flask-conical') : ''}${esc(g.title)}</h2>` : ''}
-          <ol class="rows">${g.items.map((id) => itemRow(id, n++, null, true)).join('')}</ol></section>`;
+        const tick = (label) => (canTick ? `<input type="checkbox" class="sel-group" aria-label="Select all of ${esc(label)} for printing">` : '');
+        let head = '';
+        if (g.sub) {
+          if (g.title !== lastTitle && g.title) head += `<h2 class="part-title">${isPr ? icon('flask-conical') : ''}${esc(g.title)}</h2>`;
+          head += `<h3>${tick(g.sub)}${esc(g.sub)}</h3>`;
+        } else if (g.title) head = `<h2>${tick(g.title)}${isPr ? icon('flask-conical') : ''}${esc(g.title)}</h2>`;
+        lastTitle = g.title;
+        return `<section class="stage${isPr ? ' stage-practicals' : ''}${g.sub ? ' stage-sub' : ''}" data-group="${gi}">${head}
+          <ol class="rows">${g.items.map((id) => itemRow(id, n++, null, true, notesText[id])).join('')}</ol></section>`;
       }).join('');
       const anyWritten = s.order.some((x) => written(x) && x !== s.intro);
       app.innerHTML = `<nav class="crumbs"><a href="index.html">Home</a></nav>
-        <h1>${esc(s.title)}</h1><p class="sub">${countWritten(s.order)} of ${s.order.length} notes written · recommended reading order</p>
+        <h1>${esc(s.title)}</h1>${s.about ? `<p class="sub">${esc(s.about)}</p>` : ''}<p class="sub">${countWritten(s.order)} of ${s.order.length} notes written · recommended reading order</p>
         ${introCard(s.intro)}
         ${anyWritten ? `<div class="print-bar"><span class="print-bar-text">${icon('printer')}Tick notes to print them as one document.</span>
           <button type="button" class="btn" id="printSelBtn" disabled>${icon('printer')}Print selected</button></div>` : ''}

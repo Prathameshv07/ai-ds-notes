@@ -105,3 +105,48 @@ export const SUBJECT_TITLES = {
   'data-eng': 'Data Engineering', bi: 'BI & Dashboards', genai: 'Generative AI',
   mlops: 'MLOps', rl: 'Reinforcement Learning', research: 'Research Methods',
 };
+
+// ---------- Profiles (plan Section 18, decision 39) ----------
+// The same engine builds two sites. Everything above is the "ai-ds-notes" profile (the default).
+// A profile below overrides only what differs. Build with: node scripts/build.mjs --profile=class-notes
+export const PROFILES = {
+  'ai-ds-notes': {
+    layout: 'concepts',      // content/concepts/<subject>/<note>.md, indexes in content/subjects/<subject>.md
+    indexType: 'subject',    // the "type" a subject index declares
+    registry: true,          // REGISTRY.md: planned rows, generated rows
+    courses: true,           // career paths in content/courses/
+    fixedSubjects: true,     // subjects must be in SUBJECTS (plan Section 5)
+    templates: {
+      theory: 'plan Section 8.1', practical: 'plan Section 8.2', project: 'plan Section 8.3', intro: 'plan Section 8.6',
+    },
+  },
+  'class-notes': {
+    layout: 'flat',          // content/<subject>/<note>.md, index in content/<subject>/_index.md
+    indexType: 'index',
+    registry: false,         // no registry: IDs listed in a subject's _index.md count as planned
+    courses: false,          // no career paths
+    fixedSubjects: false,    // any kebab-case subject folder
+    SITE: { title: 'Sutra · Class Notes', tagline: 'Lecture notes for BSc IT and Data Science classes' },
+    TYPES: ['theory', 'practical', 'intro'],
+    REQUIRED_FIELDS: ['id', 'title', 'subject', 'type', 'status'],
+    RECOMMENDED_FIELDS: ['sources'],
+    // Section 18 template; practicals as Section 8.2; intro as Section 8.6. No self-check or flashcards.
+    REQUIRED_SECTIONS: {
+      theory: ['Why should you care?', 'In one line', 'Explained', 'Analogy and real-life example', 'Key points', 'Exam questions', 'Sources'],
+      practical: ['Aim', 'Code', 'Output', 'Explanation', 'Viva questions', 'Sources'],
+      intro: ['Why this subject matters', 'A short story', 'Where it is used today', 'What you will be able to do', 'Careers that use it', 'Map of the subject', 'Sources'],
+    },
+    WRITE_DOWN_SECTIONS: ['In one line', 'Key points', 'Diagram'],
+    templates: { theory: 'templates/theory-note.md', practical: 'templates/practical-note.md', intro: 'templates/intro-note.md' },
+    // Unit titles come from the "**Unit N · Title**" lines in each _index.md, so only names are needed here.
+    COURSES: {
+      'UITIV-005': { title: 'Embedded System', programme: 'BSc IT · Semester IV' },
+      'UITIV-006': { title: 'Embedded System Practical', programme: 'BSc IT · Semester IV' },
+      'UDSIV-005': { title: 'Embedded System', programme: 'BSc Data Science · Semester IV' },
+      'UDSIV-006': { title: 'Embedded System Practical', programme: 'BSc Data Science · Semester IV' },
+      'UITVI-001': { title: 'Security in Computing', programme: 'BSc IT · Semester VI' },
+      'UITVI-002': { title: 'Security in Computing Practical', programme: 'BSc IT · Semester VI' },
+    },
+    FEEDBACK: { formUrl: '', noteField: '' },
+  },
+};

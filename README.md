@@ -117,6 +117,36 @@ write-down section, more than 5 highlights, or `[!beyond]` without a `syllabus` 
 Self-check answers: a closed answer whose title gives the answer away (`Answer: B`) shows
 "Show answer" instead; the full title appears once it is opened.
 
+## Two sites, one engine (plan Section 18)
+
+The same engine also publishes **class-notes** (Prathameshv07/class-notes) as
+"Sutra · Class Notes". That repo holds only notes and one workflow; on every push (and daily, to
+pick up engine changes) the workflow checks out this repo and runs:
+
+```
+node scripts/build.mjs --profile=class-notes --root=<class-notes checkout> --out=_site
+```
+
+The `class-notes` profile (in `PROFILES`, `scripts/config.mjs`) differs from the default:
+
+- notes in `content/<subject>/<note>.md`; each subject's index is `content/<subject>/_index.md`
+  (`type: index`), with `## Start here`, `## Theory` and `## Practicals`, and units as
+  `**Unit N · Title**` lines, shown as sub-groups and used as syllabus-page unit names;
+- no registry and no career paths: an ID listed in an `_index.md` counts as planned;
+- the Section 18 template (Why should you care?, In one line, Explained, Analogy and real-life
+  example, Key points, Exam questions, Sources); "Key points" is a write-down section;
+- `unit: 0` marks the intro note ("Introduction" on syllabus pages).
+
+Everything else (present mode, Notebook view, print, syllabus pages, Draft badge) is shared.
+**Changing the engine changes both sites**, so test both before pushing:
+
+```
+npm run build -- --profile=class-notes --root=../class-notes --out=/tmp/cn
+```
+
+Every error and warning names its file and says how to fix it (`fix:` line; on GitHub also as an
+annotation on the run's page), because the subject chats read them.
+
 ## Changing things
 
 - **Site title and tagline:** `SITE` in `scripts/config.mjs` (title: Sutra).
