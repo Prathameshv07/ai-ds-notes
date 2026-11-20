@@ -9,7 +9,7 @@
 |---|---|---|---|---|---|---|
 | acid-properties | ACID Properties | databases | theory | planned | Covers: transactions, atomicity, consistency, isolation, durability |  |
 | data-models | Data Models | databases | theory | planned | Covers: what a data model is, why it matters, building blocks, business rules | what-is-dbms |
-| dbms-architecture | DBMS Architecture | databases | theory | planned | Covers: database system components, types of users, overall DBMS architecture | what-is-dbms |
+| dbms-architecture | DBMS Architecture | databases | theory | draft | DBMS architecture describes the parts of a database system, the people who use and run it, and how a request travels… | what-is-dbms |
 | levels-of-abstraction | Levels of Data Abstraction | databases | theory | planned | Covers: physical, logical and view levels, schemas, data independence | data-models |
 | normalization | Normalization | databases | theory | planned | Covers: anomalies, need for normalization, 1NF, 2NF, 3NF, BCNF, denormalization |  |
 | nosql-databases | NoSQL Databases | databases | theory | planned | Covers: key-value, document, column-family and graph stores; when to choose NoSQL | types-of-databases |
