@@ -7,6 +7,7 @@ type: theory
 prerequisites: []
 related: [types-of-databases, dbms-architecture, data-models, levels-of-abstraction]
 tags: [interview]
+syllabus: [UDSII-002]
 time: 10 min
 status: draft
 sources:
@@ -30,18 +31,18 @@ A DBMS is software that keeps data in one shared, organised place and controls h
 ### Q1. What are data, a database and a DBMS?
 
 - **Data:** raw facts, such as `Asha`, `9876543210`, `85`.
-- **Information:** data processed so that it means something, such as "Asha scored 85 in DBMS". Collecting, storing, sorting and summarising data to get information is called **data processing**.
-- **Database:** an organised collection of related data, such as all the student, course and marks records of a college.
+- **Information:** data processed so that it means something, such as "Asha scored 85 in DBMS".
+- **Data processing:** collecting, storing, sorting and summarising data. ==Data processing converts raw data into meaningful information.==
+- **Database:** ==A database is an organised collection of related data==, such as all the student, course and marks records of a college.
 - **DBMS:** the software that creates and manages a database. Examples: MySQL, PostgreSQL, Oracle Database, SQLite, MongoDB.
 
-A **database system** is the whole package: the database, the DBMS, the application programs that use it, and the people who use them.
+A **database system** is the whole package. ==A database system consists of the database, the DBMS, application programs and users.==
 
 ### Q2. Why not just use files?
 
-Before DBMSs, each department wrote its own programs and kept its own files. This **file-processing system** causes eight problems:
+Before DBMSs, each department wrote its own programs and kept its own files. This **file-processing system** causes eight problems (the full list is in Key facts):
 
-- **Redundancy:** the same data is stored many times (your phone number in three files).
-- **Inconsistency:** copies disagree when one is updated and the others are not.
+- **Redundancy and inconsistency:** ==Redundancy is storing the same data more than once; inconsistency is when those copies disagree.== Your phone number in three files is redundancy; the old number still in the exam file is inconsistency.
 - **Hard to access data:** every new question, such as "students with fees pending and attendance below 75%", needs a new program.
 - **Data isolation:** data is scattered across files in different formats, so combining it is painful.
 - **Integrity problems:** rules such as "marks must be between 0 and 100" are buried in program code and easy to break.

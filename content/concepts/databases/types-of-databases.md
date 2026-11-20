@@ -7,6 +7,7 @@ type: theory
 prerequisites: [what-is-dbms]
 related: [nosql-databases, data-warehouse, dbms-architecture]
 tags: [interview]
+syllabus: [UDSII-002]
 time: 10 min
 status: draft
 sources:
@@ -49,20 +50,21 @@ Every database has one answer to each question. Your college ERP is multiuser, c
 ### Q3. What are the types by location?
 
 - **Centralised database:** all data is kept at one site. Easy to manage, but if that site fails, everyone stops.
-- **Distributed database:** data is spread across several sites connected by a network, yet users see it as one database. Example: a national booking system with servers in several cities.
+- **Distributed database:** ==A distributed database spreads data across several networked sites, but users see it as one database.== Example: a national booking system with servers in several cities.
 - **Cloud database:** created and run on a cloud provider's servers, such as AWS, Microsoft Azure or Google Cloud. You rent it instead of buying hardware. Underneath, it may be centralised or distributed.
 
 ### Q4. What are the types by usage?
 
-- **Operational database:** supports day-to-day work by recording events as they happen: a UPI payment, a seat booking, a new admission. It handles many small reads and writes every second. These are also called **OLTP** (online transaction processing) systems.
-- **Analytical database:** stores historical data for reports and decisions. It is mostly read, rarely changed. It answers questions like "Which city's sales grew fastest in three years?" A **data warehouse** is the classic analytical database (see [[data-warehouse]]). This work is called **OLAP** (online analytical processing).
+- **Operational database:** ==An operational database records day-to-day transactions as they happen.== Examples: a UPI payment, a seat booking, a new admission. It handles many small reads and writes every second. These are also called **OLTP** (online transaction processing) systems.
+- **Analytical database:** ==An analytical database stores historical data for reports and decisions.== It is mostly read, rarely changed. It answers questions like "Which city's sales grew fastest in three years?" A **data warehouse** is the classic analytical database (see [[data-warehouse]]). This work is called **OLAP** (online analytical processing).
 
-Data analysts and data scientists spend most of their time on the analytical side.
+> [!beyond] Beyond the syllabus
+> In data careers, the analytical side is where most of the work happens. Data analysts and data scientists rarely query the live operational database; they work on copies in a warehouse or a "data lake", built by data engineers using pipelines that move data every night or even every few minutes.
 
 ### Q5. What are the types by structure?
 
 - **Structured data** fits fixed rows and columns, such as a marks table. It is stored in **relational databases** such as MySQL, PostgreSQL and Oracle.
-- **Semi-structured data** has some structure but no fixed table shape, such as JSON or XML. On a shopping site, a phone has fields like RAM and battery; a saree has fabric and length.
+- **Semi-structured data:** ==Semi-structured data has some structure but no fixed table shape, such as JSON or XML.== On a shopping site, a phone has fields like RAM and battery; a saree has fabric and length.
 - **Unstructured data** has no predefined format: photos, videos, PDFs, voice notes.
 
 Semi-structured and very large data sets are often kept in **NoSQL databases**, such as MongoDB, which do not force every record into the same columns (see [[nosql-databases]]).
@@ -139,8 +141,11 @@ Classify two systems in your college.
 ## Think deeper
 
 - **Why two databases?** Companies copy data from operational to analytical databases every night instead of using one. What do they gain? What do they lose? (Think about how fresh the report data is.)
-- **When the network breaks.** In a distributed booking system, the Mumbai and Delhi servers lose contact for a minute. Should bookings stop, so no seat is sold twice, or continue, so customers are not turned away? You will meet this trade-off again later as the CAP theorem.
+- **When the network breaks.** In a distributed booking system, the Mumbai and Delhi servers lose contact for a minute. Should bookings stop, so no seat is sold twice, or continue, so customers are not turned away?
 - **Starting small.** A new startup has ten users today and hopes for a million next year. Should it buy its own servers or start with a cloud database? What would change your answer?
+
+> [!beyond] Beyond the syllabus
+> The "stop or continue" question is a famous result called the **CAP theorem**: when the network between sites breaks, a distributed database must choose between staying consistent and staying available. Interviewers for data engineering roles often ask about it.
 
 ## Self-check
 
