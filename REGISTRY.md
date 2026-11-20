@@ -26,4 +26,7 @@
 | nosql-databases | NoSQL Databases | databases | theory | planned | Covers: key-value, document, column-family and graph stores; when to choose NoSQL | types-of-databases |
 | types-of-databases | Types of Databases | databases | theory | draft | Databases are classified by how many users they serve, where the data is kept, what the data is used for, and how… | what-is-dbms |
 | what-is-dbms | What is a DBMS? | databases | theory | draft | A DBMS is software that keeps data in one shared, organised place and controls how it is defined, accessed, updated and… |  |
+| business-analytics | Introduction to Business Analytics | data-analysis | theory | draft | Business analytics is the use of data, statistical and quantitative methods, and computer tools to understand business… |  |
+| data-analysis-intro | Why Data Analysis? | data-analysis | intro | draft |  |  |
+| exploratory-data-analysis | Exploratory Data Analysis (EDA) | data-analysis | theory | planned | Covers: purpose of EDA, univariate and bivariate summaries, spotting trends, patterns and outliers in a dataset |  |
 | data-warehouse | Data Warehouse | data-eng | theory | planned | Covers: OLTP vs OLAP, purpose of a warehouse, ETL basics, star schema | types-of-databases |
