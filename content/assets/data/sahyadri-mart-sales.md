@@ -79,5 +79,7 @@ Synthetic data created for this site; no real company or person is described. Li
 |---|---|---|
 | [[data-collection-practical]] | data-analysis | ABA (UDSVI-006) Unit 1, practical 1 |
 | [[exploratory-data-analysis-practical]] | data-analysis | ABA (UDSVI-006) Unit 1, practical 2 |
+| [[central-tendency-practical]] | prob-stats | ABA (UDSVI-006) Unit 1, practical 3 |
+| [[dispersion-practical]] | prob-stats | ABA (UDSVI-006) Unit 1, practical 4 |
 
 Other subject chats: add your practical to this table when you reuse the file.
