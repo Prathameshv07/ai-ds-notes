@@ -29,7 +29,7 @@ Daily sales of **Sahyadri Mart**, a fictional chain of 12 grocery and household 
 | `discount_pct` | integer | Store-wide discount that day: 0, 5, 10 or 15 |
 | `display` | 0/1 | 1 if a promotional end-of-aisle display was set up |
 | `ad_spend_inr` | integer | Local advertising spend that day (₹) |
-| `rainfall_mm` | decimal | Rainfall at the store that day (mm); **98 missing values** |
+| `rainfall_mm` | decimal | Rainfall at the store that day (mm); **93 missing values** |
 | `footfall` | integer | Number of people who entered the store |
 | `transactions` | integer | Number of bills (buying customers) |
 | `units_sold` | integer | Total items sold |
@@ -65,7 +65,7 @@ Script: `sahyadri-mart-sales.py` (beside this file), random seed 2026, so every 
 - **Marketing levers:** ad spend, discounts and displays each raise footfall a little, with diminishing returns for ad spend; a display works slightly better together with a discount (an interaction effect).
 - **Noise:** random day-to-day variation, so relationships are realistic rather than perfect.
 
-**Known imperfection (on purpose):** the rain gauges at S03 (Ratnagiri) and S10 (Nanded) failed on some days, leaving 98 blank `rainfall_mm` values. All other columns are complete.
+**Known imperfection (on purpose):** the rain gauges at S03 (Ratnagiri) and S10 (Nanded) failed on some days, leaving 93 blank `rainfall_mm` values. All other columns are complete.
 
 **Caution for students:** because the data is synthetic, never quote its numbers as facts about real stores or cities.
 

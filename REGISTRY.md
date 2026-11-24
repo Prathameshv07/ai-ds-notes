@@ -17,6 +17,7 @@
 | prob-stats-intro | Why Probability & Statistics? | prob-stats | intro | draft |  |  |
 | quartiles-and-percentiles | Quartiles and Percentiles | prob-stats | theory | planned | Covers: quartiles, deciles, percentiles, IQR, five-number summary, 1.5 IQR outlier rule | central-tendency |
 | skewness-and-kurtosis | Skewness and Kurtosis | prob-stats | theory | planned | Covers: shape of a distribution, positive and negative skew, mean-median-mode order, types of kurtosis | central-tendency, dispersion |
+| types-of-variables | Types of Variables and Scales of Measurement | prob-stats | theory | planned | Covers: categorical and numerical variables, discrete and continuous, nominal, ordinal, interval and ratio scales |  |
 | acid-properties | ACID Properties | databases | theory | planned | Covers: transactions, atomicity, consistency, isolation, durability |  |
 | data-models | Data Models | databases | theory | reviewed | A data model is a simple, usually graphical, picture of real-world data: what things exist, what we store about them… | what-is-dbms |
 | databases-intro | Databases & SQL: Start Here | databases | intro | reviewed |  |  |
@@ -29,5 +30,8 @@
 | what-is-dbms | What is a DBMS? | databases | theory | reviewed | A DBMS is software that keeps data in one shared, organised place and controls how it is defined, accessed, updated and… |  |
 | business-analytics | Introduction to Business Analytics | data-analysis | theory | reviewed | Business analytics is the use of data, statistical and quantitative methods, and computer tools to understand business… |  |
 | data-analysis-intro | Why Data Analysis? | data-analysis | intro | reviewed |  |  |
-| exploratory-data-analysis | Exploratory Data Analysis (EDA) | data-analysis | theory | planned | Covers: purpose of EDA, univariate and bivariate summaries, spotting trends, patterns and outliers in a dataset |  |
+| data-cleaning | Data Cleaning | data-analysis | theory | planned | Covers: missing values, duplicates, wrong data types, inconsistent categories, handling outliers, in pandas | exploratory-data-analysis |
+| data-collection-practical | Collecting Business Datasets | data-analysis | practical | draft |  | business-analytics |
+| exploratory-data-analysis | Exploratory Data Analysis (EDA) | data-analysis | theory | draft | Exploratory data analysis (EDA) is the first, open-minded examination of a dataset, using summary numbers and simple… | business-analytics |
+| exploratory-data-analysis-practical | Exploratory Data Analysis on Sales Data | data-analysis | practical | draft |  | exploratory-data-analysis, data-collection-practical |
 | data-warehouse | Data Warehouse | data-eng | theory | planned | Covers: OLTP vs OLAP, purpose of a warehouse, ETL basics, star schema | types-of-databases |
