@@ -10,7 +10,7 @@ tags: [interview]
 syllabus: [UDSII-002]
 unit: 1
 time: 10 min
-status: draft
+status: reviewed
 sources:
   - "Coronel & Morris, Database Systems: Design, Implementation, and Management, Ch. 2 (verify)"
   - "Silberschatz, Korth & Sudarshan, Database System Concepts, Ch. 1 (verify)"

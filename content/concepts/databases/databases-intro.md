@@ -8,7 +8,7 @@ related: [what-is-dbms, types-of-databases]
 syllabus: [UDSII-002]
 unit: 1
 time: 5 min
-status: draft
+status: reviewed
 sources:
   - "E. F. Codd, \"A Relational Model of Data for Large Shared Data Banks\", Communications of the ACM, 13(6), 1970"
   - "Coronel & Morris, Database Systems: Design, Implementation, and Management, Ch. 1 (verify)"
