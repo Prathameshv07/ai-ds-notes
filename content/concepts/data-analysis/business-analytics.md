@@ -10,7 +10,7 @@ tags: [interview]
 syllabus: [UDSVI-006]
 unit: 1
 time: 10 min
-status: draft
+status: reviewed
 sources:
   - "James R. Evans, Business Analytics, Pearson, Ch. 1 (verify)"
   - "S. C. Albright & W. L. Winston, Business Analytics: Data Analysis and Decision Making, Cengage, Ch. 1 (verify)"

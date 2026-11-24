@@ -4,7 +4,7 @@ title: Why Data Analysis?
 subject: data-analysis
 type: intro
 time: 5 min
-status: draft
+status: reviewed
 sources:
   - "Wes McKinney, Python for Data Analysis, 3rd ed., Ch. 1 (verify)"
   - "James R. Evans, Business Analytics, Ch. 1 (verify)"
