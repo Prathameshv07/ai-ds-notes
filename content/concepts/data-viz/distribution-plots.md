@@ -37,14 +37,14 @@ A histogram shows the shape of a numerical variable by counting how many values 
 
 ### Q1. What is a distribution, and why graph it?
 
-The **distribution** of a variable is the full pattern of its values: which values occur, and how often.
+==The **distribution** of a variable is the full pattern of its values==: which values occur, and how often.
 
 A graph of the distribution answers four questions at once:
 
-- **Centre:** where is a typical value?
-- **Spread:** how far do values range?
-- **Shape:** symmetric, or with a long tail on one side? One hump or two?
-- **Unusual values:** are there outliers or gaps?
+- ==**Centre:**== where is a typical value?
+- ==**Spread:**== how far do values range?
+- ==**Shape:**== symmetric, or with a long tail on one side? One hump or two?
+- ==**Unusual values:**== are there outliers or gaps?
 
 Numbers such as the mean and SD ([[central-tendency]], [[dispersion]]) answer the first two only partly, and the last two not at all.
 
@@ -52,9 +52,9 @@ Numbers such as the mean and SD ([[central-tendency]], [[dispersion]]) answer th
 
 ==A histogram is a bar graph of a frequency table: the x-axis is divided into equal intervals (bins), and each bar's height is the number of values in that bin.==
 
-- The x-axis is a **numerical** variable (footfall, salary, delivery time).
-- Bars **touch**, because the intervals are continuous: 900–1,100 runs straight into 1,100–1,300.
-- The y-axis is a count (frequency) or a percentage.
+- ==The x-axis is a **numerical** variable== (footfall, salary, delivery time).
+- ==Bars **touch**==, because the intervals are continuous: 900–1,100 runs straight into 1,100–1,300.
+- ==The y-axis is a count (frequency)== or a percentage.
 
 Building one is building a frequency table ([[frequency-distribution]]) and drawing it. For S05: 244 of 731 days (33%) fall in 1,100–1,299, the tallest bar.
 
@@ -62,10 +62,10 @@ Building one is building a frequency table ([[frequency-distribution]]) and draw
 
 | | Histogram | Bar chart |
 |---|---|---|
-| x-axis | Numerical, cut into intervals | Categories (store, city, product) |
-| Bars | Touch | Have gaps |
+| x-axis | ==Numerical, cut into intervals== | ==Categories== (store, city, product) |
+| Bars | ==Touch== | ==Have gaps== |
 | Order of bars | Fixed by the number line | Can be reordered, e.g. sorted by height |
-| Shows | Shape of one variable | Comparison between categories |
+| Shows | ==Shape of one variable== | ==Comparison between categories== |
 
 A chart of "revenue by city" is a bar chart even if the bars look like a histogram.
 
@@ -73,12 +73,12 @@ A chart of "revenue by city" is a bar chart even if the bars look like a histogr
 
 The bin width changes the picture:
 
-- **Too few** bins (4): one or two fat bars; the shape disappears.
-- **Too many** bins (200): a comb of thin spikes; random noise looks like a pattern.
+- ==**Too few** bins (4): one or two fat bars==; the shape disappears.
+- ==**Too many** bins (200): a comb of thin spikes==; random noise looks like a pattern.
 
-A common starting point is **Sturges' rule**: $k = 1 + \log_2 n$ bins. For $n = 731$: $k = 1 + 9.51 \approx 11$.
+A common starting point is ==**Sturges' rule**==: $k = 1 + \log_2 n$ bins. For $n = 731$: $k = 1 + 9.51 \approx 11$.
 
-Treat it as a start, not a law. Try two or three bin counts; trust only the features that survive all of them.
+Treat it as a start, not a law. ==Try two or three bin counts==; trust only the features that survive all of them.
 
 ### Q5. What shapes can a histogram show?
 
@@ -86,10 +86,10 @@ Treat it as a start, not a law. Try two or three bin counts; trust only the feat
 
 | Shape | Mean vs median | Business example |
 |---|---|---|
-| Symmetric | Mean ≈ median | Average bill at one store |
-| Right-skewed | Mean > median | Footfall, income, house prices |
-| Left-skewed | Mean < median | Marks in an easy exam |
-| Bimodal | Mean may lie in the gap | Bills of small and large stores mixed |
+| ==Symmetric== | Mean ≈ median | Average bill at one store |
+| ==Right-skewed== | Mean > median | Footfall, income, house prices |
+| ==Left-skewed== | Mean < median | Marks in an easy exam |
+| ==Bimodal== | Mean may lie in the gap | Bills of small and large stores mixed |
 
 ==A bimodal histogram usually means two groups are mixed in one column.== Split the data by the group and look again. Skewness as a number is in [[skewness-and-kurtosis]].
 
@@ -97,22 +97,22 @@ Treat it as a start, not a law. Try two or three bin counts; trust only the feat
 
 ==A box plot draws the five-number summary: minimum, Q1, median, Q3 and maximum, with outliers shown as separate dots.==
 
-- **Q1** and **Q3** are the first and third quartiles: 25% and 75% of values lie below them ([[quartiles-and-percentiles]]).
-- The **box** runs from Q1 to Q3. Its height is the **interquartile range**, IQR = Q3 − Q1, which holds the middle 50% of the data.
-- The **line inside** the box is the median.
-- The **whiskers** reach out to the most extreme values that are not outliers.
+- ==**Q1** and **Q3** are the first and third quartiles==: 25% and 75% of values lie below them ([[quartiles-and-percentiles]]).
+- ==The **box** runs from Q1 to Q3==. Its height is the ==**interquartile range**==, IQR = Q3 − Q1, which holds the middle 50% of the data.
+- The ==**line inside** the box is the median==.
+- ==The **whiskers** reach out to the most extreme values== that are not outliers.
 
 The box plot was introduced by the statistician John Tukey in the 1970s as a quick, hand-drawn summary.
 
 ### Q7. How are outliers and whiskers decided?
 
-The usual rule is Tukey's **1.5 × IQR rule**:
+The usual rule is ==Tukey's **1.5 × IQR rule**==:
 
 $$\text{Lower fence} = Q_1 - 1.5 \times IQR \qquad \text{Upper fence} = Q_3 + 1.5 \times IQR$$
 
 ==A value outside the fences is plotted as an outlier; each whisker stops at the most extreme value inside the fences.==
 
-The fences themselves are not drawn. If no value falls outside, the whiskers end at the minimum and maximum. This is also the rule used by matplotlib, pandas and seaborn.
+The fences themselves are not drawn. If no value falls outside, ==the whiskers end at the minimum and maximum==. This is also the rule used by matplotlib, pandas and seaborn.
 
 ![A labelled box plot of S05's daily footfall: lower whisker end 721, Q1 1077, median 1227, Q3 1393, upper whisker end 1849, IQR 316, and 15 outliers above the upper fence of 1867](../../assets/img/data-viz/distribution-plots-anatomy.png)
 
@@ -120,23 +120,23 @@ The fences themselves are not drawn. If no value falls outside, the whiskers end
 
 Compare the two halves:
 
-- **Symmetric:** median near the middle of the box; whiskers of similar length.
-- **Right-skewed:** median closer to Q1; longer upper whisker, outliers on top. S05 footfall: median 1,227 is 150 above Q1 but 166 below Q3, with all 15 outliers high.
-- **Left-skewed:** the mirror image.
+- ==**Symmetric:** median near the middle of the box==; whiskers of similar length.
+- ==**Right-skewed:** median closer to Q1; longer upper whisker==, outliers on top. S05 footfall: median 1,227 is 150 above Q1 but 166 below Q3, with all 15 outliers high.
+- ==**Left-skewed:**== the mirror image.
 
-Box plots shine when **comparing groups**: 12 stores or 7 weekdays side by side take one chart, where 12 histograms would fill a page.
+==Box plots shine when **comparing groups**==: 12 stores or 7 weekdays side by side take one chart, where 12 histograms would fill a page.
 
 ### Q9. Histogram or box plot: which one when?
 
 | Question | Better choice |
 |---|---|
-| What is the detailed shape of one variable? | Histogram |
-| Are there two humps (two groups mixed)? | Histogram: a box plot hides this |
-| Which values are outliers, by a fixed rule? | Box plot |
-| How do many groups compare? | Side-by-side box plots |
+| What is the detailed shape of one variable? | ==Histogram== |
+| Are there two humps (two groups mixed)? | ==Histogram: a box plot hides this== |
+| Which values are outliers, by a fixed rule? | ==Box plot== |
+| How do many groups compare? | ==Side-by-side box plots== |
 | Explaining to a manager with no statistics | Histogram (easier to read) |
 
-In exploratory data analysis ([[exploratory-data-analysis]]) use both: the histogram for shape, the box plot for outliers and comparisons.
+In exploratory data analysis ([[exploratory-data-analysis]]) use both: ==the histogram for shape, the box plot for outliers== and comparisons.
 
 > [!beyond] Beyond the syllabus
 > When bins have **unequal widths**, bar height must show **frequency density** (frequency ÷ width), so that area, not height, is proportional to the count. A **violin plot** combines a box plot with a smoothed histogram on each side, so it shows humps as well as quartiles.
