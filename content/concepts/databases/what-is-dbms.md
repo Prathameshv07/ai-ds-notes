@@ -31,42 +31,42 @@ A DBMS is software that keeps data in one shared, organised place and controls h
 
 ### Q1. What are data, a database and a DBMS?
 
-- **Data:** raw facts, such as `Asha`, `9876543210`, `85`.
-- **Information:** data processed so that it means something, such as "Asha scored 85 in DBMS".
+- ==**Data:** raw facts==, such as `Asha`, `9876543210`, `85`.
+- ==**Information:** data processed so that it means something==, such as "Asha scored 85 in DBMS".
 - **Data processing:** collecting, storing, sorting and summarising data. ==Data processing converts raw data into meaningful information.==
 - **Database:** ==A database is an organised collection of related data==, such as all the student, course and marks records of a college.
-- **DBMS:** the software that creates and manages a database. Examples: MySQL, PostgreSQL, Oracle Database, SQLite, MongoDB.
+- ==**DBMS:** the software that creates and manages a database==. Examples: MySQL, PostgreSQL, Oracle Database, SQLite, MongoDB.
 
 A **database system** is the whole package. ==A database system consists of the database, the DBMS, application programs and users.==
 
 ### Q2. Why not just use files?
 
-Before DBMSs, each department wrote its own programs and kept its own files. This is a **file-processing system**. It causes eight problems (full list in Key facts). The first four are about the data itself:
+Before DBMSs, ==each department wrote its own programs and kept its own files==. This is a **file-processing system**. It causes eight problems (full list in Key facts). The first four are about the data itself:
 
 - **Redundancy and inconsistency:** ==Redundancy is storing the same data more than once; inconsistency is when those copies disagree.== Your phone number in three files is redundancy; the old number left in the exam file is inconsistency.
-- **Hard to access data:** every new question, such as "fees pending and attendance below 75%", needs a new program.
-- **Data isolation:** data is scattered across files in different formats, so combining it is painful.
+- ==**Hard to access data:**== every new question, such as "fees pending and attendance below 75%", needs a new program.
+- ==**Data isolation:** data is scattered across files== in different formats, so combining it is painful.
 
 ### Q3. What other problems do files cause?
 
 The other four are about rules, failures, sharing and safety:
 
-- **Integrity problems:** rules such as "marks must be 0 to 100" are buried in program code and easy to break.
-- **Atomicity problems:** a crash halfway through a task leaves half-finished work, such as money taken but the fee not marked paid (see [[acid-properties]]).
-- **Concurrent-access problems:** two people editing the same file at once can overwrite each other's changes.
-- **Security problems:** it is hard to let the library see names but not marks.
+- ==**Integrity problems:**== rules such as "marks must be 0 to 100" are buried in program code and easy to break.
+- ==**Atomicity problems:**== a crash halfway through a task leaves half-finished work, such as money taken but the fee not marked paid (see [[acid-properties]]).
+- ==**Concurrent-access problems:**== two people editing the same file at once can overwrite each other's changes.
+- ==**Security problems:**== it is hard to let the library see names but not marks.
 
 ### Q4. What does a DBMS actually do?
 
-A DBMS sits between users (or apps) and the stored data. Its main jobs:
+==A DBMS sits between users (or apps) and the stored data.== Its main jobs:
 
-1. **Define** the structure of the data: tables, columns, data types and rules.
+1. ==**Define** the structure of the data==: tables, columns, data types and rules.
 2. **Store** data efficiently on disk.
-3. **Retrieve and update** data through a query language such as SQL.
-4. **Enforce rules** (integrity constraints) on every change, from every app.
-5. **Control concurrent access**, so many users can work at the same time safely.
-6. **Secure** data by giving each user only the access they need.
-7. **Back up and recover** data after failures.
+3. ==**Retrieve and update** data== through a query language such as SQL.
+4. ==**Enforce rules** (integrity constraints)== on every change, from every app.
+5. ==**Control concurrent access**==, so many users can work at the same time safely.
+6. ==**Secure** data== by giving each user only the access they need.
+7. ==**Back up and recover** data== after failures.
 
 Apps no longer need to know how data is laid out on disk; they simply ask the DBMS. This separation is called **data independence** (see [[levels-of-abstraction]]).
 
@@ -74,11 +74,11 @@ Apps no longer need to know how data is laid out on disk; they simply ask the DB
 
 | Advantages | Disadvantages |
 |---|---|
-| Controlled redundancy, consistent data | Cost of software, hardware and trained staff |
-| Easy sharing; quick answers to new questions | More complexity to set up and manage |
+| ==Controlled redundancy==, consistent data | ==Cost of software, hardware and trained staff== |
+| ==Easy sharing==; quick answers to new questions | ==More complexity== to set up and manage |
 | Rules enforced in one place | Heavier than a simple file for a tiny, single-user task |
-| Safe multi-user access, better security | |
-| Backup and recovery | |
+| ==Safe multi-user access==, better security | |
+| ==Backup and recovery== | |
 
 ## Analogy and real-life example
 
