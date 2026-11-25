@@ -12,8 +12,7 @@ unit: 1
 time: 10 min
 status: draft
 sources:
-  - "Coronel & Morris, Database Systems: Design, Implementation, and Management, Ch. 1 (verify)"
-  - "P. K. Sinha & Priti Sinha, Computer Fundamentals, chapter on data processing (verify)"
+  - "Coronel, Morris & Rob, Database Systems: Design, Implementation, and Management, 9th ed., Ch. 1 (1.2, 1.5–1.6)"
 ---
 
 ## Why should you care?
@@ -206,5 +205,4 @@ Give an example of batch processing. :: Monthly salary slips or end-of-day bank 
 
 ## Sources
 
-- Coronel & Morris, *Database Systems: Design, Implementation, and Management*, Ch. 1 (verify)
-- P. K. Sinha & Priti Sinha, *Computer Fundamentals*, chapter on data processing (verify)
+- Coronel, Morris & Rob, *Database Systems: Design, Implementation, and Management*, 9th ed., Ch. 1 (1.2, 1.5–1.6)

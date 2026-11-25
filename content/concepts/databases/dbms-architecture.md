@@ -12,9 +12,9 @@ unit: 1
 time: 10 min
 status: reviewed
 sources:
-  - "Coronel & Morris, Database Systems: Design, Implementation, and Management, Ch. 1 (verify)"
-  - "Silberschatz, Korth & Sudarshan, Database System Concepts, Ch. 1 (verify)"
-  - "Elmasri & Navathe, Fundamentals of Database Systems, Ch. 2 (verify)"
+  - "Coronel, Morris & Rob, Database Systems: Design, Implementation, and Management, 9th ed., Ch. 1 (1.7.1–1.7.2)"
+  - "Silberschatz, Korth & Sudarshan, Database System Concepts, 7th ed., Ch. 1 (1.6–1.8)"
+  - "Elmasri & Navathe, Fundamentals of Database Systems, 7th ed., Ch. 2 (2.4–2.5)"
 ---
 
 ## Why should you care?
@@ -215,6 +215,6 @@ What is three-tier architecture? :: Client → application server → database
 
 ## Sources
 
-- Coronel & Morris, *Database Systems: Design, Implementation, and Management*, Ch. 1 (verify)
-- Silberschatz, Korth & Sudarshan, *Database System Concepts*, Ch. 1 (verify)
-- Elmasri & Navathe, *Fundamentals of Database Systems*, Ch. 2 (verify)
+- Coronel, Morris & Rob, *Database Systems: Design, Implementation, and Management*, 9th ed., Ch. 1 (1.7.1–1.7.2)
+- Silberschatz, Korth & Sudarshan, *Database System Concepts*, 7th ed., Ch. 1 (1.6–1.8)
+- Elmasri & Navathe, *Fundamentals of Database Systems*, 7th ed., Ch. 2 (2.4–2.5)

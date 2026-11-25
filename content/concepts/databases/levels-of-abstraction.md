@@ -12,9 +12,9 @@ unit: 1
 time: 10 min
 status: reviewed
 sources:
-  - "Silberschatz, Korth & Sudarshan, Database System Concepts, Ch. 1 (verify)"
-  - "Coronel & Morris, Database Systems: Design, Implementation, and Management, Ch. 2 (verify)"
-  - "Elmasri & Navathe, Fundamentals of Database Systems, Ch. 2 (verify)"
+  - "Silberschatz, Korth & Sudarshan, Database System Concepts, 7th ed., Ch. 1 (1.3)"
+  - "Coronel, Morris & Rob, Database Systems: Design, Implementation, and Management, 9th ed., Ch. 2 (2.6)"
+  - "Elmasri & Navathe, Fundamentals of Database Systems, 7th ed., Ch. 2 (2.1–2.2)"
 ---
 
 ## Why should you care?
@@ -75,7 +75,7 @@ Data independence is the main payoff of the levels: you can change one level wit
 
 ### Q6. How do the textbook's four models fit these levels?
 
-Coronel and Morris describe abstraction with four models. They map onto the three levels like this:
+Coronel, Morris and Rob describe abstraction with four models. They map onto the three levels like this:
 
 | Coronel's model | What it shows | Level |
 |---|---|---|
@@ -216,6 +216,6 @@ What are Coronel's four data models? :: External, conceptual, internal, physical
 
 ## Sources
 
-- Silberschatz, Korth & Sudarshan, *Database System Concepts*, Ch. 1 (verify)
-- Coronel & Morris, *Database Systems: Design, Implementation, and Management*, Ch. 2 (verify)
-- Elmasri & Navathe, *Fundamentals of Database Systems*, Ch. 2 (verify)
+- Silberschatz, Korth & Sudarshan, *Database System Concepts*, 7th ed., Ch. 1 (1.3)
+- Coronel, Morris & Rob, *Database Systems: Design, Implementation, and Management*, 9th ed., Ch. 2 (2.6)
+- Elmasri & Navathe, *Fundamentals of Database Systems*, 7th ed., Ch. 2 (2.1–2.2)

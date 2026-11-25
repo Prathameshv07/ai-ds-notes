@@ -12,8 +12,8 @@ unit: 1
 time: 10 min
 status: reviewed
 sources:
-  - "Coronel & Morris, Database Systems: Design, Implementation, and Management, Ch. 2 (verify)"
-  - "Silberschatz, Korth & Sudarshan, Database System Concepts, Ch. 1 (verify)"
+  - "Coronel, Morris & Rob, Database Systems: Design, Implementation, and Management, 9th ed., Ch. 2 (2.1–2.5)"
+  - "Silberschatz, Korth & Sudarshan, Database System Concepts, 7th ed., Ch. 1 (1.3)"
 ---
 
 ## Why should you care?
@@ -222,5 +222,5 @@ In a business rule, what usually becomes an entity, and what a relationship? :: 
 
 ## Sources
 
-- Coronel & Morris, *Database Systems: Design, Implementation, and Management*, Ch. 2 (verify)
-- Silberschatz, Korth & Sudarshan, *Database System Concepts*, Ch. 1 (verify)
+- Coronel, Morris & Rob, *Database Systems: Design, Implementation, and Management*, 9th ed., Ch. 2 (2.1–2.5)
+- Silberschatz, Korth & Sudarshan, *Database System Concepts*, 7th ed., Ch. 1 (1.3)

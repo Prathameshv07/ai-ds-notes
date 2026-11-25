@@ -12,9 +12,9 @@ unit: 1
 time: 10 min
 status: reviewed
 sources:
-  - "Silberschatz, Korth & Sudarshan, Database System Concepts, Ch. 1 (verify)"
-  - "Coronel & Morris, Database Systems: Design, Implementation, and Management, Ch. 1 (verify)"
-  - "Elmasri & Navathe, Fundamentals of Database Systems, Ch. 1 (verify)"
+  - "Silberschatz, Korth & Sudarshan, Database System Concepts, 7th ed., Ch. 1 (1.1–1.2)"
+  - "Coronel, Morris & Rob, Database Systems: Design, Implementation, and Management, 9th ed., Ch. 1 (1.2–1.3, 1.5–1.7)"
+  - "Elmasri & Navathe, Fundamentals of Database Systems, 7th ed., Ch. 1 (1.3, 1.6)"
 ---
 
 ## Why should you care?
@@ -228,6 +228,6 @@ Give two disadvantages of a DBMS. :: Any two of: cost, complexity, overhead for 
 
 ## Sources
 
-- Silberschatz, Korth & Sudarshan, *Database System Concepts*, Ch. 1 (verify)
-- Coronel & Morris, *Database Systems: Design, Implementation, and Management*, Ch. 1 (verify)
-- Elmasri & Navathe, *Fundamentals of Database Systems*, Ch. 1 (verify)
+- Silberschatz, Korth & Sudarshan, *Database System Concepts*, 7th ed., Ch. 1 (1.1–1.2)
+- Coronel, Morris & Rob, *Database Systems: Design, Implementation, and Management*, 9th ed., Ch. 1 (1.2–1.3, 1.5–1.7)
+- Elmasri & Navathe, *Fundamentals of Database Systems*, 7th ed., Ch. 1 (1.3, 1.6)

@@ -12,8 +12,8 @@ unit: 1
 time: 10 min
 status: reviewed
 sources:
-  - "Coronel & Morris, Database Systems: Design, Implementation, and Management, Ch. 1 (verify)"
-  - "Silberschatz, Korth & Sudarshan, Database System Concepts, Ch. 1 (verify)"
+  - "Coronel, Morris & Rob, Database Systems: Design, Implementation, and Management, 9th ed., Ch. 1 (1.3.2)"
+  - "Silberschatz, Korth & Sudarshan, Database System Concepts, 7th ed., Ch. 8 (8.1), Ch. 11 (11.2–11.3), Ch. 20 (20.2)"
 ---
 
 ## Why should you care?
@@ -210,5 +210,5 @@ Which kind of database stores semi-structured data flexibly? :: A NoSQL database
 
 ## Sources
 
-- Coronel & Morris, *Database Systems: Design, Implementation, and Management*, Ch. 1 (verify)
-- Silberschatz, Korth & Sudarshan, *Database System Concepts*, Ch. 1 (verify)
+- Coronel, Morris & Rob, *Database Systems: Design, Implementation, and Management*, 9th ed., Ch. 1 (1.3.2)
+- Silberschatz, Korth & Sudarshan, *Database System Concepts*, 7th ed., Ch. 8 (8.1), Ch. 11 (11.2–11.3), Ch. 20 (20.2)

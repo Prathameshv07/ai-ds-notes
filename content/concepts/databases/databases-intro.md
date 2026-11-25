@@ -11,7 +11,7 @@ time: 5 min
 status: reviewed
 sources:
   - "E. F. Codd, \"A Relational Model of Data for Large Shared Data Banks\", Communications of the ACM, 13(6), 1970"
-  - "Coronel & Morris, Database Systems: Design, Implementation, and Management, Ch. 1 (verify)"
+  - "Coronel, Morris & Rob, Database Systems: Design, Implementation, and Management, 9th ed., Ch. 1"
   - "UDSII-002 Database Management System syllabus, BSc Data Science Sem II (course outcomes and units)"
 ---
 
@@ -82,5 +82,5 @@ Start with [[what-is-dbms]].
 ## Sources
 
 - E. F. Codd, "A Relational Model of Data for Large Shared Data Banks", *Communications of the ACM*, 13(6), 1970
-- Coronel & Morris, *Database Systems: Design, Implementation, and Management*, Ch. 1 (verify)
+- Coronel, Morris & Rob, *Database Systems: Design, Implementation, and Management*, 9th ed., Ch. 1
 - UDSII-002 Database Management System syllabus, BSc Data Science Sem II
