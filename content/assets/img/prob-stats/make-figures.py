@@ -73,6 +73,69 @@ def scatter_patterns():
     fig.savefig("scatter-patterns.png", dpi=110)
 
 
+def continuous_distributions():
+    fig, axes = plt.subplots(1, 3, figsize=(10, 3))
+    # Uniform(0, 20): P(X > 15)
+    ax = axes[0]
+    ax.plot([0, 0, 20, 20], [0, 0.05, 0.05, 0], color=BLUE, lw=2)
+    ax.fill_between([15, 20], [0.05, 0.05], color=ORANGE, alpha=0.5)
+    ax.set_title("Uniform, 0 to 20\nP(X > 15) = 0.25")
+    ax.set_xlim(-2, 22); ax.set_ylim(0, 0.07)
+    # Exponential, mean 2: P(X > 3)
+    ax = axes[1]
+    x = np.linspace(0, 10, 500); lam = 0.5; y = lam * np.exp(-lam * x)
+    ax.plot(x, y, color=BLUE, lw=2)
+    ax.fill_between(x[x >= 3], y[x >= 3], color=ORANGE, alpha=0.5)
+    ax.set_title(f"Exponential, mean 2\nP(X > 3) = {np.exp(-1.5):.2f}")
+    # Normal(30, 5): P(X > 40)
+    ax = axes[2]
+    x = np.linspace(10, 50, 500); y = np.exp(-((x - 30) / 5) ** 2 / 2)
+    ax.plot(x, y, color=BLUE, lw=2)
+    ax.fill_between(x[x >= 40], y[x >= 40], color=ORANGE, alpha=0.5)
+    ax.set_title("Normal, mean 30, SD 5\nP(X > 40) = 0.02")
+    for ax in axes:
+        ax.set_yticks([])
+    fig.tight_layout()
+    fig.savefig("continuous-distributions.png", dpi=110)
+
+
+def normal_empirical_rule():
+    x = np.linspace(-4, 4, 800); y = np.exp(-x ** 2 / 2)
+    fig, ax = plt.subplots(figsize=(7, 3.2))
+    for k, c, a in [(3, GREEN, 0.18), (2, ORANGE, 0.25), (1, BLUE, 0.35)]:
+        m = np.abs(x) <= k
+        ax.fill_between(x[m], y[m], color=c, alpha=a)
+    ax.plot(x, y, color="black", lw=1.5)
+    for k, lab, h in [(1, "68%", 0.55), (2, "95%", 0.32), (3, "99.7%", 0.12)]:
+        ax.annotate("", xy=(-k, h), xytext=(k, h), arrowprops=dict(arrowstyle="<->", color=GREY))
+        ax.text(0, h + 0.03, lab, ha="center", fontsize=10)
+    ax.set_xticks(range(-3, 4))
+    ax.set_xticklabels(["μ − 3σ", "μ − 2σ", "μ − σ", "μ", "μ + σ", "μ + 2σ", "μ + 3σ"])
+    ax.set_yticks([]); ax.set_ylim(0, 1.08)
+    fig.tight_layout()
+    fig.savefig("normal-empirical-rule.png", dpi=110)
+
+
+def clt_demo():
+    rng = np.random.default_rng(2026)
+    pop = rng.exponential(scale=550, size=200_000)        # right-skewed "bill amounts", mean about 550
+    fig, axes = plt.subplots(1, 4, figsize=(11, 2.8))
+    axes[0].hist(pop, bins=60, range=(0, 2500), color=GREY)
+    axes[0].set_title("Population of bills\n(right-skewed)")
+    for ax, n in zip(axes[1:], [2, 5, 30]):
+        means = rng.choice(pop, size=(20_000, n)).mean(axis=1)
+        ax.hist(means, bins=60, range=(0, 1500), color=BLUE)
+        ax.set_title(f"Means of samples of {n}")
+    for ax in axes:
+        ax.set_yticks([])
+        ax.axvline(pop.mean(), color=ORANGE, ls="--", lw=1.2)
+    fig.tight_layout()
+    fig.savefig("clt-demo.png", dpi=110)
+
+
 skewness_shapes()
 kurtosis_shapes()
 scatter_patterns()
+continuous_distributions()
+normal_empirical_rule()
+clt_demo()
