@@ -48,8 +48,12 @@
 | exploratory-data-analysis | Exploratory Data Analysis (EDA) | data-analysis | theory | reviewed | Exploratory data analysis (EDA) is the first, open-minded examination of a dataset, using summary numbers and simple… | business-analytics |
 | exploratory-data-analysis-practical | Exploratory Data Analysis on Sales Data | data-analysis | practical | reviewed |  | exploratory-data-analysis, data-collection-practical |
 | box-plot-practical | Box Plots and Outliers in Sales Data | data-viz | practical | draft |  | distribution-plots, histogram-practical |
+| choosing-a-chart | Choosing the Right Chart | data-viz | theory | planned | Covers: matching chart to question (comparison, trend, distribution, relationship, part of whole), when not to use pie charts | data-viz-intro |
 | data-viz-intro | Why Data Visualization? | data-viz | intro | draft |  |  |
 | distribution-plots | Graphing a Distribution: Histograms and Box Plots | data-viz | theory | draft | A histogram shows the shape of a numerical variable by counting how many values fall in each interval; a box plot… | central-tendency, quartiles-and-percentiles |
 | histogram-practical | Histograms of Sales Data | data-viz | practical | draft |  | distribution-plots |
 | scatter-plot | Scatter Plot | data-viz | theory | planned | Covers: plotting two numerical variables, reading direction, strength, form and outliers, colouring by group |  |
 | data-warehouse | Data Warehouse | data-eng | theory | planned | Covers: OLTP vs OLAP, purpose of a warehouse, ETL basics, star schema | types-of-databases |
+| bi-intro | Why Business Intelligence? | bi | intro | draft |  |  |
+| business-intelligence | Business Intelligence: Tools, Dashboards and Reports | bi | theory | draft | Business intelligence (BI) is the set of tools and processes that collect business data into one place and present it… | business-analytics |
+| dashboard-design | Dashboard Design and KPIs | bi | theory | planned | Covers: choosing KPIs, layout, filters and drill-down, avoiding clutter, designing for the audience | business-intelligence |
