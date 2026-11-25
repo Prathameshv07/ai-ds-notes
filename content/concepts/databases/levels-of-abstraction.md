@@ -35,54 +35,54 @@ A DBMS describes data at three levels (physical, logical and view), so that each
 
 - Without it, every user and every program would need to know file formats, disk locations and indexes.
 - With it, users ask simple questions ("show my marks") and the DBMS works out the details.
-- The DBMS achieves this by describing data at **three levels**, from the closest to the hardware to the closest to the user.
+- ==The DBMS achieves this by describing data at **three levels**==, from the closest to the hardware to the closest to the user.
 
 ### Q2. What are the three levels?
 
 | Level | Describes | Who works here | College example |
 |---|---|---|---|
-| **Physical (internal)** | *How* data is stored: files, blocks, indexes | DBMS, DBA | STUDENT records stored in files on an SSD, indexed by roll number |
-| **Logical (conceptual)** | *What* data is stored and how it is related | Database designer, DBA | Tables STUDENT, COURSE, FEES and their links |
-| **View (external)** | *Part* of the data, shaped for one group of users | End users, applications | A student sees only their own marks; accounts sees only fees |
+| ==**Physical (internal)**== | ==*How* data is stored: files, blocks, indexes== | DBMS, DBA | STUDENT records stored in files on an SSD, indexed by roll number |
+| ==**Logical (conceptual)**== | ==*What* data is stored and how it is related== | Database designer, DBA | Tables STUDENT, COURSE, FEES and their links |
+| ==**View (external)**== | ==*Part* of the data, shaped for one group of users== | End users, applications | A student sees only their own marks; accounts sees only fees |
 
-There is **one** physical level and **one** logical level, but **many** views, one for each kind of user.
+There is ==**one** physical level and **one** logical level, but **many** views==, one for each kind of user.
 
 ### Q3. What are a schema and an instance?
 
 ==A schema is the overall design of the database; an instance is the data stored in it at one moment.==
 
-- **Schema:** like a blank admission form: the fields and their types. It changes rarely.
-- **Instance:** the filled-in forms in the cupboard today. It changes every time data is added, updated or deleted.
+- ==**Schema:** like a blank admission form==: the fields and their types. It changes rarely.
+- ==**Instance:** the filled-in forms in the cupboard today==. It changes every time data is added, updated or deleted.
 
-Each level has its own schema: a **physical schema**, a **logical schema**, and several **external schemas** (subschemas), one per view.
+==Each level has its own schema==: a **physical schema**, a **logical schema**, and several **external schemas** (subschemas), one per view.
 
 ### Q4. What is the three-schema architecture?
 
-The three-schema (ANSI/SPARC) architecture is the formal name for this design:
+==The three-schema (ANSI/SPARC) architecture is the formal name for this design==:
 
-- **External level:** many external schemas, one per user group.
-- **Conceptual level:** one conceptual (logical) schema for the whole organisation.
-- **Internal level:** one internal (physical) schema describing storage.
+- ==**External level:** many external schemas==, one per user group.
+- ==**Conceptual level:** one conceptual (logical) schema== for the whole organisation.
+- ==**Internal level:** one internal (physical) schema== describing storage.
 
-Between the levels sit **mappings**. When a student asks for marks, the DBMS maps the request from their view to the logical tables, then to the physical files, and maps the answer back up. Users never see these mappings.
+==Between the levels sit **mappings**==. When a student asks for marks, the DBMS maps the request from their view to the logical tables, then to the physical files, and maps the answer back up. Users never see these mappings.
 
 ### Q5. What is data independence?
 
-Data independence is the main payoff of the levels: you can change one level without rewriting the level above it.
+Data independence is the main payoff of the levels: ==you can change one level without rewriting the level above it==.
 
-- **Physical data independence:** ==changing how data is stored without changing the logical schema.== Examples: a new disk, a new index, reorganised files. Apps keep working.
-- **Logical data independence:** ==changing the logical schema without changing user views.== Examples: adding a column, splitting a table. Apps built on the views keep working.
+- ==**Physical data independence:** changing how data is stored without changing the logical schema.== Examples: a new disk, a new index, reorganised files. Apps keep working.
+- ==**Logical data independence:** changing the logical schema without changing user views.== Examples: adding a column, splitting a table. Apps built on the views keep working.
 
 ### Q6. How do the textbook's four models fit these levels?
 
-Coronel, Morris and Rob describe abstraction with four models. They map onto the three levels like this:
+==Coronel, Morris and Rob describe abstraction with four models==. They map onto the three levels like this:
 
 | Coronel's model | What it shows | Level |
 |---|---|---|
-| External model | Each user group's view of the data | View |
-| Conceptual model | The whole organisation's data, independent of any DBMS (usually an ER diagram) | Logical |
-| Internal model | The conceptual model adapted to a chosen DBMS (for example, relational tables) | Logical |
-| Physical model | How the data is stored on disks | Physical |
+| ==External model== | Each user group's view of the data | View |
+| ==Conceptual model== | The whole organisation's data, independent of any DBMS (usually an ER diagram) | Logical |
+| ==Internal model== | The conceptual model adapted to a chosen DBMS (for example, relational tables) | Logical |
+| ==Physical model== | How the data is stored on disks | Physical |
 
 ## Analogy and real-life example
 

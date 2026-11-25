@@ -31,26 +31,26 @@ DBMS architecture describes the parts of a database system, the people who use a
 
 ### Q1. What are the components of a database system?
 
-A database system has five components:
+==A database system has five components==:
 
-1. **Hardware:** servers, disks, network, and users' computers and phones.
-2. **Software:**
+1. ==**Hardware:** servers, disks, network==, and users' computers and phones.
+2. ==**Software:**==
    - the **operating system**, which manages the hardware;
    - the **DBMS**, which manages the database (MySQL, PostgreSQL, Oracle);
    - **application programs and utilities** that users work with (a fee portal, a backup tool).
-3. **People:** everyone who designs, runs or uses the system (Q2).
-4. **Procedures:** written rules for using and running the system, such as "back up every night at 2 a.m."
-5. **Data:** the stored facts, plus **metadata**. ==Metadata is data about the data: table names, column types, rules and owners.==
+3. ==**People:** everyone who designs, runs or uses the system== (Q2).
+4. ==**Procedures:** written rules for using and running the system==, such as "back up every night at 2 a.m."
+5. ==**Data:** the stored facts, plus **metadata**==. ==Metadata is data about the data: table names, column types, rules and owners.==
 
 ### Q2. Who are the people in a database system?
 
 | Person | What they do | College example |
 |---|---|---|
-| System administrator | Looks after hardware, operating system, network | IT staff who keep the server running |
-| Database administrator (DBA) | Manages the DBMS and the database | Sets up accounts, backups, permissions |
-| Database designer | Designs the database structure | Decides the tables and columns |
-| System analysts and programmers | Design and write the applications | Build the fee-payment portal |
-| End users | Use the applications for their work | Students, clerks, the principal |
+| ==System administrator== | Looks after hardware, operating system, network | IT staff who keep the server running |
+| ==Database administrator (DBA)== | Manages the DBMS and the database | Sets up accounts, backups, permissions |
+| ==Database designer== | Designs the database structure | Decides the tables and columns |
+| ==System analysts and programmers== | Design and write the applications | Build the fee-payment portal |
+| ==End users== | Use the applications for their work | Students, clerks, the principal |
 
 ### Q3. What does the DBA do, and what kinds of end users are there?
 
@@ -58,31 +58,31 @@ A database system has five components:
 
 End users come in two kinds:
 
-- **Naive users** only click through ready-made screens, such as a student paying fees.
-- **Sophisticated users** write their own queries, such as a data analyst using SQL.
+- ==**Naive users** only click through ready-made screens==, such as a student paying fees.
+- ==**Sophisticated users** write their own queries==, such as a data analyst using SQL.
 
 ### Q4. What is the query processor?
 
 The DBMS has two main parts above the stored data. The first is the query processor. ==The query processor turns user queries into low-level instructions the storage manager can run.== It contains:
 
-- the **DDL interpreter**, for structure commands (DDL, data definition language, such as `CREATE TABLE`);
-- the **DML compiler**, for data commands (DML, data manipulation language, such as `SELECT` and `INSERT`); it picks a fast plan for each;
-- the **query evaluation engine**, which carries out that plan.
+- ==the **DDL interpreter**, for structure commands== (DDL, data definition language, such as `CREATE TABLE`);
+- ==the **DML compiler**, for data commands== (DML, data manipulation language, such as `SELECT` and `INSERT`); it picks a fast plan for each;
+- ==the **query evaluation engine**==, which carries out that plan.
 
 ### Q5. What is the storage manager, and what is on disk?
 
 ==The storage manager links the stored data with the queries and programs that use it.== It contains:
 
-- the **authorisation and integrity manager**: checks permissions and rules;
-- the **transaction manager**: keeps data correct during failures and simultaneous use (see [[acid-properties]]);
-- the **file manager**: handles space on disk;
-- the **buffer manager**: brings data from disk into memory.
+- ==the **authorisation and integrity manager**==: checks permissions and rules;
+- ==the **transaction manager**: keeps data correct== during failures and simultaneous use (see [[acid-properties]]);
+- ==the **file manager**==: handles space on disk;
+- ==the **buffer manager**==: brings data from disk into memory.
 
-On **disk** sit the data files, the **data dictionary** (metadata) and **indices** (lookup structures that find rows fast, like a book's index). How the DBMS hides these details from users is in [[levels-of-abstraction]].
+==On **disk** sit the data files, the **data dictionary** (metadata) and **indices**== (lookup structures that find rows fast, like a book's index). How the DBMS hides these details from users is in [[levels-of-abstraction]].
 
 ### Q6. Where do the user, application and database sit?
 
-- **Two-tier architecture:** the application on the user's computer talks directly to the database server. Simple, but every computer holds the database connection details, which is risky for large systems.
+- ==**Two-tier architecture:** the application on the user's computer talks directly to the database server==. Simple, but every computer holds the database connection details, which is risky for large systems.
 - **Three-tier architecture:** ==In a three-tier architecture, the client talks to an application server, which talks to the database.== Almost every web and mobile app today is three-tier.
 
 ## Analogy and real-life example

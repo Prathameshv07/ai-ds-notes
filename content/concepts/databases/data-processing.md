@@ -31,11 +31,11 @@ Data processing is the series of steps (collect, prepare, input, process, output
 
 ==Data processing is the collection and manipulation of raw data to produce meaningful information.==
 
-- **Data:** raw facts, such as marks 72, 65, 81 (see [[what-is-dbms]]).
-- **Information:** processed data that helps a decision, such as "Asha passed with grade A".
+- ==**Data:** raw facts==, such as marks 72, 65, 81 (see [[what-is-dbms]]).
+- ==**Information:** processed data that helps a decision==, such as "Asha passed with grade A".
 - **Processing** includes classifying, sorting, calculating, summarising and storing.
 
-Data processing is not a one-off task. Its output (stored results) often becomes the input for the next round, so it runs as a **cycle**.
+Data processing is not a one-off task. Its output (stored results) often becomes the input for the next round, ==so it runs as a **cycle**==.
 
 ### Q2. What is the data processing cycle?
 
@@ -43,38 +43,38 @@ Data processing is not a one-off task. Its output (stored results) often becomes
 
 | Stage | What happens | Exam-result example |
 |---|---|---|
-| Collection | Gather raw data from sources | Collect answer sheets and marks |
-| Preparation | Check and clean it | Fix missing or wrong roll numbers |
-| Input | Enter it into the system | Type marks into the result software |
-| Processing | Calculate, sort, summarise | Compute totals, grades, ranks |
-| Output | Present the information | Print mark sheets, publish results |
-| Storage | Keep data for later use | Save records for transcripts |
+| Collection | ==Gather raw data from sources== | Collect answer sheets and marks |
+| Preparation | ==Check and clean it== | Fix missing or wrong roll numbers |
+| Input | ==Enter it into the system== | Type marks into the result software |
+| Processing | ==Calculate, sort, summarise== | Compute totals, grades, ranks |
+| Output | ==Present the information== | Print mark sheets, publish results |
+| Storage | ==Keep data for later use== | Save records for transcripts |
 
 ### Q3. What are the methods of data processing?
 
 | Method | How it is done | Example |
 |---|---|---|
-| **Manual** | By hand, with paper and pen | A teacher totals marks in a register |
-| **Mechanical** | With simple machines | Calculators, old punch-card machines |
-| **Electronic** | By computers and software | Result software, a DBMS |
+| ==**Manual**== | ==By hand, with paper and pen== | A teacher totals marks in a register |
+| ==**Mechanical**== | ==With simple machines== | Calculators, old punch-card machines |
+| ==**Electronic**== | ==By computers and software== | Result software, a DBMS |
 
-Electronic data processing is the fastest and most accurate, and it handles huge volumes. Every database system is an example of electronic data processing.
+==Electronic data processing is the fastest and most accurate==, and it handles huge volumes. Every database system is an example of electronic data processing.
 
 ### Q4. What are batch, online and real-time processing?
 
 - **Batch processing:** ==In batch processing, data is collected over a period and processed together as one group.== Example: monthly salary slips; a bank adding interest at the end of the day.
 - **Online processing:** ==In online processing, each transaction is processed immediately while the user waits.== Example: booking a train ticket on IRCTC.
-- **Real-time processing:** a stricter form of online processing where the response must come within a fixed, very short time. Example: traffic-signal control, an aircraft's control systems.
-- **Distributed processing:** the work is shared across several connected computers in different places. Example: UPI payments handled by many bank servers.
+- ==**Real-time processing:** a stricter form of online processing== where the response must come within a fixed, very short time. Example: traffic-signal control, an aircraft's control systems.
+- ==**Distributed processing:** the work is shared across several connected computers== in different places. Example: UPI payments handled by many bank servers.
 
 ### Q5. How does database processing differ from file-based processing?
 
 | File-based processing | Database processing |
 |---|---|
-| Each application has its own files | All applications share one database |
-| Same data stored many times | Redundancy controlled |
+| ==Each application has its own files== | ==All applications share one database== |
+| ==Same data stored many times== | ==Redundancy controlled== |
 | New questions need new programs | New questions answered with a query |
-| Rules and security inside each program | Rules and security enforced by the DBMS |
+| ==Rules and security inside each program== | ==Rules and security enforced by the DBMS== |
 
 The full list of file-system problems is in [[what-is-dbms]].
 

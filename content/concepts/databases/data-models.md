@@ -32,27 +32,27 @@ A data model is a simple, usually graphical, picture of real-world data: what th
 
 ==A data model is a simple, usually graphical, representation of complex real-world data structures.==
 
-- It shows the **things** an organisation cares about (students, courses, teachers) and how they connect.
-- It leaves out storage details: no files, disks or code.
-- **Data modelling** is the process of building one. It is **iterative**: you draw a first version, check it with users, correct it, and repeat until it matches reality.
+- ==It shows the **things** an organisation cares about== (students, courses, teachers) and how they connect.
+- ==It leaves out storage details==: no files, disks or code.
+- ==**Data modelling** is the process of building one==. ==It is **iterative**==: you draw a first version, check it with users, correct it, and repeat until it matches reality.
 
 A data model is to a database what a blueprint is to a building.
 
 ### Q2. Why are data models important?
 
-- **Communication:** designers, programmers and end users all read the same picture, so misunderstandings appear early.
-- **Different views, one model:** the principal sees "results by department", a clerk sees "fee receipts", a programmer sees tables. The model joins these views into one consistent design.
-- **Cheaper mistakes:** errors caught on paper cost far less than errors found after the database holds a year of data.
-- **A good database starts with a good model.** A bad model gives redundancy and wrong answers, however good the DBMS is.
+- ==**Communication:**== designers, programmers and end users all read the same picture, so misunderstandings appear early.
+- ==**Different views, one model:**== the principal sees "results by department", a clerk sees "fee receipts", a programmer sees tables. The model joins these views into one consistent design.
+- ==**Cheaper mistakes:**== errors caught on paper cost far less than errors found after the database holds a year of data.
+- ==**A good database starts with a good model.**== A bad model gives redundancy and wrong answers, however good the DBMS is.
 
 ### Q3. What are the building blocks of a data model?
 
 | Block | Meaning | College example |
 |---|---|---|
 | **Entity** | A thing about which data is stored | STUDENT, COURSE |
-| **Attribute** | A property of an entity | Student name, roll number |
-| **Relationship** | An association between entities | A student *enrols in* a course |
-| **Constraint** | A rule the data must follow | Marks must be between 0 and 100 |
+| ==**Attribute**== | ==A property of an entity== | Student name, roll number |
+| ==**Relationship**== | ==An association between entities== | A student *enrols in* a course |
+| ==**Constraint**== | ==A rule the data must follow== | Marks must be between 0 and 100 |
 
 ==An entity is a person, place, thing or event about which data is collected.== Entities are written in capitals and in the singular: STUDENT, not students.
 
@@ -62,11 +62,11 @@ Relationships are described by how many of one entity link to how many of the ot
 
 | Type | Read it as | Example |
 |---|---|---|
-| **One-to-one (1:1)** | One A has one B, and one B has one A | One principal manages one college |
-| **One-to-many (1:M)** | One A has many B; each B has one A | One department offers many courses |
-| **Many-to-many (M:N)** | One A has many B, and one B has many A | A student enrols in many courses; a course has many students |
+| ==**One-to-one (1:1)**== | ==One A has one B, and one B has one A== | One principal manages one college |
+| ==**One-to-many (1:M)**== | ==One A has many B; each B has one A== | One department offers many courses |
+| ==**Many-to-many (M:N)**== | ==One A has many B, and one B has many A== | A student enrols in many courses; a course has many students |
 
-Always read a relationship **in both directions**; only then is its type clear. Unit 2 draws these as ER diagrams (see [[er-model]]).
+==Always read a relationship **in both directions**==; only then is its type clear. Unit 2 draws these as ER diagrams (see [[er-model]]).
 
 ### Q5. What are business rules?
 
@@ -77,15 +77,15 @@ Examples from a college:
 - Each course is offered by exactly one department.
 - A student may borrow at most three library books at a time.
 
-Business rules come from managers, written policies (the college handbook) and, most importantly, **interviews with end users**, who know how work really happens. Rules must be written down and checked, because people often describe the same process differently.
+==Business rules come from managers, written policies== (the college handbook) and, most importantly, ==**interviews with end users**==, who know how work really happens. ==Rules must be written down and checked==, because people often describe the same process differently.
 
 ### Q6. How do business rules become a data model?
 
 A simple translation rule works most of the time:
 
 - ==Nouns in a business rule usually become entities; verbs become relationships.==
-- Facts about a noun become its attributes.
-- Words like "at most", "exactly one" or "must" become constraints or the relationship type.
+- ==Facts about a noun become its attributes==.
+- Words like "at most", "exactly one" or "must" ==become constraints or the relationship type==.
 
 Example: "A **department** *offers* many **courses**; each **course** is *offered by* one **department**."
 - Entities: DEPARTMENT, COURSE

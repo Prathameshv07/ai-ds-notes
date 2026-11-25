@@ -30,46 +30,46 @@ Databases are classified by how many users they serve, where the data is kept, w
 
 ### Q1. On what basis do we classify databases?
 
-There is no single list of "types". Instead, we describe a database by answering four questions:
+There is no single list of "types". Instead, ==we describe a database by answering four questions==:
 
 | Question | Types |
 |---|---|
-| How many users? | Single-user, multiuser (workgroup, enterprise) |
-| Where is the data? | Centralised, distributed, cloud |
-| What is it used for? | Operational, analytical |
-| How structured is the data? | Structured, semi-structured, unstructured |
+| ==How many users?== | Single-user, multiuser (workgroup, enterprise) |
+| ==Where is the data?== | Centralised, distributed, cloud |
+| ==What is it used for?== | Operational, analytical |
+| ==How structured is the data?== | Structured, semi-structured, unstructured |
 
 Every database has one answer to each question. Your college ERP is multiuser, centralised, operational and structured, all at once.
 
 ### Q2. What are the types by number of users?
 
-- **Single-user database:** one user at a time. When it runs on a personal computer, it is called a **desktop database**. Example: a shopkeeper's billing software on one laptop.
-- **Multiuser database:** many users at the same time.
-  - **Workgroup database:** a small group, usually fewer than 50 users, such as one department.
-  - **Enterprise database:** a whole organisation, often hundreds or thousands of users across departments. Example: a bank's core banking system.
+- ==**Single-user database:** one user at a time==. When it runs on a personal computer, ==it is called a **desktop database**==. Example: a shopkeeper's billing software on one laptop.
+- ==**Multiuser database:** many users== at the same time.
+  - ==**Workgroup database:** a small group, usually fewer than 50 users==, such as one department.
+  - ==**Enterprise database:** a whole organisation==, often hundreds or thousands of users across departments. Example: a bank's core banking system.
 
 ### Q3. What are the types by location?
 
-- **Centralised database:** all data is kept at one site. Easy to manage, but if that site fails, everyone stops.
+- ==**Centralised database:** all data is kept at one site==. Easy to manage, but if that site fails, everyone stops.
 - **Distributed database:** ==A distributed database spreads data across several networked sites, but users see it as one database.== Example: a national booking system with servers in several cities.
-- **Cloud database:** created and run on a cloud provider's servers, such as AWS, Microsoft Azure or Google Cloud. You rent it instead of buying hardware. Underneath, it may be centralised or distributed.
+- ==**Cloud database:** created and run on a cloud provider's servers==, such as AWS, Microsoft Azure or Google Cloud. You rent it instead of buying hardware. Underneath, it may be centralised or distributed.
 
 ### Q4. What are the types by usage?
 
 - **Operational database:** ==An operational database records day-to-day transactions as they happen.==
   - Examples: a UPI payment, a seat booking, a new admission.
   - Many small reads and writes every second.
-  - Called **OLTP** (online transaction processing).
+  - ==Called **OLTP**== (online transaction processing).
 - **Analytical database:** ==An analytical database stores historical data for reports and decisions.==
   - Example question: "Which city's sales grew fastest in three years?"
   - Mostly read, rarely changed.
-  - Called **OLAP** (online analytical processing). A **data warehouse** is the classic example (see [[data-warehouse]]).
+  - ==Called **OLAP**== (online analytical processing). A **data warehouse** is the classic example (see [[data-warehouse]]).
 
 ### Q5. What are the types by structure?
 
-- **Structured data** fits fixed rows and columns, such as a marks table. It is stored in **relational databases** such as MySQL, PostgreSQL and Oracle.
+- ==**Structured data** fits fixed rows and columns==, such as a marks table. It is stored in **relational databases** such as MySQL, PostgreSQL and Oracle.
 - **Semi-structured data:** ==Semi-structured data has some structure but no fixed table shape, such as JSON or XML.== On a shopping site, a phone has fields like RAM and battery; a saree has fabric and length.
-- **Unstructured data** has no predefined format: photos, videos, PDFs, voice notes.
+- ==**Unstructured data** has no predefined format==: photos, videos, PDFs, voice notes.
 
 Semi-structured and very large data sets are often kept in **NoSQL databases**, such as MongoDB, which do not force every record into the same columns (see [[nosql-databases]]).
 
