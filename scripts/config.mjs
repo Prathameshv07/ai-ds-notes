@@ -46,10 +46,13 @@ export const REQUIRED_SECTIONS = {
 };
 
 // Section 8.5 and 11: write-down marking. These sections count as write-down automatically
-// (never highlight inside them); elsewhere ==highlights== mark lines to copy, at most a few per note.
+// (never highlight inside them). Elsewhere ==highlights== build answer skeletons (decision 42):
+// per ### answer, a definition plus at most 6 key phrases.
 // Keep in step with writeDown in engine/assets/sections.js.
 export const WRITE_DOWN_SECTIONS = ['In one line', 'Key facts and formulas', 'Diagram'];
-export const HIGHLIGHT_MAX = 5;
+export const HIGHLIGHT_MAX_PER_ANSWER = 7;
+// Sections that are for reading, never for copying: no highlights here (Section 11).
+export const NO_HIGHLIGHT_SECTIONS = ['Why should you care?', 'Analogy and real-life example', 'Think deeper'];
 
 // Section 10: REGISTRY.md summary column for written notes = first sentence of "In one line",
 // trimmed to about this many characters.

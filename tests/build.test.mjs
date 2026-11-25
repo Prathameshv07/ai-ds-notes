@@ -337,19 +337,26 @@ test('summary keeps maths subscripts and snake_case, drops emphasis markers', ()
   assert.equal(m.notes.aa.summary, 'The mean $x_i$ of each user_id is bold');
 });
 
-test('syllabus field, ==highlights== and [!beyond] checks', () => {
-  const body = (extra) => note('aa', { body: extra })
-    .replace('## In one line\n\nPlaceholder.', '## In one line\n\n==Do not highlight here.==');
-  let root = tree({ 'content/concepts/databases/aa.md': body('==one== ==two== ==three== ==four== ==five== ==six== and `==code==`\n\n> [!beyond] Extra\n> Placeholder.') });
-  let w = warnings(build({ root }));
+test('syllabus field, answer-skeleton highlights and [!beyond] checks', () => {
+  const eight = Array.from({ length: 8 }, (_, i) => `- ==point ${i + 1}== more words`).join('\n');
+  const seven = Array.from({ length: 7 }, (_, i) => `- ==point ${i + 1}== more words`).join('\n');
+  const body = `\n\n### Q2. Long answer?\n${eight}\n\n### Q3. Fine answer?\n${seven} and \`==code==\`\n\n> [!beyond] Extra\n> A ==beyond highlight==.`;
+  const md = note('aa', { body }).replace('## In one line\n\nPlaceholder.', '## In one line\n\n==Do not highlight here.==')
+    .replace('## Why should you care?\n\nPlaceholder text for engine testing.', '## Why should you care?\n\n==Not for copying.==');
+  const w = warnings(build({ root: tree({ 'content/concepts/databases/aa.md': md }) }));
   assert.ok(w.some((x) => x.includes('already a write-down section')), 'highlight in a write-down section warns');
-  assert.ok(w.some((x) => x.includes('6 ==highlights==')), 'more than 5 highlights warns (code ignored)');
+  assert.ok(w.some((x) => x.includes('"## Why should you care?" is for reading')), 'highlight in a reading section warns');
+  assert.ok(w.some((x) => x.includes('"Q2. Long answer?" has 8 ==highlights==')), 'more than 7 in one answer warns');
+  assert.ok(!w.some((x) => x.includes('Q3. Fine answer?')), '7 in one answer is fine (code ignored)');
+  assert.ok(w.some((x) => x.includes('highlight inside a [!beyond] box')), 'highlight in [!beyond] warns');
   assert.ok(w.some((x) => x.includes('uses [!beyond] but has no "syllabus"')), '[!beyond] without syllabus warns');
 
-  root = tree({ 'content/concepts/databases/aa.md': note('aa', { body: '==one==\n\n> [!beyond] Extra\n> Placeholder.', extra: { syllabus: '[UDSII-002]' } }) });
+  // many highlights across a note are fine when each answer stays within the limit (old 5-per-note cap gone)
+  const many = [2, 3, 4].map((q) => `### Q${q}. Answer?\n${seven}`).join('\n\n');
+  let root = tree({ 'content/concepts/databases/aa.md': note('aa', { body: `\n\n${many}\n\n> [!beyond] Extra\n> Placeholder.`, extra: { syllabus: '[UDSII-002]' } }) });
   const r = build({ root });
   assert.deepEqual(errors(r), []);
-  assert.ok(!warnings(r).some((x) => /beyond|highlight/.test(x)));
+  assert.ok(!warnings(r).some((x) => /beyond|highlight/.test(x)), JSON.stringify(warnings(r)));
   const m = JSON.parse(fs.readFileSync(path.join(root, 'dist/data/manifest.json'), 'utf8'));
   assert.deepEqual(m.notes.aa.syllabus, ['UDSII-002']);
 

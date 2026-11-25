@@ -791,22 +791,26 @@
         out.push(c);
         return;
       }
-      const groups = new Map();
+      // Answer skeletons (plan v2.6, decision 42): each ### question heading above its highlighted
+      // points, so students see which question each skeleton answers. Highlights before the first
+      // ### sit under the section's own name. Questions with no highlights are left out.
+      const groups = new Map(); // heading element (h3, or the section's h2) -> marks
       sec.querySelectorAll('mark.wd').forEach((m) => {
         if (m.closest('.callout-beyond')) return;
-        let label = sec.querySelector('h2 .h-text').textContent.trim();
-        let h3 = null;
-        for (let n = m.closest('.note-section > *'); n; n = n.previousElementSibling) { if (n.tagName === 'H3') { h3 = n; break; } }
-        if (h3) label += ' · ' + h3.querySelector('.h-text').textContent.trim();
-        if (!groups.has(label)) groups.set(label, []);
-        groups.get(label).push(m);
+        let head = sec.querySelector(':scope > h2');
+        for (let n = m.closest('.note-section > *'); n; n = n.previousElementSibling) { if (n.tagName === 'H3') { head = n; break; } }
+        if (!groups.has(head)) groups.set(head, []);
+        groups.get(head).push(m);
       });
-      groups.forEach((marks, label) => {
+      groups.forEach((marks, head) => {
         const box = document.createElement('section');
         box.className = 'note-section notebook-lines';
-        box.innerHTML = `<h3>${esc(label)}</h3><ul></ul>`;
-        const ul = box.querySelector('ul');
+        const h = document.createElement('h3');
+        h.className = head.tagName === 'H3' ? 'nb-question' : 'nb-section';
+        h.innerHTML = head.querySelector('.h-text').innerHTML; // keeps maths and formatting
+        const ul = document.createElement('ul');
         marks.forEach((m) => { const li = document.createElement('li'); li.appendChild(m.cloneNode(true)); ul.appendChild(li); });
+        box.append(h, ul);
         out.push(box);
       });
     });

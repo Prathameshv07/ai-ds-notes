@@ -479,6 +479,7 @@ html.overlay-open, html.overlay-open body{ overflow:hidden; }
 .notebook-page > *{ max-width:58em; margin-left:auto; margin-right:auto; }
 .notebook-page h2{ font-size:1.45em; }
 .notebook-page h3{ font-size:1.05em; color:var(--muted); margin:1.6em 0 .3em; }
+.notebook-page h3.nb-question, .notebook-page h3.nb-section{ color:var(--ink); }
 .notebook-page .note-section{ margin-top:1.6em; }
 .notebook-lines ul{ margin:.2em 0; padding-left:1.2em; }
 .notebook-lines li{ margin:.35em 0; }

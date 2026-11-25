@@ -421,17 +421,32 @@ export function build(opts = {}) {
 
     // write-down marking and [!beyond] (plan Sections 8.5 and 11)
     const wdSections = new Set(C.WRITE_DOWN_SECTIONS.map(norm));
-    let highlights = 0, beyond = false;
+    const readOnly = new Set(C.NO_HIGHLIGHT_SECTIONS.map(norm));
+    const HL = /==(?=\S)[^=\n]*?\S==/g;
+    let beyond = false;
     for (const sec of scan.sections) {
+      const name = norm(sec.name);
+      let answer = sec.name, answerLine = sec.line, count = 0, inBeyond = false;
+      const closeAnswer = () => {
+        if (count > C.HIGHLIGHT_MAX_PER_ANSWER) {
+          warn(f, `line ${answerLine}: "${answer}" has ${count} ==highlights==; an answer skeleton is a definition plus at most ${C.HIGHLIGHT_MAX_PER_ANSWER - 1} key phrases`,
+            'keep the definition and the key phrase that opens each main point; unmark the rest');
+        }
+      };
       for (const l of sec.lines) {
         if (l.inCode) continue;
-        const text = l.text.replace(/`[^`\n]*`/g, '');
-        const n = (text.match(/==(?=\S)[^=\n]*?\S==/g) || []).length;
-        if (n && wdSections.has(norm(sec.name))) {
-          warn(f, `line ${l.line}: "## ${sec.name}" is already a write-down section; don't highlight inside it`, 'remove the == marks in that section');
-        } else highlights += n;
-        if (/^\s*>\s*\[!beyond\]/i.test(l.text)) beyond = true;
+        const h3 = l.text.match(/^###\s+(.*\S)\s*$/);
+        if (h3) { closeAnswer(); answer = h3[1].replace(/<!--.*?-->/g, '').trim(); answerLine = l.line; count = 0; continue; }
+        if (/^\s*>\s*\[!beyond\]/i.test(l.text)) { beyond = true; inBeyond = true; }
+        else if (!/^\s*>/.test(l.text)) inBeyond = false;
+        const n = (l.text.replace(/`[^`\n]*`/g, '').match(HL) || []).length;
+        if (!n) continue;
+        if (wdSections.has(name)) warn(f, `line ${l.line}: "## ${sec.name}" is already a write-down section; don't highlight inside it`, 'remove the == marks in that section');
+        else if (readOnly.has(name)) warn(f, `line ${l.line}: "## ${sec.name}" is for reading, not copying; don't highlight in it`, 'remove the == marks in that section');
+        else if (inBeyond) warn(f, `line ${l.line}: highlight inside a [!beyond] box (not examined)`, 'remove the == marks inside the box');
+        else count += n;
       }
+      closeAnswer();
     }
     // alt text for every diagram and image (plan Sections 8.5, 11)
     for (const m of body.matchAll(/^ {0,3}(`{3,}|~{3,})[ \t]*mermaid[ \t]*\n([\s\S]*?)^ {0,3}\1[ \t]*$/gm)) {
@@ -445,7 +460,6 @@ export function build(opts = {}) {
         if (/!\[\s*\]\(/.test(t) || /!\[\[[^|\]]+\]\]/.test(t)) warn(f, `line ${l.line}: image without alt text`, 'write ![what the picture shows](path) or ![[file.png|what it shows]]');
       }
     }
-    if (highlights > C.HIGHLIGHT_MAX) warn(f, `${highlights} ==highlights==; the style guide asks for at most ${C.HIGHLIGHT_MAX} short lines`, 'keep only the lines students must copy');
     if (beyond && !syllabus.length) warn(f, 'uses [!beyond] but has no "syllabus" field, so "beyond the syllabus" has no meaning here', 'add syllabus: [<course code>], or turn the box into a normal callout');
 
     notes.set(id, {
