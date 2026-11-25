@@ -10,10 +10,10 @@ tags: [interview]
 syllabus: [UDSVI-006]
 unit: 1
 time: 10 min
-status: draft
+status: reviewed
 sources:
-  - "James R. Evans, Business Analytics, Pearson, Ch. 4 (verify)"
-  - "S. C. Gupta and V. K. Kapoor, Fundamentals of Mathematical Statistics, Sultan Chand, Ch. 3 (verify)"
+  - "James R. Evans, Business Analytics, 3rd ed., Pearson, 2021, Ch. 4: Descriptive Statistics"
+  - "S. C. Gupta and V. K. Kapoor, Fundamentals of Mathematical Statistics, Sultan Chand, Ch. 3: Measures of Dispersion, Skewness and Kurtosis"
   - "NIST/SEMATECH e-Handbook of Statistical Methods, Section 1.3.5.11: Measures of Skewness and Kurtosis"
   - "pandas documentation: Series.skew and Series.kurt, https://pandas.pydata.org/docs/reference/series.html"
 ---
@@ -233,7 +233,7 @@ What does pandas .kurt() report? :: Excess kurtosis (β2 − 3), with a sample c
 
 ## Sources
 
-- James R. Evans, *Business Analytics*, Pearson, Ch. 4 (verify)
-- S. C. Gupta and V. K. Kapoor, *Fundamentals of Mathematical Statistics*, Sultan Chand, Ch. 3 (verify)
+- James R. Evans, *Business Analytics*, 3rd ed., Pearson, 2021, Ch. 4: Descriptive Statistics
+- S. C. Gupta and V. K. Kapoor, *Fundamentals of Mathematical Statistics*, Sultan Chand, Ch. 3: Measures of Dispersion, Skewness and Kurtosis
 - NIST/SEMATECH *e-Handbook of Statistical Methods*, Section 1.3.5.11: Measures of Skewness and Kurtosis
 - pandas documentation: [Series API reference (skew, kurt)](https://pandas.pydata.org/docs/reference/series.html)

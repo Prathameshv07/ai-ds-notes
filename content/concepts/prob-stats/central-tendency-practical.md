@@ -10,7 +10,7 @@ unit: 1
 prerequisites: [central-tendency]
 related: [exploratory-data-analysis-practical, dispersion-practical]
 time: 45 min
-status: draft
+status: reviewed
 sources:
   - "pandas documentation: Series.mean, Series.median, Series.mode, https://pandas.pydata.org/docs/reference/series.html"
   - "NumPy documentation: numpy.average, https://numpy.org/doc/stable/reference/generated/numpy.average.html"

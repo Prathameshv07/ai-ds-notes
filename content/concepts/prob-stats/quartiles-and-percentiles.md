@@ -10,11 +10,11 @@ tags: [interview]
 syllabus: [UDSVI-006]
 unit: 1
 time: 10 min
-status: draft
+status: reviewed
 sources:
-  - "James R. Evans, Business Analytics, Pearson, Ch. 4 (verify)"
-  - "S. C. Gupta and V. K. Kapoor, Fundamentals of Mathematical Statistics, Sultan Chand, Ch. 2–3 (verify)"
-  - "Hyndman & Fan, Sample Quantiles in Statistical Packages, The American Statistician, 50(4), 1996 (verify)"
+  - "James R. Evans, Business Analytics, 3rd ed., Pearson, 2021, Ch. 4: Descriptive Statistics"
+  - "S. C. Gupta and V. K. Kapoor, Fundamentals of Mathematical Statistics, Sultan Chand, Ch. 2 (partition values) and Ch. 3 (quartile deviation)"
+  - "Hyndman & Fan, Sample Quantiles in Statistical Packages, The American Statistician, 50(4), 361–365, 1996"
   - "pandas documentation: Series.quantile, https://pandas.pydata.org/docs/reference/api/pandas.Series.quantile.html"
 ---
 
@@ -217,7 +217,7 @@ Percentile vs percentage? :: Percentile = % of people/values below you; percenta
 
 ## Sources
 
-- James R. Evans, *Business Analytics*, Pearson, Ch. 4 (verify)
-- S. C. Gupta and V. K. Kapoor, *Fundamentals of Mathematical Statistics*, Sultan Chand, Ch. 2–3 (verify)
-- Hyndman & Fan, "Sample Quantiles in Statistical Packages", *The American Statistician*, 50(4), 1996 (verify)
+- James R. Evans, *Business Analytics*, 3rd ed., Pearson, 2021, Ch. 4: Descriptive Statistics
+- S. C. Gupta and V. K. Kapoor, *Fundamentals of Mathematical Statistics*, Sultan Chand, Ch. 2 (partition values) and Ch. 3 (quartile deviation)
+- Hyndman & Fan, "Sample Quantiles in Statistical Packages", *The American Statistician*, 50(4), 361–365, 1996
 - pandas documentation: [Series.quantile](https://pandas.pydata.org/docs/reference/api/pandas.Series.quantile.html)

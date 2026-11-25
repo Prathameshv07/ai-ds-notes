@@ -11,9 +11,9 @@ prerequisites: [correlation-practical, simple-linear-regression]
 related: [correlation, covariance]
 tags: [interview]
 time: 60 min
-status: draft
+status: reviewed
 sources:
-  - "James R. Evans, Business Analytics, Pearson, Ch. 8: Trendlines and Regression Analysis (verify)"
+  - "James R. Evans, Business Analytics, 3rd ed., Pearson, 2021, Ch. 8: Trendlines and Regression Analysis"
   - "NumPy documentation: numpy.polyfit, https://numpy.org/doc/stable/reference/generated/numpy.polyfit.html"
   - "Sahyadri Mart sales dataset: content/assets/data/sahyadri-mart-sales.md (synthetic, this site)"
 ---
@@ -280,6 +280,6 @@ Sahyadri Mart ad-spend slope: chain-wide vs within store? :: About â‚¹72.5 vs â‚
 
 ## Sources
 
-- James R. Evans, *Business Analytics*, Pearson, Ch. 8: Trendlines and Regression Analysis (verify)
+- James R. Evans, *Business Analytics*, 3rd ed., Pearson, 2021, Ch. 8: Trendlines and Regression Analysis
 - NumPy documentation: [numpy.polyfit](https://numpy.org/doc/stable/reference/generated/numpy.polyfit.html)
 - Sahyadri Mart sales dataset: data card in `content/assets/data/sahyadri-mart-sales.md` (synthetic, this site)

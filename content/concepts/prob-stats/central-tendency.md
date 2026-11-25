@@ -10,11 +10,11 @@ tags: [interview]
 syllabus: [UDSVI-006]
 unit: 1
 time: 10 min
-status: draft
+status: reviewed
 sources:
-  - "James R. Evans, Business Analytics, Pearson, Ch. 4 (verify)"
-  - "S. C. Gupta and V. K. Kapoor, Fundamentals of Mathematical Statistics, Sultan Chand, Ch. 2 (verify)"
-  - "Freedman, Pisani & Purves, Statistics, 4th ed., Norton, Ch. 4 (verify)"
+  - "James R. Evans, Business Analytics, 3rd ed., Pearson, 2021, Ch. 4: Descriptive Statistics"
+  - "S. C. Gupta and V. K. Kapoor, Fundamentals of Mathematical Statistics, Sultan Chand, Ch. 2: Frequency Distributions and Measures of Central Tendency"
+  - "Freedman, Pisani & Purves, Statistics, 4th ed., Norton, 2007, Ch. 4: The Average and the Standard Deviation"
   - "NIST/SEMATECH e-Handbook of Statistical Methods, Section 1.3.5.1: Measures of Location"
 ---
 
@@ -130,13 +130,13 @@ flowchart TD
 
 Bills (₹) of 7 customers at a Sahyadri Mart Express store one morning: 120, 250, 180, 250, 300, 220, 2,400. The last customer was a caterer buying in bulk.
 
-1. **Mean:** sum = 3,720, so $\bar{x} = 3720 / 7 = ₹531.43$.
+1. **Mean:** sum = 3,720, so $\bar{x} = 3720 / 7 =$ ₹531.43.
 2. **Median:** order the bills: 120, 180, 220, **250**, 250, 300, 2,400. $n = 7$, position $(7+1)/2 = 4$, so median = ₹250.
 3. **Mode:** 250 appears twice, every other value once, so mode = ₹250.
 
 Now drop the caterer:
 - mean = 1,320 / 6 = ₹220;
-- median = $(220 + 250)/2 = ₹235$.
+- median = $(220 + 250)/2 =$ ₹235.
 
 **Conclusion:** one bulk buyer more than doubled the mean (₹220 → ₹531) but moved the median only from ₹235 to ₹250. To describe a typical customer's bill, report the median.
 
@@ -170,7 +170,7 @@ Start: $\sum w_i x_i = 4(8) + 4(7) + 2(9) + 2(10) = \;?$ and $\sum w_i = 12$.
 > Finding the median without sorting first. The middle of 9, 2, 40, 7, 3 as written is 40; the true median is 7.
 
 > [!warning] Common mistake
-> Averaging averages. If one store has a ₹700 average bill over 1,500 bills and another ₹300 over 500 bills, the chain's average bill is not ₹500. Weight by the number of bills: $(700 \times 1500 + 300 \times 500)/2000 = ₹600$.
+> Averaging averages. If one store has a ₹700 average bill over 1,500 bills and another ₹300 over 500 bills, the chain's average bill is not ₹500. Weight by the number of bills: $(700 \times 1500 + 300 \times 500)/2000 =$ ₹600.
 
 > [!warning] Common mistake
 > Expecting the mean to be a possible value. "2.3 children per family" is a correct mean even though no family has 2.3 children. The median and mode are always actual values (or, for even $n$, halfway between two).
@@ -218,7 +218,7 @@ Start: $\sum w_i x_i = 4(8) + 4(7) + 2(9) + 2(10) = \;?$ and $\sum w_i = 12$.
 > (D) ₹60
 >
 > > [!answer]- Answer: C
-> > Weighted mean: $(100 \times 40 + 300 \times 60)/400 = 22000/400 = ₹55$. ₹50 is the unweighted mean of the two prices.
+> > Weighted mean: $(100 \times 40 + 300 \times 60)/400 = 22000/400 =$ ₹55. ₹50 is the unweighted mean of the two prices.
 
 > [!quiz] Q5. For any dataset, what does $\sum (x_i - \bar{x})$ equal?
 > (A) 0
@@ -245,7 +245,7 @@ What is Σ(x − x̄) always equal to? :: Zero
 
 ## Sources
 
-- James R. Evans, *Business Analytics*, Pearson, Ch. 4 (verify)
-- S. C. Gupta and V. K. Kapoor, *Fundamentals of Mathematical Statistics*, Sultan Chand, Ch. 2 (verify)
-- Freedman, Pisani & Purves, *Statistics*, 4th ed., Norton, Ch. 4 (verify)
+- James R. Evans, *Business Analytics*, 3rd ed., Pearson, 2021, Ch. 4: Descriptive Statistics
+- S. C. Gupta and V. K. Kapoor, *Fundamentals of Mathematical Statistics*, Sultan Chand, Ch. 2: Frequency Distributions and Measures of Central Tendency
+- Freedman, Pisani & Purves, *Statistics*, 4th ed., Norton, 2007, Ch. 4: The Average and the Standard Deviation
 - NIST/SEMATECH *e-Handbook of Statistical Methods*, Section 1.3.5.1: Measures of Location

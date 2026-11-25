@@ -10,7 +10,7 @@ unit: 1
 prerequisites: [dispersion, central-tendency-practical]
 related: [exploratory-data-analysis-practical]
 time: 45 min
-status: draft
+status: reviewed
 sources:
   - "pandas documentation: Series.var, Series.std, https://pandas.pydata.org/docs/reference/series.html"
   - "NumPy documentation: numpy.std (ddof parameter), https://numpy.org/doc/stable/reference/generated/numpy.std.html"

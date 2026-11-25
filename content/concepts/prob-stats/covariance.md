@@ -10,11 +10,11 @@ tags: [interview]
 syllabus: [UDSVI-006]
 unit: 1
 time: 8 min
-status: draft
+status: reviewed
 sources:
-  - "James R. Evans, Business Analytics, Pearson, Ch. 4 (verify)"
-  - "S. C. Gupta and V. K. Kapoor, Fundamentals of Mathematical Statistics, Sultan Chand, Ch. 10 (verify)"
-  - "Freedman, Pisani & Purves, Statistics, 4th ed., Norton, Ch. 8 (verify)"
+  - "James R. Evans, Business Analytics, 3rd ed., Pearson, 2021, Ch. 4: Descriptive Statistics"
+  - "S. C. Gupta and V. K. Kapoor, Fundamentals of Mathematical Statistics, Sultan Chand, Ch. 10: Correlation and Regression"
+  - "Freedman, Pisani & Purves, Statistics, 4th ed., Norton, 2007, Ch. 8: Correlation"
   - "pandas documentation: Series.cov, https://pandas.pydata.org/docs/reference/api/pandas.Series.cov.html"
 ---
 
@@ -121,7 +121,9 @@ Five days at a store: ad spend $x$ (₹ thousand) and sales $y$ (₹ lakh).
 | 5 | 10 | 12 | 4 | 4 | 16 |
 | | $\bar{x} = 6$ | $\bar{y} = 8$ | | | **34** |
 
-$$\text{Cov}(x, y) = \frac{34}{5 - 1} = 8.5 \text{ (₹ thousand × ₹ lakh)}$$
+$$\text{Cov}(x, y) = \frac{34}{5 - 1} = 8.5$$
+
+Unit: ₹ thousand × ₹ lakh.
 
 **Conclusion:** positive, so higher ad spend goes with higher sales on these days. Every product is zero or positive: each day lies in a "both above" or "both below" quadrant. We cannot yet say how *strong* the relationship is; the [[correlation]] note finishes this example.
 
@@ -211,7 +213,7 @@ How is correlation obtained from covariance? :: Divide by the product of the two
 
 ## Sources
 
-- James R. Evans, *Business Analytics*, Pearson, Ch. 4 (verify)
-- S. C. Gupta and V. K. Kapoor, *Fundamentals of Mathematical Statistics*, Sultan Chand, Ch. 10 (verify)
-- Freedman, Pisani & Purves, *Statistics*, 4th ed., Norton, Ch. 8 (verify)
+- James R. Evans, *Business Analytics*, 3rd ed., Pearson, 2021, Ch. 4: Descriptive Statistics
+- S. C. Gupta and V. K. Kapoor, *Fundamentals of Mathematical Statistics*, Sultan Chand, Ch. 10: Correlation and Regression
+- Freedman, Pisani & Purves, *Statistics*, 4th ed., Norton, 2007, Ch. 8: Correlation
 - pandas documentation: [Series.cov](https://pandas.pydata.org/docs/reference/api/pandas.Series.cov.html)

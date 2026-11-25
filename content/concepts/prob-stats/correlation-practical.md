@@ -10,7 +10,7 @@ unit: 1
 prerequisites: [correlation, dispersion-practical]
 related: [covariance, exploratory-data-analysis-practical, simple-linear-regression-practical]
 time: 60 min
-status: draft
+status: reviewed
 sources:
   - "pandas documentation: DataFrame.corr, https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.corr.html"
   - "Matplotlib documentation: Axes.scatter, https://matplotlib.org/stable/api/_as_gen/matplotlib.axes.Axes.scatter.html"

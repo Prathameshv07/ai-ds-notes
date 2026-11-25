@@ -7,19 +7,19 @@
 
 | id | title | subject | type | status | summary | prerequisites |
 |---|---|---|---|---|---|---|
-| central-tendency | Measures of Central Tendency | prob-stats | theory | draft | A measure of central tendency is a single value that represents the centre, or typical value, of a dataset; the three… |  |
-| central-tendency-practical | Mean, Median and Mode of Sales Data | prob-stats | practical | draft |  | central-tendency |
-| correlation | Correlation | prob-stats | theory | draft | The correlation coefficient r measures the strength and direction of the linear relationship between two numerical… | covariance |
-| correlation-practical | Correlation Analysis of Sales Data | prob-stats | practical | draft |  | correlation, dispersion-practical |
-| covariance | Covariance | prob-stats | theory | draft | Covariance measures whether two numerical variables tend to move in the same direction (positive), in opposite… | dispersion |
-| dispersion | Measures of Dispersion | prob-stats | theory | draft | A measure of dispersion tells how spread out the values of a dataset are around its centre; the main ones are the… | central-tendency |
-| dispersion-practical | Variance and Standard Deviation of Sales Data | prob-stats | practical | draft |  | dispersion, central-tendency-practical |
+| central-tendency | Measures of Central Tendency | prob-stats | theory | reviewed | A measure of central tendency is a single value that represents the centre, or typical value, of a dataset; the three… |  |
+| central-tendency-practical | Mean, Median and Mode of Sales Data | prob-stats | practical | reviewed |  | central-tendency |
+| correlation | Correlation | prob-stats | theory | reviewed | The correlation coefficient r measures the strength and direction of the linear relationship between two numerical… | covariance |
+| correlation-practical | Correlation Analysis of Sales Data | prob-stats | practical | reviewed |  | correlation, dispersion-practical |
+| covariance | Covariance | prob-stats | theory | reviewed | Covariance measures whether two numerical variables tend to move in the same direction (positive), in opposite… | dispersion |
+| dispersion | Measures of Dispersion | prob-stats | theory | reviewed | A measure of dispersion tells how spread out the values of a dataset are around its centre; the main ones are the… | central-tendency |
+| dispersion-practical | Variance and Standard Deviation of Sales Data | prob-stats | practical | reviewed |  | dispersion, central-tendency-practical |
 | frequency-distribution | Frequency Distributions | prob-stats | theory | planned | Covers: class intervals, frequency and cumulative frequency tables for discrete and continuous data | types-of-variables |
-| prob-stats-intro | Why Probability & Statistics? | prob-stats | intro | draft |  |  |
-| quartiles-and-percentiles | Quartiles and Percentiles | prob-stats | theory | draft | Quartiles, deciles and percentiles are values that divide ordered data into 4, 10 and 100 equal parts, and the… | central-tendency |
+| prob-stats-intro | Why Probability & Statistics? | prob-stats | intro | reviewed |  |  |
+| quartiles-and-percentiles | Quartiles and Percentiles | prob-stats | theory | reviewed | Quartiles, deciles and percentiles are values that divide ordered data into 4, 10 and 100 equal parts, and the… | central-tendency |
 | simple-linear-regression | Simple Linear Regression | prob-stats | theory | planned | Covers: regression line, least squares, slope and intercept, prediction, R², regression vs correlation | correlation |
-| simple-linear-regression-practical | Regression of Sales Revenue on Advertising | prob-stats | practical | draft |  | correlation-practical, simple-linear-regression |
-| skewness-and-kurtosis | Skewness and Kurtosis | prob-stats | theory | draft | Skewness measures the lack of symmetry of a distribution (which side its long tail is on), and kurtosis measures how… | central-tendency, dispersion |
+| simple-linear-regression-practical | Regression of Sales Revenue on Advertising | prob-stats | practical | reviewed |  | correlation-practical, simple-linear-regression |
+| skewness-and-kurtosis | Skewness and Kurtosis | prob-stats | theory | reviewed | Skewness measures the lack of symmetry of a distribution (which side its long tail is on), and kurtosis measures how… | central-tendency, dispersion |
 | types-of-variables | Types of Variables and Scales of Measurement | prob-stats | theory | planned | Covers: categorical and numerical variables, discrete and continuous, nominal, ordinal, interval and ratio scales |  |
 | acid-properties | ACID Properties | databases | theory | planned | Covers: transactions, atomicity, consistency, isolation, durability |  |
 | associative-entities | Associative (Composite) Entities | databases | theory | draft | An associative (composite, bridge) entity turns an M:N relationship into two 1:M relationships, and stores the facts… | connectivity-and-cardinality, weak-entities |

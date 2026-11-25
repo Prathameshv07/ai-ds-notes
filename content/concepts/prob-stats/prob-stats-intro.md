@@ -7,12 +7,13 @@ related: [central-tendency, dispersion, correlation]
 syllabus: [UDSVI-006]
 unit: 1
 time: 6 min
-status: draft
+status: reviewed
 sources:
-  - "James R. Evans, Business Analytics, Pearson, Ch. 1 and Ch. 4 (verify)"
-  - "Freedman, Pisani & Purves, Statistics, 4th ed., Norton, Ch. 1 (verify)"
-  - "Mangel & Samaniego, Abraham Wald's Work on Aircraft Survivability, Journal of the American Statistical Association, 79(386), 1984 (verify)"
-  - "Indian Statistical Institute, About ISI: history and founder P. C. Mahalanobis, isical.ac.in (verify)"
+  - "James R. Evans, Business Analytics, 3rd ed., Pearson, 2021, Ch. 1: Introduction to Business Analytics; Ch. 4: Descriptive Statistics"
+  - "Freedman, Pisani & Purves, Statistics, 4th ed., Norton, 2007, Ch. 1: Controlled Experiments"
+  - "Mangel & Samaniego, Abraham Wald's Work on Aircraft Survivability, Journal of the American Statistical Association, 79(386), June 1984"
+  - "Bill Casselman, The Legend of Abraham Wald, AMS Feature Column, June 2016, https://www.ams.org/samplings/feature-column/fc-2016-06"
+  - "Indian Statistical Institute, About ISI: history and founder P. C. Mahalanobis, isical.ac.in; Ministry of Statistics and Programme Implementation, Statistics Day notification, 2007"
 ---
 
 ## Why this subject matters
@@ -33,6 +34,8 @@ Statistics answers the first two. Probability answers the third. Together they t
 During the Second World War, American bombers came back from missions full of bullet holes. Most holes were on the wings and the body; very few were on the engines. The obvious plan was to add armour where the holes were.
 
 The statistician Abraham Wald, working with the Statistical Research Group at Columbia University, saw the flaw. The planes being studied were the ones that **came back**. Planes hit in the engines mostly did not return, so their holes never reached the data. The armour belonged where the surviving planes had **no** holes.
+
+The popular retelling simplifies the history: Wald's real contribution was a set of 1943 memoranda on estimating how vulnerable each part of a plane was from the damage on the planes that returned. But the core insight is his.
 
 This mistake now has a name: **survivorship bias**. The lesson for you: data can be accurate and still mislead, if you forget to ask where it came from and what is missing.
 
@@ -85,7 +88,8 @@ Applied Business Analytics Unit 1 covers the first two boxes: describing data, t
 
 ## Sources
 
-- James R. Evans, *Business Analytics*, Pearson, Ch. 1 and Ch. 4 (verify)
-- Freedman, Pisani & Purves, *Statistics*, 4th ed., Norton, Ch. 1 (verify)
-- Mangel & Samaniego, "Abraham Wald's Work on Aircraft Survivability", *Journal of the American Statistical Association*, 79(386), 1984 (verify)
-- Indian Statistical Institute, "About ISI", isical.ac.in (verify)
+- James R. Evans, *Business Analytics*, 3rd ed., Pearson, 2021, Ch. 1: Introduction to Business Analytics; Ch. 4: Descriptive Statistics
+- Freedman, Pisani & Purves, *Statistics*, 4th ed., Norton, 2007, Ch. 1: Controlled Experiments
+- Mangel & Samaniego, "Abraham Wald's Work on Aircraft Survivability", *Journal of the American Statistical Association*, 79(386), June 1984
+- Bill Casselman, ["The Legend of Abraham Wald"](https://www.ams.org/samplings/feature-column/fc-2016-06), AMS Feature Column, June 2016
+- Indian Statistical Institute, "About ISI", isical.ac.in; Ministry of Statistics and Programme Implementation, Statistics Day notification, 2007

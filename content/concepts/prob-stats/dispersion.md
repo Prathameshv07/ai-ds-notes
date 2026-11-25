@@ -10,11 +10,11 @@ tags: [interview]
 syllabus: [UDSVI-006]
 unit: 1
 time: 10 min
-status: draft
+status: reviewed
 sources:
-  - "James R. Evans, Business Analytics, Pearson, Ch. 4 (verify)"
-  - "S. C. Gupta and V. K. Kapoor, Fundamentals of Mathematical Statistics, Sultan Chand, Ch. 3 (verify)"
-  - "Freedman, Pisani & Purves, Statistics, 4th ed., Norton, Ch. 4 (verify)"
+  - "James R. Evans, Business Analytics, 3rd ed., Pearson, 2021, Ch. 4: Descriptive Statistics"
+  - "S. C. Gupta and V. K. Kapoor, Fundamentals of Mathematical Statistics, Sultan Chand, Ch. 3: Measures of Dispersion, Skewness and Kurtosis"
+  - "Freedman, Pisani & Purves, Statistics, 4th ed., Norton, 2007, Ch. 4: The Average and the Standard Deviation"
   - "NIST/SEMATECH e-Handbook of Statistical Methods, Section 1.3.5.6: Measures of Scale"
 ---
 
@@ -248,7 +248,7 @@ Default divisor of pandas .std() vs NumPy np.std()? :: pandas: n − 1; NumPy: n
 
 ## Sources
 
-- James R. Evans, *Business Analytics*, Pearson, Ch. 4 (verify)
-- S. C. Gupta and V. K. Kapoor, *Fundamentals of Mathematical Statistics*, Sultan Chand, Ch. 3 (verify)
-- Freedman, Pisani & Purves, *Statistics*, 4th ed., Norton, Ch. 4 (verify)
+- James R. Evans, *Business Analytics*, 3rd ed., Pearson, 2021, Ch. 4: Descriptive Statistics
+- S. C. Gupta and V. K. Kapoor, *Fundamentals of Mathematical Statistics*, Sultan Chand, Ch. 3: Measures of Dispersion, Skewness and Kurtosis
+- Freedman, Pisani & Purves, *Statistics*, 4th ed., Norton, 2007, Ch. 4: The Average and the Standard Deviation
 - NIST/SEMATECH *e-Handbook of Statistical Methods*, Section 1.3.5.6: Measures of Scale

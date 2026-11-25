@@ -10,11 +10,11 @@ tags: [interview]
 syllabus: [UDSVI-006]
 unit: 1
 time: 10 min
-status: draft
+status: reviewed
 sources:
-  - "James R. Evans, Business Analytics, Pearson, Ch. 4 (verify)"
-  - "S. C. Gupta and V. K. Kapoor, Fundamentals of Mathematical Statistics, Sultan Chand, Ch. 10 (verify)"
-  - "Freedman, Pisani & Purves, Statistics, 4th ed., Norton, Ch. 8–9 (verify)"
+  - "James R. Evans, Business Analytics, 3rd ed., Pearson, 2021, Ch. 4: Descriptive Statistics"
+  - "S. C. Gupta and V. K. Kapoor, Fundamentals of Mathematical Statistics, Sultan Chand, Ch. 10: Correlation and Regression"
+  - "Freedman, Pisani & Purves, Statistics, 4th ed., Norton, 2007, Ch. 8: Correlation; Ch. 9: More about Correlation"
   - "pandas documentation: Series.corr and DataFrame.corr, https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.corr.html"
 ---
 
@@ -219,7 +219,7 @@ Ad spend vs revenue at Sahyadri Mart: chain-wide vs within store? :: About 0.61 
 
 ## Sources
 
-- James R. Evans, *Business Analytics*, Pearson, Ch. 4 (verify)
-- S. C. Gupta and V. K. Kapoor, *Fundamentals of Mathematical Statistics*, Sultan Chand, Ch. 10 (verify)
-- Freedman, Pisani & Purves, *Statistics*, 4th ed., Norton, Ch. 8–9 (verify)
+- James R. Evans, *Business Analytics*, 3rd ed., Pearson, 2021, Ch. 4: Descriptive Statistics
+- S. C. Gupta and V. K. Kapoor, *Fundamentals of Mathematical Statistics*, Sultan Chand, Ch. 10: Correlation and Regression
+- Freedman, Pisani & Purves, *Statistics*, 4th ed., Norton, 2007, Ch. 8: Correlation; Ch. 9: More about Correlation
 - pandas documentation: [DataFrame.corr](https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.corr.html)
