@@ -14,6 +14,7 @@
 | covariance | Covariance | prob-stats | theory | planned | Covers: how two variables vary together, sign and meaning, why its size is hard to read | dispersion |
 | dispersion | Measures of Dispersion | prob-stats | theory | draft | A measure of dispersion tells how spread out the values of a dataset are around its centre; the main ones are the… | central-tendency |
 | dispersion-practical | Variance and Standard Deviation of Sales Data | prob-stats | practical | draft |  | dispersion, central-tendency-practical |
+| frequency-distribution | Frequency Distributions | prob-stats | theory | planned | Covers: class intervals, frequency and cumulative frequency tables for discrete and continuous data | types-of-variables |
 | prob-stats-intro | Why Probability & Statistics? | prob-stats | intro | draft |  |  |
 | quartiles-and-percentiles | Quartiles and Percentiles | prob-stats | theory | planned | Covers: quartiles, deciles, percentiles, IQR, five-number summary, 1.5 IQR outlier rule | central-tendency |
 | skewness-and-kurtosis | Skewness and Kurtosis | prob-stats | theory | planned | Covers: shape of a distribution, positive and negative skew, mean-median-mode order, types of kurtosis | central-tendency, dispersion |
@@ -35,4 +36,8 @@
 | data-collection-practical | Collecting Business Datasets | data-analysis | practical | draft |  | business-analytics |
 | exploratory-data-analysis | Exploratory Data Analysis (EDA) | data-analysis | theory | draft | Exploratory data analysis (EDA) is the first, open-minded examination of a dataset, using summary numbers and simple… | business-analytics |
 | exploratory-data-analysis-practical | Exploratory Data Analysis on Sales Data | data-analysis | practical | draft |  | exploratory-data-analysis, data-collection-practical |
+| box-plot-practical | Box Plots and Outliers in Sales Data | data-viz | practical | draft |  | distribution-plots, histogram-practical |
+| data-viz-intro | Why Data Visualization? | data-viz | intro | draft |  |  |
+| distribution-plots | Graphing a Distribution: Histograms and Box Plots | data-viz | theory | draft | A histogram shows the shape of a numerical variable by counting how many values fall in each interval; a box plot… | central-tendency, quartiles-and-percentiles |
+| histogram-practical | Histograms of Sales Data | data-viz | practical | draft |  | distribution-plots |
 | data-warehouse | Data Warehouse | data-eng | theory | planned | Covers: OLTP vs OLAP, purpose of a warehouse, ETL basics, star schema | types-of-databases |
