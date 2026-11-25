@@ -83,5 +83,7 @@ Synthetic data created for this site; no real company or person is described. Li
 | [[dispersion-practical]] | prob-stats | ABA (UDSVI-006) Unit 1, practical 4 |
 | [[histogram-practical]] | data-viz | ABA (UDSVI-006) Unit 1, practical 5 |
 | [[box-plot-practical]] | data-viz | ABA (UDSVI-006) Unit 1, practical 6 |
+| [[correlation-practical]] | prob-stats | ABA (UDSVI-006) Unit 1, practical 7 |
+| [[simple-linear-regression-practical]] | prob-stats | ABA (UDSVI-006) Unit 1, practical 8 |
 
 Other subject chats: add your practical to this table when you reuse the file.

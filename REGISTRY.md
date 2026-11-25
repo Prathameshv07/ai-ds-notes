@@ -9,15 +9,17 @@
 |---|---|---|---|---|---|---|
 | central-tendency | Measures of Central Tendency | prob-stats | theory | draft | A measure of central tendency is a single value that represents the centre, or typical value, of a dataset; the three… |  |
 | central-tendency-practical | Mean, Median and Mode of Sales Data | prob-stats | practical | draft |  | central-tendency |
-| correlation | Correlation | prob-stats | theory | planned | Covers: Pearson's r, strength and direction, scatter-plot patterns, correlation vs causation | covariance |
-| correlation-practical | Correlation Practical | prob-stats | practical | planned | Covers: correlation analysis of business variables in Python on Colab (ABA practical 7) | correlation |
-| covariance | Covariance | prob-stats | theory | planned | Covers: how two variables vary together, sign and meaning, why its size is hard to read | dispersion |
+| correlation | Correlation | prob-stats | theory | draft | The correlation coefficient r measures the strength and direction of the linear relationship between two numerical… | covariance |
+| correlation-practical | Correlation Analysis of Sales Data | prob-stats | practical | draft |  | correlation, dispersion-practical |
+| covariance | Covariance | prob-stats | theory | draft | Covariance measures whether two numerical variables tend to move in the same direction (positive), in opposite… | dispersion |
 | dispersion | Measures of Dispersion | prob-stats | theory | draft | A measure of dispersion tells how spread out the values of a dataset are around its centre; the main ones are the… | central-tendency |
 | dispersion-practical | Variance and Standard Deviation of Sales Data | prob-stats | practical | draft |  | dispersion, central-tendency-practical |
 | frequency-distribution | Frequency Distributions | prob-stats | theory | planned | Covers: class intervals, frequency and cumulative frequency tables for discrete and continuous data | types-of-variables |
 | prob-stats-intro | Why Probability & Statistics? | prob-stats | intro | draft |  |  |
-| quartiles-and-percentiles | Quartiles and Percentiles | prob-stats | theory | planned | Covers: quartiles, deciles, percentiles, IQR, five-number summary, 1.5 IQR outlier rule | central-tendency |
-| skewness-and-kurtosis | Skewness and Kurtosis | prob-stats | theory | planned | Covers: shape of a distribution, positive and negative skew, mean-median-mode order, types of kurtosis | central-tendency, dispersion |
+| quartiles-and-percentiles | Quartiles and Percentiles | prob-stats | theory | draft | Quartiles, deciles and percentiles are values that divide ordered data into 4, 10 and 100 equal parts, and the… | central-tendency |
+| simple-linear-regression | Simple Linear Regression | prob-stats | theory | planned | Covers: regression line, least squares, slope and intercept, prediction, R², regression vs correlation | correlation |
+| simple-linear-regression-practical | Regression of Sales Revenue on Advertising | prob-stats | practical | draft |  | correlation-practical, simple-linear-regression |
+| skewness-and-kurtosis | Skewness and Kurtosis | prob-stats | theory | draft | Skewness measures the lack of symmetry of a distribution (which side its long tail is on), and kurtosis measures how… | central-tendency, dispersion |
 | types-of-variables | Types of Variables and Scales of Measurement | prob-stats | theory | planned | Covers: categorical and numerical variables, discrete and continuous, nominal, ordinal, interval and ratio scales |  |
 | acid-properties | ACID Properties | databases | theory | planned | Covers: transactions, atomicity, consistency, isolation, durability |  |
 | data-models | Data Models | databases | theory | reviewed | A data model is a simple, usually graphical, picture of real-world data: what things exist, what we store about them… | what-is-dbms |
@@ -40,4 +42,5 @@
 | data-viz-intro | Why Data Visualization? | data-viz | intro | draft |  |  |
 | distribution-plots | Graphing a Distribution: Histograms and Box Plots | data-viz | theory | draft | A histogram shows the shape of a numerical variable by counting how many values fall in each interval; a box plot… | central-tendency, quartiles-and-percentiles |
 | histogram-practical | Histograms of Sales Data | data-viz | practical | draft |  | distribution-plots |
+| scatter-plot | Scatter Plot | data-viz | theory | planned | Covers: plotting two numerical variables, reading direction, strength, form and outliers, colouring by group |  |
 | data-warehouse | Data Warehouse | data-eng | theory | planned | Covers: OLTP vs OLAP, purpose of a warehouse, ETL basics, star schema | types-of-databases |

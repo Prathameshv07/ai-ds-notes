@@ -11,8 +11,10 @@ type: subject
 5. [[skewness-and-kurtosis]]
 6. [[covariance]]
 7. [[correlation]]
+8. [[simple-linear-regression]]
 
 ## Practicals
 1. [[central-tendency-practical]]
 2. [[dispersion-practical]]
 3. [[correlation-practical]]
+4. [[simple-linear-regression-practical]]
