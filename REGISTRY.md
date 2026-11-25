@@ -22,15 +22,24 @@
 | skewness-and-kurtosis | Skewness and Kurtosis | prob-stats | theory | draft | Skewness measures the lack of symmetry of a distribution (which side its long tail is on), and kurtosis measures how… | central-tendency, dispersion |
 | types-of-variables | Types of Variables and Scales of Measurement | prob-stats | theory | planned | Covers: categorical and numerical variables, discrete and continuous, nominal, ordinal, interval and ratio scales |  |
 | acid-properties | ACID Properties | databases | theory | planned | Covers: transactions, atomicity, consistency, isolation, durability |  |
+| associative-entities | Associative (Composite) Entities | databases | theory | draft | An associative (composite, bridge) entity turns an M:N relationship into two 1:M relationships, and stores the facts… | connectivity-and-cardinality, weak-entities |
+| connectivity-and-cardinality | Connectivity, Cardinality and Participation | databases | theory | draft | Connectivity names the relationship type (1:1, 1:M, M:N), cardinality gives the minimum and maximum number of linked… | er-model |
 | data-models | Data Models | databases | theory | reviewed | A data model is a simple, usually graphical, picture of real-world data: what things exist, what we store about them… | what-is-dbms |
-| data-processing | Data Processing Concepts | databases | theory | draft | Data processing is the series of steps (collect, prepare, input, process, output, store) that turns raw data into… | what-is-dbms |
+| data-processing | Data Processing Concepts | databases | theory | reviewed | Data processing is the series of steps (collect, prepare, input, process, output, store) that turns raw data into… | what-is-dbms |
 | databases-intro | Databases & SQL: Start Here | databases | intro | reviewed |  |  |
 | dbms-architecture | DBMS Architecture | databases | theory | reviewed | DBMS architecture describes the parts of a database system, the people who use and run it, and how a request travels… | what-is-dbms |
-| er-model | Entity-Relationship Model | databases | theory | planned | Covers: entities, attributes, relationships, connectivity, cardinality, weak entities, ER diagrams | data-models |
+| er-diagram-development | Developing an ER Diagram | databases | theory | draft | An ER diagram is developed iteratively: write the narrative, extract business rules, find entities and relationships… | er-model, connectivity-and-cardinality, associative-entities, keys |
+| er-diagram-practical | ER Diagrams for Student and Library Management | databases | practical | draft |  | er-diagram-development, associative-entities, connectivity-and-cardinality |
+| er-model | Entity-Relationship Model | databases | theory | draft | The ER model describes a database design as entities, their attributes and the relationships between them, drawn as an… | data-models |
+| extended-er-model | Extended ER Model and Entity Clustering | databases | theory | draft | The extended ER model adds supertypes and subtypes (with inheritance and constraints) to the ER model, and entity… | er-model, keys |
+| flexible-database-design | Flexible Database Design | databases | theory | draft | Flexible database design handles four common cases correctly: placing the foreign key in 1:1 relationships, keeping… | er-diagram-development, keys |
+| keys | Keys and Entity Integrity | databases | theory | draft | A key is one or more attributes that uniquely identify each row; the primary key is the one chosen for this, and entity… | er-model |
 | levels-of-abstraction | Levels of Data Abstraction | databases | theory | reviewed | A DBMS describes data at three levels (physical, logical and view), so that each user sees only what they need and… | data-models |
 | normalization | Normalization | databases | theory | planned | Covers: anomalies, need for normalization, 1NF, 2NF, 3NF, BCNF, denormalization |  |
 | nosql-databases | NoSQL Databases | databases | theory | planned | Covers: key-value, document, column-family and graph stores; when to choose NoSQL | types-of-databases |
+| relationship-degree | Relationship Degree and Recursive Relationships | databases | theory | draft | The degree of a relationship is the number of entity types in it: unary (one, also called recursive), binary (two) or… | connectivity-and-cardinality |
 | types-of-databases | Types of Databases | databases | theory | reviewed | Databases are classified by how many users they serve, where the data is kept, what the data is used for, and how… | what-is-dbms |
+| weak-entities | Weak Entities and Relationship Strength | databases | theory | draft | A weak entity cannot exist without its parent and borrows part of its primary key from it; the relationship that gives… | connectivity-and-cardinality |
 | what-is-dbms | What is a DBMS? | databases | theory | reviewed | A DBMS is software that keeps data in one shared, organised place and controls how it is defined, accessed, updated and… |  |
 | business-analytics | Introduction to Business Analytics | data-analysis | theory | reviewed | Business analytics is the use of data, statistical and quantitative methods, and computer tools to understand business… |  |
 | data-analysis-intro | Why Data Analysis? | data-analysis | intro | reviewed |  |  |
