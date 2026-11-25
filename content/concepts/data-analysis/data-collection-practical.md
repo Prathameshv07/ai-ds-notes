@@ -175,9 +175,9 @@ Name: count, dtype: int64
 | Example here | Customer survey (Step 2) | Sales records from the billing system (Step 1) |
 | Cost and time | High | Low |
 | Fits the question? | Exactly, you designed it | Partly, it was collected for another reason |
-| Typical sources | Surveys, interviews, observation, experiments | Company records, government data (data.gov.in), Kaggle, reports, APIs |
+| Typical sources | ==Surveys, interviews, observation, experiments== | ==Company records, government data== (data.gov.in), ==Kaggle, reports, APIs== |
 
-Data can also be **internal** (from inside the company, like the sales records) or **external** (from outside, like census or weather data).
+Data can also be ==**internal** (from inside the company==, like the sales records) or ==**external** (from outside==, like census or weather data).
 
 ### What does each step show?
 
@@ -189,7 +189,7 @@ Data can also be **internal** (from inside the company, like the sales records) 
 
 ### What makes collected data good?
 
-Good data is **relevant** to the question, **accurate**, **complete**, **timely**, and **representative** of the people or events it describes. ==Plan what to ask, whom to ask and how many before collecting.== A survey filled in only by happy weekend customers cannot describe all customers.
+==Good data is **relevant** to the question, **accurate**, **complete**, **timely**, and **representative**== of the people or events it describes. ==Plan what to ask, whom to ask and how many before collecting.== A survey filled in only by happy weekend customers cannot describe all customers.
 
 ## Try it
 

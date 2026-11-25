@@ -36,11 +36,11 @@ Exploratory data analysis (EDA) is the first, open-minded examination of a datas
 
 ==EDA is examining data with summaries and charts to understand it before formal analysis.==
 
-The statistician **John Tukey** made the idea popular in his 1977 book *Exploratory Data Analysis*. His point: before *testing* ideas about data (confirmatory analysis), first *let the data show you* what is in it.
+The statistician ==**John Tukey** made the idea popular== in his 1977 book *Exploratory Data Analysis*. His point: before *testing* ideas about data (confirmatory analysis), first *let the data show you* what is in it.
 
 | | Exploratory (EDA) | Confirmatory |
 |---|---|---|
-| Goal | Discover patterns, raise questions | Test a specific claim |
+| Goal | ==Discover patterns, raise questions== | ==Test a specific claim== |
 | Approach | Open-ended, flexible | Planned in advance |
 | Tools | Summaries, charts | Hypothesis tests, models |
 | Output | Insights and hypotheses | A decision: accept or reject |
@@ -49,10 +49,10 @@ The statistician **John Tukey** made the idea popular in his 1977 book *Explorat
 
 EDA answers four practical questions:
 
-1. **Is the data what I think it is?** Right rows, right columns, right data types.
-2. **Can I trust it?** Missing values, duplicates, impossible values (negative sales, a 240-year-old customer).
-3. **What does each variable look like?** Typical value, spread, shape.
-4. **What is related to what?** Which factors move together, and which groups differ.
+1. ==**Is the data what I think it is?**== Right rows, right columns, right data types.
+2. ==**Can I trust it?**== Missing values, duplicates, impossible values (negative sales, a 240-year-old customer).
+3. ==**What does each variable look like?**== Typical value, spread, shape.
+4. ==**What is related to what?**== Which factors move together, and which groups differ.
 
 It also guides what comes next: which variables to clean, which method suits the data, and which questions are worth testing. Skipping EDA is the most common reason analyses and models fail quietly.
 
@@ -60,12 +60,12 @@ It also guides what comes next: which variables to clean, which method suits the
 
 ==Steps of EDA: understand structure, check quality, univariate analysis, bivariate analysis, outliers, summarise findings.==
 
-1. **Understand the structure:** number of rows and columns, what one row means, the data type of each column.
-2. **Check quality:** missing values, duplicate rows, wrong types, impossible values.
-3. **Univariate analysis:** study one variable at a time.
-4. **Bivariate (and multivariate) analysis:** study two or more variables together.
-5. **Look for outliers:** values far from the rest, and decide why they are there.
-6. **Summarise findings:** a short list of insights, problems and questions for the next stage.
+1. ==**Understand the structure:** number of rows and columns==, what one row means, the data type of each column.
+2. ==**Check quality:** missing values, duplicate rows==, wrong types, impossible values.
+3. ==**Univariate analysis:** study one variable at a time==.
+4. ==**Bivariate (and multivariate) analysis:**== study two or more variables together.
+5. ==**Look for outliers:** values far from the rest==, and decide why they are there.
+6. ==**Summarise findings:** a short list of insights==, problems and questions for the next stage.
 
 Problems found in step 2 are fixed during [[data-cleaning]]; EDA finds them, cleaning fixes them.
 
@@ -75,8 +75,8 @@ The summary depends on the variable's type (see [[types-of-variables]]):
 
 | Variable type | Example | Summaries | Charts |
 |---|---|---|---|
-| Numerical | Daily revenue, footfall | Mean, median, min, max, standard deviation, quartiles | Histogram, box plot |
-| Categorical | Store type, region | Count and percentage of each category, mode | Bar chart |
+| Numerical | Daily revenue, footfall | ==Mean, median, min, max, standard deviation, quartiles== | ==Histogram, box plot== |
+| Categorical | Store type, region | ==Count and percentage of each category, mode== | ==Bar chart== |
 
 For a numerical variable, describe its **centre** ([[central-tendency]]), its **spread** ([[dispersion]]) and its **shape**: symmetric, or with a long tail on one side. If the mean is much larger than the median, a few very large values are pulling it up.
 
@@ -84,22 +84,22 @@ For a numerical variable, describe its **centre** ([[central-tendency]]), its **
 
 | Pair of variables | Question | Tool |
 |---|---|---|
-| Numerical and numerical | Do they move together? | Scatter plot, [[correlation]] |
-| Categorical and numerical | Do groups differ? | Group means or medians, side-by-side box plots |
-| Categorical and categorical | Are they linked? | Cross-tabulation (counts table) |
-| Time and numerical | Is there a trend or season? | Totals by month or weekday, line chart |
+| Numerical and numerical | Do they move together? | ==Scatter plot==, [[correlation]] |
+| Categorical and numerical | Do groups differ? | ==Group means or medians, side-by-side box plots== |
+| Categorical and categorical | Are they linked? | ==Cross-tabulation (counts table)== |
+| Time and numerical | Is there a trend or season? | ==Totals by month or weekday, line chart== |
 
 ==A relationship found in EDA is a clue to investigate, not proof of cause.==
 
 ### Q6. What is an outlier, and what should you do with one?
 
-An **outlier** is a value far away from most of the others. One common rule marks values more than 1.5 × IQR beyond the quartiles (see [[quartiles-and-percentiles]]).
+==An **outlier** is a value far away from most of the others.== One common rule marks values more than 1.5 × IQR beyond the quartiles (see [[quartiles-and-percentiles]]).
 
 Never delete an outlier automatically. First ask **why** it is there:
 
-- **Error** (typing mistake, faulty sensor): correct it or remove it.
-- **Genuine but rare** (Diwali-day sales): keep it; it is real and often the most important data point.
-- **Different group** (a wholesale order in retail data): analyse it separately.
+- ==**Error**== (typing mistake, faulty sensor): ==correct it or remove it==.
+- ==**Genuine but rare**== (Diwali-day sales): ==keep it==; it is real and often the most important data point.
+- ==**Different group**== (a wholesale order in retail data): ==analyse it separately==.
 
 ## Analogy and real-life example
 

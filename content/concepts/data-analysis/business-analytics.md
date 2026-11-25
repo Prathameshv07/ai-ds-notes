@@ -39,19 +39,19 @@ It turns raw records into action in four steps:
 **Data** (sales bills) → **information** (sales per store per month) → **insight** (syrup sales double in winter in two stores) → **decision** (send extra stock to those stores in October).
 
 Four ingredients are always involved:
-- **Data:** sales, customers, stock, finance, web clicks.
-- **Methods:** statistics, forecasting, optimization, simulation.
-- **Tools:** Excel, Python, Power BI, Tableau.
-- **People:** analysts who ask the right question and managers who act on the answer.
+- ==**Data:** sales, customers, stock, finance==, web clicks.
+- ==**Methods:** statistics, forecasting, optimization==, simulation.
+- ==**Tools:** Excel, Python, Power BI==, Tableau.
+- ==**People:** analysts who ask the right question== and managers who act on the answer.
 
 ### Q2. Why is business analytics important?
 
-- **Better decisions:** choices rest on evidence, not only opinion or habit.
-- **Lower cost:** less waste, less unsold stock, fewer wrong hires.
-- **More revenue:** right price, right product, right customer.
-- **Speed:** problems are spotted early, from data, instead of after losses.
-- **Risk control:** fraud, defaults and supply shortages are flagged in advance.
-- **Competitive advantage:** companies such as Amazon, Flipkart and Swiggy compete largely on how well they use data.
+- ==**Better decisions:** choices rest on evidence==, not only opinion or habit.
+- ==**Lower cost:** less waste==, less unsold stock, fewer wrong hires.
+- ==**More revenue:** right price, right product==, right customer.
+- ==**Speed:** problems are spotted early==, from data, instead of after losses.
+- ==**Risk control:** fraud, defaults and supply shortages== are flagged in advance.
+- ==**Competitive advantage:**== companies such as Amazon, Flipkart and Swiggy compete largely on how well they use data.
 
 Data is now cheap and plentiful; the advantage lies in using it well.
 
@@ -63,23 +63,23 @@ The scope is usually described by the **question** being answered.
 
 | Type | Question | Example (medical store chain) | Typical methods |
 |---|---|---|---|
-| Descriptive | What happened? | Syrup sales by month and store | Averages, totals, charts, dashboards |
-| Diagnostic | Why did it happen? | Sales rose with a flu outbreak | Drill-down, comparison, correlation |
-| Predictive | What will happen? | Expected sales next November | Regression, time-series forecasting |
-| Prescriptive | What should we do? | Best order quantity per store | Optimization, simulation |
+| Descriptive | ==What happened?== | Syrup sales by month and store | Averages, totals, charts, dashboards |
+| Diagnostic | ==Why did it happen?== | Sales rose with a flu outbreak | Drill-down, comparison, correlation |
+| Predictive | ==What will happen?== | Expected sales next November | Regression, time-series forecasting |
+| Prescriptive | ==What should we do?== | Best order quantity per store | Optimization, simulation |
 
-Value and difficulty both rise as you move down the table. Some textbooks (including Evans) list only three types and treat diagnostic as part of descriptive.
+==Value and difficulty both rise as you move down the table.== Some textbooks (including Evans) list only three types and treat diagnostic as part of descriptive.
 
 ### Q4. Where is business analytics applied?
 
 | Area | Typical use |
 |---|---|
-| Marketing | Customer segments, campaign performance, who will respond to an offer |
-| Sales and retail | Demand forecasting, stock levels, store comparison |
-| Finance and banking | Credit scoring, UPI fraud detection, budgeting |
-| Operations and supply chain | Delivery routes, inventory, warehouse location |
-| Human resources | Hiring, predicting which employees may leave |
-| Healthcare | Bed planning, patient follow-up, medicine stock |
+| ==Marketing== | Customer segments, campaign performance, who will respond to an offer |
+| ==Sales and retail== | Demand forecasting, stock levels, store comparison |
+| ==Finance and banking== | Credit scoring, UPI fraud detection, budgeting |
+| ==Operations and supply chain== | Delivery routes, inventory, warehouse location |
+| ==Human resources== | Hiring, predicting which employees may leave |
+| ==Healthcare== | Bed planning, patient follow-up, medicine stock |
 | Pricing | Dynamic fares (airlines, ride apps), discounts |
 | Sports | Player selection, auction strategy |
 | Government | Crop and price monitoring, scheme targeting |
@@ -88,20 +88,20 @@ Value and difficulty both rise as you move down the table. Some textbooks (inclu
 
 A decision normally follows these steps, and analytics supports each one:
 
-1. **Recognise the problem:** descriptive reports show that something is off (stock-outs every winter).
-2. **Understand the cause:** diagnostic analysis finds why.
-3. **Generate options:** order more, move stock between stores, change suppliers.
-4. **Evaluate options:** predictive models estimate what each option would lead to.
-5. **Choose:** prescriptive methods find the best option within limits (budget, shelf space).
-6. **Act and monitor:** dashboards check whether the decision worked.
+1. ==**Recognise the problem:**== descriptive reports show that something is off (stock-outs every winter).
+2. ==**Understand the cause:**== diagnostic analysis finds why.
+3. ==**Generate options:**== order more, move stock between stores, change suppliers.
+4. ==**Evaluate options:**== predictive models estimate what each option would lead to.
+5. ==**Choose:**== prescriptive methods find the best option within limits (budget, shelf space).
+6. ==**Act and monitor:**== dashboards check whether the decision worked.
 
 ==Analytics supports decisions; managers still make them.== Judgment, ethics and context remain human jobs.
 
 ### Q6. How is business analytics different from BI and data science?
 
-- **Business intelligence (BI)** mainly reports and visualises what has happened: dashboards and reports (descriptive). You will study BI tools in Unit 2.
-- **Business analytics** covers BI and goes further, into why, what next and what to do.
-- **Data science** is broader still: it includes programming, machine learning and new kinds of data (text, images), and is not limited to business problems.
+- ==**Business intelligence (BI)**== mainly ==reports and visualises what has happened==: dashboards and reports (descriptive). You will study BI tools in Unit 2.
+- ==**Business analytics** covers BI and goes further==, into why, what next and what to do.
+- ==**Data science** is broader still==: it includes programming, machine learning and new kinds of data (text, images), and is not limited to business problems.
 
 The boundaries overlap in practice; job titles vary between companies.
 
