@@ -6,8 +6,8 @@ type: intro
 time: 5 min
 status: reviewed
 sources:
-  - "Wes McKinney, Python for Data Analysis, 3rd ed., Ch. 1 (verify)"
-  - "James R. Evans, Business Analytics, Ch. 1 (verify)"
+  - "Wes McKinney, Python for Data Analysis, 3rd ed., O'Reilly, 2022, Ch. 1"
+  - "James R. Evans, Business Analytics, 3rd ed., Pearson, 2021, Ch. 1"
   - "Michael Lewis, Moneyball: The Art of Winning an Unfair Game, 2003"
 ---
 
@@ -69,6 +69,6 @@ flowchart LR
 
 ## Sources
 
-- Wes McKinney, *Python for Data Analysis*, 3rd ed., Ch. 1 (verify)
-- James R. Evans, *Business Analytics*, Ch. 1 (verify)
+- Wes McKinney, *Python for Data Analysis*, 3rd ed., O'Reilly, 2022, Ch. 1: Preliminaries
+- James R. Evans, *Business Analytics*, 3rd ed., Pearson, 2021, Ch. 1: Introduction to Business Analytics
 - Michael Lewis, *Moneyball: The Art of Winning an Unfair Game*, 2003

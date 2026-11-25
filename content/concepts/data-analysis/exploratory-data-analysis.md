@@ -10,12 +10,12 @@ tags: [interview]
 syllabus: [UDSVI-006]
 unit: 1
 time: 10 min
-status: draft
+status: reviewed
 sources:
   - "John W. Tukey, Exploratory Data Analysis, Addison-Wesley, 1977"
   - "NIST/SEMATECH e-Handbook of Statistical Methods, Ch. 1: Exploratory Data Analysis"
-  - "Wes McKinney, Python for Data Analysis, 3rd ed., O'Reilly (verify chapter)"
-  - "S. C. Albright & W. L. Winston, Business Analytics: Data Analysis and Decision Making, Cengage, Ch. 2–3 (verify)"
+  - "Wes McKinney, Python for Data Analysis, 3rd ed., O'Reilly, 2022, Ch. 5 and 10"
+  - "S. C. Albright & W. L. Winston, Business Analytics: Data Analysis and Decision Making, 7th ed., Cengage, 2020, Ch. 2–3"
 ---
 
 ## Why should you care?
@@ -265,5 +265,5 @@ What should you do before removing an outlier? :: Find out whether it is an erro
 
 - John W. Tukey, *Exploratory Data Analysis*, Addison-Wesley, 1977
 - NIST/SEMATECH *e-Handbook of Statistical Methods*, Ch. 1: Exploratory Data Analysis
-- Wes McKinney, *Python for Data Analysis*, 3rd ed., O'Reilly (verify chapter)
-- S. C. Albright & W. L. Winston, *Business Analytics: Data Analysis and Decision Making*, Cengage, Ch. 2–3 (verify)
+- Wes McKinney, *Python for Data Analysis*, 3rd ed., O'Reilly, 2022, Ch. 5: Getting Started with pandas; Ch. 10: Data Aggregation and Group Operations
+- S. C. Albright & W. L. Winston, *Business Analytics: Data Analysis and Decision Making*, 7th ed., Cengage, 2020, Ch. 2: Describing the Distribution of a Variable; Ch. 3: Finding Relationships among Variables

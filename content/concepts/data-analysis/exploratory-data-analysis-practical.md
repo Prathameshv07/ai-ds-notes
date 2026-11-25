@@ -11,11 +11,11 @@ prerequisites: [exploratory-data-analysis, data-collection-practical]
 related: [central-tendency, dispersion, quartiles-and-percentiles, correlation, correlation-practical]
 tags: [interview]
 time: 60 min
-status: draft
+status: reviewed
 sources:
   - "pandas documentation: User Guide, Group by: split-apply-combine, https://pandas.pydata.org/docs/user_guide/groupby.html"
   - "NIST/SEMATECH e-Handbook of Statistical Methods, Ch. 1: Exploratory Data Analysis"
-  - "Wes McKinney, Python for Data Analysis, 3rd ed., O'Reilly (verify chapter)"
+  - "Wes McKinney, Python for Data Analysis, 3rd ed., O'Reilly, 2022, Ch. 10"
   - "Sahyadri Mart sales dataset: content/assets/data/sahyadri-mart-sales.md (synthetic, this site)"
 ---
 
@@ -420,5 +420,5 @@ Why check correlations within groups? :: A third factor (such as store size) can
 
 - pandas documentation: [Group by: split-apply-combine](https://pandas.pydata.org/docs/user_guide/groupby.html)
 - NIST/SEMATECH *e-Handbook of Statistical Methods*, Ch. 1: Exploratory Data Analysis
-- Wes McKinney, *Python for Data Analysis*, 3rd ed., O'Reilly (verify chapter)
+- Wes McKinney, *Python for Data Analysis*, 3rd ed., O'Reilly, 2022, Ch. 10: Data Aggregation and Group Operations
 - Sahyadri Mart sales dataset: data card in `content/assets/data/sahyadri-mart-sales.md` (synthetic, this site)

@@ -35,9 +35,9 @@
 | business-analytics | Introduction to Business Analytics | data-analysis | theory | reviewed | Business analytics is the use of data, statistical and quantitative methods, and computer tools to understand business… |  |
 | data-analysis-intro | Why Data Analysis? | data-analysis | intro | reviewed |  |  |
 | data-cleaning | Data Cleaning | data-analysis | theory | planned | Covers: missing values, duplicates, wrong data types, inconsistent categories, handling outliers, in pandas | exploratory-data-analysis |
-| data-collection-practical | Collecting Business Datasets | data-analysis | practical | draft |  | business-analytics |
-| exploratory-data-analysis | Exploratory Data Analysis (EDA) | data-analysis | theory | draft | Exploratory data analysis (EDA) is the first, open-minded examination of a dataset, using summary numbers and simple… | business-analytics |
-| exploratory-data-analysis-practical | Exploratory Data Analysis on Sales Data | data-analysis | practical | draft |  | exploratory-data-analysis, data-collection-practical |
+| data-collection-practical | Collecting Business Datasets | data-analysis | practical | reviewed |  | business-analytics |
+| exploratory-data-analysis | Exploratory Data Analysis (EDA) | data-analysis | theory | reviewed | Exploratory data analysis (EDA) is the first, open-minded examination of a dataset, using summary numbers and simple… | business-analytics |
+| exploratory-data-analysis-practical | Exploratory Data Analysis on Sales Data | data-analysis | practical | reviewed |  | exploratory-data-analysis, data-collection-practical |
 | box-plot-practical | Box Plots and Outliers in Sales Data | data-viz | practical | draft |  | distribution-plots, histogram-practical |
 | data-viz-intro | Why Data Visualization? | data-viz | intro | draft |  |  |
 | distribution-plots | Graphing a Distribution: Histograms and Box Plots | data-viz | theory | draft | A histogram shows the shape of a numerical variable by counting how many values fall in each interval; a box plot… | central-tendency, quartiles-and-percentiles |

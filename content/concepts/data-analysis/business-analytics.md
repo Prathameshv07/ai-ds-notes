@@ -12,10 +12,9 @@ unit: 1
 time: 10 min
 status: reviewed
 sources:
-  - "James R. Evans, Business Analytics, Pearson, Ch. 1 (verify)"
-  - "S. C. Albright & W. L. Winston, Business Analytics: Data Analysis and Decision Making, Cengage, Ch. 1 (verify)"
-  - "N. G. Narasimha Murthy, Business Analytics, Wiley India, Ch. 1 (verify)"
-  - "T. H. Davenport & J. G. Harris, Competing on Analytics, Harvard Business School Press, Ch. 1 (verify)"
+  - "James R. Evans, Business Analytics, 3rd ed., Pearson, 2021, Ch. 1"
+  - "S. C. Albright & W. L. Winston, Business Analytics: Data Analysis and Decision Making, 7th ed., Cengage, 2020, Ch. 1"
+  - "T. H. Davenport & J. G. Harris, Competing on Analytics, Harvard Business School Press, 2007, Ch. 1"
 ---
 
 ## Why should you care?
@@ -251,7 +250,6 @@ How does BI differ from business analytics? :: BI mainly reports the past; busin
 
 ## Sources
 
-- James R. Evans, *Business Analytics*, Pearson, Ch. 1 (verify)
-- S. C. Albright & W. L. Winston, *Business Analytics: Data Analysis and Decision Making*, Cengage, Ch. 1 (verify)
-- N. G. Narasimha Murthy, *Business Analytics*, Wiley India, Ch. 1 (verify)
-- T. H. Davenport & J. G. Harris, *Competing on Analytics*, Harvard Business School Press, Ch. 1 (verify)
+- James R. Evans, *Business Analytics*, 3rd ed., Pearson, 2021, Ch. 1: Introduction to Business Analytics
+- S. C. Albright & W. L. Winston, *Business Analytics: Data Analysis and Decision Making*, 7th ed., Cengage, 2020, Ch. 1: Introduction to Business Analytics
+- T. H. Davenport & J. G. Harris, *Competing on Analytics*, Harvard Business School Press, 2007, Ch. 1: The Nature of Analytical Competition

@@ -10,11 +10,10 @@ unit: 1
 prerequisites: [business-analytics]
 related: [exploratory-data-analysis-practical, types-of-variables]
 time: 45 min
-status: draft
+status: reviewed
 sources:
   - "pandas documentation: pandas.read_csv, https://pandas.pydata.org/docs/reference/api/pandas.read_csv.html"
-  - "Google Forms Help: View and export responses (verify)"
-  - "S. C. Albright & W. L. Winston, Business Analytics: Data Analysis and Decision Making, Cengage, Ch. 1–2 (verify)"
+  - "Google Docs Editors Help: View & manage form responses, https://support.google.com/docs/answer/139706"
   - "Sahyadri Mart sales dataset: content/assets/data/sahyadri-mart-sales.md (synthetic, this site)"
 ---
 
@@ -33,7 +32,7 @@ To collect business datasets from real-life scenarios: **secondary data** from a
 [Open in Colab](https://colab.research.google.com/github/Prathameshv07/ai-ds-notes/blob/main/content/assets/notebooks/data-analysis/data-collection-practical.ipynb). Nothing to install: Colab already has pandas.
 
 - **Dataset:** Sahyadri Mart daily sales, 12 Maharashtra stores, 2024–2025 (synthetic; see its data card in `content/assets/data/`). The code loads it directly from GitHub.
-- **Your own survey (in class):** create a Google Form with 4–5 questions → *Responses* tab → *Link to Sheets* → in the sheet, *File → Download → Comma-separated values (.csv)*. In Colab, run `from google.colab import files; files.upload()`, choose the file, and read it with `pd.read_csv("<file name>.csv", thousands=",")`.
+- **Your own survey (in class):** create a Google Form with 4–5 questions → *Responses* tab → *More* (⋮) → *Download responses (.csv)*. In Colab, run `from google.colab import files; files.upload()`, choose the file, and read it with `pd.read_csv("<file name>.csv", thousands=",")`.
 - The outputs below come from pandas 3. On pandas 2.x (current Colab), text columns show the type `object` instead of `str`; everything else is the same.
 
 ## Code
@@ -217,11 +216,10 @@ Which pandas function reads a CSV file? :: pd.read_csv()
 Which read_csv option turns "3,200" into 3200? :: thousands=","
 How do you count missing values in each column? :: df.isna().sum()
 What does df.shape return? :: A tuple (number of rows, number of columns)
-How do you export a Google Form's responses as CSV? :: Responses → Link to Sheets → File → Download → CSV
+How do you export a Google Form's responses as CSV? :: Responses tab → More (⋮) → Download responses (.csv)
 
 ## Sources
 
 - pandas documentation: [pandas.read_csv](https://pandas.pydata.org/docs/reference/api/pandas.read_csv.html)
-- Google Forms Help: View and export responses (verify)
-- S. C. Albright & W. L. Winston, *Business Analytics: Data Analysis and Decision Making*, Cengage, Ch. 1–2 (verify)
+- Google Docs Editors Help: [View & manage form responses](https://support.google.com/docs/answer/139706)
 - Sahyadri Mart sales dataset: data card in `content/assets/data/sahyadri-mart-sales.md` (synthetic, this site)
