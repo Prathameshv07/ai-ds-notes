@@ -20,6 +20,7 @@
 | types-of-variables | Types of Variables and Scales of Measurement | prob-stats | theory | planned | Covers: categorical and numerical variables, discrete and continuous, nominal, ordinal, interval and ratio scales |  |
 | acid-properties | ACID Properties | databases | theory | planned | Covers: transactions, atomicity, consistency, isolation, durability |  |
 | data-models | Data Models | databases | theory | reviewed | A data model is a simple, usually graphical, picture of real-world data: what things exist, what we store about them… | what-is-dbms |
+| data-processing | Data Processing Concepts | databases | theory | draft | Data processing is the series of steps (collect, prepare, input, process, output, store) that turns raw data into… | what-is-dbms |
 | databases-intro | Databases & SQL: Start Here | databases | intro | reviewed |  |  |
 | dbms-architecture | DBMS Architecture | databases | theory | reviewed | DBMS architecture describes the parts of a database system, the people who use and run it, and how a request travels… | what-is-dbms |
 | er-model | Entity-Relationship Model | databases | theory | planned | Covers: entities, attributes, relationships, connectivity, cardinality, weak entities, ER diagrams | data-models |

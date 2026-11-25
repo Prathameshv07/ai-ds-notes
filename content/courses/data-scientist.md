@@ -8,6 +8,7 @@ summary: Turn data into decisions using statistics and machine learning.
 *Why: you can't model what you can't describe.*
 - [[what-is-dbms]]
 - [[types-of-databases]]
+- [[data-processing]]
 - [[dbms-architecture]]
 - [[data-models]]
 - [[levels-of-abstraction]]
