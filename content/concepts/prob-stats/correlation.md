@@ -34,7 +34,7 @@ The correlation coefficient r measures the strength and direction of the linear 
 
 ### Q1. What is Karl Pearson's correlation coefficient?
 
-[[covariance]] gives the direction but its size depends on units. Dividing by both standard deviations removes the units:
+[[covariance]] gives the direction but its size depends on units. ==Dividing by both standard deviations removes the units==:
 
 $$r = \frac{\text{Cov}(x, y)}{s_x \, s_y} = \frac{\sum (x_i - \bar{x})(y_i - \bar{y})}{\sqrt{\sum (x_i - \bar{x})^2 \; \sum (y_i - \bar{y})^2}}$$
 
@@ -42,48 +42,48 @@ The second form is the easiest by hand: the $(n-1)$ terms cancel.
 
 ==Pearson's r always lies between −1 and +1, and has no units.==
 
-It is also called the **product moment correlation coefficient**.
+It is also called the ==**product moment correlation coefficient**==.
 
 ### Q2. How do I read the value of r?
 
 | r | Meaning |
 |---|---|
-| +1 | Perfect positive: all points on a rising straight line |
-| 0.7 to 1 | Strong positive |
-| 0.3 to 0.7 | Moderate positive |
-| −0.3 to 0.3 | Weak or no linear relationship |
+| +1 | ==Perfect positive==: all points on a rising straight line |
+| 0.7 to 1 | ==Strong positive== |
+| 0.3 to 0.7 | ==Moderate positive== |
+| −0.3 to 0.3 | ==Weak or no linear relationship== |
 | −0.7 to −0.3 | Moderate negative |
 | −1 to −0.7 | Strong negative |
 | −1 | Perfect negative |
 
-These cut-offs are rules of thumb; fields differ. The **sign** gives the direction, the **size** gives the strength.
+These cut-offs are rules of thumb; fields differ. ==The **sign** gives the direction, the **size** gives the strength==.
 
 ![Six scatter plots: r = 0.89 with points close to a rising line, r = 0.49 a looser rising cloud, r = 0.09 a shapeless cloud, r = −0.52 a loose falling cloud, r = −0.92 points close to a falling line, and a clear U-shape whose r is only −0.07](../../assets/img/prob-stats/scatter-patterns.png)
 
 ### Q3. What are the properties of r?
 
-- $-1 \le r \le 1$; it has no units.
-- $r_{xy} = r_{yx}$: symmetric.
-- **Unchanged by change of origin and scale:** converting rupees to lakh, or °C to °F, does not change r (if both scale factors have the same sign).
-- $r^2$, the **coefficient of determination**, is the share of the variation in $y$ that a straight line in $x$ explains. $r = 0.6$ → $r^2 = 0.36$: 36%.
+- $-1 \le r \le 1$; ==it has no units==.
+- $r_{xy} = r_{yx}$: ==symmetric==.
+- ==**Unchanged by change of origin and scale:**== converting rupees to lakh, or °C to °F, does not change r (if both scale factors have the same sign).
+- $r^2$, the ==**coefficient of determination**, is the share of the variation in $y$== that a straight line in $x$ explains. $r = 0.6$ → $r^2 = 0.36$: 36%.
 - ==r measures only linear relationships: r near 0 does not mean "no relationship".== The U-shape above has $r \approx 0$.
-- r is sensitive to outliers: one extreme point can create or destroy a strong r.
+- ==r is sensitive to outliers==: one extreme point can create or destroy a strong r.
 
 ### Q4. Does correlation mean causation?
 
 No. ==Correlation does not imply causation.== A strong r can arise because:
 
-1. **x causes y** (ads bring customers).
-2. **y causes x** (a store that sells more is given a bigger ad budget).
-3. **A third variable, a confounder, drives both.** In Sahyadri Mart, store size raises both ad spend and revenue: r = 0.61 across the chain, but about 0.27 within each store.
-4. **Coincidence**, especially when many pairs are tested.
+1. ==**x causes y**== (ads bring customers).
+2. ==**y causes x**== (a store that sells more is given a bigger ad budget).
+3. ==**A third variable, a confounder, drives both.**== In Sahyadri Mart, store size raises both ad spend and revenue: r = 0.61 across the chain, but about 0.27 within each store.
+4. ==**Coincidence**==, especially when many pairs are tested.
 
-To argue causation you need more: a controlled experiment (A/B test), or comparing like with like, as the within-store check does.
+To argue causation you need more: ==a controlled experiment (A/B test), or comparing like with like==, as the within-store check does.
 
 ### Q5. How do I check for a confounder?
 
-- **Split the data** by the suspected third variable (store, region, season) and compute r within each group. If r shrinks a lot, the confounder was doing much of the work.
-- **Plot it:** colour a [[scatter-plot]] by group. Separate clusters, one per group, are a warning sign.
+- ==**Split the data** by the suspected third variable== (store, region, season) and ==compute r within each group==. ==If r shrinks a lot, the confounder was doing much of the work==.
+- ==**Plot it:** colour a [[scatter-plot]] by group==. ==Separate clusters, one per group, are a warning sign==.
 - Later tools (multiple regression, Unit 3) control for several variables at once.
 
 > [!beyond] Beyond the syllabus

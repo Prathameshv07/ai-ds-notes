@@ -34,43 +34,43 @@ Skewness measures the lack of symmetry of a distribution (which side its long ta
 
 ### Q1. What is skewness?
 
-A distribution is **symmetric** when its left and right halves are mirror images. Then mean = median = mode.
+==A distribution is **symmetric** when its left and right halves are mirror images==. Then mean = median = mode.
 
-- **Positive (right) skew:** a long tail to the right; a few very large values. ==In a positively skewed distribution, mean > median > mode.== Examples: incomes, house prices, order values, delivery times.
-- **Negative (left) skew:** a long tail to the left; a few very small values. Mean < median < mode. Examples: marks in an easy exam, age at retirement.
+- ==**Positive (right) skew:** a long tail to the right==; a few very large values. ==In a positively skewed distribution, mean > median > mode.== Examples: incomes, house prices, order values, delivery times.
+- ==**Negative (left) skew:** a long tail to the left==; a few very small values. ==Mean < median < mode==. Examples: marks in an easy exam, age at retirement.
 
-The mean is pulled towards the tail, the mode stays at the peak, and the median sits between them.
+==The mean is pulled towards the tail==, the mode stays at the peak, and the median sits between them.
 
 ![Three curves: a left-skewed curve with mean left of median left of mode, a symmetric bell curve where all three coincide, and a right-skewed curve with mode left of median left of mean](../../assets/img/prob-stats/skewness-shapes.png)
 
 ### Q2. How is skewness measured with averages?
 
-**Karl Pearson's coefficient** compares the mean with the mode or the median, in units of SD:
+==**Karl Pearson's coefficient** compares the mean with the mode or the median==, in units of SD:
 
 $$Sk_P = \frac{\bar{x} - \text{Mode}}{s} \qquad \text{or} \qquad Sk_P = \frac{3(\bar{x} - \text{Median})}{s}$$
 
-The second form is used when the mode is unclear; it relies on the empirical relation Mode ≈ 3 Median − 2 Mean for moderately skewed data.
+The second form is used when the mode is unclear; it relies on ==the empirical relation Mode ≈ 3 Median − 2 Mean== for moderately skewed data.
 
-**Bowley's coefficient** uses quartiles ([[quartiles-and-percentiles]]):
+==**Bowley's coefficient** uses quartiles== ([[quartiles-and-percentiles]]):
 
 $$Sk_B = \frac{Q_3 + Q_1 - 2Q_2}{Q_3 - Q_1}$$
 
-It lies between −1 and +1 and ignores the outer 25% on each side.
+==It lies between −1 and +1== and ==ignores the outer 25% on each side==.
 
-Sign: positive → right skew; zero → symmetric; negative → left skew.
+Sign: ==positive → right skew; zero → symmetric; negative → left skew==.
 
 ### Q3. What are moments, and how do they measure shape?
 
-The $r$-th **central moment** is the average of the deviations raised to the power $r$:
+The $r$-th ==**central moment** is the average of the deviations raised to the power $r$==:
 
 $$m_r = \frac{\sum (x_i - \bar{x})^r}{n}$$
 
-- $m_1 = 0$ always; $m_2$ is the variance.
-- $m_3$: cubing keeps the sign, so large deviations on one side dominate. This gives the **moment coefficient of skewness**:
+- $m_1 = 0$ always; ==$m_2$ is the variance==.
+- ==$m_3$: cubing keeps the sign==, so large deviations on one side dominate. This gives the ==**moment coefficient of skewness**==:
 
 $$\gamma_1 = \frac{m_3}{m_2^{3/2}}$$
 
-- $m_4$: the fourth power makes extreme values dominate, which measures the tails (Q4).
+- ==$m_4$: the fourth power makes extreme values dominate==, which measures the tails (Q4).
 
 Software such as pandas uses moment-based formulas.
 
@@ -78,22 +78,22 @@ Software such as pandas uses moment-based formulas.
 
 $$\beta_2 = \frac{m_4}{m_2^2}$$
 
-==Kurtosis compares the heaviness of a distribution's tails with those of a normal distribution, for which β₂ = 3.==
+==Kurtosis compares the heaviness of a distribution's tails with those of a normal distribution==, for which β₂ = 3.
 
 | Type | $\beta_2$ | Shape |
 |---|---|---|
-| Mesokurtic | $= 3$ | Normal |
-| Leptokurtic | $> 3$ | Sharp peak, heavy tails: more extreme values |
-| Platykurtic | $< 3$ | Flat top, light tails: few extreme values |
+| ==Mesokurtic== | $= 3$ | Normal |
+| ==Leptokurtic== | $> 3$ | ==Sharp peak, heavy tails==: more extreme values |
+| ==Platykurtic== | $< 3$ | ==Flat top, light tails==: few extreme values |
 
-**Excess kurtosis** $= \beta_2 - 3$, so the normal distribution scores 0. Most software reports excess kurtosis.
+==**Excess kurtosis**== $= \beta_2 - 3$, so the normal distribution scores 0. Most software reports excess kurtosis.
 
 ![Three curves with the same mean and SD: a sharply peaked leptokurtic curve with heavy tails, a normal mesokurtic curve, and a flat platykurtic box shape](../../assets/img/prob-stats/kurtosis-shapes.png)
 
 ### Q5. How do I see shape in a graph?
 
-- **[[distribution-plots|Histogram]]:** look for the long tail. Tail on the right → positive skew.
-- **[[distribution-plots|Box plot]]:** median nearer to $Q_1$ and a longer upper whisker → positive skew; many points beyond the whiskers → heavy tails.
+- ==**[[distribution-plots|Histogram]]:** look for the long tail==. Tail on the right → positive skew.
+- ==**[[distribution-plots|Box plot]]:** median nearer to $Q_1$== and a longer upper whisker → positive skew; ==many points beyond the whiskers → heavy tails==.
 
 ==Always look at a graph before trusting a single shape number.== Two very different shapes can share a skewness value.
 

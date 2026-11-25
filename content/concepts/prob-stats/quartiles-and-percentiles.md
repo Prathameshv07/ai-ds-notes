@@ -34,7 +34,7 @@ Quartiles, deciles and percentiles are values that divide ordered data into 4, 1
 
 ### Q1. What are quartiles, deciles and percentiles?
 
-All three are **positional averages** (quantiles): values found from the position of data arranged in order.
+==All three are **positional averages**== (quantiles): ==values found from the position of data arranged in order==.
 
 | Measure | Divides data into | Values | Example |
 |---|---|---|---|
@@ -42,19 +42,19 @@ All three are **positional averages** (quantiles): values found from the positio
 | Deciles | 10 equal parts | $D_1 \dots D_9$ | $D_9$: 90% below |
 | Percentiles | 100 equal parts | $P_1 \dots P_{99}$ | $P_{90}$: 90% below |
 
-==The median is the second quartile, the fifth decile and the 50th percentile: $Q_2 = D_5 = P_{50}$.==
+==The median is the second quartile, the fifth decile and the 50th percentile==: $Q_2 = D_5 = P_{50}$.
 
 So $Q_1 = P_{25}$ and $Q_3 = P_{75}$.
 
 ### Q2. How do I find a quartile by hand?
 
-1. Arrange the $n$ values in ascending order.
-2. Find the **position**:
+1. ==Arrange== the $n$ values ==in ascending order==.
+2. Find the ==**position**==:
 
 $$Q_k \text{ at position } \frac{k(n+1)}{4}, \quad D_k \text{ at } \frac{k(n+1)}{10}, \quad P_k \text{ at } \frac{k(n+1)}{100}$$
 
-3. If the position is a whole number, take that value.
-4. If not, interpolate. Position 2.25 means "the 2nd value plus 0.25 of the gap to the 3rd value".
+3. If the position is a whole number, ==take that value==.
+4. If not, ==interpolate==. Position 2.25 means "the 2nd value plus 0.25 of the gap to the 3rd value".
 
 Example: 12, 15, 17, 20, 22 ($n = 5$). $Q_1$ at position $6/4 = 1.5$: $12 + 0.5(15 - 12) = 13.5$.
 
@@ -62,27 +62,27 @@ Example: 12, 15, 17, 20, 22 ($n = 5$). $Q_1$ at position $6/4 = 1.5$: $12 + 0.5(
 
 $$\text{IQR} = Q_3 - Q_1 \qquad \text{QD} = \frac{Q_3 - Q_1}{2} \qquad \text{Coefficient of QD} = \frac{Q_3 - Q_1}{Q_3 + Q_1}$$
 
-- ==The interquartile range is the spread of the middle 50% of the data.==
-- The **quartile deviation** (semi-interquartile range) is half of it. Its coefficient has no units, so it compares groups like the CV does ([[dispersion]]).
-- Because they ignore the lowest and highest 25%, these measures are **robust**: one extreme value hardly moves them. Use them with the median for skewed data, as you use the SD with the mean for symmetric data.
+- ==The interquartile range is the spread of the middle 50%== of the data.
+- ==The **quartile deviation** (semi-interquartile range) is half of it==. ==Its coefficient has no units==, so it compares groups like the CV does ([[dispersion]]).
+- Because they ignore the lowest and highest 25%, ==these measures are **robust**==: one extreme value hardly moves them. Use them with the median for skewed data, as you use the SD with the mean for symmetric data.
 
 ### Q4. What is the five-number summary?
 
-Minimum, $Q_1$, median, $Q_3$, maximum.
+==Minimum, $Q_1$, median, $Q_3$, maximum==.
 
-These five numbers show the centre, the spread and the shape of the data at once. They are exactly what a [[distribution-plots|box plot]] draws: a box from $Q_1$ to $Q_3$, a line at the median, and whiskers towards the extremes.
+==These five numbers show the centre, the spread and the shape== of the data at once. ==They are exactly what a [[distribution-plots|box plot]] draws==: a box from $Q_1$ to $Q_3$, a line at the median, and whiskers towards the extremes.
 
-If the median sits closer to $Q_1$ than to $Q_3$, the upper half is more spread out: a sign of right skew ([[skewness-and-kurtosis]]).
+If the median sits closer to $Q_1$ than to $Q_3$, the upper half is more spread out: ==a sign of right skew== ([[skewness-and-kurtosis]]).
 
 ### Q5. How do quartiles detect outliers?
 
-The **1.5 × IQR rule** (Tukey's fences):
+The ==**1.5 × IQR rule**== (Tukey's fences):
 
 $$\text{Lower fence} = Q_1 - 1.5 \times \text{IQR} \qquad \text{Upper fence} = Q_3 + 1.5 \times \text{IQR}$$
 
 ==A value below the lower fence or above the upper fence is flagged as a possible outlier.==
 
-"Flagged" means *check it*, not *delete it*. A Diwali-day sales spike is a genuine outlier; a revenue of ₹0 on an open day is probably an error.
+=="Flagged" means *check it*, not *delete it*==. A Diwali-day sales spike is a genuine outlier; a revenue of ₹0 on an open day is probably an error.
 
 ## Analogy and real-life example
 

@@ -39,8 +39,8 @@ A measure of dispersion tells how spread out the values of a dataset are around 
 
 ==Dispersion is the extent to which values differ from each other and from their average.== Small dispersion means the average is a good summary; large dispersion means it hides a lot.
 
-- **Absolute measures** are in the data's own units (minutes, ₹): range, quartile deviation, mean absolute deviation, variance, standard deviation.
-- **Relative measures** have no units (often a %), so they can compare datasets measured on different scales: the coefficient of variation is the main one.
+- ==**Absolute measures** are in the data's own units== (minutes, ₹): range, quartile deviation, mean absolute deviation, variance, standard deviation.
+- ==**Relative measures** have no units== (often a %), so they can compare datasets measured on different scales: the coefficient of variation is the main one.
 
 Quartiles and the interquartile range have their own note: [[quartiles-and-percentiles]].
 
@@ -50,20 +50,20 @@ $$\text{Range} = \text{Maximum} - \text{Minimum}$$
 
 Partner A: $32 - 28 = 4$ min. Partner B: $50 - 10 = 40$ min.
 
-- **Strength:** the simplest possible measure; quick for quality checks and daily price bands.
-- **Weakness:** it uses only two values. One unusual day changes it completely, and it says nothing about the values in between.
+- ==**Strength:** the simplest possible measure==; quick for quality checks and daily price bands.
+- ==**Weakness:** it uses only two values==. One unusual day changes it completely, and it says nothing about the values in between.
 
 ### Q3. What is the variance?
 
-Measure each value's distance from the mean, its **deviation** $x_i - \bar{x}$. Deviations always add up to zero, so we **square** them first, then average.
+Measure each value's distance from the mean, its **deviation** $x_i - \bar{x}$. ==Deviations always add up to zero, so we **square** them first==, then average.
 
 $$\sigma^2 = \frac{\sum (x_i - \mu)^2}{N} \qquad s^2 = \frac{\sum (x_i - \bar{x})^2}{n - 1}$$
 
-$\sigma^2$ is the **population** variance (all $N$ values); $s^2$ is the **sample** variance ($n$ values from a larger population).
+==$\sigma^2$ is the **population** variance== (all $N$ values); ==$s^2$ is the **sample** variance== ($n$ values from a larger population).
 
-==Variance is the average squared deviation from the mean.== Its unit is the square of the data's unit (min², ₹²), which is hard to interpret.
+==Variance is the average squared deviation from the mean.== ==Its unit is the square of the data's unit== (min², ₹²), which is hard to interpret.
 
-Another option, the **mean absolute deviation** $\frac{\sum |x_i - \bar{x}|}{n}$, uses absolute values instead of squares. It is easy to read but harder to use in further maths.
+Another option, the ==**mean absolute deviation**== $\frac{\sum |x_i - \bar{x}|}{n}$, ==uses absolute values instead of squares==. It is easy to read but harder to use in further maths.
 
 ### Q4. What is the standard deviation?
 
@@ -71,19 +71,19 @@ Another option, the **mean absolute deviation** $\frac{\sum |x_i - \bar{x}|}{n}$
 
 $$\sigma = \sqrt{\sigma^2} \qquad s = \sqrt{s^2}$$
 
-Taking the root brings the unit back to the data's own unit. Read it as "a typical distance of a value from the mean".
+==Taking the root brings the unit back to the data's own unit.== Read it as =="a typical distance of a value from the mean"==.
 
-- It uses every value, and it is the basis of most later statistics: the normal distribution, confidence intervals, z-scores, regression.
-- Like the mean, it is pulled by outliers, because squaring makes large deviations even larger.
-- SD = 0 only when every value is the same.
+- ==It uses every value==, and ==it is the basis of most later statistics==: the normal distribution, confidence intervals, z-scores, regression.
+- Like the mean, ==it is pulled by outliers==, because squaring makes large deviations even larger.
+- SD = 0 ==only when every value is the same==.
 
 ### Q5. Why divide by $n - 1$ for a sample?
 
-A sample's values sit a little closer to their own mean $\bar{x}$ than to the true population mean $\mu$. So the squared deviations come out slightly too small. Dividing by $n - 1$ instead of $n$ corrects this underestimate (**Bessel's correction**).
+==A sample's values sit a little closer to their own mean== $\bar{x}$ than to the true population mean $\mu$. So the squared deviations come out slightly too small. ==Dividing by $n - 1$ instead of $n$ corrects this underestimate== (**Bessel's correction**).
 
 In practice:
-- Data is the whole group you care about (all 12 stores) → divide by $N$.
-- Data is a sample used to learn about something bigger → divide by $n - 1$.
+- ==Data is the whole group you care about== (all 12 stores) ==→ divide by $N$==.
+- ==Data is a sample== used to learn about something bigger ==→ divide by $n - 1$==.
 
 For large $n$ the difference is tiny; for small samples it matters.
 
@@ -91,7 +91,7 @@ For large $n$ the difference is tiny; for small samples it matters.
 
 $$CV = \frac{\sigma}{\bar{x}} \times 100\%$$
 
-The CV expresses the SD as a percentage of the mean, so it compares spread between datasets with different means or units.
+==The CV expresses the SD as a percentage of the mean==, so ==it compares spread between datasets with different means or units==.
 
 Example: a Supermarket's daily footfall has SD 450; an Express store's has SD 150. The Supermarket looks more erratic, but its mean is 2,200 against 750. Both CVs are about 20%: relative to their size, they are equally steady.
 

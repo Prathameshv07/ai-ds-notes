@@ -36,9 +36,9 @@ Covariance measures whether two numerical variables tend to move in the same dir
 
 Take each pair $(x_i, y_i)$, such as one day's ad spend and sales.
 
-- If days with **above-average** $x$ also tend to have **above-average** $y$, the variables move together: **positive** covariance.
-- If above-average $x$ goes with **below-average** $y$, they move oppositely: **negative** covariance.
-- If there is no consistent pattern: covariance **near zero**.
+- If days with **above-average** $x$ also tend to have **above-average** $y$, ==the variables move together: **positive** covariance==.
+- If above-average $x$ goes with **below-average** $y$, ==they move oppositely: **negative** covariance==.
+- If there is no consistent pattern: ==covariance **near zero**==.
 
 ==Covariance measures the direction of the linear relationship between two variables.==
 
@@ -46,18 +46,18 @@ Take each pair $(x_i, y_i)$, such as one day's ad spend and sales.
 
 $$\text{Cov}(x, y) = s_{xy} = \frac{\sum (x_i - \bar{x})(y_i - \bar{y})}{n - 1}$$
 
-For a whole population, divide by $N$ (and use $\mu_x$, $\mu_y$).
+For a whole population, ==divide by $N$== (and use $\mu_x$, $\mu_y$).
 
 Read it in three steps:
-1. Find each value's deviation from its own mean.
-2. Multiply the two deviations for each pair.
-3. Average the products.
+1. ==Find each value's deviation== from its own mean.
+2. ==Multiply the two deviations== for each pair.
+3. ==Average== the products.
 
 Compare with variance: $s^2 = \frac{\sum (x_i - \bar{x})(x_i - \bar{x})}{n - 1}$. ==The covariance of a variable with itself is its variance.==
 
 ### Q3. Why does multiplying deviations work?
 
-Draw lines at $\bar{x}$ and $\bar{y}$ on a [[scatter-plot]]. They split it into four quadrants.
+Draw lines at $\bar{x}$ and $\bar{y}$ on a [[scatter-plot]]. ==They split it into four quadrants==.
 
 | Point is… | $x - \bar{x}$ | $y - \bar{y}$ | Product |
 |---|---|---|---|
@@ -66,26 +66,26 @@ Draw lines at $\bar{x}$ and $\bar{y}$ on a [[scatter-plot]]. They split it into 
 | High $x$, low $y$ | + | − | **−** |
 | Low $x$, high $y$ | − | + | **−** |
 
-If most points fall in the "both above" and "both below" quadrants, the positive products win: positive covariance. If most fall in the mixed quadrants, negative products win.
+If most points fall in the "both above" and "both below" quadrants, ==the positive products win: positive covariance==. If most fall in the mixed quadrants, ==negative products win==.
 
 ### Q4. Why is covariance hard to interpret?
 
-Its **size** depends on the units of both variables.
+Its ==**size** depends on the units== of both variables.
 
 - Ad spend in ₹ thousand and sales in ₹ lakh might give a covariance of 8.5.
 - The same data with both in rupees gives 850,000,000.
 
-Same relationship, very different numbers. So covariance tells you the **direction** reliably, but not the **strength**. You cannot say whether 8.5 is "large".
+Same relationship, very different numbers. So ==covariance tells you the **direction** reliably, but not the **strength**==. You cannot say whether 8.5 is "large".
 
-The fix is to divide by both SDs, which removes the units. That gives the correlation coefficient: [[correlation]].
+The fix is to ==divide by both SDs==, which removes the units. That gives the correlation coefficient: [[correlation]].
 
 ### Q5. What properties should I know?
 
-- $\text{Cov}(x, y) = \text{Cov}(y, x)$: the order does not matter.
+- $\text{Cov}(x, y) = \text{Cov}(y, x)$: ==the order does not matter==.
 - $\text{Cov}(x, x) = \text{Var}(x)$.
-- Adding constants changes nothing: $\text{Cov}(x + a, y + c) = \text{Cov}(x, y)$.
-- Multiplying scales it: $\text{Cov}(bx, dy) = bd\,\text{Cov}(x, y)$. This is why units matter.
-- If $x$ and $y$ are independent, the covariance is 0. **The reverse is not true:** covariance 0 only means no *linear* pattern; a U-shaped relationship can have zero covariance.
+- ==Adding constants changes nothing==: $\text{Cov}(x + a, y + c) = \text{Cov}(x, y)$.
+- ==Multiplying scales it==: $\text{Cov}(bx, dy) = bd\,\text{Cov}(x, y)$. This is why units matter.
+- ==If $x$ and $y$ are independent, the covariance is 0==. ==**The reverse is not true:**== covariance 0 only means no *linear* pattern; a U-shaped relationship can have zero covariance.
 
 ## Analogy and real-life example
 

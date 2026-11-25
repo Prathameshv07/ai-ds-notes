@@ -34,15 +34,15 @@ A measure of central tendency is a single value that represents the centre, or t
 
 ### Q1. What is central tendency, and what makes a good average?
 
-A dataset may have thousands of values. A measure of central tendency (an "average") replaces them with **one** typical value, so we can describe and compare groups quickly.
+A dataset may have thousands of values. ==A measure of central tendency (an "average") replaces them with **one** typical value==, so we can describe and compare groups quickly.
 
 A good average should be:
-- rigidly defined (everyone gets the same answer);
-- easy to understand and calculate;
-- based on all the observations;
-- not unduly affected by extreme values;
-- suitable for further calculation (algebra);
-- stable from sample to sample.
+- ==rigidly defined== (everyone gets the same answer);
+- ==easy to understand== and calculate;
+- ==based on all== the observations;
+- ==not unduly affected== by extreme values;
+- ==suitable for further calculation== (algebra);
+- ==stable== from sample to sample.
 
 No single average has all six properties, which is why we need three.
 
@@ -56,40 +56,40 @@ Here $x_i$ are the values and $n$ is how many there are. For a whole population,
 
 Example: daily footfall 120, 150, 90 → $\bar{x} = 360 / 3 = 120$.
 
-- **Strength:** uses every value; easy to use in further formulas.
-- **Weakness:** one extreme value pulls it strongly, as the founder's salary did.
-- **Property:** the deviations from the mean always add up to zero: $\sum (x_i - \bar{x}) = 0$.
+- ==**Strength:** uses every value==; easy to use in further formulas.
+- ==**Weakness:** one extreme value pulls it strongly==, as the founder's salary did.
+- ==**Property:** the deviations from the mean always add up to zero==: $\sum (x_i - \bar{x}) = 0$.
 
 ### Q3. What is a weighted mean?
 
-When some values count more than others, multiply each value by its weight $w_i$:
+==When some values count more than others, multiply each value by its weight== $w_i$:
 
 $$\bar{x}_w = \frac{\sum w_i x_i}{\sum w_i}$$
 
 Example: your SGPA. A 4-credit subject counts twice as much as a 2-credit subject, so grade points are weighted by credits.
 
-In business, the average price per kg, the average bill value of a chain, and a price index are all weighted means. Averaging such figures without weights is a common error.
+In business, the average price per kg, the average bill value of a chain, and a price index are all weighted means. ==Averaging such figures without weights is a common error.==
 
 ### Q4. What is the median?
 
 ==The median is the middle value when the data are arranged in order.==
 
-- **Odd $n$:** the value at position $\frac{n+1}{2}$. For 3, 7, 9, 12, 40 the median is 9.
-- **Even $n$:** the mean of the two middle values. For 3, 7, 9, 12 the median is $(7 + 9)/2 = 8$.
+- ==**Odd $n$:** the value at position $\frac{n+1}{2}$==. For 3, 7, 9, 12, 40 the median is 9.
+- ==**Even $n$:** the mean of the two middle values==. For 3, 7, 9, 12 the median is $(7 + 9)/2 = 8$.
 
-The median is **robust**: change 40 to 4,000 and it stays 9. That is why house prices, incomes and delivery times are usually reported as medians.
+==The median is **robust**==: change 40 to 4,000 and it stays 9. That is why house prices, incomes and delivery times are usually reported as medians.
 
-It needs only an order, so it also works for ordinal data, such as ratings from "poor" to "excellent" (see [[types-of-variables]]).
+It needs only an order, so ==it also works for ordinal data==, such as ratings from "poor" to "excellent" (see [[types-of-variables]]).
 
 ### Q5. What is the mode?
 
 ==The mode is the value that occurs most often.==
 
 - Shoe sizes sold today: 7, 8, 8, 9, 8, 10 → mode = 8.
-- A dataset can have one mode, two (**bimodal**), several, or none (every value different).
-- It is the **only** average for nominal data: the most popular payment method (UPI, card, cash) has a mode but no mean or median.
+- ==A dataset can have one mode, two (**bimodal**), several, or none== (every value different).
+- ==It is the **only** average for nominal data==: the most popular payment method (UPI, card, cash) has a mode but no mean or median.
 
-The mode is less useful for continuous data such as revenue in rupees, where almost every value is different.
+==The mode is less useful for continuous data== such as revenue in rupees, where almost every value is different.
 
 ### Q6. Which average should I use?
 
@@ -102,7 +102,7 @@ The mode is less useful for continuous data such as revenue in rupees, where alm
 
 ==Use the mean for symmetric numerical data and the median for skewed data or data with outliers.==
 
-When the mean is much larger than the median, a few large values are pulling it up: the data are **right-skewed** (see [[skewness-and-kurtosis]]).
+==When the mean is much larger than the median==, a few large values are pulling it up: ==the data are **right-skewed**== (see [[skewness-and-kurtosis]]).
 
 > [!beyond] Beyond the syllabus
 > **Grouped data** (a frequency table with classes): mean $= \frac{\sum f_i x_i}{\sum f_i}$ with $x_i$ the class midpoints; median $= L + \frac{N/2 - cf}{f} \times h$; mode $= L + \frac{f_1 - f_0}{2f_1 - f_0 - f_2} \times h$, where $L$ is the lower limit of the median (or modal) class, $cf$ the cumulative frequency before it, $f$ (or $f_1$) its frequency, $f_0$ and $f_2$ the frequencies of the classes before and after, and $h$ the class width. The **geometric mean** (for growth rates) and **harmonic mean** (for rates such as speed) are other averages for special cases.
