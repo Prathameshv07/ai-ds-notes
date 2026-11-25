@@ -174,12 +174,12 @@ A Nashik tiffin service records orders for 9 days, sorted: **42, 45, 47, 48, 50,
 
 The histogram has two tall bars, a long gap, and one bar at 90–99: right-skewed with one extreme day.
 
-**Five-number summary** (quartiles by pandas' default method; textbooks may differ slightly, see [[quartiles-and-percentiles]]):
+**Five-number summary** (quartile positions $k(n+1)/4$, as in [[quartiles-and-percentiles]]):
 
-1. Min = 42, Q1 = 47, median = 50, Q3 = 55, max = 95.
-2. IQR = 55 − 47 = 8.
-3. Lower fence = 47 − 1.5 × 8 = 35; upper fence = 55 + 12 = 67.
-4. 95 > 67, so **95 is an outlier**. The upper whisker stops at 58; the lower whisker at 42.
+1. Q1 at position 2.5: $45 + 0.5(47 - 45) = 46$. Median at position 5: 50. Q3 at position 7.5: $55 + 0.5(58 - 55) = 56.5$.
+2. Min = 42, Q1 = 46, median = 50, Q3 = 56.5, max = 95. IQR = 56.5 − 46 = 10.5.
+3. Lower fence = 46 − 1.5 × 10.5 = 30.25; upper fence = 56.5 + 15.75 = 72.25.
+4. 95 > 72.25, so **95 is an outlier**. The upper whisker stops at 58; the lower whisker at 42.
 5. Mean = 492 / 9 = 54.7 > median 50: the outlier drags the mean up, confirming right skew.
 
 The 95 was a wedding order. It is real, so keep it, but plan daily cooking around the median.
@@ -187,13 +187,13 @@ The 95 was a wedding order. It is real, so keep it, but plan daily cooking aroun
 ## Try it
 
 A Thane cloud kitchen's delivery times (minutes, sorted) over 9 orders: **18, 22, 25, 26, 28, 30, 31, 33, 34**.
-Q1 = 25, median = 28, Q3 = 31. Find the IQR, the fences, any outliers and the whisker ends. Is the data skewed?
+Q1 = $22 + 0.5(25 - 22) = 23.5$ and median = 28. Find Q3, the IQR, the fences, any outliers and the whisker ends. Is the data skewed?
 
 > [!answer]- Answer
-> - IQR = 31 − 25 = 6.
-> - Fences: 25 − 9 = 16 and 31 + 9 = 40. No value lies outside, so **no outliers**.
+> - Q3 at position 7.5: $31 + 0.5(33 - 31) = 32$. IQR = 32 − 23.5 = 8.5.
+> - Fences: 23.5 − 12.75 = 10.75 and 32 + 12.75 = 44.75. No value lies outside, so **no outliers**.
 > - Whiskers end at 18 and 34 (the min and max).
-> - The box is symmetric (median 3 from each quartile), but the lower whisker (25 − 18 = 7) is longer than the upper (34 − 31 = 3). Mean = 247 / 9 = 27.4 < median 28: **slightly left-skewed**, pulled by one fast 18-minute delivery.
+> - The box is nearly symmetric (median 4.5 above Q1, 4 below Q3), but the lower whisker (23.5 − 18 = 5.5) is longer than the upper (34 − 32 = 2). Mean = 247 / 9 = 27.4 < median 28: **slightly left-skewed**, pulled by one fast 18-minute delivery.
 
 ## Key facts and formulas
 
@@ -235,14 +235,14 @@ Q1 = 25, median = 28, Q3 = 31. Find the IQR, the fences, any outliers and the wh
 > > [!answer]- Answer: B
 > > The bins are consecutive intervals of a number line, so one ends exactly where the next begins. Gaps are used for categories (bar charts).
 
-> [!quiz] Q2. For a dataset, Q1 = 40 and Q3 = 60. Which value is an outlier by the 1.5 × IQR rule?
-> (A) 15
-> (B) 30
-> (C) 85
-> (D) 95
+> [!quiz] Q2. Q1 = 40 and Q3 = 60. The three largest values are 84, 88 and 97. Where does the upper whisker end?
+> (A) At 90, the upper fence
+> (B) At 88
+> (C) At 97, the maximum
+> (D) At 60, the top of the box
 >
-> > [!answer]- Answer: D
-> > IQR = 20, so the fences are 40 − 30 = 10 and 60 + 30 = 90. Only 95 lies outside them.
+> > [!answer]- Answer: B
+> > IQR = 20, so the upper fence is 60 + 30 = 90. The whisker stops at the largest value inside the fence, 88; 97 is drawn as an outlier dot. The fence itself is never drawn.
 
 > [!quiz] Q3. A histogram has a long tail to the right. Which is most likely?
 > (A) Mean < median

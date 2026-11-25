@@ -251,7 +251,7 @@ S01       1907  2135  2451  544
 | Fences | 603 and 1,867 | Q1 − 1.5 × 316 and Q3 + 1.5 × 316 |
 | Whiskers | 721 and 1,849 | Quietest and busiest days inside the fences |
 
-`f.quantile()` uses the same method as `plt.boxplot()`, so these numbers match the chart exactly. ==Whiskers end at the last data value inside the fences, not at the fences themselves.==
+`f.quantile()` uses the same (linear) method as `plt.boxplot()`, so these numbers match the chart exactly. The hand method in [[quartiles-and-percentiles]], position $k(n+1)/4$, can differ by a visitor or two here; with 731 days the difference does not matter. ==Whiskers end at the last data value inside the fences, not at the fences themselves.==
 
 ### Steps 3–4: outliers are real days, not errors
 
