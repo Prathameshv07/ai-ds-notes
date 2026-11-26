@@ -395,6 +395,11 @@ summary.callout-title .callout-label ~ *{ margin-left:.6rem; }
 .milestone{ display:flex; gap:.5rem; align-items:flex-start; margin:.6rem 0 0; padding:.55rem .8rem; font-size:.92rem;
   background:color-mix(in srgb, var(--co-green) 9%, var(--surface)); border:1px solid color-mix(in srgb, var(--co-green) 35%, var(--line)); border-radius:var(--radius); }
 .milestone .icon{ color:var(--co-green); margin-top:.2em; }
+.path-sub{ font-size:.92rem; margin:1rem 0 .35rem; color:var(--muted); font-family:'IBM Plex Sans', sans-serif; font-weight:600; }
+.path-stage .path-sub + .rows, .path-stage .rows + .path-sub{ margin-top:.3rem; }
+.stage-resources{ display:flex; gap:.5rem; align-items:flex-start; margin:.5rem 0 0; font-size:.88rem; color:var(--muted); }
+.stage-resources .icon{ margin-top:.2em; color:var(--accent); }
+.stage-resources a[target="_blank"]::after{ content:" ↗"; font-size:.8em; }
 
 /* print dialog */
 .print-dialog{ border:1px solid var(--line); border-radius:var(--radius); background:var(--surface); color:var(--ink); padding:1rem 1.2rem; width:min(27rem, calc(100vw - 2rem)); }

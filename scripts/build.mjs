@@ -662,6 +662,15 @@ export function build(opts = {}) {
     const scan = scanBody(body, bodyLine);
     const extras = {};
     const textOf = (sec) => sec.lines.map((l) => l.text).join('\n').trim();
+    // The named sections may also be ### headings before the first stage (the paths chat's layout).
+    {
+      const pre = body.split(/^## /m)[0];
+      const parts = pre.split(/^###\s+(.+?)\s*$/m); // [before, name1, text1, name2, text2, …]
+      for (let k = 1; k < parts.length; k += 2) {
+        const key = C.COURSE_SECTIONS[norm(parts[k]).replace(/[?:.]$/, '')];
+        if (key) extras[key] = parts[k + 1].trim();
+      }
+    }
     const stages = [];
     for (const s of scan.sections) {
       const key = C.COURSE_SECTIONS[norm(s.name).replace(/[?:.]$/, '')];
@@ -678,7 +687,19 @@ export function build(opts = {}) {
         for (let k = mi; k < s.lines.length && s.lines[k].text.trim(); k++) parts.push(s.lines[k].text.trim());
         milestone = parts.join(' ').replace(/^\*\*milestone:?\*\*:?\s*/i, '').trim() || null;
       }
-      stages.push({ title: s.name, why: whyLine ? whyLine.text.trim().slice(1, -1).trim() : null, milestone, items: [] });
+      // "**Free resources:** …" line inside a stage: links for that stage
+      const rl = s.lines.find((l) => !l.inCode && /^\s*\*\*free resources:?\*\*:?/i.test(l.text));
+      const resources = rl ? rl.text.trim().replace(/^\*\*free resources:?\*\*:?\s*/i, '').trim() || null : null;
+      // a line that is only bold text ("**Statistics and probability**") starts a sub-group
+      const subAt = new Map();
+      let sub = null;
+      for (const l of s.lines) {
+        if (l.inCode) continue;
+        const m = l.text.match(/^\s*\*\*([^*]+?)\*\*\s*$/);
+        if (m) sub = m[1].trim();
+        subAt.set(l.line, sub);
+      }
+      stages.push({ title: s.name, why: whyLine ? whyLine.text.trim().slice(1, -1).trim() : null, milestone, resources, items: [], groups: [], subAt });
     }
     if (!extras.whatIs) warn(f, 'no "## What this job is" section', 'add one paragraph: a day at work, typical Indian employers, entry roles (plan Section 6)');
     if (!extras.whereAmI) warn(f, 'no "## Where am I?" section', 'add the semester-to-stage table (plan Section 6)');
@@ -687,10 +708,15 @@ export function build(opts = {}) {
       if (!resolve(l.target, l.raw, `course:${id}`, f, l.line)) continue;
       const stage = stages.find((x) => x.title === l.section);
       if (!stage) continue; // a link in "What this job is" or "Where am I?" is fine; the reader shows it there
-      if (stage.items.includes(l.target)) warn(f, `"${l.target}" is listed twice in "${stage.title}"`, 'keep one');
-      else stage.items.push(l.target);
+      if (stage.items.includes(l.target)) { warn(f, `"${l.target}" is listed twice in "${stage.title}"`, 'keep one'); continue; }
+      stage.items.push(l.target);
+      const sub = stage.subAt.get(l.line) ?? null;
+      const g = stage.groups.at(-1);
+      if (g && g.title === sub) g.items.push(l.target); else stage.groups.push({ title: sub, items: [l.target] });
     }
     for (const st of stages) {
+      delete st.subAt;
+      if (!st.groups.some((g) => g.title)) st.groups = []; // no sub-groups: the flat list is enough
       if (st.items.length && !st.milestone) warn(f, `"${st.title}" has no milestone`, 'add a line "**Milestone:** you can now …" after its notes');
     }
     courses.push({ id, title: fm.title ?? id, summary: fm.summary ?? '', path: f, stages, ...extras });

@@ -134,6 +134,10 @@ all optional except the stages:
 ## Free resources            - [Name](https://…) : what it covers   (open in a new tab)
 ```
 
+Also accepted (the paths chat's layout): "What this job is" and "Where am I?" as `###` headings
+before the first stage; a bold-only line (`**Statistics and probability**`) inside a stage starts a
+sub-group of notes; a `**Free resources:** …` line inside a stage gives that stage's links.
+
 The path page shows them in that order with jump links, a progress bar and planned notes greyed;
 the home page leads with **Choose your career path**. The build warns about a stage with notes
 but no milestone, a missing "What this job is" or "Where am I?", and any other `##` heading.

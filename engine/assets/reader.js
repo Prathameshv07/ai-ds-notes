@@ -319,9 +319,12 @@
     document.title = `${c.title} · ${M.site.title}`;
     const ids = c.stages.flatMap((st) => st.items);
     const done = countWritten(ids);
-    const [whatIs, whereAmI, resources, ...milestones] = await markdownSnippets(c, [
-      [c.whatIs, false], [c.whereAmI, false], [c.resources, false], ...c.stages.map((st) => [st.milestone, true]),
+    const [whatIs, whereAmI, resources, ...inline] = await markdownSnippets(c, [
+      [c.whatIs, false], [c.whereAmI, false], [c.resources, false],
+      ...c.stages.flatMap((st) => [[st.milestone, true], [st.resources, true]]),
     ]);
+    const milestones = c.stages.map((_, i) => inline[2 * i]);
+    const stageRes = c.stages.map((_, i) => inline[2 * i + 1]);
     const anchor = (t) => 'p-' + slugify(t);
     const jumps = [
       c.whatIs ? ['What this job is', 'p-what'] : null,
@@ -332,8 +335,11 @@
     let n = 0;
     const stages = c.stages.map((st, i) => `<section class="stage path-stage" id="${anchor(st.title)}"><h2>${esc(st.title)}</h2>
         ${st.why ? `<p class="stage-why">${esc(st.why)}</p>` : ''}
-        ${st.items.length ? `<ol class="rows">${st.items.map((id) => itemRow(id, n++, c.id)).join('')}</ol>` : '<p class="empty">Notes for this stage are coming.</p>'}
+        ${!st.items.length ? '<p class="empty">Notes for this stage are coming.</p>'
+          : (st.groups && st.groups.length ? st.groups : [{ title: null, items: st.items }]).map((g) =>
+            `${g.title ? `<h3 class="path-sub">${esc(g.title)}</h3>` : ''}<ol class="rows">${g.items.map((id) => itemRow(id, n++, c.id)).join('')}</ol>`).join('')}
         ${st.milestone ? `<p class="milestone">${icon('flag')}<span><b>Milestone:</b> ${milestones[i]}</span></p>` : ''}
+        ${st.resources ? `<p class="stage-resources">${icon('external-link')}<span><b>Free resources:</b> ${stageRes[i]}</span></p>` : ''}
       </section>`).join('');
     app.innerHTML = `<nav class="crumbs"><a href="index.html">Home</a></nav>
       <p class="card-kicker">Career path</p>

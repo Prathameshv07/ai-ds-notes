@@ -564,3 +564,21 @@ test('practicals: Before the lab, Steps, Common errors and fixes warn for now; C
   assert.deepEqual(errors(r), []);
   assert.equal(r.problems.filter((p) => p.msg.includes('will become an error')).length, 3);
 });
+
+test('career path: ### intro sections, bold sub-groups and per-stage resources (paths chat layout)', () => {
+  const root = validTree();
+  fs.writeFileSync(path.join(root, 'content/courses/data-scientist.md'),
+    '---\nid: data-scientist\ntitle: Data Scientist\ntype: course\nsummary: S.\n---\n### What this job is\n\nA job.\n\n### Where am I?\n\n| Sem | Stage |\n|---|---|\n| 1 | 1 |\n\n' +
+    '## Stage 1 · Foundations\n*Why: because.*\n\n**Group A**\n- [[aa]]\n\n**Group B**\n- [[future-note]]\n\n**Milestone:** you can now do it.\n\n**Free resources:** [X](https://example.org)\n\n' +
+    '## Stage 2 · Core\n- [[bb]]\n\n**Milestone:** more.\n');
+  const r = build({ root });
+  assert.deepEqual(errors(r), []);
+  assert.ok(!r.problems.some((p) => p.file === 'content/courses/data-scientist.md'), 'no warnings for this layout');
+  const c = JSON.parse(fs.readFileSync(path.join(root, 'dist/data/manifest.json'), 'utf8')).courses[0];
+  assert.equal(c.whatIs, 'A job.');
+  assert.match(c.whereAmI, /\| Sem/);
+  assert.deepEqual(c.stages[0].groups.map((g) => g.title), ['Group A', 'Group B']);
+  assert.deepEqual(c.stages[1].groups, [], 'no sub-groups: flat list');
+  assert.match(c.stages[0].resources, /example\.org/);
+  assert.equal(c.stages[0].milestone, 'you can now do it.');
+});
