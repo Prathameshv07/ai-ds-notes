@@ -546,8 +546,26 @@ test('career path format: What this job is, stages with why and milestone, Where
 test('a path file without the new sections warns, naming the fix', () => {
   const root = validTree(); // old-format course
   const w = build({ root }).problems.filter((p) => p.file === 'content/courses/data-scientist.md' && p.level === 'warning');
-  assert.ok(w.some((p) => p.msg.includes('no "## What this job is"') && p.fix.includes('Indian employers')));
-  assert.ok(w.some((p) => p.msg.includes('no "## Where am I?"')));
+  assert.ok(w.some((p) => p.msg.includes('no "### What this job is"') && p.fix.includes('Indian employers')));
+  assert.ok(w.some((p) => p.msg.includes('no "### Where am I?"') && p.fix.includes('before Stage 1')));
+});
+
+test('Section 9 path rules: milestone stops at Free resources line; intro notes, >3 links and missing resources warn; seven paths listed', () => {
+  const root = validTree();
+  fs.writeFileSync(path.join(root, 'content/concepts/databases/databases-intro.md'), introNote('databases'));
+  fs.writeFileSync(path.join(root, 'content/courses/data-scientist.md'),
+    '---\nid: data-scientist\ntitle: Data Scientist\ntype: course\nsummary: S.\n---\n### What this job is\nA job.\n\n### Where am I?\n| a | b |\n|---|---|\n| 1 | 2 |\n\n' +
+    '## Stage 1 · Foundations\n*Why: w.*\n- [[databases-intro]]\n- [[aa]]\n\n**Milestone:** you can now\ndo X.\n**Free resources:** [1](https://a.org) · [2](https://b.org) · [3](https://c.org) · [4](https://d.org)\n\n' +
+    '## Stage 2 · Core\n*Why: w.*\n- [[bb]]\n\n**Milestone:** M.\n');
+  const r = build({ root });
+  assert.deepEqual(errors(r), []);
+  const w = warnings(r);
+  assert.ok(w.some((x) => x.includes('"databases-intro" is a subject intro note')), 'intro note listed warns');
+  assert.ok(w.some((x) => x.includes('"Stage 1 · Foundations" has 4 free resource links')), 'more than 3 links warns');
+  assert.ok(w.some((x) => x.includes('"Stage 2 · Core" has no Free resources line')), 'missing resources line warns');
+  const m = JSON.parse(fs.readFileSync(path.join(root, 'dist/data/manifest.json'), 'utf8'));
+  assert.equal(m.courses[0].stages[0].milestone, 'you can now do X.', 'milestone does not swallow the Free resources line');
+  assert.deepEqual(m.site.pathList.map((p) => p.id), ['data-analyst', 'data-scientist', 'data-engineer', 'ml-engineer', 'ai-engineer', 'mlops-engineer', 'ai-researcher']);
 });
 
 test('practicals: Before the lab, Steps, Common errors and fixes warn for now; Code no longer required', () => {
@@ -570,7 +588,7 @@ test('career path: ### intro sections, bold sub-groups and per-stage resources (
   fs.writeFileSync(path.join(root, 'content/courses/data-scientist.md'),
     '---\nid: data-scientist\ntitle: Data Scientist\ntype: course\nsummary: S.\n---\n### What this job is\n\nA job.\n\n### Where am I?\n\n| Sem | Stage |\n|---|---|\n| 1 | 1 |\n\n' +
     '## Stage 1 · Foundations\n*Why: because.*\n\n**Group A**\n- [[aa]]\n\n**Group B**\n- [[future-note]]\n\n**Milestone:** you can now do it.\n\n**Free resources:** [X](https://example.org)\n\n' +
-    '## Stage 2 · Core\n- [[bb]]\n\n**Milestone:** more.\n');
+    '## Stage 2 · Core\n- [[bb]]\n\n**Milestone:** more.\n**Free resources:** [Y](https://example.org/y)\n');
   const r = build({ root });
   assert.deepEqual(errors(r), []);
   assert.ok(!r.problems.some((p) => p.file === 'content/courses/data-scientist.md'), 'no warnings for this layout');

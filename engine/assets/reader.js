@@ -196,7 +196,17 @@
 
   function renderHome() {
     document.title = M.site.title;
-    const courseCards = M.courses.map((c) => {
+    // all seven paths in plan order (Section 6); written path files first in that order, any extra after
+    const listed = (M.site.pathList || []).map((p) => M.courses.find((c) => c.id === p.id) || p);
+    const extra = M.courses.filter((c) => !listed.includes(c));
+    const courseCards = [...listed, ...extra].map((c) => {
+      if (!c.stages) {
+        return `<div class="card path-card is-coming" aria-disabled="true">
+        <div class="card-icon">${icon('route')}</div>
+        <div class="card-body"><div class="card-title">${esc(c.title)}</div>
+          <div class="card-text">This path is being written.</div>
+          <div class="card-meta">Coming soon</div></div></div>`;
+      }
       const ids = c.stages.flatMap((s) => s.items);
       const done = countWritten(ids);
       return `<a class="card path-card" href="path.html?course=${encodeURIComponent(c.id)}">
@@ -328,19 +338,21 @@
     const anchor = (t) => 'p-' + slugify(t);
     const jumps = [
       c.whatIs ? ['What this job is', 'p-what'] : null,
-      ...c.stages.map((st) => [st.title.replace(/^stage\s*(\d+)\s*[·:.-]\s*/i, 'Stage $1: '), anchor(st.title)]),
       c.whereAmI ? ['Where am I?', 'p-where'] : null,
+      ...c.stages.map((st) => [st.title.replace(/^stage\s*(\d+)\s*[·:.-]\s*/i, 'Stage $1: '), anchor(st.title)]),
       c.resources ? ['Free resources', 'p-resources'] : null,
     ].filter(Boolean);
     let n = 0;
-    const stages = c.stages.map((st, i) => `<section class="stage path-stage" id="${anchor(st.title)}"><h2>${esc(st.title)}</h2>
+    // stages are collapsed: "Stage 1 · Foundations · 12 of 20 written"; click to expand
+    const stages = c.stages.map((st, i) => `<details class="stage path-stage" id="${anchor(st.title)}">
+        <summary><h2>${esc(st.title)}</h2><span class="stage-count">· ${st.items.length ? `${countWritten(st.items)} of ${st.items.length} written` : 'notes coming'}</span>${icon('chevron-down')}</summary>
         ${st.why ? `<p class="stage-why">${esc(st.why)}</p>` : ''}
         ${!st.items.length ? '<p class="empty">Notes for this stage are coming.</p>'
           : (st.groups && st.groups.length ? st.groups : [{ title: null, items: st.items }]).map((g) =>
             `${g.title ? `<h3 class="path-sub">${esc(g.title)}</h3>` : ''}<ol class="rows">${g.items.map((id) => itemRow(id, n++, c.id)).join('')}</ol>`).join('')}
         ${st.milestone ? `<p class="milestone">${icon('flag')}<span><b>Milestone:</b> ${milestones[i]}</span></p>` : ''}
         ${st.resources ? `<p class="stage-resources">${icon('external-link')}<span><b>Free resources:</b> ${stageRes[i]}</span></p>` : ''}
-      </section>`).join('');
+      </details>`).join('');
     app.innerHTML = `<nav class="crumbs"><a href="index.html">Home</a></nav>
       <p class="card-kicker">Career path</p>
       <h1>${esc(c.title)}</h1><p class="sub">${esc(c.summary)}</p>
@@ -349,10 +361,33 @@
         <span>${done} of ${ids.length} notes written; greyed notes are planned.</span></div>
       ${jumps.length > 1 ? `<nav class="path-jumps" aria-label="On this page">${jumps.map(([t, a]) => `<a href="#${a}">${esc(t)}</a>`).join('')}</nav>` : ''}
       ${c.whatIs ? `<section class="path-block" id="p-what"><h2>${icon('briefcase')}What this job is</h2><div class="md">${whatIs}</div></section>` : ''}
-      ${stages}
       ${c.whereAmI ? `<section class="path-block" id="p-where"><h2>${icon('map-pin')}Where am I?</h2><div class="md">${whereAmI}</div></section>` : ''}
+      ${c.stages.length ? `<div class="path-stages-head"><h2>${icon('route')}The stages</h2>
+        <button type="button" class="btn" id="stagesToggle">Expand all</button></div>` : ''}
+      ${stages}
       ${c.resources ? `<section class="path-block" id="p-resources"><h2>${icon('external-link')}Free resources</h2><div class="md">${resources}</div></section>` : ''}`;
-    if (location.hash) { const el = document.getElementById(location.hash.slice(1)); if (el) el.scrollIntoView(); }
+    const all = () => [...app.querySelectorAll('details.path-stage')];
+    const toggle = document.getElementById('stagesToggle');
+    const syncToggle = () => { if (toggle) toggle.textContent = all().every((d) => d.open) ? 'Collapse all' : 'Expand all'; };
+    if (toggle) toggle.addEventListener('click', () => { const open = !all().every((d) => d.open); all().forEach((d) => { d.open = open; }); syncToggle(); });
+    all().forEach((d) => d.addEventListener('toggle', syncToggle));
+    // a jump link or #hash to a stage opens it
+    const openHash = () => {
+      const el = location.hash && document.getElementById(decodeURIComponent(location.hash.slice(1)));
+      if (!el) return;
+      if (el.tagName === 'DETAILS') el.open = true;
+      el.scrollIntoView();
+    };
+    window.addEventListener('hashchange', openHash);
+    app.querySelectorAll('.path-jumps a').forEach((a) => a.addEventListener('click', () => {
+      const el = document.getElementById(a.getAttribute('href').slice(1));
+      if (el && el.tagName === 'DETAILS') el.open = true;
+    }));
+    // printing shows every stage
+    let wasOpen = null;
+    window.addEventListener('beforeprint', () => { wasOpen = all().map((d) => d.open); all().forEach((d) => { d.open = true; }); });
+    window.addEventListener('afterprint', () => { if (wasOpen) all().forEach((d, k) => { d.open = wasOpen[k]; }); wasOpen = null; syncToggle(); });
+    openHash();
   }
 
   function setupSelection() {

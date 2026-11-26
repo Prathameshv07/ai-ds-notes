@@ -66,6 +66,14 @@ export const PENDING_SECTIONS = {
 };
 
 // Career path files (plan Sections 6 and 9): sections besides the stages, kept as Markdown.
+// The seven career paths, in home-page order (plan Section 6). A path whose file is not written yet
+// shows as a greyed "coming soon" card.
+export const CAREER_PATHS = [
+  ['data-analyst', 'Data Analyst'], ['data-scientist', 'Data Scientist'], ['data-engineer', 'Data Engineer'],
+  ['ml-engineer', 'ML Engineer'], ['ai-engineer', 'AI / GenAI Engineer'], ['mlops-engineer', 'MLOps Engineer'],
+  ['ai-researcher', 'AI Researcher'],
+];
+export const PATH_MAX_RESOURCE_LINKS = 3;
 export const COURSE_SECTION_NAMES = { whatIs: 'What this job is', whereAmI: 'Where am I?', resources: 'Free resources' };
 export const COURSE_SECTIONS = { 'what this job is': 'whatIs', 'where am i': 'whereAmI', 'free resources': 'resources' };
 

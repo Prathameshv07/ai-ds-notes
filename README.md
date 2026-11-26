@@ -123,24 +123,26 @@ Self-check answers: a closed answer whose title gives the answer away (`Answer: 
 
 ## Career paths and practicals (plan v2.7)
 
-**Career path files** (`content/courses/<path>.md`, written by the paths chat) use fixed headings,
-all optional except the stages:
+**Career path files** (`content/courses/<path>.md`, written by the paths chat) follow plan Section 9:
 
 ```
-## What this job is          one paragraph (Markdown; [[links]] work)
-## Stage 1 · Foundations     *Why: …* line, - [[note-id]] lines, then **Milestone:** you can now …
-## Stage 2 · Core            … (a stage with no notes yet shows "Notes for this stage are coming")
-## Where am I?               a Markdown table: semesters → stages
-## Free resources            - [Name](https://…) : what it covers   (open in a new tab)
+### What this job is        one paragraph (Markdown; [[links]] work)
+### Where am I?             **BSc Data Science** table, then **BSc IT** table
+## Stage 1 · Foundations    *Why: …* line
+                            **Sub-group label** lines, each followed by - [[note-id]] lines
+                            **Milestone:** you can now …
+                            **Free resources:** [Name](https://…) · …   (at most 3 links)
+## Stage 2 · Core … ## Stage 4 · Projects
 ```
 
-Also accepted (the paths chat's layout): "What this job is" and "Where am I?" as `###` headings
-before the first stage; a bold-only line (`**Statistics and probability**`) inside a stage starts a
-sub-group of notes; a `**Free resources:** …` line inside a stage gives that stage's links.
-
-The path page shows them in that order with jump links, a progress bar and planned notes greyed;
-the home page leads with **Choose your career path**. The build warns about a stage with notes
-but no milestone, a missing "What this job is" or "Where am I?", and any other `##` heading.
+The path page shows What this job is and Where am I? first, then the stages **collapsed**, each
+summarised as "Stage 1 · Foundations · 12 of 20 written"; click to expand, or Expand all. Jump links
+and `#p-stage-…` links open their stage; printing opens every stage. Planned notes are greyed.
+The home page leads with **Choose your career path**: all seven paths from `CAREER_PATHS` in
+`scripts/config.mjs` (plan Section 6), the ones without a file yet greyed as "coming soon".
+The build warns about a missing What this job is / Where am I?, a stage with notes but no
+Milestone or Free resources line, more than 3 resource links, and a subject intro note listed in
+a path. (The older `## What this job is` / `## Free resources` headings are still read.)
 
 **Practical notes** gain Before the lab, Steps and Common errors and fixes (plan 8.2, both sites).
 They are listed in `PENDING_SECTIONS` in `scripts/config.mjs`, so a missing one is a **warning**

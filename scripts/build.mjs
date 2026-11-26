@@ -684,7 +684,8 @@ export function build(opts = {}) {
       const mi = s.lines.findIndex((l) => !l.inCode && /^\s*\*\*milestone:?\*\*:?/i.test(l.text));
       if (mi >= 0) {
         const parts = [];
-        for (let k = mi; k < s.lines.length && s.lines[k].text.trim(); k++) parts.push(s.lines[k].text.trim());
+        // continues over wrapped lines, up to a blank line or the next bold label ("**Free resources:**")
+        for (let k = mi; k < s.lines.length && s.lines[k].text.trim() && (k === mi || !/^\s*\*\*/.test(s.lines[k].text)); k++) parts.push(s.lines[k].text.trim());
         milestone = parts.join(' ').replace(/^\*\*milestone:?\*\*:?\s*/i, '').trim() || null;
       }
       // "**Free resources:** …" line inside a stage: links for that stage
@@ -701,14 +702,15 @@ export function build(opts = {}) {
       }
       stages.push({ title: s.name, why: whyLine ? whyLine.text.trim().slice(1, -1).trim() : null, milestone, resources, items: [], groups: [], subAt });
     }
-    if (!extras.whatIs) warn(f, 'no "## What this job is" section', 'add one paragraph: a day at work, typical Indian employers, entry roles (plan Section 6)');
-    if (!extras.whereAmI) warn(f, 'no "## Where am I?" section', 'add the semester-to-stage table (plan Section 6)');
+    if (!extras.whatIs) warn(f, 'no "### What this job is" section', 'add it before Stage 1: one paragraph on a day at work, typical Indian employers, entry roles (plan Section 9)');
+    if (!extras.whereAmI) warn(f, 'no "### Where am I?" section', 'add it before Stage 1: the semester-to-stage tables for BSc DS and BSc IT (plan Section 9)');
     stages.forEach((st) => { if (st.items.length === 0 && !st.milestone) { /* an empty future stage is fine */ } });
     for (const l of scan.links) {
       if (!resolve(l.target, l.raw, `course:${id}`, f, l.line)) continue;
       const stage = stages.find((x) => x.title === l.section);
       if (!stage) continue; // a link in "What this job is" or "Where am I?" is fine; the reader shows it there
       if (stage.items.includes(l.target)) { warn(f, `"${l.target}" is listed twice in "${stage.title}"`, 'keep one'); continue; }
+      if (notes.get(l.target)?.fm?.type === 'intro') warn(f, `"${l.target}" is a subject intro note listed in "${stage.title}"`, 'remove it: paths do not list intro notes, each subject page opens with its intro (plan Section 9)');
       stage.items.push(l.target);
       const sub = stage.subAt.get(l.line) ?? null;
       const g = stage.groups.at(-1);
@@ -718,6 +720,9 @@ export function build(opts = {}) {
       delete st.subAt;
       if (!st.groups.some((g) => g.title)) st.groups = []; // no sub-groups: the flat list is enough
       if (st.items.length && !st.milestone) warn(f, `"${st.title}" has no milestone`, 'add a line "**Milestone:** you can now …" after its notes');
+      if (st.items.length && !st.resources) warn(f, `"${st.title}" has no Free resources line`, 'add a line "**Free resources:** [Name](https://…) · …" after the milestone (at most 3 links)');
+      const nLinks = st.resources ? (st.resources.match(/\]\(https?:/g) || []).length : 0;
+      if (C.PATH_MAX_RESOURCE_LINKS && nLinks > C.PATH_MAX_RESOURCE_LINKS) warn(f, `"${st.title}" has ${nLinks} free resource links`, `keep the best ${C.PATH_MAX_RESOURCE_LINKS} (plan Section 9)`);
     }
     courses.push({ id, title: fm.title ?? id, summary: fm.summary ?? '', path: f, stages, ...extras });
   }
@@ -787,6 +792,7 @@ export function build(opts = {}) {
     version: 1,
     site: {
       ...C.SITE, built: new Date().toISOString(), profile: C.name, careerPaths: C.courses,
+      pathList: C.courses ? (C.CAREER_PATHS || []).map(([id, title]) => ({ id, title })) : [],
       feedback: C.FEEDBACK.formUrl ? { formUrl: C.FEEDBACK.formUrl, noteField: C.FEEDBACK.noteField } : null,
     },
     subjectTitles: Object.fromEntries(subjectIds.map((id) => [id, subjectTitle(id)])),
