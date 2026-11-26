@@ -35,7 +35,8 @@ export const REQUIRED_SECTIONS = {
     'Why should you care?', 'In one line', 'Explained',
     'Key facts and formulas', 'Self-check', 'Flashcards', 'Sources',
   ],
-  practical: ['Aim', 'Code', 'Output', 'Explanation', 'Viva questions', 'Sources'],
+  // Code is required only when the practical has code (plan 8.2), so the build cannot insist on it.
+  practical: ['Aim', 'Output', 'Explanation', 'Viva questions', 'Sources'],
   project: ['Problem', 'Steps', 'Expected result', 'What interviewers ask about this', 'Sources'],
   // Section 8.6: subject intro note, ID <subject-id>-intro, first in the subject index.
   intro: [
@@ -57,6 +58,16 @@ export const NO_HIGHLIGHT_SECTIONS = ['Why should you care?', 'Analogy and real-
 // Section 10: REGISTRY.md summary column for written notes = first sentence of "In one line",
 // trimmed to about this many characters.
 export const REGISTRY_SUMMARY_MAX = 120;
+
+// Plan v2.7 (decision 44): newly required practical sections. They warn until the existing practicals
+// are updated; then move them into REQUIRED_SECTIONS above to make them errors.
+export const PENDING_SECTIONS = {
+  practical: ['Before the lab', 'Steps', 'Common errors and fixes'],
+};
+
+// Career path files (plan Sections 6 and 9): sections besides the stages, kept as Markdown.
+export const COURSE_SECTION_NAMES = { whatIs: 'What this job is', whereAmI: 'Where am I?', resources: 'Free resources' };
+export const COURSE_SECTIONS = { 'what this job is': 'whatIs', 'where am i': 'whereAmI', 'free resources': 'resources' };
 
 // Section 8.1: "Self-check: 3–5 questions"
 export const SELF_CHECK_MIN = 3;
@@ -136,7 +147,7 @@ export const PROFILES = {
     // Section 18 template; practicals as Section 8.2; intro as Section 8.6. No self-check or flashcards.
     REQUIRED_SECTIONS: {
       theory: ['Why should you care?', 'In one line', 'Explained', 'Analogy and real-life example', 'Key points', 'Exam questions', 'Sources'],
-      practical: ['Aim', 'Code', 'Output', 'Explanation', 'Viva questions', 'Sources'],
+      practical: ['Aim', 'Output', 'Explanation', 'Viva questions', 'Sources'],
       intro: ['Why this subject matters', 'A short story', 'Where it is used today', 'What you will be able to do', 'Careers that use it', 'Map of the subject', 'Sources'],
     },
     WRITE_DOWN_SECTIONS: ['In one line', 'Key points', 'Diagram'],

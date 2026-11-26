@@ -381,6 +381,11 @@ export function build(opts = {}) {
     for (const s of C.REQUIRED_SECTIONS[fm.type] ?? []) {
       if (!seen.has(norm(s))) error(f, `missing required section: ## ${s}`, `add a "## ${s}" heading with its content${tmpl(fm.type)}`);
     }
+    // Newly required sections (plan v2.7, decision 44) warn until existing notes are updated;
+    // move them into REQUIRED_SECTIONS in config.mjs to make them errors.
+    for (const s of C.PENDING_SECTIONS[fm.type] ?? []) {
+      if (!seen.has(norm(s))) warn(f, `missing required section: ## ${s} (warning for now; will become an error)`, `add a "## ${s}" heading with its content${tmpl(fm.type)}`);
+    }
 
     // flashcards
     const cards = [];
@@ -650,20 +655,45 @@ export function build(opts = {}) {
     if (!fm.title) error(f, 'missing front matter field: title', 'add "title: <career name>"');
     if (!fm.summary) warn(f, 'missing front matter field: summary', 'add "summary: <one sentence>"');
 
+    // Path file format (plan Sections 6 and 9, v2.7): "## What this job is", then "## Stage N · …"
+    // sections (an italic *Why: …* line, note links, and a "**Milestone:** …" line), then
+    // "## Where am I?" (a table) and "## Free resources" (links). The three named sections are kept
+    // as Markdown for the reader; everything else on the page is IDs and short lines.
     const scan = scanBody(body, bodyLine);
-    const stages = scan.sections.map((s) => {
+    const extras = {};
+    const textOf = (sec) => sec.lines.map((l) => l.text).join('\n').trim();
+    const stages = [];
+    for (const s of scan.sections) {
+      const key = C.COURSE_SECTIONS[norm(s.name).replace(/[?:.]$/, '')];
+      if (key) { extras[key] = textOf(s); continue; }
+      if (!/^stage\b/i.test(s.name)) {
+        warn(f, `section "## ${s.name}" is not a stage or a known section`, `name stages like "## Stage 1 · Foundations"; other sections: ${Object.values(C.COURSE_SECTION_NAMES).map((x) => `"## ${x}"`).join(', ')}`);
+      }
       const whyLine = s.lines.find((l) => !l.inCode && /^\s*\*(?!\*)(.+)\*\s*$/.test(l.text));
-      if (!/^stage\b/i.test(s.name)) warn(f, `section "## ${s.name}" should be a stage`, 'name it like "## Stage 1 · Foundations"');
-      return { title: s.name, why: whyLine ? whyLine.text.trim().slice(1, -1).trim() : null, items: [] };
-    });
+      // "**Milestone:** you can now …", possibly wrapped over several lines (up to a blank line)
+      let milestone = null;
+      const mi = s.lines.findIndex((l) => !l.inCode && /^\s*\*\*milestone:?\*\*:?/i.test(l.text));
+      if (mi >= 0) {
+        const parts = [];
+        for (let k = mi; k < s.lines.length && s.lines[k].text.trim(); k++) parts.push(s.lines[k].text.trim());
+        milestone = parts.join(' ').replace(/^\*\*milestone:?\*\*:?\s*/i, '').trim() || null;
+      }
+      stages.push({ title: s.name, why: whyLine ? whyLine.text.trim().slice(1, -1).trim() : null, milestone, items: [] });
+    }
+    if (!extras.whatIs) warn(f, 'no "## What this job is" section', 'add one paragraph: a day at work, typical Indian employers, entry roles (plan Section 6)');
+    if (!extras.whereAmI) warn(f, 'no "## Where am I?" section', 'add the semester-to-stage table (plan Section 6)');
+    stages.forEach((st) => { if (st.items.length === 0 && !st.milestone) { /* an empty future stage is fine */ } });
     for (const l of scan.links) {
       if (!resolve(l.target, l.raw, `course:${id}`, f, l.line)) continue;
-      const stage = stages.find((s) => s.title === l.section);
-      if (!stage) { warn(f, `link [[${l.raw}]] on line ${l.line} is outside any stage`, 'move it under a ## Stage heading'); continue; }
+      const stage = stages.find((x) => x.title === l.section);
+      if (!stage) continue; // a link in "What this job is" or "Where am I?" is fine; the reader shows it there
       if (stage.items.includes(l.target)) warn(f, `"${l.target}" is listed twice in "${stage.title}"`, 'keep one');
       else stage.items.push(l.target);
     }
-    courses.push({ id, title: fm.title ?? id, summary: fm.summary ?? '', path: f, stages });
+    for (const st of stages) {
+      if (st.items.length && !st.milestone) warn(f, `"${st.title}" has no milestone`, 'add a line "**Milestone:** you can now …" after its notes');
+    }
+    courses.push({ id, title: fm.title ?? id, summary: fm.summary ?? '', path: f, stages, ...extras });
   }
 
   // --- registry: merge generated rows with hand-typed planned rows ---
@@ -738,7 +768,9 @@ export function build(opts = {}) {
     notes: notesOut,
     planned: plannedOut,
     subjects: subjects.map(({ id, title, about, path: p, order, groups, intro, notes: nt }) => ({ id, title, about, path: p, order, groups, intro, notes: nt })),
-    courses: courses.map(({ id, title, summary, path: p, stages }) => ({ id, title, summary, path: p, stages })),
+    courses: courses.map(({ id, title, summary, path: p, stages, whatIs, whereAmI, resources }) => ({
+      id, title, summary, path: p, stages, whatIs: whatIs ?? null, whereAmI: whereAmI ?? null, resources: resources ?? null,
+    })),
   };
   // Syllabus pages (plan 12): one per course code, notes from every subject grouped by unit.
   // Within a unit: theory in subject-index order, then practicals by number.

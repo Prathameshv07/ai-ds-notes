@@ -121,6 +121,30 @@ about more than 7 highlights in one answer (a definition plus 6 key phrases,
 Self-check answers: a closed answer whose title gives the answer away (`Answer: B`) shows
 "Show answer" instead; the full title appears once it is opened.
 
+## Career paths and practicals (plan v2.7)
+
+**Career path files** (`content/courses/<path>.md`, written by the paths chat) use fixed headings,
+all optional except the stages:
+
+```
+## What this job is          one paragraph (Markdown; [[links]] work)
+## Stage 1 · Foundations     *Why: …* line, - [[note-id]] lines, then **Milestone:** you can now …
+## Stage 2 · Core            … (a stage with no notes yet shows "Notes for this stage are coming")
+## Where am I?               a Markdown table: semesters → stages
+## Free resources            - [Name](https://…) : what it covers   (open in a new tab)
+```
+
+The path page shows them in that order with jump links, a progress bar and planned notes greyed;
+the home page leads with **Choose your career path**. The build warns about a stage with notes
+but no milestone, a missing "What this job is" or "Where am I?", and any other `##` heading.
+
+**Practical notes** gain Before the lab, Steps and Common errors and fixes (plan 8.2, both sites).
+They are listed in `PENDING_SECTIONS` in `scripts/config.mjs`, so a missing one is a **warning**
+for now; once the existing practicals have them, move them into `REQUIRED_SECTIONS` to make them
+errors. Code is no longer a required section (it is required only when the practical has code).
+In present mode, a **Steps** slide always reveals one numbered step per press (with its nested
+points and code), whether or not Step by step is on.
+
 ## Two sites, one engine (plan Section 18)
 
 The same engine also publishes **class-notes** (Prathameshv07/class-notes) as

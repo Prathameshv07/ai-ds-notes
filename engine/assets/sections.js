@@ -33,10 +33,12 @@ var SECTION_STYLES = {
   'output':                         { icon: 'terminal',               level: 'U' },
   'explanation':                    { icon: 'message-square-text',    level: 'U' },
   'viva questions':                 { icon: 'mic',                    level: 'P' },
+  'before the lab':                 { icon: 'backpack',               level: 'U' },
+  'common errors and fixes':        { icon: 'bug',                    level: 'R' },
   // project (8.3)
   'problem':                        { icon: 'circle-help',            level: 'U' },
   'dataset':                        { icon: 'database',               level: 'N' },
-  'steps':                          { icon: 'footprints',             level: 'U' },
+  'steps':                          { icon: 'footprints',             level: 'U' }, // practicals and projects
   'expected result':                { icon: 'flag',                   level: 'U' },
   'extensions':                     { icon: 'rocket',                 level: 'R' },
   'what interviewers ask about this': { icon: 'briefcase',            level: 'P' },

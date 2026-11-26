@@ -517,3 +517,50 @@ test('every error carries a fix', () => {
   assert.deepEqual(noFix, []);
   assert.ok(r.problems.filter((p) => p.level === 'error').length >= 5);
 });
+
+test('career path format: What this job is, stages with why and milestone, Where am I?, Free resources', () => {
+  const root = validTree();
+  fs.writeFileSync(path.join(root, 'content/courses/data-scientist.md'),
+    '---\nid: data-scientist\ntitle: Data Scientist\ntype: course\nsummary: S.\n---\n## What this job is\nA day at work with [[aa]].\n\n' +
+    '## Stage 1 · Foundations\n*Why: because.*\n- [[aa]]\n- [[future-note]]\n\n**Milestone:** you can now\ndo X.\n\n' +
+    '## Stage 2 · Core\n- [[bb]]\n\n## Stage 3 · Specialisation\n\n## Where am I?\n| Sem | Stage |\n|---|---|\n| 1 | 1 |\n\n## Free resources\n- [NPTEL](https://nptel.ac.in)\n');
+  const r = build({ root });
+  assert.deepEqual(errors(r), []);
+  const w = warnings(r);
+  assert.ok(w.some((x) => x.includes('"Stage 2 · Core" has no milestone')), 'stage with notes but no milestone warns');
+  assert.ok(!w.some((x) => x.includes('Stage 3')), 'an empty future stage needs nothing');
+  assert.ok(!w.some((x) => x.includes('not a stage')), 'the named sections are accepted');
+  const m = JSON.parse(fs.readFileSync(path.join(root, 'dist/data/manifest.json'), 'utf8'));
+  const c = m.courses[0];
+  assert.equal(c.whatIs, 'A day at work with [[aa]].');
+  assert.match(c.whereAmI, /^\| Sem \| Stage \|/);
+  assert.equal(c.resources, '- [NPTEL](https://nptel.ac.in)');
+  assert.deepEqual(c.stages.map((s) => [s.title, s.why, s.milestone, s.items]), [
+    ['Stage 1 · Foundations', 'Why: because.', 'you can now do X.', ['aa', 'future-note']],
+    ['Stage 2 · Core', null, null, ['bb']],
+    ['Stage 3 · Specialisation', null, null, []],
+  ]);
+  assert.ok(m.notes.aa.backlinks.includes('course:data-scientist') === false); // backlinks list notes only
+});
+
+test('a path file without the new sections warns, naming the fix', () => {
+  const root = validTree(); // old-format course
+  const w = build({ root }).problems.filter((p) => p.file === 'content/courses/data-scientist.md' && p.level === 'warning');
+  assert.ok(w.some((p) => p.msg.includes('no "## What this job is"') && p.fix.includes('Indian employers')));
+  assert.ok(w.some((p) => p.msg.includes('no "## Where am I?"')));
+});
+
+test('practicals: Before the lab, Steps, Common errors and fixes warn for now; Code no longer required', () => {
+  const prac = (sections) => `---\nid: p-practical\ntitle: P\nsubject: databases\nlevel: core\ntype: practical\npractical: 1\nstatus: draft\ntime: 5 min\nsources: [x]\n---\n` +
+    sections.map((h) => `## ${h}\n\nPlaceholder.\n`).join('\n');
+  let r = build({ root: tree({ 'content/concepts/databases/p-practical.md': prac(['Aim', 'Output', 'Explanation', 'Viva questions', 'Sources']) }) });
+  assert.deepEqual(errors(r), []);
+  const w = r.problems.filter((p) => p.level === 'warning' && p.msg.includes('will become an error'));
+  assert.deepEqual(w.map((p) => p.msg.match(/## (.*) \(/)[1]), ['Before the lab', 'Steps', 'Common errors and fixes']);
+  r = build({ root: tree({ 'content/concepts/databases/p-practical.md': prac(['Aim', 'Before the lab', 'Steps', 'Output', 'Explanation', 'Common errors and fixes', 'Viva questions', 'Sources']) }) });
+  assert.ok(!r.problems.some((p) => p.msg.includes('will become an error')));
+  // class-notes profile: same rule
+  r = build({ root: tree({ 'content/sec/p-practical.md': prac(['Aim', 'Output', 'Explanation', 'Viva questions', 'Sources']).replace('subject: databases', 'subject: sec'), 'content/sec/_index.md': '---\nid: sec\ntitle: S\ntype: index\n---\n## Practicals\n1. [[p-practical]]\n' }), profile: 'class-notes' });
+  assert.deepEqual(errors(r), []);
+  assert.equal(r.problems.filter((p) => p.msg.includes('will become an error')).length, 3);
+});

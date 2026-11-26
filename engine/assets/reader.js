@@ -198,11 +198,13 @@
     document.title = M.site.title;
     const courseCards = M.courses.map((c) => {
       const ids = c.stages.flatMap((s) => s.items);
-      return `<a class="card" href="path.html?course=${encodeURIComponent(c.id)}">
+      const done = countWritten(ids);
+      return `<a class="card path-card" href="path.html?course=${encodeURIComponent(c.id)}">
         <div class="card-icon">${icon('route')}</div>
         <div class="card-body"><div class="card-title">${esc(c.title)}</div>
           <div class="card-text">${esc(c.summary)}</div>
-          <div class="card-meta">${countWritten(ids)} of ${ids.length} notes written</div></div></a>`;
+          <div class="bar" aria-hidden="true"><span style="width:${ids.length ? Math.round((done / ids.length) * 100) : 0}%"></span></div>
+          <div class="card-meta">${c.stages.length} stages · ${done} of ${ids.length} notes written</div></div></a>`;
     }).join('');
     const subjectCards = M.subjects.map((s) => `<a class="card" href="path.html?subject=${encodeURIComponent(s.id)}">
         <div class="card-icon">${icon('library')}</div>
@@ -211,8 +213,8 @@
           <div class="card-meta">${countWritten(s.order)} of ${s.order.length} notes written</div></div></a>`).join('');
     app.innerHTML = `
       <section class="home-hero"><h1>${esc(M.site.title)}</h1><p class="sub">${esc(M.site.tagline)}</p></section>
-      ${M.site.careerPaths === false ? '' : `<section class="home-block"><h2>${icon('route')} Career paths</h2>
-        <p class="sub">Pick a career; follow its stages from foundations to projects.</p>
+      ${M.site.careerPaths === false ? '' : `<section class="home-block home-paths"><h2>${icon('route')} Choose your career path</h2>
+        <p class="lead">Pick the job you want. Each path shows what to learn, stage by stage, and which of your college semesters covers it.</p>
         <div class="card-grid">${courseCards || '<p class="empty">Career paths will appear here soon.</p>'}</div></section>`}
       <section class="home-block"><h2>${icon('library')} Subjects</h2>
         <div class="card-grid">${subjectCards || '<p class="empty">Subjects will appear here soon.</p>'}</div></section>
@@ -289,16 +291,62 @@
     }
     const c = courseOf(cid);
     if (!c) return notice(`No career path called “${esc(cid || '')}”. <a href="index.html">Back to home</a>.`);
+    return renderCourse(c);
+  }
+
+  // Short Markdown from a path file ("What this job is", milestones, the "Where am I?" table, free
+  // resources) rendered with the note renderer, so [[links]], tables and callouts work as in notes.
+  async function markdownSnippets(c, parts) {
+    try {
+      await loadScript(LIBS.marked);
+      setupMarked(c.path);
+      return parts.map(([md, inline]) => {
+        if (!md) return '';
+        if (inline) return marked.parseInline(md);
+        const div = document.createElement('div');
+        div.innerHTML = marked.parse(md);
+        convertCallouts(div);
+        wrapTables(div);
+        return div.innerHTML;
+      });
+    } catch (e) {
+      // offline: show the text without formatting
+      return parts.map(([md, inline]) => (md ? (inline ? esc(md) : `<p>${esc(md).replace(/\n{2,}/g, '</p><p>')}</p>`) : ''));
+    }
+  }
+
+  async function renderCourse(c) {
     document.title = `${c.title} · ${M.site.title}`;
+    const ids = c.stages.flatMap((st) => st.items);
+    const done = countWritten(ids);
+    const [whatIs, whereAmI, resources, ...milestones] = await markdownSnippets(c, [
+      [c.whatIs, false], [c.whereAmI, false], [c.resources, false], ...c.stages.map((st) => [st.milestone, true]),
+    ]);
+    const anchor = (t) => 'p-' + slugify(t);
+    const jumps = [
+      c.whatIs ? ['What this job is', 'p-what'] : null,
+      ...c.stages.map((st) => [st.title.replace(/^stage\s*(\d+)\s*[·:.-]\s*/i, 'Stage $1: '), anchor(st.title)]),
+      c.whereAmI ? ['Where am I?', 'p-where'] : null,
+      c.resources ? ['Free resources', 'p-resources'] : null,
+    ].filter(Boolean);
     let n = 0;
-    const stages = c.stages.map((st) => `<section class="stage"><h2>${esc(st.title)}</h2>
+    const stages = c.stages.map((st, i) => `<section class="stage path-stage" id="${anchor(st.title)}"><h2>${esc(st.title)}</h2>
         ${st.why ? `<p class="stage-why">${esc(st.why)}</p>` : ''}
         ${st.items.length ? `<ol class="rows">${st.items.map((id) => itemRow(id, n++, c.id)).join('')}</ol>` : '<p class="empty">Notes for this stage are coming.</p>'}
+        ${st.milestone ? `<p class="milestone">${icon('flag')}<span><b>Milestone:</b> ${milestones[i]}</span></p>` : ''}
       </section>`).join('');
-    const ids = c.stages.flatMap((s) => s.items);
     app.innerHTML = `<nav class="crumbs"><a href="index.html">Home</a></nav>
+      <p class="card-kicker">Career path</p>
       <h1>${esc(c.title)}</h1><p class="sub">${esc(c.summary)}</p>
-      <p class="sub">${countWritten(ids)} of ${ids.length} notes written</p>${stages}`;
+      <div class="path-progress" title="${done} of ${ids.length} notes written">
+        <div class="bar"><span style="width:${ids.length ? Math.round((done / ids.length) * 100) : 0}%"></span></div>
+        <span>${done} of ${ids.length} notes written; greyed notes are planned.</span></div>
+      ${jumps.length > 1 ? `<nav class="path-jumps" aria-label="On this page">${jumps.map(([t, a]) => `<a href="#${a}">${esc(t)}</a>`).join('')}</nav>` : ''}
+      ${c.whatIs ? `<section class="path-block" id="p-what"><h2>${icon('briefcase')}What this job is</h2><div class="md">${whatIs}</div></section>` : ''}
+      ${stages}
+      ${c.whereAmI ? `<section class="path-block" id="p-where"><h2>${icon('map-pin')}Where am I?</h2><div class="md">${whereAmI}</div></section>` : ''}
+      ${c.resources ? `<section class="path-block" id="p-resources"><h2>${icon('external-link')}Free resources</h2><div class="md">${resources}</div></section>` : ''}`;
+    if (location.hash) { const el = document.getElementById(location.hash.slice(1)); if (el) el.scrollIntoView(); }
   }
 
   function setupSelection() {
@@ -1088,7 +1136,7 @@
   setupSettings();
   loadManifest().then(() => {
     if (page === 'home') renderHome();
-    else if (page === 'path') renderPath();
+    else if (page === 'path') return renderPath();
     else if (page === 'note') return renderNote();
     else if (page === 'whatsnew') renderWhatsNew();
     else if (page === 'syllabus') renderSyllabus();

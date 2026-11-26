@@ -297,7 +297,13 @@
   }
 
   // List items revealed one by one (not quiz options or flashcards).
-  const stepsOf = (slide) => [...slide.querySelectorAll('li')].filter((li) => !li.closest('.quiz-options, .flashcards, .slide-cover'));
+  // A practical's "## Steps" (plan 8.2) always reveals one step per press, whether or not step-by-step
+  // is on; a step's nested points, code and pictures come with it.
+  const isStepsSlide = (slide) => !!(slide && slide.querySelector('.note-section[data-section="steps"]'));
+  const stepsOf = (slide) => (isStepsSlide(slide)
+    ? [...slide.querySelectorAll('.note-section > ol > li, .note-section > ul > li')]
+    : [...slide.querySelectorAll('li')].filter((li) => !li.closest('.quiz-options, .flashcards, .slide-cover')));
+  const revealing = (slide) => (P && P.reveal) || isStepsSlide(slide);
 
   function present() {
     if (P) return;
@@ -344,7 +350,7 @@
       stage.replaceChildren(slide);
       slide.scrollTop = 0;
       const steps = stepsOf(slide);
-      steps.forEach((li, k) => li.classList.toggle('step-pending', P.reveal && k >= P.shown));
+      steps.forEach((li, k) => li.classList.toggle('step-pending', revealing(slide) && k >= P.shown));
       fitText(slide);
       count.textContent = `${P.i + 1} / ${P.slides.length}`;
       bar.style.width = `${((P.i + 1) / P.slides.length) * 100}%`;
@@ -359,11 +365,11 @@
     };
     P.next = () => {
       const total = stepsOf(P.slides[P.i]).length;
-      if (P.reveal && P.shown < total) { P.shown++; P.render(); return; }
+      if (revealing(P.slides[P.i]) && P.shown < total) { P.shown++; P.render(); return; }
       if (P.i < P.slides.length - 1) P.go(P.i + 1, false);
     };
     P.prev = () => {
-      if (P.reveal && P.shown > 0) { P.shown--; P.render(); return; }
+      if (revealing(P.slides[P.i]) && P.shown > 0) { P.shown--; P.render(); return; }
       if (P.i > 0) P.go(P.i - 1, true);
     };
     P.toggleReveal = () => { P.reveal = !P.reveal; saveFlag(REVEAL_KEY, P.reveal); P.shown = 0; P.render(); };

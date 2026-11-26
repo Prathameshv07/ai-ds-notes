@@ -374,6 +374,28 @@ summary.callout-title .callout-label ~ *{ margin-left:.6rem; }
 .cont{ font-weight:400; font-size:.8em; color:var(--muted); }
 .kp-lines{ line-height:2; }
 
+/* career paths (plan v2.7) */
+.home-paths{ background:var(--surface); border:1px solid var(--line); border-left:4px solid var(--accent); border-radius:var(--radius); padding:1rem 1.1rem 1.2rem; }
+.home-paths h2{ font-size:1.45rem; }
+.lead{ font-size:1rem; color:var(--ink); margin:.2rem 0 1rem; }
+.path-card{ border-color:color-mix(in srgb, var(--accent) 35%, var(--line)); }
+.bar{ height:6px; background:var(--line); border-radius:99px; overflow:hidden; margin:.5rem 0 .1rem; }
+.bar span{ display:block; height:100%; background:var(--accent); border-radius:99px; }
+.path-progress{ display:flex; flex-wrap:wrap; align-items:center; gap:.4rem .8rem; font-size:.85rem; color:var(--muted); margin:.4rem 0 1rem; }
+.path-progress .bar{ flex:1 1 10rem; max-width:18rem; margin:0; }
+.path-jumps{ display:flex; flex-wrap:wrap; gap:.4rem; margin:0 0 1.2rem; font-size:.82rem; }
+.path-jumps a{ text-decoration:none; padding:.2rem .6rem; border:1px solid var(--line); border-radius:99px; background:var(--surface); }
+.path-jumps a:hover{ border-color:var(--accent); }
+.path-block{ margin-top:1.6rem; scroll-margin-top:4.5rem; }
+.path-block h2{ display:flex; align-items:center; gap:.5rem; font-size:1.2rem; margin:0 0 .4rem; }
+.path-block h2 .icon{ color:var(--accent); }
+.path-block .md{ background:var(--surface); border:1px solid var(--line); border-radius:var(--radius); padding:.2rem 1rem; }
+.path-block .md a[target="_blank"]::after{ content:" ↗"; font-size:.8em; }
+.path-stage{ scroll-margin-top:4.5rem; }
+.milestone{ display:flex; gap:.5rem; align-items:flex-start; margin:.6rem 0 0; padding:.55rem .8rem; font-size:.92rem;
+  background:color-mix(in srgb, var(--co-green) 9%, var(--surface)); border:1px solid color-mix(in srgb, var(--co-green) 35%, var(--line)); border-radius:var(--radius); }
+.milestone .icon{ color:var(--co-green); margin-top:.2em; }
+
 /* print dialog */
 .print-dialog{ border:1px solid var(--line); border-radius:var(--radius); background:var(--surface); color:var(--ink); padding:1rem 1.2rem; width:min(27rem, calc(100vw - 2rem)); }
 .print-dialog::backdrop{ background:rgba(0,0,0,.45); }
