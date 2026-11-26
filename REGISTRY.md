@@ -7,8 +7,17 @@
 
 | id | title | subject | type | status | summary | prerequisites |
 |---|---|---|---|---|---|---|
+| eigenvalues-and-eigenvectors | Eigenvalues and Eigenvectors | linear-algebra | theory | planned | Covers: directions a matrix only stretches, computing them for a 2×2 matrix, the link to PCA | matrices |
+| matrices | Matrices and Matrix Operations | linear-algebra | theory | planned | Covers: addition, multiplication, transpose, identity and inverse, a matrix as a data table and as a transformation | vectors |
+| vectors | Vectors | linear-algebra | theory | planned | Covers: vectors as lists and as arrows, addition, scalar multiplication, dot product, length (norm), distance |  |
+| derivatives | Derivatives and Gradients | calculus | theory | planned | Covers: rate of change, basic rules, chain rule, partial derivatives, the gradient vector, finding minima |  |
+| gradient-descent | Gradient Descent | calculus | theory | planned | Covers: the update rule, learning rate, convergence, batch and stochastic versions, local minima | derivatives |
+| ab-test-analysis-project | A/B Test of a Checkout Page | prob-stats | project | planned | Covers: analyse a simulated website experiment, test significance, estimate the lift, write a recommendation | ab-testing |
+| ab-testing | A/B Testing | prob-stats | theory | planned | Covers: designing an experiment, control and treatment groups, conversion rates, two-proportion z-test, sample size, pitfalls such as peeking | hypothesis-testing |
+| anova | Analysis of Variance (ANOVA) | prob-stats | theory | planned | Covers: comparing three or more means, one-way and two-way ANOVA, F-statistic, the idea of post-hoc tests | t-tests |
 | central-tendency | Measures of Central Tendency | prob-stats | theory | reviewed | A measure of central tendency is a single value that represents the centre, or typical value, of a dataset; the three… |  |
 | central-tendency-practical | Mean, Median and Mode of Sales Data | prob-stats | practical | reviewed |  | central-tendency |
+| chi-square-tests | Chi-Square Tests | prob-stats | theory | planned | Covers: goodness-of-fit test, test of independence, contingency tables, expected counts, categorical data | hypothesis-testing |
 | conditional-probability | Conditional Probability and Bayes' Theorem | prob-stats | theory | draft | Conditional probability $P(A \mid B)$ is the probability that $A$ happens given that $B$ has already happened, found by… | probability-basics |
 | conditional-probability-practical | Probabilities from Simulations and Sales Data | prob-stats | practical | draft |  | conditional-probability, probability-simulation-practical |
 | confidence-intervals | Estimation and Confidence Intervals | prob-stats | theory | draft | A confidence interval is a range of values, computed from a sample, that is expected to contain the population… | sampling-distributions |
@@ -25,19 +34,27 @@
 | frequency-distribution | Frequency Distributions | prob-stats | theory | planned | Covers: class intervals, frequency and cumulative frequency tables for discrete and continuous data | types-of-variables |
 | hypothesis-testing | Hypothesis Testing and Type I and II Errors | prob-stats | theory | draft | Hypothesis testing is a procedure that uses sample data to decide whether there is enough evidence to reject a claim… | sampling-distributions, confidence-intervals |
 | hypothesis-testing-practical | Confidence Intervals and Hypothesis Tests on Sales Data | prob-stats | practical | draft |  | hypothesis-testing, confidence-intervals |
+| multiple-linear-regression | Multiple Linear Regression | prob-stats | theory | planned | Covers: several predictors, interpreting coefficients, adjusted R², dummy variables, multicollinearity, residual checks | simple-linear-regression |
 | normal-distribution | The Normal Distribution | prob-stats | theory | draft | The normal distribution is a symmetric, bell-shaped continuous distribution completely described by its mean μ and… | continuous-distributions, dispersion |
 | normal-distribution-practical | Normal Random Numbers and the Empirical Rule | prob-stats | practical | draft |  | normal-distribution |
 | prob-stats-intro | Why Probability & Statistics? | prob-stats | intro | reviewed |  |  |
 | probability-basics | Probability Basics | prob-stats | theory | draft | Probability is a number between 0 and 1 that measures how likely an event is to happen, where 0 means impossible and 1… |  |
 | probability-simulation-practical | Simulating Probability Experiments | prob-stats | practical | draft |  | probability-basics |
 | quartiles-and-percentiles | Quartiles and Percentiles | prob-stats | theory | reviewed | Quartiles, deciles and percentiles are values that divide ordered data into 4, 10 and 100 equal parts, and the… | central-tendency |
+| sales-forecasting-project | Sales Forecasting for Sahyadri Mart | prob-stats | project | planned | Covers: forecast monthly store sales with moving averages, smoothing and regression; compare forecast errors | time-series-analysis |
 | sampling-distributions | Sampling Distributions and the Central Limit Theorem | prob-stats | theory | draft | The sampling distribution of a statistic is the distribution of its values across all possible samples of the same… | sampling-techniques, normal-distribution |
 | sampling-distributions-practical | Sampling Distributions and the CLT | prob-stats | practical | draft |  | sampling-distributions, sampling-techniques |
 | sampling-techniques | Sampling Techniques | prob-stats | theory | draft | Sampling is the selection of a part of a population to study so that conclusions can be drawn about the whole, and… | probability-basics |
 | simple-linear-regression | Simple Linear Regression | prob-stats | theory | planned | Covers: regression line, least squares, slope and intercept, prediction, R², regression vs correlation | correlation |
 | simple-linear-regression-practical | Regression of Sales Revenue on Advertising | prob-stats | practical | reviewed |  | correlation-practical, simple-linear-regression |
 | skewness-and-kurtosis | Skewness and Kurtosis | prob-stats | theory | reviewed | Skewness measures the lack of symmetry of a distribution (which side its long tail is on), and kurtosis measures how… | central-tendency, dispersion |
+| t-tests | t-Tests | prob-stats | theory | planned | Covers: one-sample, independent two-sample and paired t-tests, their assumptions, choosing t or z | hypothesis-testing |
+| time-series-analysis | Time Series Analysis and Forecasting | prob-stats | theory | planned | Covers: trend, seasonality and noise, moving averages, exponential smoothing, simple forecasts and forecast error | simple-linear-regression |
 | types-of-variables | Types of Variables and Scales of Measurement | prob-stats | theory | planned | Covers: categorical and numerical variables, discrete and continuous, nominal, ordinal, interval and ratio scales |  |
+| python-basics | Python Basics | python | theory | planned | Covers: running Python in Colab, variables, numbers and strings, input and output, f-strings, comments |  |
+| python-collections | Lists, Tuples, Sets and Dictionaries | python | theory | planned | Covers: creating and changing each collection, slicing, looping, comprehensions, choosing the right one | python-control-flow |
+| python-control-flow | Control Flow in Python | python | theory | planned | Covers: if-elif-else, for and while loops, range, break and continue, simple try-except | python-basics |
+| python-functions | Functions in Python | python | theory | planned | Covers: defining and calling functions, parameters and defaults, return values, scope, lambda, importing modules | python-control-flow |
 | acid-properties | ACID Properties | databases | theory | planned | Covers: transactions, atomicity, consistency, isolation, durability |  |
 | associative-entities | Associative (Composite) Entities | databases | theory | draft | An associative (composite, bridge) entity turns an M:N relationship into two 1:M relationships, and stores the facts… | connectivity-and-cardinality, weak-entities |
 | connectivity-and-cardinality | Connectivity, Cardinality and Participation | databases | theory | draft | Connectivity names the relationship type (1:1, 1:M, M:N), cardinality gives the minimum and maximum number of linked… | er-model |
@@ -55,6 +72,14 @@
 | normalization | Normalization | databases | theory | planned | Covers: anomalies, need for normalization, 1NF, 2NF, 3NF, BCNF, denormalization |  |
 | nosql-databases | NoSQL Databases | databases | theory | planned | Covers: key-value, document, column-family and graph stores; when to choose NoSQL | types-of-databases |
 | relationship-degree | Relationship Degree and Recursive Relationships | databases | theory | draft | The degree of a relationship is the number of entity types in it: unary (one, also called recursive), binary (two) or… | connectivity-and-cardinality |
+| sql-aggregates | Aggregate Functions and GROUP BY | databases | theory | planned | Covers: COUNT, SUM, AVG, MIN, MAX, GROUP BY, HAVING, WHERE vs HAVING | sql-select-queries |
+| sql-basics | SQL Basics: Creating and Changing Tables | databases | theory | planned | Covers: DDL and DML, CREATE, ALTER, DROP, INSERT, UPDATE, DELETE, data types, constraints | keys |
+| sql-business-questions-project | Answering Business Questions with SQL | databases | project | planned | Covers: load a retail database and answer 15 business questions with joins, aggregates and window functions | sql-joins, sql-window-functions |
+| sql-functions | SQL Built-in Functions | databases | theory | planned | Covers: string, date and numeric functions, CASE expressions, COALESCE, type casting | sql-select-queries |
+| sql-joins | SQL Joins | databases | theory | planned | Covers: inner, left, right, full and self joins, join conditions, joining three tables | sql-select-queries |
+| sql-select-queries | SELECT Queries | databases | theory | planned | Covers: SELECT, WHERE, comparison and logical operators, ORDER BY, DISTINCT, LIMIT, LIKE, IN, BETWEEN, NULL | sql-basics |
+| sql-subqueries | Subqueries and CTEs | databases | theory | planned | Covers: subqueries in WHERE and FROM, IN and EXISTS, correlated subqueries, WITH (common table expressions), views | sql-joins |
+| sql-window-functions | Window Functions | databases | theory | planned | Covers: OVER and PARTITION BY, ROW_NUMBER, RANK and DENSE_RANK, running totals, LAG and LEAD | sql-aggregates |
 | types-of-databases | Types of Databases | databases | theory | reviewed | Databases are classified by how many users they serve, where the data is kept, what the data is used for, and how… | what-is-dbms |
 | weak-entities | Weak Entities and Relationship Strength | databases | theory | draft | A weak entity cannot exist without its parent and borrows part of its primary key from it; the relationship that gives… | connectivity-and-cardinality |
 | what-is-dbms | What is a DBMS? | databases | theory | reviewed | A DBMS is software that keeps data in one shared, organised place and controls how it is defined, accessed, updated and… |  |
@@ -64,13 +89,58 @@
 | data-collection-practical | Collecting Business Datasets | data-analysis | practical | reviewed |  | business-analytics |
 | exploratory-data-analysis | Exploratory Data Analysis (EDA) | data-analysis | theory | reviewed | Exploratory data analysis (EDA) is the first, open-minded examination of a dataset, using summary numbers and simple… | business-analytics |
 | exploratory-data-analysis-practical | Exploratory Data Analysis on Sales Data | data-analysis | practical | reviewed |  | exploratory-data-analysis, data-collection-practical |
+| numpy-arrays | NumPy Arrays | data-analysis | theory | planned | Covers: creating arrays, shape and dtype, indexing and slicing, vectorised operations, broadcasting, aggregations | python-collections |
+| pandas-dataframes | pandas Series and DataFrames | data-analysis | theory | planned | Covers: reading CSV and Excel files, inspecting data, selecting rows and columns, filtering, sorting, adding columns | numpy-arrays |
+| pandas-groupby | Grouping and Aggregation in pandas | data-analysis | theory | planned | Covers: groupby, agg, pivot_table, crosstab, the split-apply-combine idea | pandas-dataframes |
+| pandas-merge | Combining Data in pandas | data-analysis | theory | planned | Covers: merge (inner, left, right, outer), join, concat, duplicate and missing keys | pandas-dataframes |
+| sales-eda-project | Exploratory Analysis of Sahyadri Mart Sales | data-analysis | project | planned | Covers: clean, explore and summarise two years of store sales; present five business insights with charts | exploratory-data-analysis, data-cleaning |
+| bar-and-line-charts | Bar and Line Charts | data-viz | theory | planned | Covers: bar charts for comparison, line charts for trends over time, grouped and stacked bars, misleading axes | choosing-a-chart |
 | box-plot-practical | Box Plots and Outliers in Sales Data | data-viz | practical | draft |  | distribution-plots, histogram-practical |
 | choosing-a-chart | Choosing the Right Chart | data-viz | theory | planned | Covers: matching chart to question (comparison, trend, distribution, relationship, part of whole), when not to use pie charts | data-viz-intro |
+| data-storytelling | Data Storytelling | data-viz | theory | planned | Covers: knowing the audience, one message per chart, decluttering, annotation, structuring a findings presentation | choosing-a-chart |
 | data-viz-intro | Why Data Visualization? | data-viz | intro | draft |  |  |
 | distribution-plots | Graphing a Distribution: Histograms and Box Plots | data-viz | theory | draft | A histogram shows the shape of a numerical variable by counting how many values fall in each interval; a box plot… | central-tendency, quartiles-and-percentiles |
 | histogram-practical | Histograms of Sales Data | data-viz | practical | draft |  | distribution-plots |
+| plotting-with-matplotlib | Plotting with Matplotlib and Seaborn | data-viz | theory | planned | Covers: figure and axes, line, bar, scatter and histogram plots, labels and legends, subplots, seaborn statistical plots | pandas-dataframes |
 | scatter-plot | Scatter Plot | data-viz | theory | planned | Covers: plotting two numerical variables, reading direction, strength, form and outliers, colouring by group |  |
+| association-rules | Association Rules and Apriori | ml | theory | planned | Covers: market basket analysis, support, confidence and lift, the Apriori algorithm | probability-basics |
+| bias-variance-tradeoff | Bias, Variance, Overfitting and Underfitting | ml | theory | planned | Covers: training vs test error, model complexity, the bias-variance trade-off, learning curves | train-test-split |
+| categorical-encoding | Encoding Categorical Variables | ml | theory | planned | Covers: label, ordinal and one-hot encoding, the dummy variable trap, high-cardinality categories | types-of-variables |
+| classification-metrics | Classification Metrics | ml | theory | planned | Covers: confusion matrix, accuracy, precision, recall, F1, ROC curve and AUC, choosing a threshold | logistic-regression |
+| cross-validation | Cross-Validation | ml | theory | planned | Covers: k-fold and stratified k-fold, leave-one-out, using cross-validation to choose a model | train-test-split |
+| customer-churn-project | Customer Churn Prediction | ml | project | planned | Covers: predict which telecom customers will leave; handle imbalance, choose a threshold, explain the drivers | classification-metrics, imbalanced-data |
+| customer-segmentation-project | Customer Segmentation | ml | project | planned | Covers: RFM features from transactions, k-means segments, profiling and naming segments for marketing | k-means-clustering |
+| decision-trees | Decision Trees | ml | theory | planned | Covers: splitting rules, entropy, information gain, Gini impurity, the ID3 algorithm, depth and pruning | bias-variance-tradeoff |
+| ensemble-learning | Ensemble Learning | ml | theory | planned | Covers: why combining models helps, bagging, boosting, voting, stacking | decision-trees |
+| feature-engineering | Feature Engineering and Selection | ml | theory | planned | Covers: features from dates and text, binning, interactions, filter and wrapper selection, feature importance | categorical-encoding |
+| feature-scaling | Feature Scaling | ml | theory | planned | Covers: min-max scaling, standardisation, which algorithms need scaling, fitting the scaler on training data only | train-test-split |
+| gradient-boosting | Gradient Boosting | ml | theory | planned | Covers: sequential error correction, learning rate and number of trees, XGBoost and LightGBM, controlling overfitting | ensemble-learning |
+| hierarchical-clustering | Hierarchical Clustering | ml | theory | planned | Covers: agglomerative and divisive clustering, linkage methods, dendrograms, cutting the tree | k-means-clustering |
+| house-price-prediction-project | House Price Prediction | ml | project | planned | Covers: predict flat prices from size, location and amenities; compare linear, tree and boosting models; explain the errors | regression-metrics, gradient-boosting |
+| hyperparameter-tuning | Hyperparameter Tuning | ml | theory | planned | Covers: parameters vs hyperparameters, grid search, random search, validation curves, keeping the test set untouched | cross-validation |
+| imbalanced-data | Handling Imbalanced Data | ml | theory | planned | Covers: why accuracy misleads, undersampling, oversampling and SMOTE, class weights, threshold tuning | classification-metrics |
+| k-means-clustering | k-Means Clustering | ml | theory | planned | Covers: the algorithm step by step, choosing k (elbow, silhouette), scaling, limitations | feature-scaling |
+| k-nearest-neighbours | k-Nearest Neighbours | ml | theory | planned | Covers: distance measures, choosing k, majority vote, why scaling matters, strengths and limits | feature-scaling |
+| logistic-regression | Logistic Regression | ml | theory | planned | Covers: the sigmoid, probability output, decision threshold, log loss, interpreting coefficients | ml-linear-regression |
+| ml-linear-regression | Linear Regression as Machine Learning | ml | theory | planned | Covers: the MSE cost function, fitting by gradient descent vs the normal equation, the scikit-learn workflow | multiple-linear-regression, gradient-descent |
+| ml-workflow | The Machine Learning Workflow | ml | theory | planned | Covers: framing the problem, collecting data, splitting, training, evaluating, tuning, deploying, monitoring | types-of-machine-learning |
+| naive-bayes | Naive Bayes Classifier | ml | theory | planned | Covers: Bayes' theorem for classification, the independence assumption, Gaussian and multinomial variants, text classification | conditional-probability |
+| principal-component-analysis | Principal Component Analysis (PCA) | ml | theory | planned | Covers: the curse of dimensionality, components as directions of most variance, explained variance, choosing components | eigenvalues-and-eigenvectors, feature-scaling |
+| random-forest | Random Forest | ml | theory | planned | Covers: bootstrap samples, random feature subsets, out-of-bag error, feature importance | ensemble-learning |
+| regression-metrics | Regression Metrics | ml | theory | planned | Covers: MAE, MSE, RMSE, R², choosing a metric, residual plots | ml-linear-regression |
+| regularization | Regularisation: Ridge, Lasso and Elastic Net | ml | theory | planned | Covers: penalising large weights, L1 vs L2, the effect on overfitting, tuning the penalty | bias-variance-tradeoff, ml-linear-regression |
+| support-vector-machines | Support Vector Machines | ml | theory | planned | Covers: the maximum-margin line, support vectors, hard and soft margins, the kernel trick | vectors, logistic-regression |
+| train-test-split | Train, Validation and Test Sets | ml | theory | planned | Covers: why data is held out, split ratios, stratified splits, data leakage | ml-workflow |
+| types-of-machine-learning | Types of Machine Learning | ml | theory | planned | Covers: supervised, unsupervised, semi-supervised and reinforcement learning; classification vs regression; examples |  |
+| backpropagation | Backpropagation | dl | theory | planned | Covers: loss functions, the chain rule through layers, weight updates, vanishing gradients, the training loop | neural-networks, gradient-descent |
+| neural-networks | Neural Networks | dl | theory | planned | Covers: the artificial neuron, perceptron, layers, activation functions, forward pass, an MLP solving XOR | logistic-regression, matrices |
 | data-warehouse | Data Warehouse | data-eng | theory | planned | Covers: OLTP vs OLAP, purpose of a warehouse, ETL basics, star schema | types-of-databases |
 | bi-intro | Why Business Intelligence? | bi | intro | draft |  |  |
 | business-intelligence | Business Intelligence: Tools, Dashboards and Reports | bi | theory | draft | Business intelligence (BI) is the set of tools and processes that collect business data into one place and present it… | business-analytics |
 | dashboard-design | Dashboard Design and KPIs | bi | theory | planned | Covers: choosing KPIs, layout, filters and drill-down, avoiding clutter, designing for the audience | business-intelligence |
+| pivot-tables | Pivot Tables and Pivot Charts | bi | theory | planned | Covers: building a pivot table, rows, columns, values and filters, grouping dates, pivot charts | spreadsheet-basics |
+| power-bi-basics | Power BI Basics | bi | theory | planned | Covers: loading and shaping data with Power Query, relationships, visuals, slicers, simple DAX measures, publishing | business-intelligence |
+| sales-dashboard-project | Sales Performance Dashboard | bi | project | planned | Covers: build an interactive KPI dashboard for Sahyadri Mart in Power BI or Excel, with filters and a one-page summary | dashboard-design, power-bi-basics |
+| spreadsheet-basics | Spreadsheet Basics | bi | theory | planned | Covers: workbooks, relative and absolute cell references, formulas, common functions, sorting, filtering, data validation |  |
+| spreadsheet-lookups | Lookup and Logical Functions | bi | theory | planned | Covers: IF and nested IF, COUNTIF and SUMIF, VLOOKUP, XLOOKUP, INDEX-MATCH | spreadsheet-basics |
+| model-deployment | Deploying a Model | mlops | theory | planned | Covers: saving a model with joblib, batch vs online prediction, serving with FastAPI, demo apps with Streamlit | ml-workflow |
