@@ -48,7 +48,7 @@ A graph of the distribution answers four questions at once:
 
 Numbers such as the mean and SD ([[central-tendency]], [[dispersion]]) answer the first two only partly, and the last two not at all.
 
-### Q2. What is a histogram?
+### Q2. What is a histogram? ⭐
 
 ==A histogram is a bar graph of a frequency table: the x-axis is divided into equal intervals (bins), and each bar's height is the number of values in that bin.==
 
@@ -58,7 +58,7 @@ Numbers such as the mean and SD ([[central-tendency]], [[dispersion]]) answer th
 
 Building one is building a frequency table ([[frequency-distribution]]) and drawing it. For S05: 244 of 731 days (33%) fall in 1,100–1,299, the tallest bar.
 
-### Q3. How is a histogram different from a bar chart?
+### Q3. How is a histogram different from a bar chart? ⭐
 
 | | Histogram | Bar chart |
 |---|---|---|
@@ -93,7 +93,7 @@ Treat it as a start, not a law. ==Try two or three bin counts==; trust only the 
 
 ==A bimodal histogram usually means two groups are mixed in one column.== Split the data by the group and look again. Skewness as a number is in [[skewness-and-kurtosis]].
 
-### Q6. What is a box plot?
+### Q6. What is a box plot? ⭐
 
 ==A box plot draws the five-number summary: minimum, Q1, median, Q3 and maximum, with outliers shown as separate dots.==
 
@@ -104,7 +104,7 @@ Treat it as a start, not a law. ==Try two or three bin counts==; trust only the 
 
 The box plot was introduced by the statistician John Tukey in the 1970s as a quick, hand-drawn summary.
 
-### Q7. How are outliers and whiskers decided?
+### Q7. How are outliers and whiskers decided? ⭐
 
 The usual rule is ==Tukey's **1.5 × IQR rule**==:
 
