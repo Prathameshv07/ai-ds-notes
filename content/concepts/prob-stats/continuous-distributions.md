@@ -29,7 +29,7 @@ A continuous probability distribution describes a variable that can take any val
 
 ## Explained
 
-### Q1. How does a continuous distribution give probabilities?
+### Q1. How does a continuous distribution give probabilities? ⭐
 
 A continuous distribution is described by a **probability density function (pdf)** $f(x)$.
 
@@ -51,7 +51,7 @@ $$P(a < X \le b) = F(b) - F(a)$$
 
 Software (Excel's `NORM.DIST`, Python's `scipy.stats`) returns CDF values, so this one formula covers most calculations.
 
-### Q3. What is the uniform distribution?
+### Q3. What is the uniform distribution? ⭐
 
 ==Every value between a and b is equally likely.== The density is a flat rectangle:
 
@@ -64,7 +64,7 @@ Example: a bus comes every 20 minutes and you arrive at a random time. Your wait
 
 Random-number generators produce uniform numbers between 0 and 1; simulations build everything else from them.
 
-### Q4. What is the exponential distribution?
+### Q4. What is the exponential distribution? ⭐
 
 ==It models the waiting time until the next event== when events happen at a constant average rate $\lambda$ per unit time.
 

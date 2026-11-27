@@ -49,7 +49,7 @@ Two conditions must hold:
 |---|---|---|---|---|
 | $P(X = x)$ | 0.50 | 0.30 | 0.15 | 0.05 |
 
-### Q3. What are the expected value and variance?
+### Q3. What are the expected value and variance? ⭐
 
 $$E(X) = \mu = \sum x \, P(x) \qquad \text{Var}(X) = \sigma^2 = \sum (x - \mu)^2 P(x)$$
 
@@ -58,7 +58,7 @@ $$E(X) = \mu = \sum x \, P(x) \qquad \text{Var}(X) = \sigma^2 = \sum (x - \mu)^2
 
 For the defects table: $E(X) = 0(0.5) + 1(0.3) + 2(0.15) + 3(0.05) = 0.75$ defects a day. Over 100 days expect about 75 defects.
 
-### Q4. What is the binomial distribution?
+### Q4. What is the binomial distribution? ⭐
 
 It counts ==the number of successes in n trials==, when:
 - ==the number of trials $n$ is fixed==;
@@ -72,7 +72,7 @@ $\binom{n}{k} = \frac{n!}{k!(n-k)!}$ counts the ways to choose which $k$ trials 
 
 Mean $np$; variance $np(1 - p)$.
 
-### Q5. What is the Poisson distribution?
+### Q5. What is the Poisson distribution? ⭐
 
 It counts ==the number of events in a fixed interval== of time or space, when events occur independently at a constant average rate $\lambda$ (lambda): calls per hour, accidents per month, typos per page.
 

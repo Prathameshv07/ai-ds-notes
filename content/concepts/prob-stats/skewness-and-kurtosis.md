@@ -32,7 +32,7 @@ Skewness measures the lack of symmetry of a distribution (which side its long ta
 
 ## Explained
 
-### Q1. What is skewness?
+### Q1. What is skewness? ⭐
 
 ==A distribution is **symmetric** when its left and right halves are mirror images==. Then mean = median = mode.
 
@@ -43,7 +43,7 @@ Skewness measures the lack of symmetry of a distribution (which side its long ta
 
 ![Three curves: a left-skewed curve with mean left of median left of mode, a symmetric bell curve where all three coincide, and a right-skewed curve with mode left of median left of mean](../../assets/img/prob-stats/skewness-shapes.png)
 
-### Q2. How is skewness measured with averages?
+### Q2. How is skewness measured with averages? ⭐
 
 ==**Karl Pearson's coefficient** compares the mean with the mode or the median==, in units of SD:
 
@@ -74,7 +74,7 @@ $$\gamma_1 = \frac{m_3}{m_2^{3/2}}$$
 
 Software such as pandas uses moment-based formulas.
 
-### Q4. What is kurtosis?
+### Q4. What is kurtosis? ⭐
 
 $$\beta_2 = \frac{m_4}{m_2^2}$$
 

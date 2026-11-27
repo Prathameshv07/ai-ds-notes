@@ -29,7 +29,7 @@ Probability is a number between 0 and 1 that measures how likely an event is to 
 
 ## Explained
 
-### Q1. What are the basic terms?
+### Q1. What are the basic terms? ⭐
 
 | Term | Meaning | Example |
 |---|---|---|
@@ -40,7 +40,7 @@ Probability is a number between 0 and 1 that measures how likely an event is to 
 
 Probability is written $P(A)$: the probability of event $A$.
 
-### Q2. What are the three ways to assign a probability?
+### Q2. What are the three ways to assign a probability? ⭐
 
 - ==**Classical (a priori):** favourable outcomes ÷ total outcomes==, when all outcomes are equally likely. A die: $P(6) = 1/6$.
 - ==**Empirical (relative frequency):**== how often the event happened in past data. 64 buyers out of 100 visitors gives $P(\text{buy}) = 0.64$.
@@ -58,14 +58,14 @@ $$P(A') = 1 - P(A)$$
 
 ==Use the complement when "not A" is easier to count.== If $P(\text{buy}) = 0.64$, then $P(\text{does not buy}) = 0.36$.
 
-### Q4. What kinds of events should I know?
+### Q4. What kinds of events should I know? ⭐
 
 - ==**Mutually exclusive:** cannot happen together==. A single bill cannot be paid entirely by UPI and entirely by cash.
 - ==**Exhaustive:** together they cover the whole sample space==. UPI, cash and card, if those are the only payment methods.
 - ==**Equally likely:** each has the same chance==, as with the faces of a fair die.
 - ==**Independent:** one happening does not change the chance of the other==. Two separate coin tosses. This idea needs [[conditional-probability]].
 
-### Q5. What is the addition rule?
+### Q5. What is the addition rule? ⭐
 
 The probability that $A$ **or** $B$ (or both) happens:
 

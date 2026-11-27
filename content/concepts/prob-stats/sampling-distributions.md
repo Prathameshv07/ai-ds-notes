@@ -28,7 +28,7 @@ The sampling distribution of a statistic is the distribution of its values acros
 
 ## Explained
 
-### Q1. What is a sampling distribution?
+### Q1. What is a sampling distribution? ⭐
 
 Imagine taking every possible random sample of size $n$ from a population and computing the sample mean $\bar{x}$ for each. ==The distribution of all those means is the sampling distribution of $\bar{x}$.==
 
@@ -43,7 +43,7 @@ $$E(\bar{x}) = \mu$$
 
 ==The sample mean is an **unbiased** estimator of μ==: on average across samples, it hits the population mean exactly. Individual samples miss, sometimes high and sometimes low, but there is no systematic tilt.
 
-### Q3. What is the standard error?
+### Q3. What is the standard error? ⭐
 
 ==The standard error (SE) is the standard deviation of a statistic's sampling distribution.== For the mean:
 
@@ -53,7 +53,7 @@ $$SE(\bar{x}) = \frac{\sigma}{\sqrt{n}}$$
 - When σ is unknown, estimate it by the sample SD $s$: $SE \approx s/\sqrt{n}$.
 - ==SD describes individual values; SE describes sample means.== Individual bills vary a lot; averages of 100 bills vary much less.
 
-### Q4. What does the central limit theorem (CLT) say?
+### Q4. What does the central limit theorem (CLT) say? ⭐
 
 ==For a large enough sample, the sampling distribution of $\bar{x}$ is approximately normal, whatever the shape of the population.==
 

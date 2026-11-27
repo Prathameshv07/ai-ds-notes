@@ -29,7 +29,7 @@ The normal distribution is a symmetric, bell-shaped continuous distribution comp
 
 ## Explained
 
-### Q1. What are the properties of the normal curve?
+### Q1. What are the properties of the normal curve? ⭐
 
 - ==**Bell-shaped and symmetric** about the mean μ==.
 - ==**Mean, median and mode are equal**== and sit at the centre.
@@ -39,7 +39,7 @@ The normal distribution is a symmetric, bell-shaped continuous distribution comp
 
 Its skewness is 0 and its kurtosis $\beta_2$ is 3 ([[skewness-and-kurtosis]]).
 
-### Q2. What is the empirical (68–95–99.7) rule?
+### Q2. What is the empirical (68–95–99.7) rule? ⭐
 
 For any normal distribution:
 
@@ -55,7 +55,7 @@ So a value more than 3 SDs from the mean happens only about 3 times in 1,000: ==
 
 ![A normal bell curve with mean μ marked in the centre. Shaded bands show 68 percent of the area within one standard deviation, 95 percent within two and 99.7 percent within three](../../assets/img/prob-stats/normal-empirical-rule.png)
 
-### Q3. What is a z-score?
+### Q3. What is a z-score? ⭐
 
 $$z = \frac{x - \mu}{\sigma}$$
 
@@ -82,7 +82,7 @@ To find the value with a given share below it (a percentile):
 
 Example: the top 5% of a test with $\mu = 60$, $\sigma = 10$ starts at $z = 1.645$, that is $x = 60 + 1.645 \times 10 = 76.45$ marks.
 
-### Q6. Why is the normal distribution so important?
+### Q6. Why is the normal distribution so important? ⭐
 
 - ==Many measurements are roughly normal==: heights, filling weights, measurement errors.
 - ==**Averages of large samples are approximately normal**, whatever the shape of the data== ([[sampling-distributions|central limit theorem]]). This is why confidence intervals and hypothesis tests use $z$ values such as 1.96.

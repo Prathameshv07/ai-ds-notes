@@ -36,7 +36,7 @@ Decision analysis is a structured way to choose among alternatives when the outc
 
 A **payoff table** shows alternatives as rows, states as columns, and payoffs in the cells.
 
-### Q2. What are the three decision environments?
+### Q2. What are the three decision environments? ⭐
 
 | Environment | What is known | How to decide |
 |---|---|---|
@@ -44,7 +44,7 @@ A **payoff table** shows alternatives as rows, states as columns, and payoffs in
 | ==Risk== | Probabilities of the states | Expected monetary value (EMV) |
 | ==Uncertainty== | Only the list of states, no probabilities | Criteria in Q3 |
 
-### Q3. How do I decide without probabilities?
+### Q3. How do I decide without probabilities? ⭐
 
 - ==**Maximax (optimistic):** pick the alternative with the best best-case payoff.==
 - ==**Maximin (pessimistic):** pick the alternative with the best worst-case payoff.==
@@ -54,7 +54,7 @@ A **payoff table** shows alternatives as rows, states as columns, and payoffs in
 
 Different criteria can recommend different alternatives: the choice reflects the decision maker's attitude to risk.
 
-### Q4. How do I decide when probabilities are known?
+### Q4. How do I decide when probabilities are known? ⭐
 
 The **expected monetary value** of an alternative is its probability-weighted average payoff:
 
@@ -74,7 +74,7 @@ where EV with perfect information $= \sum (\text{best payoff in each state} \tim
 
 ==EVPI is the most you should ever pay for information== such as a market survey. ==EVPI equals the minimum EOL.==
 
-### Q6. What is a decision tree?
+### Q6. What is a decision tree? ⭐
 
 ==A decision tree draws a decision as a sequence of choices and chance events, from left to right.==
 

@@ -32,7 +32,7 @@ Covariance measures whether two numerical variables tend to move in the same dir
 
 ## Explained
 
-### Q1. What does covariance measure?
+### Q1. What does covariance measure? ⭐
 
 Take each pair $(x_i, y_i)$, such as one day's ad spend and sales.
 
@@ -42,7 +42,7 @@ Take each pair $(x_i, y_i)$, such as one day's ad spend and sales.
 
 ==Covariance measures the direction of the linear relationship between two variables.==
 
-### Q2. What is the formula?
+### Q2. What is the formula? ⭐
 
 $$\text{Cov}(x, y) = s_{xy} = \frac{\sum (x_i - \bar{x})(y_i - \bar{y})}{n - 1}$$
 
@@ -79,7 +79,7 @@ Same relationship, very different numbers. So ==covariance tells you the **direc
 
 The fix is to ==divide by both SDs==, which removes the units. That gives the correlation coefficient: [[correlation]].
 
-### Q5. What properties should I know?
+### Q5. What properties should I know? ⭐
 
 - $\text{Cov}(x, y) = \text{Cov}(y, x)$: ==the order does not matter==.
 - $\text{Cov}(x, x) = \text{Var}(x)$.

@@ -28,7 +28,7 @@ Hypothesis testing is a procedure that uses sample data to decide whether there 
 
 ## Explained
 
-### Q1. What are the null and alternative hypotheses?
+### Q1. What are the null and alternative hypotheses? ⭐
 
 - ==**Null hypothesis $H_0$:** the claim of "no effect" or "no difference", the status quo.== It always contains equality: $H_0: \mu = 30$.
 - ==**Alternative hypothesis $H_1$ (or $H_a$):** what we look for evidence of.== $H_1: \mu \ne 30$, $\mu > 30$ or $\mu < 30$.
@@ -38,7 +38,7 @@ Hypothesis testing is a procedure that uses sample data to decide whether there 
 - ==**Two-tailed test:** $H_1$ uses ≠== (a difference in either direction).
 - ==**One-tailed test:** $H_1$ uses > or <== (a difference in one stated direction).
 
-### Q2. What are the test statistic and the p-value?
+### Q2. What are the test statistic and the p-value? ⭐
 
 ==The **test statistic** measures how far the sample result is from $H_0$, in standard errors.== For a mean:
 
@@ -62,7 +62,7 @@ Choose a **significance level** α before looking at the data, usually 0.05.
 
 ==We never "accept" or "prove" $H_0$==; we only fail to find evidence against it.
 
-### Q4. What are Type I and Type II errors?
+### Q4. What are Type I and Type II errors? ⭐
 
 | | $H_0$ actually true | $H_0$ actually false |
 |---|---|---|
@@ -75,7 +75,7 @@ Choose a **significance level** α before looking at the data, usually 0.05.
 - ==Lowering α (stricter test) raises β==, for a fixed sample size.
 - ==A larger sample reduces β without raising α.==
 
-### Q5. What are the steps of a hypothesis test?
+### Q5. What are the steps of a hypothesis test? ⭐
 
 1. ==State $H_0$ and $H_1$.==
 2. ==Choose the significance level α.==

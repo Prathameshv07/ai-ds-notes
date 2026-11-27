@@ -35,7 +35,7 @@ A measure of dispersion tells how spread out the values of a dataset are around 
 
 ## Explained
 
-### Q1. What is dispersion, and what kinds of measures are there?
+### Q1. What is dispersion, and what kinds of measures are there? ⭐
 
 ==Dispersion is the extent to which values differ from each other and from their average.== Small dispersion means the average is a good summary; large dispersion means it hides a lot.
 
@@ -53,7 +53,7 @@ Partner A: $32 - 28 = 4$ min. Partner B: $50 - 10 = 40$ min.
 - ==**Strength:** the simplest possible measure==; quick for quality checks and daily price bands.
 - ==**Weakness:** it uses only two values==. One unusual day changes it completely, and it says nothing about the values in between.
 
-### Q3. What is the variance?
+### Q3. What is the variance? ⭐
 
 Measure each value's distance from the mean, its **deviation** $x_i - \bar{x}$. ==Deviations always add up to zero, so we **square** them first==, then average.
 
@@ -65,7 +65,7 @@ $$\sigma^2 = \frac{\sum (x_i - \mu)^2}{N} \qquad s^2 = \frac{\sum (x_i - \bar{x}
 
 Another option, the ==**mean absolute deviation**== $\frac{\sum |x_i - \bar{x}|}{n}$, ==uses absolute values instead of squares==. It is easy to read but harder to use in further maths.
 
-### Q4. What is the standard deviation?
+### Q4. What is the standard deviation? ⭐
 
 ==The standard deviation is the square root of the variance.==
 
@@ -87,7 +87,7 @@ In practice:
 
 For large $n$ the difference is tiny; for small samples it matters.
 
-### Q6. What is the coefficient of variation (CV)?
+### Q6. What is the coefficient of variation (CV)? ⭐
 
 $$CV = \frac{\sigma}{\bar{x}} \times 100\%$$
 

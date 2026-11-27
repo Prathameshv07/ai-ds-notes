@@ -29,7 +29,7 @@ Conditional probability $P(A \mid B)$ is the probability that $A$ happens given 
 
 ## Explained
 
-### Q1. What is conditional probability?
+### Q1. What is conditional probability? ⭐
 
 $P(A \mid B)$ is read "the probability of $A$ given $B$".
 
@@ -49,7 +49,7 @@ $$P(A \cap B) = P(B) \times P(A \mid B) = P(A) \times P(B \mid A)$$
 
 Example: 2 of 10 items in a box are faulty. Pick two without replacement. $P(\text{both faulty}) = \frac{2}{10} \times \frac{1}{9} = \frac{2}{90} \approx 0.022$. ==The second probability is conditional==: one faulty item is already gone.
 
-### Q3. When are two events independent?
+### Q3. When are two events independent? ⭐
 
 ==A and B are independent if knowing B does not change the chance of A==:
 
@@ -62,7 +62,7 @@ Equivalently, ==for independent events, multiply the probabilities==: $P(A \cap 
 
 ==Checking independence in data means comparing P(A | B) with P(A).==
 
-### Q4. What is Bayes' theorem?
+### Q4. What is Bayes' theorem? ⭐
 
 Often we know $P(B \mid A)$ but want the reverse, $P(A \mid B)$. Bayes' theorem turns it round:
 

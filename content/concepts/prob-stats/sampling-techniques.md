@@ -28,7 +28,7 @@ Sampling is the selection of a part of a population to study so that conclusions
 
 ## Explained
 
-### Q1. What are the key terms?
+### Q1. What are the key terms? ⭐
 
 | Term | Meaning | Example |
 |---|---|---|
@@ -49,7 +49,7 @@ We use statistics to **estimate** parameters.
 - ==**Accuracy:** a small, well-trained survey team can make fewer recording errors== than a huge one.
 - ==**Impossibility:** some populations are infinite or unreachable==, such as all future customers.
 
-### Q3. What are the main probability sampling methods?
+### Q3. What are the main probability sampling methods? ⭐
 
 - ==**Simple random sampling (SRS):** every possible sample of size n has the same chance==; use random numbers or a lottery.
 - ==**Systematic:** pick a random start, then every k-th unit==, where $k = N/n$. Easy for lists and queues.
@@ -57,7 +57,7 @@ We use statistics to **estimate** parameters.
 - ==**Cluster:** randomly choose whole groups (clusters) and study everyone in them==, such as 3 of the 12 stores. Cheap, but less precise if clusters differ.
 - ==**Multistage:** combine methods==, such as choose stores, then days, then customers.
 
-### Q4. What are non-probability sampling methods?
+### Q4. What are non-probability sampling methods? ⭐
 
 - ==**Convenience:** whoever is easiest to reach==.
 - ==**Judgement (purposive):** an expert picks "typical" units.==
@@ -66,7 +66,7 @@ We use statistics to **estimate** parameters.
 
 They are quick and cheap, but ==selection probabilities are unknown, so sampling error cannot be measured== and bias is likely. Use them for exploration, not for firm conclusions.
 
-### Q5. What kinds of error can a sample have?
+### Q5. What kinds of error can a sample have? ⭐
 
 - ==**Sampling error:** the chance difference between a statistic and the parameter==, because we saw only part of the population. ==It shrinks as the sample grows== and can be measured ([[sampling-distributions]]).
 - ==**Non-sampling error (bias):** errors from how the data were collected==:

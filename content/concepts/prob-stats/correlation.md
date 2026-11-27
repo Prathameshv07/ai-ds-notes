@@ -32,7 +32,7 @@ The correlation coefficient r measures the strength and direction of the linear 
 
 ## Explained
 
-### Q1. What is Karl Pearson's correlation coefficient?
+### Q1. What is Karl Pearson's correlation coefficient? ⭐
 
 [[covariance]] gives the direction but its size depends on units. ==Dividing by both standard deviations removes the units==:
 
@@ -60,7 +60,7 @@ These cut-offs are rules of thumb; fields differ. ==The **sign** gives the direc
 
 ![Six scatter plots: r = 0.89 with points close to a rising line, r = 0.49 a looser rising cloud, r = 0.09 a shapeless cloud, r = −0.52 a loose falling cloud, r = −0.92 points close to a falling line, and a clear U-shape whose r is only −0.07](../../assets/img/prob-stats/scatter-patterns.png)
 
-### Q3. What are the properties of r?
+### Q3. What are the properties of r? ⭐
 
 - $-1 \le r \le 1$; ==it has no units==.
 - $r_{xy} = r_{yx}$: ==symmetric==.
@@ -69,7 +69,7 @@ These cut-offs are rules of thumb; fields differ. ==The **sign** gives the direc
 - ==r measures only linear relationships: r near 0 does not mean "no relationship".== The U-shape above has $r \approx 0$.
 - ==r is sensitive to outliers==: one extreme point can create or destroy a strong r.
 
-### Q4. Does correlation mean causation?
+### Q4. Does correlation mean causation? ⭐
 
 No. ==Correlation does not imply causation.== A strong r can arise because:
 

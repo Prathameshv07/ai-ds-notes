@@ -32,7 +32,7 @@ Quartiles, deciles and percentiles are values that divide ordered data into 4, 1
 
 ## Explained
 
-### Q1. What are quartiles, deciles and percentiles?
+### Q1. What are quartiles, deciles and percentiles? ⭐
 
 ==All three are **positional averages**== (quantiles): ==values found from the position of data arranged in order==.
 
@@ -58,7 +58,7 @@ $$Q_k \text{ at position } \frac{k(n+1)}{4}, \quad D_k \text{ at } \frac{k(n+1)}
 
 Example: 12, 15, 17, 20, 22 ($n = 5$). $Q_1$ at position $6/4 = 1.5$: $12 + 0.5(15 - 12) = 13.5$.
 
-### Q3. What are the IQR and the quartile deviation?
+### Q3. What are the IQR and the quartile deviation? ⭐
 
 $$\text{IQR} = Q_3 - Q_1 \qquad \text{QD} = \frac{Q_3 - Q_1}{2} \qquad \text{Coefficient of QD} = \frac{Q_3 - Q_1}{Q_3 + Q_1}$$
 
@@ -66,7 +66,7 @@ $$\text{IQR} = Q_3 - Q_1 \qquad \text{QD} = \frac{Q_3 - Q_1}{2} \qquad \text{Coe
 - ==The **quartile deviation** (semi-interquartile range) is half of it==. ==Its coefficient has no units==, so it compares groups like the CV does ([[dispersion]]).
 - Because they ignore the lowest and highest 25%, ==these measures are **robust**==: one extreme value hardly moves them. Use them with the median for skewed data, as you use the SD with the mean for symmetric data.
 
-### Q4. What is the five-number summary?
+### Q4. What is the five-number summary? ⭐
 
 ==Minimum, $Q_1$, median, $Q_3$, maximum==.
 

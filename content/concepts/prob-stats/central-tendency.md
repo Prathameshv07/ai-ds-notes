@@ -32,7 +32,7 @@ A measure of central tendency is a single value that represents the centre, or t
 
 ## Explained
 
-### Q1. What is central tendency, and what makes a good average?
+### Q1. What is central tendency, and what makes a good average? ⭐
 
 A dataset may have thousands of values. ==A measure of central tendency (an "average") replaces them with **one** typical value==, so we can describe and compare groups quickly.
 
@@ -46,7 +46,7 @@ A good average should be:
 
 No single average has all six properties, which is why we need three.
 
-### Q2. What is the arithmetic mean?
+### Q2. What is the arithmetic mean? ⭐
 
 ==The arithmetic mean is the sum of all values divided by the number of values.==
 
@@ -70,7 +70,7 @@ Example: your SGPA. A 4-credit subject counts twice as much as a 2-credit subjec
 
 In business, the average price per kg, the average bill value of a chain, and a price index are all weighted means. ==Averaging such figures without weights is a common error.==
 
-### Q4. What is the median?
+### Q4. What is the median? ⭐
 
 ==The median is the middle value when the data are arranged in order.==
 
@@ -81,7 +81,7 @@ In business, the average price per kg, the average bill value of a chain, and a 
 
 It needs only an order, so ==it also works for ordinal data==, such as ratings from "poor" to "excellent" (see [[types-of-variables]]).
 
-### Q5. What is the mode?
+### Q5. What is the mode? ⭐
 
 ==The mode is the value that occurs most often.==
 

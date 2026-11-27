@@ -28,7 +28,7 @@ A confidence interval is a range of values, computed from a sample, that is expe
 
 ## Explained
 
-### Q1. What are point and interval estimates?
+### Q1. What are point and interval estimates? ⭐
 
 - ==A **point estimate** is a single value from the sample used to estimate a parameter==: $\bar{x}$ for μ, $\hat{p}$ for $p$, $s$ for σ.
 - ==An **interval estimate** gives a range around the point estimate==, with a confidence level.
@@ -38,7 +38,7 @@ A good estimator is:
 - ==**consistent:** gets closer to the parameter as n grows==;
 - ==**efficient:** has the smallest SE among unbiased estimators==.
 
-### Q2. How is a confidence interval for a mean built?
+### Q2. How is a confidence interval for a mean built? ⭐
 
 Every confidence interval has the same structure:
 
@@ -73,7 +73,7 @@ $$\hat{p} \pm z^* \sqrt{\frac{\hat{p}(1 - \hat{p})}{n}}$$
 
 An opinion poll's "±3 points" is this margin of error at 95% confidence, for a sample of about 1,000.
 
-### Q5. What does "95% confidence" mean?
+### Q5. What does "95% confidence" mean? ⭐
 
 ==If we took many samples and built an interval from each, about 95% of those intervals would contain the true parameter.==
 
