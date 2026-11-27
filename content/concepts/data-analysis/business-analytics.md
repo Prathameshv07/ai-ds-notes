@@ -29,7 +29,7 @@ Business analytics is the use of data, statistical and quantitative methods, and
 
 ## Explained
 
-### Q1. What is business analytics?
+### Q1. What is business analytics? ⭐
 
 ==Business analytics (BA) is the use of data, statistical methods and computer tools to support business decisions.==
 
@@ -43,7 +43,7 @@ Four ingredients are always involved:
 - ==**Tools:** Excel, Python, Power BI==, Tableau.
 - ==**People:** analysts who ask the right question== and managers who act on the answer.
 
-### Q2. Why is business analytics important?
+### Q2. Why is business analytics important? ⭐
 
 - ==**Better decisions:** choices rest on evidence==, not only opinion or habit.
 - ==**Lower cost:** less waste==, less unsold stock, fewer wrong hires.
@@ -54,7 +54,7 @@ Four ingredients are always involved:
 
 Data is now cheap and plentiful; the advantage lies in using it well.
 
-### Q3. What is the scope of business analytics? (Types of analytics)
+### Q3. What is the scope of business analytics? (Types of analytics) ⭐
 
 The scope is usually described by the **question** being answered.
 
@@ -83,7 +83,7 @@ The scope is usually described by the **question** being answered.
 | Sports | Player selection, auction strategy |
 | Government | Crop and price monitoring, scheme targeting |
 
-### Q5. What role does analytics play in decision making?
+### Q5. What role does analytics play in decision making? ⭐
 
 A decision normally follows these steps, and analytics supports each one:
 

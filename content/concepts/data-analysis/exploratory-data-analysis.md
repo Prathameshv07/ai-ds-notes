@@ -32,7 +32,7 @@ Exploratory data analysis (EDA) is the first, open-minded examination of a datas
 
 ## Explained
 
-### Q1. What is EDA, and who introduced it?
+### Q1. What is EDA, and who introduced it? ⭐
 
 ==EDA is examining data with summaries and charts to understand it before formal analysis.==
 
@@ -56,7 +56,7 @@ EDA answers four practical questions:
 
 It also guides what comes next: which variables to clean, which method suits the data, and which questions are worth testing. Skipping EDA is the most common reason analyses and models fail quietly.
 
-### Q3. What are the steps of EDA?
+### Q3. What are the steps of EDA? ⭐
 
 ==Steps of EDA: understand structure, check quality, univariate analysis, bivariate analysis, outliers, summarise findings.==
 
@@ -91,7 +91,7 @@ For a numerical variable, describe its **centre** ([[central-tendency]]), its **
 
 ==A relationship found in EDA is a clue to investigate, not proof of cause.==
 
-### Q6. What is an outlier, and what should you do with one?
+### Q6. What is an outlier, and what should you do with one? ⭐
 
 ==An **outlier** is a value far away from most of the others.== One common rule marks values more than 1.5 × IQR beyond the quartiles (see [[quartiles-and-percentiles]]).
 
