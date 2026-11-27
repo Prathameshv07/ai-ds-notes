@@ -29,7 +29,7 @@ Connectivity names the relationship type (1:1, 1:M, M:N), cardinality gives the 
 
 ## Explained
 
-### Q1. What is connectivity? ⭐
+### Q1. What is connectivity? ⭐ [2M]
 
 ==Connectivity describes the classification of a relationship: 1:1, 1:M or M:N.==
 
@@ -70,7 +70,7 @@ A **circle** always means "zero is allowed", that is, optional.
 - Optional participation means the **minimum cardinality is 0**; mandatory means it is **at least 1**.
 - Elmasri and Navathe call these **total** and **partial** participation.
 
-### Q5. What is existence dependence? ⭐
+### Q5. What is existence dependence? ⭐ [2M]
 
 ==An entity is **existence-dependent** if it can exist only when it is linked to another entity.==
 

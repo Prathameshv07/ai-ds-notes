@@ -50,7 +50,7 @@ The degree of a relationship is the number of entity types in it: unary (one, al
   - **1:M:** an EMPLOYEE *manages* many EMPLOYEEs.
   - **M:N:** a COURSE *is a prerequisite for* many COURSEs, and may need many COURSEs.
 
-### Q3. How is a 1:M recursive relationship stored?
+### Q3. How is a 1:M recursive relationship stored? [2M]
 
 - The entity gets a foreign key that points back to its **own** primary key.
 - Example: EMPLOYEE (emp_id, name, ==**manager_id**==), where manager_id holds another employee's emp_id.

@@ -29,7 +29,7 @@ A DBMS describes data at three levels (physical, logical and view), so that each
 
 ## Explained
 
-### Q1. What is data abstraction?
+### Q1. What is data abstraction? [2M]
 
 ==Data abstraction means hiding the complex details of how data is stored and showing users only what they need.==
 
@@ -47,7 +47,7 @@ A DBMS describes data at three levels (physical, logical and view), so that each
 
 There is ==**one** physical level and **one** logical level, but **many** views==, one for each kind of user.
 
-### Q3. What are a schema and an instance? ⭐
+### Q3. What are a schema and an instance? ⭐ [2M]
 
 ==A schema is the overall design of the database; an instance is the data stored in it at one moment.==
 

@@ -51,7 +51,7 @@ The extended ER model adds supertypes and subtypes (with inheritance and constra
 - ==**Disjoint (non-overlapping)**: an instance belongs to **at most one** subtype.== A staff member is a teacher or a driver, not both.
 - ==**Overlapping**: an instance may belong to **more than one** subtype.== A PERSON at a university may be both a STUDENT and an EMPLOYEE.
 
-### Q4. What is the completeness constraint? ⭐
+### Q4. What is the completeness constraint? ⭐ [2M]
 
 ==The completeness constraint says whether every supertype instance must belong to a subtype.==
 
@@ -64,7 +64,7 @@ The extended ER model adds supertypes and subtypes (with inheritance and constra
 - ==**Generalization** is bottom-up==: start with separate entities (TEACHER, DRIVER), notice common attributes, and create a supertype.
 - Both produce the same kind of hierarchy; they differ only in the direction of discovery.
 
-### Q6. What is entity clustering? ⭐
+### Q6. What is entity clustering? ⭐ [2M]
 
 ==An **entity cluster** is a virtual entity that represents several entities and relationships in an ERD.==
 

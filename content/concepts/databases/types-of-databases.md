@@ -28,7 +28,7 @@ Databases are classified by how many users they serve, where the data is kept, w
 
 ## Explained
 
-### Q1. On what basis do we classify databases?
+### Q1. On what basis do we classify databases? [2M]
 
 There is no single list of "types". Instead, ==we describe a database by answering four questions==:
 

@@ -27,7 +27,7 @@ Data processing is the series of steps (collect, prepare, input, process, output
 
 ## Explained
 
-### Q1. What is data processing? ⭐
+### Q1. What is data processing? ⭐ [2M]
 
 ==Data processing is the collection and manipulation of raw data to produce meaningful information.==
 
@@ -67,7 +67,7 @@ Data processing is not a one-off task. Its output (stored results) often becomes
 - ==**Real-time processing:** a stricter form of online processing== where the response must come within a fixed, very short time. Example: traffic-signal control, an aircraft's control systems.
 - ==**Distributed processing:** the work is shared across several connected computers== in different places. Example: UPI payments handled by many bank servers.
 
-### Q5. How does database processing differ from file-based processing?
+### Q5. How does database processing differ from file-based processing? ⭐
 
 | File-based processing | Database processing |
 |---|---|

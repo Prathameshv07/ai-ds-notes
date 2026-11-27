@@ -29,7 +29,7 @@ A key is one or more attributes that uniquely identify each row; the primary key
 
 ## Explained
 
-### Q1. What is a key?
+### Q1. What is a key? [2M]
 
 ==A key is an attribute, or a set of attributes, that uniquely identifies each instance of an entity.==
 
@@ -48,7 +48,7 @@ A key is one or more attributes that uniquely identify each row; the primary key
 | ==**Foreign key (FK)**== | An attribute that refers to the PK of another (or the same) table | dept code in STUDENT |
 | ==**Secondary key**== | Used only for searching; need not be unique | last name |
 
-### Q3. What is entity integrity? ⭐
+### Q3. What is entity integrity? ⭐ [2M]
 
 ==Entity integrity means every primary key value is **unique** and **not null**.==
 

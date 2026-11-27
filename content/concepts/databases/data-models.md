@@ -28,7 +28,7 @@ A data model is a simple, usually graphical, picture of real-world data: what th
 
 ## Explained
 
-### Q1. What is a data model? ⭐
+### Q1. What is a data model? ⭐ [2M]
 
 ==A data model is a simple, usually graphical, representation of complex real-world data structures.==
 

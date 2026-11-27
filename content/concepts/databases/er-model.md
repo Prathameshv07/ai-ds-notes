@@ -29,7 +29,7 @@ The ER model describes a database design as entities, their attributes and the r
 
 ## Explained
 
-### Q1. What is the ER model? ⭐
+### Q1. What is the ER model? ⭐ [2M]
 
 ==The entity relationship model (ERM) describes a database as entities, their attributes and the relationships between them.==
 
@@ -38,7 +38,7 @@ The ER model describes a database design as entities, their attributes and the r
 - ==Its drawing is called an **ER diagram (ERD)**==.
 - It uses the building blocks you met in [[data-models]]: entities, attributes, relationships and constraints.
 
-### Q2. What is an entity?
+### Q2. What is an entity? [2M]
 
 ==An entity is a thing about which data is stored, such as STUDENT or COURSE.==
 
@@ -58,7 +58,7 @@ The ER model describes a database design as entities, their attributes and the r
 
 The set of allowed values of an attribute is its **domain**: marks from 0 to 100.
 
-### Q4. What is a relationship?
+### Q4. What is a relationship? [2M]
 
 ==A relationship is an association between entities, named with a verb.==
 

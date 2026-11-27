@@ -28,7 +28,7 @@ An associative (composite, bridge) entity turns an M:N relationship into two 1:M
 
 ## Explained
 
-### Q1. Why can't an M:N relationship be stored directly?
+### Q1. Why can't an M:N relationship be stored directly? [2M]
 
 - In a relational table, ==each cell holds **one value**==.
 - If STUDENT stored a list of course codes, or COURSE a list of roll numbers, one cell would hold many values.

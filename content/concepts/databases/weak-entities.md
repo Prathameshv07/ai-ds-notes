@@ -58,7 +58,7 @@ Example: DEPENDENT of an EMPLOYEE. A dependent (such as an employee's child, for
 
 In Elmasri and Navathe's terms, the weak entity's own part of the key (such as section) is its **partial key**, drawn with a dashed underline.
 
-### Q4. Is every existence-dependent entity weak?
+### Q4. Is every existence-dependent entity weak? [2M]
 
 ==No. Existence dependence alone is not enough.==
 

@@ -61,6 +61,26 @@ A designer must balance three goals that often pull in different directions:
 
 ==A perfect design that is too slow, or a fast design that cannot produce the reports, both fail.== The designer documents each trade-off.
 
+### Q4. Draw an ER diagram for an online food-delivery app. ⭐
+
+Rules: a customer places many orders; each order is from one restaurant and is delivered by one delivery partner; a restaurant offers many menu items; an order contains many menu items, and an item appears in many orders.
+
+- ==**Entities:** CUSTOMER, RESTAURANT, MENU_ITEM, ORDER, DELIVERY_PARTNER==.
+- ==**1:M relationships:**== customer places orders; restaurant receives orders and offers items; partner delivers orders.
+- ==**M:N resolved:**== ORDER–MENU_ITEM becomes ORDER_ITEM (order ID + item ID, with quantity).
+
+```mermaid
+erDiagram
+  accTitle: ER diagram for an online food-delivery app
+  accDescr: A customer places zero or many orders. A restaurant receives zero or many orders and offers one or many menu items. A delivery partner delivers zero or many orders. Each order has one or many order items, and each menu item appears in zero or many order items.
+  CUSTOMER ||--o{ ORDER : places
+  RESTAURANT ||--o{ ORDER : receives
+  RESTAURANT ||--|{ MENU_ITEM : offers
+  DELIVERY_PARTNER ||--o{ ORDER : delivers
+  ORDER ||--|{ ORDER_ITEM : contains
+  MENU_ITEM ||--o{ ORDER_ITEM : "appears in"
+```
+
 ## Analogy and real-life example
 
 An architect designing a house for a family follows the same loop: listen to the family (narrative), note their needs ("three bedrooms, parents on the ground floor": business rules), sketch a plan, add measurements (attributes), and show it to them. They say "the kitchen is too far from the dining room", and the architect redraws.
