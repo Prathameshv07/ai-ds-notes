@@ -22,7 +22,7 @@ ENGINE TEST FIXTURE, not teaching content. A paragraph with **bold**, *italic*, 
 Inline maths $x_i^2 + y_{ij}$ and a price of 5 dollars stays plain.
 
 ## Explained                        <!-- required · U · Q&A style -->
-### Q1. What is the placeholder?
+### Q1. What is the placeholder? ⭐
 ==A placeholder definition line with $x_i$ to copy.==
 
 Display maths on its own lines:
@@ -37,7 +37,7 @@ $$
 | 1 | placeholder | $a^2$ |
 | 2 | placeholder | text |
 
-### Q3. How does it work?
+### Q3. How does it work? ⭐️
 Placeholder sentence with ==a short highlighted rule== inside it.
 
 1. First step

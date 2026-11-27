@@ -424,6 +424,7 @@
     let saved = {};
     try { saved = JSON.parse(localStorage.getItem(PRINT_KEY)) || {}; } catch (e) { /* ignore */ }
     const mode = saved.mode === 'full' ? 'full' : 'notebook';
+    const starred = !!saved.starred;
     const size = saved.size === 'A5' ? 'A5' : 'A4';
     const dlg = document.createElement('dialog');
     dlg.className = 'print-dialog';
@@ -432,6 +433,8 @@
       <fieldset><legend>What to print</legend>
         <label class="opt"><input type="radio" name="mode" value="notebook"${mode === 'notebook' ? ' checked' : ''}>
           <span><b>${icon('notebook-text')}Notebook sheet</b><small>Only the parts to write down, about one page per note. A whole unit makes a revision sheet.</small></span></label>
+        <label class="opt opt-sub"><input type="checkbox" name="starred"${starred ? ' checked' : ''}>
+          <span><b>${icon('star')}⭐ only</b><small>Only the questions marked important. Notes with none are left out.</small></span></label>
         <label class="opt"><input type="radio" name="mode" value="full"${mode === 'full' ? ' checked' : ''}>
           <span><b>${icon('book-open')}Full note</b><small>Everything, with the answers in a key at the end.</small></span></label>
       </fieldset>
@@ -453,10 +456,14 @@
       dlg.querySelector('form').addEventListener('submit', (e) => {
         e.preventDefault();
         const f = new FormData(e.target);
-        const val = { mode: f.get('mode'), size: f.get('size') };
+        const val = { mode: f.get('mode'), size: f.get('size'), starred: f.get('mode') === 'notebook' && !!f.get('starred') };
         try { localStorage.setItem(PRINT_KEY, JSON.stringify(val)); } catch (err) { /* ignore */ }
         done(val);
       });
+      // "⭐ only" belongs to the Notebook sheet
+      const sync = () => { const cb = dlg.querySelector('[name="starred"]'); const nb = dlg.querySelector('[name="mode"][value="notebook"]').checked; cb.disabled = !nb; cb.closest('label').classList.toggle('is-off', !nb); };
+      dlg.querySelectorAll('[name="mode"]').forEach((r) => r.addEventListener('change', sync));
+      sync();
       dlg.showModal();
     });
   }
@@ -473,13 +480,18 @@
     return doc;
   }
 
-  function printPiece(doc, n, mode, article) {
+  // Returns false when nothing was added (⭐ only, and the note has no starred questions).
+  function printPiece(doc, n, mode, article, starredOnly = false) {
     const piece = document.createElement('section');
     piece.className = 'pd-note';
     const meta = [subjectTitle(n.subject), n.updated ? `Updated ${fmtDate(n.updated)}` : ''].filter(Boolean).map(esc).join(' · ');
     piece.innerHTML = `<header class="pd-head"><h1>${esc(n.title)}</h1><p>${meta}</p></header>`;
     if (mode === 'notebook') {
-      const parts = writeDownParts(article);
+      let parts = writeDownParts(article);
+      if (starredOnly) {
+        parts = parts.filter((p) => 'starred' in p.dataset);
+        if (!parts.length) return false;
+      }
       if (parts.length) parts.forEach((p) => piece.appendChild(p));
       else piece.insertAdjacentHTML('beforeend', '<p class="empty">This note has no write-down parts yet.</p>');
     } else {
@@ -488,6 +500,7 @@
       copy.insertAdjacentHTML('beforeend', buildAnswerKey(article));
     }
     doc.appendChild(piece);
+    return true;
   }
 
   function runPrint(opts, doc) {
@@ -512,6 +525,7 @@
     const opts = await printDialog(ids.length === 1 ? `Print ${titleOf(ids[0])}` : `Print ${ids.length} notes`);
     if (!opts) return;
     const doc = printDoc(opts.mode);
+    let added = 0;
     const stage = document.createElement('div');
     stage.className = 'pd-stage';
     doc.appendChild(stage);
@@ -522,9 +536,10 @@
       try { r = await renderArticle(n); } catch (e) { toast(`Couldn't load ${n.title}`); continue; }
       stage.replaceChildren(r.article);
       await Promise.all([r.mermaidCount ? renderMermaid(r.article) : null, r.codeCount ? highlightCode(r.article) : null]);
-      printPiece(doc, n, opts.mode, r.article);
+      if (printPiece(doc, n, opts.mode, r.article, opts.starred)) added++;
     }
     stage.remove();
+    if (!added) { doc.remove(); toast(opts.starred ? 'None of these notes has a ⭐ question yet.' : 'Nothing to print.'); return; }
     runPrint(opts, doc);
   }
 
@@ -764,17 +779,32 @@
     return { mermaidCount, codeCount };
   }
 
+  // A trailing ⭐ on a ### heading marks an important question (plan v2.9, decision 47). It is taken
+  // out of the heading text (so the anchor and section links don't change) and shown as a badge.
+  const STAR_RE = /\s*\u2B50\uFE0F?\s*$/u;
+  function takeStar(h) {
+    const walker = document.createTreeWalker(h, NodeFilter.SHOW_TEXT);
+    let last = null;
+    for (let t = walker.nextNode(); t; t = walker.nextNode()) if (t.nodeValue.trim()) last = t;
+    if (!last || !STAR_RE.test(last.nodeValue)) return false;
+    last.nodeValue = last.nodeValue.replace(STAR_RE, '');
+    return true;
+  }
+  const starBadge = () => `<span class="star-badge" title="Important question">${icon('star')}<span>Important</span></span>`;
+
   // Stable heading IDs for section links, e.g. note.html?id=normalization#q3-how-does-it-work
   function addHeadingIds(root) {
     const used = new Set();
     root.querySelectorAll('h2, h3, h4').forEach((h) => {
       [...h.childNodes].forEach((n) => { if (n.nodeType === 8) n.remove(); }); // drop <!-- template labels -->
+      const starred = h.tagName === 'H3' && takeStar(h);
       const text = h.textContent.trim();
       let id = slugify(text), k = 2;
       while (used.has(id)) id = slugify(text) + '-' + k++;
       used.add(id);
       h.id = id;
       h.innerHTML = `<span class="h-text">${h.innerHTML.trim()}</span>`;
+      if (starred) { h.classList.add('is-starred'); h.insertAdjacentHTML('beforeend', starBadge()); }
       const a = document.createElement('a');
       a.className = 'anchor';
       a.href = '#' + id;
@@ -877,6 +907,7 @@
       if (sec.classList.contains('write-down')) {
         const c = cleanCopy(sec);
         c.querySelectorAll('.callout-beyond').forEach((b) => b.remove());
+        if (c.querySelector('h3.is-starred')) c.dataset.starred = '';
         out.push(c);
         return;
       }
@@ -897,6 +928,7 @@
         const h = document.createElement('h3');
         h.className = head.tagName === 'H3' ? 'nb-question' : 'nb-section';
         h.innerHTML = head.querySelector('.h-text').innerHTML; // keeps maths and formatting
+        if (head.classList.contains('is-starred')) { box.dataset.starred = ''; h.insertAdjacentHTML('beforeend', starBadge()); }
         const ul = document.createElement('ul');
         marks.forEach((m) => { const li = document.createElement('li'); li.appendChild(m.cloneNode(true)); ul.appendChild(li); });
         box.append(h, ul);
@@ -908,7 +940,7 @@
 
   function buildToc(root) {
     const items = [...root.querySelectorAll('h2, h3')].map((h) =>
-      `<li class="toc-${h.tagName.toLowerCase()}"><a href="#${h.id}">${esc(h.querySelector('.h-text').textContent)}</a></li>`).join('');
+      `<li class="toc-${h.tagName.toLowerCase()}"><a href="#${h.id}">${esc(h.querySelector('.h-text').textContent)}${h.classList.contains('is-starred') ? ` <span class="toc-star" title="Important">${icon('star')}</span>` : ''}</a></li>`).join('');
     return items ? `<ul>${items}</ul>` : '';
   }
 
@@ -1122,7 +1154,7 @@
       if (!opts) return;
       if (opts.mode === 'full') return runPrint(opts, null); // the page itself prints as the full note
       const doc = printDoc('notebook');
-      printPiece(doc, n, 'notebook', article);
+      if (!printPiece(doc, n, 'notebook', article, opts.starred)) { doc.remove(); toast('This note has no ⭐ questions yet.'); return; }
       runPrint(opts, doc);
     });
     // Classroom tools live in classroom.js; they read what they need from window.Sutra.

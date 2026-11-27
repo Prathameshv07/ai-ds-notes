@@ -74,6 +74,8 @@ export const CAREER_PATHS = [
   ['ai-researcher', 'AI Researcher'],
 ];
 export const PATH_MAX_RESOURCE_LINKS = 3;
+// A trailing ⭐ on a ### question heading marks it important (plan v2.9, decision 47).
+export const STAR_RE = /\s*\u2B50\uFE0F?\s*$/u;
 export const COURSE_SECTION_NAMES = { whatIs: 'What this job is', whereAmI: 'Where am I?', resources: 'Free resources' };
 export const COURSE_SECTIONS = { 'what this job is': 'whatIs', 'where am i': 'whereAmI', 'free resources': 'resources' };
 

@@ -147,8 +147,10 @@ function scanBody(body, startLine) {
     if (!inCode) {
       const h = line.match(/^(#{2,3})\s+(.*\S)\s*$/);
       if (h) {
-        const name = h[2].replace(/<!--.*?-->/g, '').trim();
-        headings.push({ level: h[1].length, text: name });
+        const raw = h[2].replace(/<!--.*?-->/g, '').trim();
+        const starred = h[1] === '###' && C.STAR_RE.test(raw);
+        const name = starred ? raw.replace(C.STAR_RE, '') : raw;
+        headings.push(starred ? { level: 3, text: name, starred } : { level: h[1].length, text: name });
         if (h[1] === '##') {
           cur = { name, line: lineNo, lines: [] };
           sections.push(cur);
@@ -431,8 +433,13 @@ export function build(opts = {}) {
     let beyond = false;
     for (const sec of scan.sections) {
       const name = norm(sec.name);
-      let answer = sec.name, answerLine = sec.line, count = 0, inBeyond = false;
+      let answer = sec.name, answerLine = sec.line, count = 0, inBeyond = false, starred = false;
+      if (sec.name.includes('\u2B50')) warn(f, `line ${sec.line}: "## ${sec.name}" has a ⭐; only ### question headings can be starred`, 'remove the ⭐ from the ## heading, or star the ### questions inside it');
       const closeAnswer = () => {
+        if (starred && !count && !wdSections.has(name)) {
+          warn(f, `line ${answerLine}: "${answer}" is starred ⭐ but has no ==highlights==, so Notebook "⭐ only" shows nothing for it`,
+            'highlight its definition and key phrases, or remove the ⭐');
+        }
         if (count > C.HIGHLIGHT_MAX_PER_ANSWER) {
           warn(f, `line ${answerLine}: "${answer}" has ${count} ==highlights==; an answer skeleton is a definition plus at most ${C.HIGHLIGHT_MAX_PER_ANSWER - 1} key phrases`,
             'keep the definition and the key phrase that opens each main point; unmark the rest');
@@ -441,7 +448,14 @@ export function build(opts = {}) {
       for (const l of sec.lines) {
         if (l.inCode) continue;
         const h3 = l.text.match(/^###\s+(.*\S)\s*$/);
-        if (h3) { closeAnswer(); answer = h3[1].replace(/<!--.*?-->/g, '').trim(); answerLine = l.line; count = 0; continue; }
+        if (h3) {
+          closeAnswer();
+          const raw = h3[1].replace(/<!--.*?-->/g, '').trim();
+          starred = C.STAR_RE.test(raw);
+          answer = starred ? raw.replace(C.STAR_RE, '') : raw; answerLine = l.line; count = 0;
+          if (!starred && raw.includes('\u2B50')) warn(f, `line ${l.line}: "### ${raw}" has a ⭐ that is not at the end, so it is not read as "important"`, 'put the ⭐ at the very end: "### Question text ⭐"');
+          continue;
+        }
         if (/^\s*>\s*\[!beyond\]/i.test(l.text)) { beyond = true; inBeyond = true; }
         else if (!/^\s*>/.test(l.text)) inBeyond = false;
         const n = (l.text.replace(/`[^`\n]*`/g, '').match(HL) || []).length;

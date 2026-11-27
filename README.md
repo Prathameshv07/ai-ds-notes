@@ -151,6 +151,16 @@ errors. Code is no longer a required section (it is required only when the pract
 In present mode, a **Steps** slide always reveals one numbered step per press (with its nested
 points and code), whether or not Step by step is on.
 
+## Important questions ⭐ (plan v2.9, decision 47)
+
+End a `###` question heading with ` ⭐` to mark it important: `### Q1. What is the CIA triad? ⭐`.
+The reader takes the star out of the heading text (so its anchor and section links stay the same) and
+shows an **Important** badge; the contents list marks it too. Notebook view has a **⭐ only** switch
+(remembered between notes), and the print dialog's Notebook sheet has a **⭐ only** option; both keep
+just the starred questions' answer skeletons, and a unit print leaves out notes with none. The build
+warns about a starred question with no `==highlights==` (it would be empty in ⭐ only), a ⭐ that is
+not at the end of the heading, and a ⭐ on a `##` heading.
+
 ## Two sites, one engine (plan Section 18)
 
 The same engine also publishes **class-notes** (Prathameshv07/class-notes) as

@@ -600,3 +600,19 @@ test('career path: ### intro sections, bold sub-groups and per-stage resources (
   assert.match(c.stages[0].resources, /example\.org/);
   assert.equal(c.stages[0].milestone, 'you can now do it.');
 });
+
+test('⭐ important questions: kept out of heading text, flagged, and checked (plan v2.9)', () => {
+  const root = validTree();
+  const f = path.join(root, 'content/concepts/databases/aa.md');
+  const src = fs.readFileSync(f, 'utf8');
+  fs.writeFileSync(f, src.replace(/\n## Sources/, '\n## Interview questions\n\n### What is aa? ⭐\n\n==A definition.==\n\n### Why aa? ⭐️\n\nNo highlight here.\n\n### ⭐ Misplaced star\n\nText.\n\n## Sources'));
+  const r = build({ root });
+  assert.deepEqual(errors(r), []);
+  const w = warnings(r);
+  assert.ok(w.some((x) => x.includes('"Why aa?" is starred ⭐ but has no ==highlights==')), 'starred without highlights warns');
+  assert.ok(!w.some((x) => x.includes('"What is aa?" is starred')), 'starred with highlights is fine');
+  assert.ok(w.some((x) => x.includes('not at the end')), 'misplaced star warns');
+  const m = JSON.parse(fs.readFileSync(path.join(root, 'dist/data/manifest.json'), 'utf8'));
+  const hs = m.notes.aa.headings.filter((h) => h.starred);
+  assert.deepEqual(hs, [{ level: 3, text: 'What is aa?', starred: true }, { level: 3, text: 'Why aa?', starred: true }]);
+});

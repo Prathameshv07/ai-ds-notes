@@ -456,6 +456,7 @@
   // ======================= notebook view =======================
 
   let NB = null;
+  const NB_STAR_KEY = 'notes_nb_starred_v1';
 
   function notebook() {
     if (NB) return;
@@ -466,6 +467,8 @@
     root.innerHTML = `
       <div class="notebook-bar">
         <span class="notebook-title">${icon('notebook-text')}<span>Write this down · ${esc(note.title)}</span></span>
+        <label class="nb-star-switch" title="Show only the questions marked important">
+          <input type="checkbox" role="switch" data-act="starred"><span class="track" aria-hidden="true"></span><span>⭐ only</span></label>
         <button type="button" class="pbtn" data-act="close" aria-label="Close notebook view (Esc)" title="Close (Esc)">${icon('x')}</button>
       </div>
       <div class="notebook-page"></div>`;
@@ -473,6 +476,19 @@
 
     S().writeDownParts(art).forEach((part) => page.appendChild(part));
     if (!page.children.length) page.innerHTML = '<p class="empty">This note has no write-down parts yet.</p>';
+
+    // "⭐ only": just the questions marked important (plan v2.9). Remembered between notes.
+    const sw = root.querySelector('[data-act="starred"]');
+    const nStarred = page.querySelectorAll(':scope > [data-starred]').length;
+    page.insertAdjacentHTML('beforeend', '<p class="empty nb-none-starred">No question in this note is marked ⭐ yet.</p>');
+    const apply = () => {
+      page.classList.toggle('nb-starred-only', sw.checked);
+      try { localStorage.setItem(NB_STAR_KEY, sw.checked ? '1' : ''); } catch (e) { /* ignore */ }
+    };
+    try { sw.checked = localStorage.getItem(NB_STAR_KEY) === '1'; } catch (e) { /* ignore */ }
+    if (!nStarred) page.classList.add('nb-has-none');
+    sw.addEventListener('change', apply);
+    apply();
 
     root.querySelector('[data-act="close"]').addEventListener('click', closeNotebook);
     document.addEventListener('keydown', onNotebookKey);
