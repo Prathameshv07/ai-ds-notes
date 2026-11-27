@@ -39,7 +39,7 @@ $$P(A \mid B) = \frac{P(A \cap B)}{P(B)}, \quad P(B) > 0$$
 
 In a table of counts this is simply: ==count of A-and-B ÷ count of B==.
 
-### Q2. What is the multiplication rule?
+### Q2. What is the multiplication rule? [2M]
 
 Rearranging the definition gives the probability that **both** events happen:
 
@@ -76,6 +76,24 @@ $$P(B) = P(B \mid A)\,P(A) + P(B \mid A')\,P(A')$$
 - ==$P(A \mid B)$ is the **posterior**==: the updated belief after seeing $B$.
 
 ==$P(A \mid B)$ and $P(B \mid A)$ are usually very different.== Most festival days are high-sales days, but most high-sales days are not festivals.
+
+### Q5. In an office of 100 employees, 60 are men and 40 are women; 30 men and 20 women have a company laptop. Find P(laptop | woman) and P(woman | laptop). Are "woman" and "has a laptop" independent? ⭐
+
+1. ==P(laptop | woman): count of both ÷ count of women== $= 20/40 = 0.5$.
+2. ==P(woman | laptop): count of both ÷ count with laptops== $= 20/(30 + 20) = 20/50 = 0.4$.
+3. ==Check independence: compare P(laptop | woman) with P(laptop).== $P(\text{laptop}) = 50/100 = 0.5$.
+4. ==Equal, so the events are independent==: knowing an employee is a woman does not change the chance of having a laptop. (Also $P(\text{laptop}) \times P(\text{woman}) = 0.5 \times 0.4 = 0.2 = 20/100$.)
+
+### Q6. Distinguish between mutually exclusive and independent events.
+
+| Point | Mutually exclusive | Independent |
+|---|---|---|
+| ==Meaning== | Cannot happen together | One does not affect the other's probability |
+| ==Joint probability== | $P(A \cap B) = 0$ | $P(A \cap B) = P(A)P(B)$ |
+| ==Key rule== | $P(A \cup B) = P(A) + P(B)$ | $P(A \mid B) = P(A)$ |
+| ==Example== | One bill paid fully by UPI or fully by cash | Two separate coin tosses |
+
+==Mutually exclusive events (with non-zero probabilities) are always dependent==: if one happens, the other's probability drops to 0.
 
 ## Analogy and real-life example
 

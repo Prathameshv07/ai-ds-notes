@@ -90,6 +90,12 @@ Example: the top 5% of a test with $\mu = 60$, $\sigma = 10$ starts at $z = 1.64
 
 But not everything is normal: incomes, sales and waiting times are usually right-skewed.
 
+### Q7. The weights of adults are normal with mean 70 kg and SD 5 kg. Find the share of adults weighing between 65 kg and 80 kg, and the share above 78 kg. (Φ(1) = 0.8413, Φ(1.6) = 0.9452, Φ(2) = 0.9772) ⭐
+
+1. ==Convert to z-scores: z is (x − μ) ÷ σ.== For 65: $z = -1$; for 80: $z = 2$; for 78: $z = 1.6$.
+2. ==Between 65 and 80: Φ(2) − Φ(−1)== $= 0.9772 - (1 - 0.8413) = 0.9772 - 0.1587 = 0.8185$, about **81.9%**.
+3. ==Above 78: right tail, 1 − Φ(1.6)== $= 1 - 0.9452 = 0.0548$, about **5.5%**.
+
 ## Analogy and real-life example
 
 Think of a Galton board: balls dropped through rows of pins bounce left or right at random, and pile up in a bell shape at the bottom. Each ball's final position is the sum of many small random nudges, and sums of many small independent effects tend to be normal. That is why filling weights, which are pushed by many small machine variations, are close to normal.

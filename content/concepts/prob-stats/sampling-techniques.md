@@ -41,7 +41,7 @@ Sampling is the selection of a part of a population to study so that conclusions
 
 We use statistics to **estimate** parameters.
 
-### Q2. Why sample instead of taking a census?
+### Q2. Why sample instead of taking a census? [2M]
 
 - ==**Cost:** far cheaper==.
 - ==**Time:** results arrive while they are still useful.==
@@ -75,6 +75,35 @@ They are quick and cheap, but ==selection probabilities are unknown, so sampling
   - **measurement error:** leading questions, wrong recording.
 
 ==A bigger sample does not fix bias==: it gives a more precise wrong answer.
+
+### Q6. Distinguish between stratified and cluster sampling. ⭐
+
+| Point | Stratified | Cluster |
+|---|---|---|
+| ==Groups== | Strata: similar units within each | Clusters: each a mini-population |
+| ==What is sampled== | **Some units from every** stratum | **All units from some** clusters |
+| ==Main aim== | Precision and representation of every group | Lower cost and easier fieldwork |
+| ==Precision== | Usually higher than simple random | Usually lower than simple random |
+| ==Example== | Survey customers from every store type | Survey all customers of 3 random stores |
+
+### Q7. Distinguish between probability and non-probability sampling.
+
+| Point | Probability sampling | Non-probability sampling |
+|---|---|---|
+| ==Selection== | Random; every unit has a known chance | Judgement or convenience; chance unknown |
+| ==Sampling error== | Can be measured | Cannot be measured |
+| ==Bias== | Low, if the frame is good | Often high |
+| ==Methods== | Simple random, systematic, stratified, cluster | Convenience, judgement, quota, snowball |
+| ==Use== | Firm conclusions about the population | Pilot studies, exploration |
+
+### Q8. A college has 600 first-year, 400 second-year and 200 third-year students. Find a proportional stratified sample of 60, and the sampling interval for a systematic sample of 60 from the full list.
+
+1. ==Total population:== $N = 600 + 400 + 200 = 1{,}200$.
+2. ==Proportional allocation: n × stratum size ÷ N.==
+   - First year: $60 \times 600/1200 = 30$
+   - Second year: $60 \times 400/1200 = 20$
+   - Third year: $60 \times 200/1200 = 10$
+3. ==Systematic interval: k is N ÷ n== $= 1200/60 = 20$: choose a random start from 1 to 20, then every 20th student.
 
 ## Analogy and real-life example
 

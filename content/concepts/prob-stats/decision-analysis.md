@@ -28,7 +28,7 @@ Decision analysis is a structured way to choose among alternatives when the outc
 
 ## Explained
 
-### Q1. What are the elements of a decision problem?
+### Q1. What are the elements of a decision problem? [2M]
 
 - ==**Decision alternatives:** the options the decision maker controls== (order large, medium or small).
 - ==**States of nature:** the uncertain events the decision maker does not control== (demand high, medium or low).
@@ -64,7 +64,7 @@ $$\text{EMV} = \sum (\text{payoff} \times \text{probability of the state})$$
 
 Equivalently, you can minimise the **expected opportunity loss (EOL)**, the probability-weighted regret; ==the lowest EOL always picks the same alternative as the highest EMV==.
 
-### Q5. What is the expected value of perfect information (EVPI)?
+### Q5. What is the expected value of perfect information (EVPI)? [2M]
 
 Suppose a perfect forecaster could tell you the state in advance. You would always pick the best alternative for that state.
 
@@ -94,6 +94,14 @@ Trees handle **sequential** decisions that tables cannot, such as "run a survey 
 - ==Run a **sensitivity analysis**==: how much can the probabilities change before the best choice changes?
 
 Monte Carlo simulation (Unit 4) extends this to many uncertain inputs at once.
+
+### Q8. A shop must choose between plan A and plan B. With good demand (probability 0.6), A earns ₹50 thousand and B ₹30 thousand; with poor demand (0.4), A loses ₹10 thousand and B earns ₹10 thousand. Find the EMV of each plan, the best plan, the maximin choice and the EVPI. ⭐
+
+1. ==EMV: sum of payoff × probability.== EMV(A) $= 0.6(50) + 0.4(-10) = 26$; EMV(B) $= 0.6(30) + 0.4(10) = 22$.
+2. ==Best by EMV: plan A== (₹26 thousand).
+3. ==Maximin: best worst case.== Worst cases: A −10, B 10, so **plan B**.
+4. ==EV with perfect information: best payoff in each state.== $0.6(50) + 0.4(10) = 34$.
+5. ==EVPI: EV with perfect information − best EMV== $= 34 - 26 = 8$, that is ₹8,000.
 
 ## Analogy and real-life example
 

@@ -84,6 +84,25 @@ $$\text{Lower fence} = Q_1 - 1.5 \times \text{IQR} \qquad \text{Upper fence} = Q
 
 =="Flagged" means *check it*, not *delete it*==. A Diwali-day sales spike is a genuine outlier; a revenue of ₹0 on an open day is probably an error.
 
+### Q6. Find Q1, the median, Q3, the quartile deviation and its coefficient for: 10, 14, 18, 22, 25, 30, 41. ⭐
+
+The data are already in order; $n = 7$, so $n + 1 = 8$.
+
+1. ==Q1 at position 8/4, the 2nd value== → $Q_1 = 14$.
+2. ==Median at position 8/2, the 4th value== → $Q_2 = 22$.
+3. ==Q3 at position 3 × 8/4, the 6th value== → $Q_3 = 30$.
+4. ==Quartile deviation: (Q3 − Q1) ÷ 2== $= (30 - 14)/2 = 8$.
+5. ==Coefficient of QD: (Q3 − Q1) ÷ (Q3 + Q1)== $= 16/44 = 0.36$.
+
+The median (22) is closer to $Q_3$ than to $Q_1$, so the lower half is more spread out.
+
+### Q7. Distinguish between a percentage and a percentile. [2M]
+
+- ==A percentage is a part out of 100==: scoring 85 marks out of 100 is 85%.
+- ==A percentile is a position among others==: the 85th percentile is the value below which 85% of the data lie.
+
+A 60% score can be the 99th percentile in a very tough exam.
+
 ## Analogy and real-life example
 
 Line up 100 students by height. The student at position 25 is $Q_1$, the one at 50 is the median, the one at 75 is $Q_3$. The IQR is the height range of the middle 50 students.

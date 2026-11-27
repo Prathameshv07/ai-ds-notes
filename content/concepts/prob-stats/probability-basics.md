@@ -48,7 +48,7 @@ Probability is written $P(A)$: the probability of event $A$.
 
 Business analytics mostly uses empirical probabilities, estimated from data.
 
-### Q3. What rules must every probability follow?
+### Q3. What rules must every probability follow? [2M]
 
 1. ==$0 \le P(A) \le 1$== for any event $A$.
 2. ==The probabilities of all outcomes in the sample space add up to 1==.
@@ -77,11 +77,21 @@ $$P(A \cup B) = P(A) + P(B) - P(A \cap B)$$
 
 Example: a card from a deck of 52. $P(\text{king or heart}) = \frac{4}{52} + \frac{13}{52} - \frac{1}{52} = \frac{16}{52}$, because the king of hearts is in both groups.
 
-### Q6. Why does the empirical approach work?
+### Q6. Why does the empirical approach work? [2M]
 
 The **law of large numbers**: ==as an experiment is repeated more and more times, the relative frequency of an event settles close to its true probability.==
 
 Toss a fair coin 10 times and you may get 7 heads (70%). Toss it 10,000 times and you will get very close to 50%. This is why data-based probabilities need enough data, and why computer **simulation** can estimate probabilities that are hard to calculate ([[probability-simulation-practical]]).
+
+### Q7. A card is drawn from a well-shuffled deck of 52. Find the probability that it is a queen or a spade, and that it is neither. ⭐
+
+1. ==Count each event:== 4 queens; 13 spades; 1 card (the queen of spades) is both.
+2. ==Addition rule, subtracting the overlap:==
+   $P(\text{queen or spade}) = \frac{4}{52} + \frac{13}{52} - \frac{1}{52} = \frac{16}{52} = 0.308$.
+3. ==Complement rule for "neither":==
+   $P(\text{neither}) = 1 - \frac{16}{52} = \frac{36}{52} = 0.692$.
+
+The queen of spades must be subtracted once, or it is counted twice.
 
 ## Analogy and real-life example
 

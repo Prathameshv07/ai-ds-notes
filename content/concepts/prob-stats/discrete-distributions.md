@@ -30,14 +30,14 @@ A discrete probability distribution lists every possible value of a countable ra
 
 ## Explained
 
-### Q1. What is a random variable?
+### Q1. What is a random variable? [2M]
 
 ==A random variable is a numerical outcome of a random experiment.== It is written with a capital letter, such as $X$.
 
 - ==**Discrete:** takes countable values== (0, 1, 2, …): buyers among 5 visitors, defects in a batch, calls per hour.
 - ==**Continuous:** takes any value in a range==: delivery time, bill amount, rainfall. See [[continuous-distributions]].
 
-### Q2. What is a probability distribution?
+### Q2. What is a probability distribution? [2M]
 
 A table, graph or formula giving $P(X = x)$ for every value $x$. It is also called the **probability mass function (PMF)**.
 
@@ -82,6 +82,36 @@ $$P(X = k) = \frac{e^{-\lambda} \lambda^k}{k!}, \quad k = 0, 1, 2, \dots$$
 - ==It approximates the binomial when n is large and p is small==, with $\lambda = np$ (rule of thumb: $n \ge 20$, $p \le 0.05$).
 
 Unlike the binomial, there is no upper limit on the count.
+
+### Q6. 20% of the items made by a machine are defective. In a random sample of 6, find the probability of exactly 2 defectives and of no defectives, and the mean and variance. ⭐
+
+$X$ = number of defectives is binomial with $n = 6$, $p = 0.2$.
+
+1. ==Exactly 2: binomial formula== $\binom{6}{2}(0.2)^2(0.8)^4 = 15 \times 0.04 \times 0.4096 = 0.246$.
+2. ==None:== $(0.8)^6 = 0.262$.
+3. ==Mean: np== $= 6 \times 0.2 = 1.2$ defectives.
+4. ==Variance: np(1 − p)== $= 6 \times 0.2 \times 0.8 = 0.96$.
+
+### Q7. A shop receives on average 3 online orders an hour. Using the Poisson distribution, find the probability of exactly 1 order and of at least 1 order in an hour.
+
+$X$ = orders per hour is Poisson with $\lambda = 3$.
+
+1. ==Exactly 1: Poisson formula== $\frac{e^{-3} 3^1}{1!} = 3e^{-3} = 3 \times 0.0498 = 0.149$.
+2. ==At least 1: use the complement== $1 - P(X = 0) = 1 - e^{-3} = 1 - 0.0498 = 0.950$.
+
+About 1 hour in 20 brings no orders at all.
+
+### Q8. Distinguish between the binomial and Poisson distributions. ⭐
+
+| Point | Binomial | Poisson |
+|---|---|---|
+| ==Counts== | Successes in $n$ fixed trials | Events in a fixed interval |
+| ==Parameters== | $n$ and $p$ | $\lambda$ only |
+| ==Possible values== | 0 to $n$ | 0, 1, 2, … with no upper limit |
+| ==Mean and variance== | $np$ and $np(1-p)$; variance < mean | Both $\lambda$ |
+| ==Example== | Buyers among 5 visitors | Calls per hour |
+
+==Poisson approximates binomial when n is large and p small==, with $\lambda = np$.
 
 ## Analogy and real-life example
 

@@ -54,7 +54,7 @@ $$\bar{x} \pm z^* \frac{\sigma}{\sqrt{n}}$$
 
 ==The critical value comes from the normal distribution of $\bar{x}$== ([[sampling-distributions]]).
 
-### Q3. What if σ is unknown?
+### Q3. What if σ is unknown? [2M]
 
 Usually σ is unknown and we use the sample SD $s$. ==Then use the **t distribution** with n − 1 degrees of freedom==:
 
@@ -65,7 +65,7 @@ $$\bar{x} \pm t^*_{n-1} \frac{s}{\sqrt{n}}$$
 
 Get $t^*$ from a t-table, Excel `T.INV.2T`, or Python `scipy.stats.t.ppf`.
 
-### Q4. How is a confidence interval for a proportion built?
+### Q4. How is a confidence interval for a proportion built? [2M]
 
 $$\hat{p} \pm z^* \sqrt{\frac{\hat{p}(1 - \hat{p})}{n}}$$
 
@@ -94,6 +94,19 @@ An opinion poll's "±3 points" is this margin of error at 95% confidence, for a 
 $$n = \left(\frac{z^* \sigma}{E}\right)^2$$
 
 ==Always round n up.==
+
+### Q7. A sample of 49 bills has mean ₹120; the population SD is ₹14. Find the 95% and 99% confidence intervals for the population mean. ⭐
+
+1. ==Standard error: σ ÷ √n== $= 14/\sqrt{49} = 2$.
+2. ==95%: z* is 1.96==; margin $= 1.96 \times 2 = 3.92$; interval $120 \pm 3.92$, that is **(116.08, 123.92)**.
+3. ==99%: z* is 2.576==; margin $= 2.576 \times 2 = 5.15$; interval $120 \pm 5.15$, that is **(114.85, 125.15)**.
+4. ==Higher confidence gives a wider interval.==
+
+### Q8. What is the margin of error? [2M]
+
+==The margin of error is the half-width of a confidence interval==: critical value × standard error.
+
+For a mean with σ known it is $z^* \sigma/\sqrt{n}$. ==It shrinks with a larger sample and grows with higher confidence.==
 
 ## Analogy and real-life example
 

@@ -97,6 +97,20 @@ $$\beta_2 = \frac{m_4}{m_2^2}$$
 
 ==Always look at a graph before trusting a single shape number.== Two very different shapes can share a skewness value.
 
+### Q6. A distribution has mean 52, median 48, SD 12, Q1 = 40 and Q3 = 60. Find Karl Pearson's and Bowley's coefficients of skewness and interpret them. ⭐
+
+1. ==Karl Pearson: 3(mean − median) ÷ SD== $= 3(52 - 48)/12 = 12/12 = 1.0$.
+2. ==Bowley: (Q3 + Q1 − 2 × median) ÷ (Q3 − Q1)== $= (60 + 40 - 96)/(60 - 40) = 4/20 = 0.2$.
+3. ==Both are positive: the distribution is positively (right) skewed.==
+4. ==Pearson's value is larger because it uses the mean==, which is pulled by the long right tail; Bowley's uses only the middle half, which is only mildly skewed.
+
+### Q7. Distinguish between skewness and kurtosis. [2M]
+
+- ==Skewness measures the lack of symmetry==: which side has the longer tail. A symmetric distribution has skewness 0.
+- ==Kurtosis measures the heaviness of the tails== compared with a normal distribution, whose $\beta_2$ is 3.
+
+A distribution can be symmetric (no skew) and still have heavy tails.
+
 ## Analogy and real-life example
 
 Think of a see-saw holding the data. The mean is the balance point. When a few heavy children (large values) sit far out on the right, the balance point moves right, away from where most children sit: that is positive skew.

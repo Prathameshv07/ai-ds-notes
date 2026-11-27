@@ -51,7 +51,7 @@ $$t = \frac{\bar{x} - \mu_0}{s / \sqrt{n}} \quad (\text{df} = n - 1)$$
 - ==Small p-value: such data would be surprising if $H_0$ were true==, so it is evidence against $H_0$.
 - ==Large p-value: the data are consistent with $H_0$.==
 
-### Q3. How is the decision made?
+### Q3. How is the decision made? [2M]
 
 Choose a **significance level** α before looking at the data, usually 0.05.
 
@@ -84,7 +84,7 @@ Choose a **significance level** α before looking at the data, usually 0.05.
 5. ==Decide: reject or fail to reject $H_0$.==
 6. ==State the conclusion in business terms.==
 
-### Q6. What is the difference between statistical and practical significance?
+### Q6. What is the difference between statistical and practical significance? [2M]
 
 - ==Statistical significance says a difference is unlikely to be chance alone.==
 - ==Practical significance asks whether the difference is big enough to matter.==
@@ -92,6 +92,21 @@ Choose a **significance level** α before looking at the data, usually 0.05.
 With a huge sample, a 0.1% rise in sales can be "significant" but worthless. Report the size of the effect with a confidence interval ([[confidence-intervals]]), not just the p-value.
 
 **Link with intervals:** a two-tailed test at α = 0.05 rejects $H_0: \mu = \mu_0$ exactly when $\mu_0$ lies outside the 95% confidence interval.
+
+### Q7. A company claims its packets weigh 500 g on average (σ = 40 g). A sample of 64 packets has mean 510 g. Test the claim at the 5% level. ⭐
+
+1. ==Hypotheses:== $H_0: \mu = 500$; $H_1: \mu \ne 500$ (two-tailed).
+2. ==Level of significance:== α = 0.05; critical values ±1.96.
+3. ==Test statistic: z is (x̄ − μ0) ÷ (σ/√n)== $= (510 - 500)/(40/8) = 10/5 = 2.0$.
+4. ==Decision:== $|z| = 2.0 > 1.96$ (p-value 0.046 < 0.05), so **reject $H_0$**.
+5. ==Conclusion: the mean weight differs significantly from 500 g==; the packets appear heavier than claimed.
+
+### Q8. Distinguish between one-tailed and two-tailed tests. [2M]
+
+- ==Two-tailed: $H_1$ uses ≠==; the rejection region is split between both tails (±1.96 at α = 0.05).
+- ==One-tailed: $H_1$ uses > or <==; the whole rejection region is in one tail (1.645 at α = 0.05).
+
+The direction must be chosen before seeing the data.
 
 ## Analogy and real-life example
 

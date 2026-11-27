@@ -68,7 +68,7 @@ Draw lines at $\bar{x}$ and $\bar{y}$ on a [[scatter-plot]]. ==They split it int
 
 If most points fall in the "both above" and "both below" quadrants, ==the positive products win: positive covariance==. If most fall in the mixed quadrants, ==negative products win==.
 
-### Q4. Why is covariance hard to interpret?
+### Q4. Why is covariance hard to interpret? [2M]
 
 Its ==**size** depends on the units== of both variables.
 
@@ -86,6 +86,27 @@ The fix is to ==divide by both SDs==, which removes the units. That gives the co
 - ==Adding constants changes nothing==: $\text{Cov}(x + a, y + c) = \text{Cov}(x, y)$.
 - ==Multiplying scales it==: $\text{Cov}(bx, dy) = bd\,\text{Cov}(x, y)$. This is why units matter.
 - ==If $x$ and $y$ are independent, the covariance is 0==. ==**The reverse is not true:**== covariance 0 only means no *linear* pattern; a U-shaped relationship can have zero covariance.
+
+### Q6. Distinguish between covariance and correlation. ⭐
+
+| Point | Covariance | Correlation |
+|---|---|---|
+| ==What it shows== | Direction of the linear relationship | Direction **and** strength |
+| ==Units== | Unit of $x$ × unit of $y$ | No units |
+| ==Range== | Any value, $-\infty$ to $+\infty$ | Between −1 and +1 |
+| ==Effect of changing units== | Changes | Unchanged |
+| ==Formula== | $\frac{\sum (x - \bar{x})(y - \bar{y})}{n - 1}$ | Covariance ÷ $(s_x s_y)$ |
+
+==Correlation is covariance made unit-free==, so only correlation can say whether a relationship is strong.
+
+### Q7. Calculate the covariance of x: 1, 2, 3, 4, 5 and y: 2, 4, 5, 4, 5.
+
+1. ==Means:== $\bar{x} = 15/5 = 3$, $\bar{y} = 20/5 = 4$.
+2. ==Deviations:== $x - \bar{x}$: −2, −1, 0, 1, 2; $y - \bar{y}$: −2, 0, 1, 0, 1.
+3. ==Products of deviations:== 4, 0, 0, 0, 2; sum $= 6$.
+4. ==Covariance: sum of products ÷ (n − 1)== $= 6/4 = 1.5$.
+
+==Positive covariance:== $x$ and $y$ tend to rise together. The [[correlation]] note's Q6 measures how strongly.
 
 ## Analogy and real-life example
 

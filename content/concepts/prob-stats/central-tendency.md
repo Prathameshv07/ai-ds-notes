@@ -107,6 +107,22 @@ It needs only an order, so ==it also works for ordinal data==, such as ratings f
 > [!beyond] Beyond the syllabus
 > **Grouped data** (a frequency table with classes): mean $= \frac{\sum f_i x_i}{\sum f_i}$ with $x_i$ the class midpoints; median $= L + \frac{N/2 - cf}{f} \times h$; mode $= L + \frac{f_1 - f_0}{2f_1 - f_0 - f_2} \times h$, where $L$ is the lower limit of the median (or modal) class, $cf$ the cumulative frequency before it, $f$ (or $f_1$) its frequency, $f_0$ and $f_2$ the frequencies of the classes before and after, and $h$ the class width. The **geometric mean** (for growth rates) and **harmonic mean** (for rates such as speed) are other averages for special cases.
 
+### Q7. What are the merits and demerits of the mean, median and mode? ⭐
+
+| Average | Merits | Demerits |
+|---|---|---|
+| Mean | ==Uses every value==; rigidly defined; suits further calculation | ==Pulled by extreme values==; can be a value that never occurs |
+| Median | ==Not affected by extreme values==; works for ordinal data and open-ended classes | ==Ignores the size of most values==; less suited to further calculation |
+| Mode | ==Only average for nominal data==; easy to spot | ==May not exist or may not be unique==; ignores most values |
+
+### Q8. Calculate the mean, median and mode of: 12, 15, 11, 15, 18, 20, 15, 14, 22. ⭐
+
+1. ==Mean: add all values and divide by n.== Sum $= 142$, $n = 9$, so $\bar{x} = 142/9 = 15.78$.
+2. ==Median: arrange in order and take the middle value.== Ordered: 11, 12, 14, 15, **15**, 15, 18, 20, 22. Position $(9 + 1)/2 = 5$, so median $= 15$.
+3. ==Mode: the most frequent value.== 15 appears three times, so mode $= 15$.
+
+==Interpretation:== the mean (15.78) is slightly above the median and mode (15) because the larger values 20 and 22 pull it up: a mild right skew.
+
 ## Analogy and real-life example
 
 A batter scores 0, 2, 1, 3 and 150 in five innings. The batting average (mean) is $156 / 5 = 31.2$. The median innings is 2.

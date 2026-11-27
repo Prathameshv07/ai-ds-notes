@@ -44,7 +44,7 @@ A measure of dispersion tells how spread out the values of a dataset are around 
 
 Quartiles and the interquartile range have their own note: [[quartiles-and-percentiles]].
 
-### Q2. What is the range?
+### Q2. What is the range? [2M]
 
 $$\text{Range} = \text{Maximum} - \text{Minimum}$$
 
@@ -77,7 +77,7 @@ $$\sigma = \sqrt{\sigma^2} \qquad s = \sqrt{s^2}$$
 - Like the mean, ==it is pulled by outliers==, because squaring makes large deviations even larger.
 - SD = 0 ==only when every value is the same==.
 
-### Q5. Why divide by $n - 1$ for a sample?
+### Q5. Why divide by $n - 1$ for a sample? [2M]
 
 ==A sample's values sit a little closer to their own mean== $\bar{x}$ than to the true population mean $\mu$. So the squared deviations come out slightly too small. ==Dividing by $n - 1$ instead of $n$ corrects this underestimate== (**Bessel's correction**).
 
@@ -99,6 +99,27 @@ Example: a Supermarket's daily footfall has SD 450; an Express store's has SD 15
 
 > [!beyond] Beyond the syllabus
 > **Combined standard deviation** of two groups with sizes $n_1, n_2$, means $\bar{x}_1, \bar{x}_2$, SDs $\sigma_1, \sigma_2$ and combined mean $\bar{x}$: $\sigma = \sqrt{\frac{n_1(\sigma_1^2 + d_1^2) + n_2(\sigma_2^2 + d_2^2)}{n_1 + n_2}}$, where $d_i = \bar{x}_i - \bar{x}$.
+
+### Q7. What are the merits and demerits of the standard deviation?
+
+**Merits**
+- ==Uses every value== in the data.
+- ==Rigidly defined and in the data's own units==, so it is easy to report.
+- ==Basis of further statistics==: the normal distribution, standard error, confidence intervals, correlation and regression.
+
+**Demerits**
+- ==Affected by extreme values==, because deviations are squared.
+- ==Harder to calculate by hand== than the range or quartile deviation.
+- ==Cannot compare groups with different means or units==; use the coefficient of variation for that.
+
+### Q8. Calculate the range, sample variance, standard deviation and coefficient of variation of: 4, 8, 6, 10, 12. ⭐
+
+1. ==Range: maximum − minimum== $= 12 - 4 = 8$.
+2. ==Mean:== $\bar{x} = 40/5 = 8$.
+3. ==Squared deviations:== $(-4)^2, 0^2, (-2)^2, 2^2, 4^2$ → $16, 0, 4, 4, 16$; sum $= 40$.
+4. ==Sample variance: sum of squares ÷ (n − 1)== $= 40/4 = 10$.
+5. ==Standard deviation: square root of the variance== $= \sqrt{10} = 3.16$.
+6. ==CV: SD ÷ mean × 100== $= 3.16/8 \times 100 = 39.5\%$.
 
 ## Analogy and real-life example
 

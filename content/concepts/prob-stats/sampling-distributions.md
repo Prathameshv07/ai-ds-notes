@@ -37,7 +37,7 @@ Imagine taking every possible random sample of size $n$ from a population and co
 
 In practice we take one sample, but theory (or simulation, in [[sampling-distributions-practical]]) tells us what the others would look like.
 
-### Q2. Where is the sampling distribution of the mean centred?
+### Q2. Where is the sampling distribution of the mean centred? [2M]
 
 $$E(\bar{x}) = \mu$$
 
@@ -65,7 +65,7 @@ $$\bar{x} \approx N\!\left(\mu, \frac{\sigma^2}{n}\right)$$
 
 ![Four histograms. The first shows a strongly right-skewed population of bill amounts. The next three show the distribution of sample means for samples of size 2, 5 and 30: each is narrower than the last, and by size 30 it is a symmetric bell shape centred on the population mean](../../assets/img/prob-stats/clt-demo.png)
 
-### Q5. What about a sample proportion?
+### Q5. What about a sample proportion? [2M]
 
 For a proportion $\hat{p}$ (such as the share of visitors who buy), with population proportion $p$:
 
@@ -81,6 +81,20 @@ A proportion is just the mean of 0/1 values (1 = buys), so the CLT covers it too
 - ==**Central limit theorem:** the **shape** of the spread of $\bar{x}$ around μ is normal, with SE $\sigma/\sqrt{n}$.== It says how likely each size of error is.
 
 Together: big samples give averages that are close to the truth, and we can say how close, with a probability.
+
+### Q7. A population has mean 200 and SD 40. For random samples of 64, find the standard error of the mean, P(x̄ > 210) and P(190 < x̄ < 210). (Φ(2) = 0.9772) ⭐
+
+1. ==Standard error: σ ÷ √n== $= 40/\sqrt{64} = 40/8 = 5$.
+2. ==By the CLT, x̄ is approximately normal== with mean 200 and SE 5 ($n = 64 \ge 30$).
+3. ==P(x̄ > 210):== $z = (210 - 200)/5 = 2$, so $P = 1 - 0.9772 = 0.0228$.
+4. ==P(190 < x̄ < 210):== $z$ from −2 to 2, so $P = 0.9772 - 0.0228 = 0.9544$.
+
+### Q8. Distinguish between standard deviation and standard error. [2M]
+
+- ==Standard deviation measures the spread of individual values== around their mean.
+- ==Standard error measures the spread of a statistic==, such as the sample mean, across repeated samples: $SE = \sigma/\sqrt{n}$.
+
+The SE shrinks as the sample grows; the SD does not.
 
 ## Analogy and real-life example
 

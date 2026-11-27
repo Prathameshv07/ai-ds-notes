@@ -39,7 +39,7 @@ A continuous distribution is described by a **probability density function (pdf)
 
 A density can be above 1; only areas are probabilities.
 
-### Q2. What is the cumulative distribution function (CDF)?
+### Q2. What is the cumulative distribution function (CDF)? [2M]
 
 $$F(x) = P(X \le x)$$
 
@@ -87,6 +87,25 @@ It is right-skewed: many short gaps, a few long ones.
 Choosing a distribution is a modelling decision: check it against a [[distribution-plots|histogram]] of real data.
 
 ![Three density curves with a shaded area. Uniform on 0 to 20: a flat rectangle, area between 15 and 20 shaded, equal to 0.25. Exponential with mean 2: a curve falling from a peak at 0, area beyond 3 shaded, equal to 0.22. Normal with mean 30 and SD 5: a bell curve, area beyond 40 shaded, equal to 0.02](../../assets/img/prob-stats/continuous-distributions.png)
+
+### Q6. The life of a machine part is exponential with a mean of 500 hours. Find the probability that a part lasts more than 800 hours, and that it fails within 200 hours.
+
+==Rate: λ is 1 ÷ mean== $= 1/500$ per hour.
+
+1. ==More than 800 hours: survival formula== $P(X > 800) = e^{-800/500} = e^{-1.6} = 0.202$.
+2. ==Within 200 hours: one minus survival== $P(X \le 200) = 1 - e^{-200/500} = 1 - e^{-0.4} = 0.330$.
+
+About 1 part in 5 lasts beyond 800 hours, and 1 in 3 fails within 200 hours, even though the mean is 500.
+
+### Q7. Distinguish between discrete and continuous probability distributions. ⭐
+
+| Point | Discrete | Continuous |
+|---|---|---|
+| ==Values== | Countable (0, 1, 2, …) | Any value in a range |
+| ==Described by== | Probability mass function $P(X = x)$ | Probability density function $f(x)$ |
+| ==Probability of one value== | Can be positive | Always 0 |
+| ==Probabilities found by== | Adding $P(x)$ values | Area under the curve |
+| ==Examples== | Binomial, Poisson | Uniform, exponential, normal |
 
 ## Analogy and real-life example
 

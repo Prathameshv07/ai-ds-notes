@@ -89,6 +89,34 @@ To argue causation you need more: ==a controlled experiment (A/B test), or compa
 > [!beyond] Beyond the syllabus
 > **Spearman's rank correlation** applies Pearson's formula to the *ranks* of the values: $\rho = 1 - \frac{6 \sum d_i^2}{n(n^2 - 1)}$, where $d_i$ is the difference between the two ranks of item $i$ (no ties). It suits ordinal data (judges' rankings) and relationships that rise steadily but not in a straight line.
 
+### Q6. Calculate Karl Pearson's coefficient of correlation for x: 1, 2, 3, 4, 5 and y: 2, 4, 5, 4, 5, and interpret it. ⭐
+
+1. ==Means:== $\bar{x} = 3$, $\bar{y} = 4$.
+2. ==Deviations:== $x - \bar{x}$: −2, −1, 0, 1, 2; $y - \bar{y}$: −2, 0, 1, 0, 1.
+3. ==Sums:== $\sum (x - \bar{x})(y - \bar{y}) = 6$; $\sum (x - \bar{x})^2 = 10$; $\sum (y - \bar{y})^2 = 6$.
+4. ==Formula:== $r = \frac{6}{\sqrt{10 \times 6}} = \frac{6}{7.746} = 0.77$.
+5. ==Interpretation: strong positive linear relationship==; $r^2 = 0.60$, so a straight line in $x$ explains about 60% of the variation in $y$.
+
+### Q7. What are the types of correlation?
+
+- ==**Positive:** both variables move in the same direction== (ad spend and sales).
+- ==**Negative:** they move in opposite directions== (price and demand).
+- ==**Zero:** no linear relationship.==
+- ==**Linear vs non-linear:**== points follow a straight line, or a curve.
+- ==**Simple, multiple, partial:**== two variables; one variable with several others together; two variables with the others held constant.
+
+### Q8. What is a scatter diagram, and how is it used to study correlation?
+
+==A scatter diagram plots each pair (x, y) as one point==, with one variable on each axis.
+
+Reading it:
+- ==**Direction:** points rising left to right show positive correlation==; falling, negative.
+- ==**Strength:** the closer the points lie to a straight line, the stronger the correlation.==
+- ==**Form:** a curved pattern shows a non-linear relationship== that r may miss.
+- ==**Outliers and groups:**== isolated points or separate clusters warn that r may mislead.
+
+It should always be drawn before calculating r ([[scatter-plot]]).
+
 ## Analogy and real-life example
 
 Ice-cream sales and drowning cases both rise in summer. Banning ice-cream would not save swimmers: hot weather drives both. The same trap appears in business all the time: a city with more ATMs has more thefts, and stores with more staff have more complaints. Both pairs are mostly driven by size.
