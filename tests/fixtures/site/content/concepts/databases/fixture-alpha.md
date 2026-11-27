@@ -31,13 +31,13 @@ $$
 \bar{x} = \frac{1}{n}\sum_{i=1}^{n} x_i
 $$
 
-### Q2. Why do we need it?
+### Q2. Why do we need it? [2M]
 | Column A | Column B | Column C |
 |---|---|---|
 | 1 | placeholder | $a^2$ |
 | 2 | placeholder | text |
 
-### Q3. How does it work? ⭐️
+### Q3. How does it work? ⭐️ [2M]
 Placeholder sentence with ==a short highlighted rule== inside it.
 
 1. First step

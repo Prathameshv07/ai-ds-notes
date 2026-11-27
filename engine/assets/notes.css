@@ -605,3 +605,11 @@ html.overlay-open, html.overlay-open body{ overflow:hidden; }
 .print-dialog .opt-sub{ margin-left:1.6rem; }
 .print-dialog .opt.is-off{ opacity:.45; }
 @media print{ .star-badge{ color:#000; background:none; border-color:#999; } .star-badge .icon{ fill:#000; stroke:#000; } }
+
+/* [2M] marks tag (plan v3.0, decision 48) */
+.marks-badge{ display:inline-block; margin-left:.45rem; padding:.08rem .45rem; vertical-align:.18em;
+  font:600 .68rem/1.4 'IBM Plex Mono', ui-monospace, monospace; letter-spacing:.02em; white-space:nowrap;
+  color:var(--muted); background:var(--surface); border:1px solid var(--line); border-radius:4px; }
+.star-badge + .marks-badge{ margin-left:.3rem; }
+.toc-marks{ font:600 .7em/1 'IBM Plex Mono', ui-monospace, monospace; color:var(--muted); border:1px solid var(--line); border-radius:3px; padding:0 .2em; }
+@media print{ .marks-badge{ color:#000; border-color:#999; background:none; } }

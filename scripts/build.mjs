@@ -148,9 +148,12 @@ function scanBody(body, startLine) {
       const h = line.match(/^(#{2,3})\s+(.*\S)\s*$/);
       if (h) {
         const raw = h[2].replace(/<!--.*?-->/g, '').trim();
-        const starred = h[1] === '###' && C.STAR_RE.test(raw);
-        const name = starred ? raw.replace(C.STAR_RE, '') : raw;
-        headings.push(starred ? { level: 3, text: name, starred } : { level: h[1].length, text: name });
+        const t = h[1] === '###' ? C.headingTags(raw) : { name: raw };
+        const name = t.name;
+        const hd = { level: h[1].length, text: name };
+        if (t.starred) hd.starred = true;
+        if (t.marks) hd.marks = t.marks;
+        headings.push(hd);
         if (h[1] === '##') {
           cur = { name, line: lineNo, lines: [] };
           sections.push(cur);
@@ -451,9 +454,13 @@ export function build(opts = {}) {
         if (h3) {
           closeAnswer();
           const raw = h3[1].replace(/<!--.*?-->/g, '').trim();
-          starred = C.STAR_RE.test(raw);
-          answer = starred ? raw.replace(C.STAR_RE, '') : raw; answerLine = l.line; count = 0;
-          if (!starred && raw.includes('\u2B50')) warn(f, `line ${l.line}: "### ${raw}" has a ⭐ that is not at the end, so it is not read as "important"`, 'put the ⭐ at the very end: "### Question text ⭐"');
+          const t = C.headingTags(raw);
+          starred = t.starred;
+          answer = t.name; answerLine = l.line; count = 0;
+          if (t.name.includes('\u2B50')) warn(f, `line ${l.line}: "### ${raw}" has a ⭐ that is not at the end, so it is not read as "important"`, 'put the ⭐ at the very end: "### Question text ⭐" (or "… ⭐ [2M]")');
+          if (/\[2M\]/.test(t.name)) warn(f, `line ${l.line}: "### ${raw}" has [2M] that is not at the end, so it is not read as a marks tag`, 'put it at the very end: "### Question text [2M]"');
+          const other = t.name.match(/\[(\d+)\s*[Mm]\]\s*$/);
+          if (other) warn(f, `line ${l.line}: "### ${raw}" ends with [${other[1]}M]; only [2M] is a marks tag`, other[1] === '5' ? 'remove it: 5 marks is the default' : 'use [2M] for a short answer, or no tag for 5 marks (plan decision 48)');
           continue;
         }
         if (/^\s*>\s*\[!beyond\]/i.test(l.text)) { beyond = true; inBeyond = true; }

@@ -161,6 +161,16 @@ just the starred questions' answer skeletons, and a unit print leaves out notes 
 warns about a starred question with no `==highlights==` (it would be empty in ⭐ only), a ⭐ that is
 not at the end of the heading, and a ⭐ on a `##` heading.
 
+## Marks tag [2M] (plan v3.0, decision 48)
+
+End a `###` question heading with ` [2M]` for a 2-mark question (5 marks is the default, so it has no
+tag). It may come before or after the ⭐: `### Q4. Define CRC. ⭐ [2M]`. Like the star, it is taken out
+of the heading text (anchors unchanged) and shown as a small **2M** badge, also in the contents list and
+Notebook view. The build warns about `[2M]` not at the end and any other marks tag such as `[5M]`.
+
+class-notes theory notes no longer need an **Exam questions** section (decision 48): exam questions
+are the notes' ⭐ `###` questions. Notes that still have one show it as before.
+
 ## Two sites, one engine (plan Section 18)
 
 The same engine also publishes **class-notes** (Prathameshv07/class-notes) as

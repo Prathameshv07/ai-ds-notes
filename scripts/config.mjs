@@ -74,8 +74,14 @@ export const CAREER_PATHS = [
   ['ai-researcher', 'AI Researcher'],
 ];
 export const PATH_MAX_RESOURCE_LINKS = 3;
-// A trailing ⭐ on a ### question heading marks it important (plan v2.9, decision 47).
-export const STAR_RE = /\s*\u2B50\uFE0F?\s*$/u;
+// Tags at the end of a ### question heading, in any order (plan v2.9 decision 47, v3.0 decision 48):
+// " ⭐" marks it important; " [2M]" makes it a 2-mark question (5 marks is the default).
+export const HEADING_TAGS_RE = /(?:\s*(?:\u2B50\uFE0F?|\[2M\]))+\s*$/u;
+export function headingTags(raw) {
+  const m = raw.match(HEADING_TAGS_RE);
+  if (!m) return { name: raw, starred: false, marks: null };
+  return { name: raw.slice(0, m.index).trimEnd(), starred: m[0].includes('\u2B50'), marks: m[0].includes('[2M]') ? 2 : null };
+}
 export const COURSE_SECTION_NAMES = { whatIs: 'What this job is', whereAmI: 'Where am I?', resources: 'Free resources' };
 export const COURSE_SECTIONS = { 'what this job is': 'whatIs', 'where am i': 'whereAmI', 'free resources': 'resources' };
 
@@ -156,7 +162,8 @@ export const PROFILES = {
     RECOMMENDED_FIELDS: ['sources'],
     // Section 18 template; practicals as Section 8.2; intro as Section 8.6. No self-check or flashcards.
     REQUIRED_SECTIONS: {
-      theory: ['Why should you care?', 'In one line', 'Explained', 'Analogy and real-life example', 'Key points', 'Exam questions', 'Sources'],
+      // "Exam questions" dropped (plan v3.0, decision 48): exam questions are the ⭐ ### questions in Explained
+      theory: ['Why should you care?', 'In one line', 'Explained', 'Analogy and real-life example', 'Key points', 'Sources'],
       practical: ['Aim', 'Output', 'Explanation', 'Viva questions', 'Sources'],
       intro: ['Why this subject matters', 'A short story', 'Where it is used today', 'What you will be able to do', 'Careers that use it', 'Map of the subject', 'Sources'],
     },

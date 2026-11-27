@@ -458,7 +458,7 @@ test('unit and practical must be whole numbers; practical warnings', () => {
 // ---------- class-notes profile (plan Section 18) ----------
 
 const cnTheory = (id, subject, extra = '', drop = []) => `---\nid: ${id}\ntitle: T ${id}\nsubject: ${subject}\nunit: 1\ntype: theory\nsyllabus: [UITVI-001]\nstatus: draft\nsources: [x]\n${extra}---\n` +
-  ['Why should you care?', 'In one line', 'Explained', 'Analogy and real-life example', 'Key points', 'Exam questions', 'Sources']
+  ['Why should you care?', 'In one line', 'Explained', 'Analogy and real-life example', 'Key points', 'Sources']
     .filter((h) => !drop.includes(h)).map((h) => `## ${h}\n\nPlaceholder.\n`).join('\n');
 const cnIndex = (subject, body) => `---\nid: ${subject}\ntitle: Subject ${subject}\ntype: index\nclass: Sem 6 BSc IT\n---\nSome prose.\n\n${body}`;
 
@@ -490,15 +490,16 @@ test('class-notes profile: layout, _index.md, planned from index, unit titles, n
 
 test('class-notes profile: required sections and broken links name the file and the fix', () => {
   const root = tree({
-    'content/sec/alpha.md': cnTheory('alpha', 'sec', '', ['Exam questions']).replace('## Sources', 'Typo [[betta]].\n\n## Sources'),
+    'content/sec/alpha.md': cnTheory('alpha', 'sec', '', ['Key points']).replace('## Sources', 'Typo [[betta]].\n\n## Sources'),
     'content/sec/_index.md': cnIndex('sec', '## Theory\n1. [[alpha]]\n2. [[beta]]\n'),
     'content/stray.md': '# x',
   });
   const r = build({ root, profile: 'class-notes' });
   const e = r.problems.filter((p) => p.level === 'error');
-  const miss = e.find((p) => p.msg === 'missing required section: ## Exam questions');
+  const miss = e.find((p) => p.msg === 'missing required section: ## Key points');
   assert.equal(miss.file, 'content/sec/alpha.md');
-  assert.match(miss.fix, /add a "## Exam questions" heading.*templates\/theory-note\.md/);
+  assert.match(miss.fix, /add a "## Key points" heading.*templates\/theory-note\.md/);
+  assert.ok(!r.problems.some((p) => p.msg.includes('Exam questions')), 'Exam questions is no longer required (plan v3.0)');
   const broken = e.find((p) => p.msg.includes('broken link [[betta]]'));
   assert.ok(broken.msg.includes('did you mean "beta"') && broken.msg.includes('_index.md'), broken.msg);
   assert.equal(broken.fix, 'correct the ID');
@@ -615,4 +616,22 @@ test('⭐ important questions: kept out of heading text, flagged, and checked (p
   const m = JSON.parse(fs.readFileSync(path.join(root, 'dist/data/manifest.json'), 'utf8'));
   const hs = m.notes.aa.headings.filter((h) => h.starred);
   assert.deepEqual(hs, [{ level: 3, text: 'What is aa?', starred: true }, { level: 3, text: 'Why aa?', starred: true }]);
+});
+
+test('[2M] marks tag: either order with ⭐, kept out of the heading, other marks warn (plan v3.0)', () => {
+  const root = validTree();
+  const f = path.join(root, 'content/concepts/databases/aa.md');
+  fs.writeFileSync(f, fs.readFileSync(f, 'utf8').replace(/\n## Sources/, '\n## Interview questions\n\n### Define aa. [2M]\n\n==A.==\n\n### Explain aa. ⭐ [2M]\n\n==B.==\n\n### Explain bb. [2M] ⭐\n\n==C.==\n\n### List cc. [5M]\n\nText.\n\n### [2M] Misplaced\n\nText.\n\n## Sources'));
+  const r = build({ root });
+  assert.deepEqual(errors(r), []);
+  const w = warnings(r);
+  assert.ok(w.some((x) => x.includes('"### List cc. [5M]" ends with [5M]')) && r.problems.some((p) => p.fix === 'remove it: 5 marks is the default'));
+  assert.ok(w.some((x) => x.includes('[2M] that is not at the end')));
+  assert.ok(!w.some((x) => x.includes('not at the end, so it is not read as "important"')), 'the ⭐ before [2M] counts as trailing');
+  const hs = JSON.parse(fs.readFileSync(path.join(root, 'dist/data/manifest.json'), 'utf8')).notes.aa.headings.filter((h) => h.marks || h.starred);
+  assert.deepEqual(hs, [
+    { level: 3, text: 'Define aa.', marks: 2 },
+    { level: 3, text: 'Explain aa.', starred: true, marks: 2 },
+    { level: 3, text: 'Explain bb.', starred: true, marks: 2 },
+  ]);
 });

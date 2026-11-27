@@ -781,30 +781,36 @@
 
   // A trailing ⭐ on a ### heading marks an important question (plan v2.9, decision 47). It is taken
   // out of the heading text (so the anchor and section links don't change) and shown as a badge.
-  const STAR_RE = /\s*\u2B50\uFE0F?\s*$/u;
-  function takeStar(h) {
+  // A trailing " [2M]" (either order with ⭐) marks a 2-mark question (plan v3.0, decision 48).
+  const TAGS_RE = /(?:\s*(?:\u2B50\uFE0F?|\[2M\]))+\s*$/u;
+  function takeTags(h) {
     const walker = document.createTreeWalker(h, NodeFilter.SHOW_TEXT);
     let last = null;
     for (let t = walker.nextNode(); t; t = walker.nextNode()) if (t.nodeValue.trim()) last = t;
-    if (!last || !STAR_RE.test(last.nodeValue)) return false;
-    last.nodeValue = last.nodeValue.replace(STAR_RE, '');
-    return true;
+    const m = last && last.nodeValue.match(TAGS_RE);
+    if (!m) return { starred: false, marks: null };
+    last.nodeValue = last.nodeValue.slice(0, m.index).replace(/\s+$/, '');
+    return { starred: m[0].includes('\u2B50'), marks: m[0].includes('[2M]') ? 2 : null };
   }
   const starBadge = () => `<span class="star-badge" title="Important question">${icon('star')}<span>Important</span></span>`;
+  const marksBadge = (n) => `<span class="marks-badge" title="${n}-mark question">${n}M</span>`;
+  const tagBadges = (h) => (h.classList.contains('is-starred') ? starBadge() : '') + (h.dataset.marks ? marksBadge(h.dataset.marks) : '');
 
   // Stable heading IDs for section links, e.g. note.html?id=normalization#q3-how-does-it-work
   function addHeadingIds(root) {
     const used = new Set();
     root.querySelectorAll('h2, h3, h4').forEach((h) => {
       [...h.childNodes].forEach((n) => { if (n.nodeType === 8) n.remove(); }); // drop <!-- template labels -->
-      const starred = h.tagName === 'H3' && takeStar(h);
+      const tags = h.tagName === 'H3' ? takeTags(h) : { starred: false, marks: null };
       const text = h.textContent.trim();
       let id = slugify(text), k = 2;
       while (used.has(id)) id = slugify(text) + '-' + k++;
       used.add(id);
       h.id = id;
       h.innerHTML = `<span class="h-text">${h.innerHTML.trim()}</span>`;
-      if (starred) { h.classList.add('is-starred'); h.insertAdjacentHTML('beforeend', starBadge()); }
+      if (tags.starred) h.classList.add('is-starred');
+      if (tags.marks) h.dataset.marks = tags.marks;
+      if (tags.starred || tags.marks) h.insertAdjacentHTML('beforeend', tagBadges(h));
       const a = document.createElement('a');
       a.className = 'anchor';
       a.href = '#' + id;
@@ -928,7 +934,8 @@
         const h = document.createElement('h3');
         h.className = head.tagName === 'H3' ? 'nb-question' : 'nb-section';
         h.innerHTML = head.querySelector('.h-text').innerHTML; // keeps maths and formatting
-        if (head.classList.contains('is-starred')) { box.dataset.starred = ''; h.insertAdjacentHTML('beforeend', starBadge()); }
+        if (head.classList.contains('is-starred')) box.dataset.starred = '';
+        h.insertAdjacentHTML('beforeend', tagBadges(head));
         const ul = document.createElement('ul');
         marks.forEach((m) => { const li = document.createElement('li'); li.appendChild(m.cloneNode(true)); ul.appendChild(li); });
         box.append(h, ul);
@@ -940,7 +947,7 @@
 
   function buildToc(root) {
     const items = [...root.querySelectorAll('h2, h3')].map((h) =>
-      `<li class="toc-${h.tagName.toLowerCase()}"><a href="#${h.id}">${esc(h.querySelector('.h-text').textContent)}${h.classList.contains('is-starred') ? ` <span class="toc-star" title="Important">${icon('star')}</span>` : ''}</a></li>`).join('');
+      `<li class="toc-${h.tagName.toLowerCase()}"><a href="#${h.id}">${esc(h.querySelector('.h-text').textContent)}${h.classList.contains('is-starred') ? ` <span class="toc-star" title="Important">${icon('star')}</span>` : ''}${h.dataset.marks ? ` <span class="toc-marks" title="${h.dataset.marks}-mark question">${h.dataset.marks}M</span>` : ''}</a></li>`).join('');
     return items ? `<ul>${items}</ul>` : '';
   }
 
