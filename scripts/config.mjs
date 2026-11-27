@@ -168,6 +168,7 @@ export const PROFILES = {
       'UITIV-006': { title: 'Embedded System Practical', programme: 'BSc IT · Semester IV' },
       'UDSIV-005': { title: 'Embedded System', programme: 'BSc Data Science · Semester IV' },
       'UDSIV-006': { title: 'Embedded System Practical', programme: 'BSc Data Science · Semester IV' },
+      'UDSII-005': { title: 'Digital Electronics', programme: 'BSc Data Science · Semester II' },
       'UITVI-001': { title: 'Security in Computing', programme: 'BSc IT · Semester VI' },
       'UITVI-002': { title: 'Security in Computing Practical', programme: 'BSc IT · Semester VI' },
     },
