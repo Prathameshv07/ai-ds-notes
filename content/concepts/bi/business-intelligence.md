@@ -31,7 +31,7 @@ Business intelligence (BI) is the set of tools and processes that collect busine
 
 ## Explained
 
-### Q1. What is business intelligence?
+### Q1. What is business intelligence? ⭐
 
 ==Business intelligence (BI) is the use of tools and processes to collect, store, analyse and present business data for better decisions.==
 
@@ -43,7 +43,7 @@ A BI system has four parts:
 - ==**Analysis:**== summaries, filters, drill-down, comparisons.
 - ==**Presentation:**== reports, dashboards and charts for users.
 
-### Q2. How does a BI system work?
+### Q2. How does a BI system work? ⭐
 
 Data passes through five stages:
 
@@ -70,7 +70,7 @@ Data passes through five stages:
 
 Common features: ==connect to many sources, drag-and-drop charts, filters and drill-down==, scheduled refresh, sharing on web and phone.
 
-### Q4. What is a dashboard?
+### Q4. What is a dashboard? ⭐
 
 ==A dashboard is a single screen that shows the most important measures of performance at a glance, usually updated automatically.==
 
@@ -81,7 +81,7 @@ Its building blocks are **KPIs**. ==A key performance indicator (KPI) is a numbe
 - ==**Tactical (analytical):**== for middle managers and analysts; trends and drill-down to find causes (why Vidarbha sales fell).
 - ==**Operational:**== for staff running daily work; live or hourly (today's billing queue, stock-outs).
 
-### Q5. What is a reporting system? What are the types of reports?
+### Q5. What is a reporting system? What are the types of reports? ⭐
 
 ==A reporting system produces structured documents that present business data in a fixed format for a set audience.== Reports are usually detailed, tabular and printable.
 
