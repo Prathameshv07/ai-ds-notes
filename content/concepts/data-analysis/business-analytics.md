@@ -104,6 +104,30 @@ A decision normally follows these steps, and analytics supports each one:
 
 The boundaries overlap in practice; job titles vary between companies.
 
+### Q7. What are the challenges of business analytics?
+
+- ==**Poor data quality:** missing, wrong or outdated records== lead to wrong answers.
+- ==**Lack of skilled people:**== analysts who understand both data and the business are scarce.
+- ==**Data silos:** data spread across departments== that do not share it.
+- ==**Cost:** tools, storage and training== need money before results appear.
+- ==**Resistance to change:** managers who trust gut feeling== may ignore the analysis.
+- ==**Privacy and ethics:** customer data must be protected==; in India, the Digital Personal Data Protection Act, 2023 sets rules for using personal data.
+
+### Q8. What is the difference between data, information and insight? [2M]
+
+- ==**Data:** raw facts==, e.g. individual sales bills.
+- ==**Information:** data organised to be meaningful==, e.g. sales per store per month.
+- ==**Insight:** an understanding that suggests an action==, e.g. syrup sales double in winter at two stores, so send them extra stock.
+
+### Q9. Differentiate between descriptive and predictive analytics. [2M]
+
+| | Descriptive | Predictive |
+|---|---|---|
+| Question | ==What happened?== | ==What will happen?== |
+| Looks at | The past | The future |
+| Example | Last month's sales by store | Next month's expected sales |
+| Methods | Totals, averages, charts | Regression, forecasting |
+
 ## Analogy and real-life example
 
 Business analytics works like a doctor treating a patient:
@@ -175,6 +199,7 @@ Classify questions 3 and 4.
 > - Applications: marketing, retail, finance, operations, HR, healthcare, pricing, sports, government.
 > - Decision steps: recognise problem → find cause → generate options → evaluate → choose → act and monitor.
 > - BI reports the past; BA also explains, predicts and recommends.
+> - Challenges: data quality, shortage of skilled people, data silos, cost, resistance to change, privacy and ethics.
 
 ## Common mistakes
 
@@ -247,6 +272,8 @@ Which question does prescriptive analytics answer? :: What should we do?
 Which type of analytics has the highest value and difficulty? :: Prescriptive
 Give three applications of business analytics. :: Any three of: marketing, retail, finance, operations, HR, healthcare, pricing, sports, government
 How does BI differ from business analytics? :: BI mainly reports the past; business analytics also explains, predicts and recommends
+Name four challenges of business analytics. :: Any four of: poor data quality, lack of skilled people, data silos, cost, resistance to change, privacy and ethics
+What is the difference between data and information? :: Data is raw facts; information is data organised to be meaningful
 
 ## Sources
 

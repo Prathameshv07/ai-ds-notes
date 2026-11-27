@@ -101,6 +101,21 @@ Never delete an outlier automatically. First ask **why** it is there:
 - ==**Genuine but rare**== (Diwali-day sales): ==keep it==; it is real and often the most important data point.
 - ==**Different group**== (a wholesale order in retail data): ==analyse it separately==.
 
+### Q7. Differentiate between univariate and bivariate analysis. [2M]
+
+| | Univariate | Bivariate |
+|---|---|---|
+| Studies | ==One variable at a time== | ==Two variables together== |
+| Question | What does this variable look like? | How are these two related? |
+| Tools | Mean, median, histogram, bar chart | Scatter plot, correlation, group comparison, cross-tab |
+| Example | Distribution of daily footfall | Footfall on rainy vs dry days |
+
+### Q8. Why is the mean alone not enough to describe data? [2M]
+
+- ==**It hides the spread:**== two stores with the same mean footfall can be steady or wildly variable.
+- ==**One extreme value pulls it:**== in the worked example below, one Diwali day of 920 visitors lifts the week's mean to 542, though the other six days average 479 and the median is 480.
+- So report the ==median, a measure of spread and a chart== along with the mean.
+
 ## Analogy and real-life example
 
 EDA is like a doctor's first examination. Before ordering an MRI (the model), the doctor checks temperature, pulse, weight and blood pressure, and asks what is wrong. Most problems are spotted here, and the basic checks decide which expensive test makes sense.
