@@ -134,6 +134,47 @@ Choose the chart by the question asked ([[choosing-a-chart]]):
 - ==**Mostly looks backward:**== BI describes the past; prediction needs further analytics.
 - Cost and skill: licences, setup, and trained people are needed.
 
+### Q9. Write a short note on Power BI.
+
+==Power BI is Microsoft's business intelligence tool for connecting to data, modelling it and building interactive reports and dashboards.==
+
+Main parts:
+- ==**Power BI Desktop:**== a free Windows app where reports are built.
+- ==**Power BI Service:**== the cloud website where reports are published, shared and refreshed on a schedule.
+- ==**Power BI Mobile:**== apps to view dashboards on a phone.
+- ==**Power Query:**== the step-by-step tool for cleaning and reshaping data (also inside Excel).
+- ==**DAX (Data Analysis Expressions):**== the formula language for measures such as total revenue or growth over last year.
+
+Strengths: low cost, works closely with Excel and other Microsoft tools, widely used in Indian companies.
+
+### Q10. Write a short note on Tableau.
+
+==Tableau is a data visualization and BI tool, now owned by Salesforce, known for building charts by dragging fields onto a canvas.==
+
+Main products:
+- ==**Tableau Desktop:**== builds worksheets, dashboards and stories.
+- ==**Tableau Prep:**== cleans and combines data before analysis.
+- ==**Tableau Public:**== a free version; work is published openly on the web.
+- ==**Tableau Server / Tableau Cloud:**== share dashboards securely inside a company.
+
+Key idea: fields are either ==**dimensions**== (categories such as region or product) or ==**measures**== (numbers such as revenue), and Tableau draws a suitable chart from them.
+
+Strengths: rich, flexible visuals and fast exploration of data.
+
+### Q11. What is a KPI? Give two examples. [2M]
+
+==A key performance indicator (KPI) is a measurable value that shows how well a business is progressing towards a goal.==
+
+Examples: monthly revenue against target; average delivery time per order.
+
+### Q12. What is ETL? [2M]
+
+==ETL (extract, transform, load) is the process of copying data out of source systems, cleaning and converting it, and loading it into a data warehouse for analysis.==
+
+### Q13. What is drill-down? [2M]
+
+==Drill-down is moving from summary data to more detailed data by clicking on a value==, for example from region → city → store → product. Moving back up to the summary is called roll-up.
+
 ## Analogy and real-life example
 
 A BI system is like a car's dashboard and the car's service record.
