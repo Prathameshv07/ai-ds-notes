@@ -29,7 +29,7 @@ The extended ER model adds supertypes and subtypes (with inheritance and constra
 
 ## Explained
 
-### Q1. What are supertypes and subtypes?
+### Q1. What are supertypes and subtypes? ⭐
 
 ==A **supertype** holds the attributes common to all instances; a **subtype** holds the attributes unique to one group.==
 
@@ -45,13 +45,13 @@ The extended ER model adds supertypes and subtypes (with inheritance and constra
 - The ==**primary key** of a subtype is the same as its supertype's== (staff ID), and it is also a foreign key to the supertype.
 - A subtype can have **its own relationships**: only TEACHER *teaches* COURSE.
 
-### Q3. What is a subtype discriminator, and what are disjoint and overlapping subtypes?
+### Q3. What is a subtype discriminator, and what are disjoint and overlapping subtypes? ⭐
 
 - ==A **subtype discriminator** is the supertype attribute that decides which subtype an instance belongs to==, such as staff type = "T" (teacher) or "D" (driver).
 - ==**Disjoint (non-overlapping)**: an instance belongs to **at most one** subtype.== A staff member is a teacher or a driver, not both.
 - ==**Overlapping**: an instance may belong to **more than one** subtype.== A PERSON at a university may be both a STUDENT and an EMPLOYEE.
 
-### Q4. What is the completeness constraint?
+### Q4. What is the completeness constraint? ⭐
 
 ==The completeness constraint says whether every supertype instance must belong to a subtype.==
 
@@ -64,7 +64,7 @@ The extended ER model adds supertypes and subtypes (with inheritance and constra
 - ==**Generalization** is bottom-up==: start with separate entities (TEACHER, DRIVER), notice common attributes, and create a supertype.
 - Both produce the same kind of hierarchy; they differ only in the direction of discovery.
 
-### Q6. What is entity clustering?
+### Q6. What is entity clustering? ⭐
 
 ==An **entity cluster** is a virtual entity that represents several entities and relationships in an ERD.==
 

@@ -36,7 +36,7 @@ Flexible database design handles four common cases correctly: placing the foreig
 - ==If **both** sides are optional, choose the side that gives the **fewest nulls**==, or use a separate table for the relationship.
 - If both sides are mandatory, check whether they are really one entity.
 
-### Q2. How do you keep history of time-variant data?
+### Q2. How do you keep history of time-variant data? ⭐
 
 ==**Time-variant data** is data whose values change over time, where the history must be kept.==
 
@@ -45,7 +45,7 @@ Flexible database design handles four common cases correctly: placing the foreig
 - Fix: ==create a **history entity**==, such as SALARY_HISTORY (teacher ID, effective date, salary) or HOD_HISTORY (dept code, start date, end date, prof ID).
 - The current value is the row with the latest date (or no end date).
 
-### Q3. What is a fan trap?
+### Q3. What is a fan trap? ⭐
 
 ==A **fan trap** happens when one entity has 1:M relationships to two other entities, so the real link between those two is missing.==
 
@@ -53,7 +53,7 @@ Flexible database design handles four common cases correctly: placing the foreig
 - The two relationships "fan out" from LEAGUE, hiding the real link.
 - ==Fix: restructure the path==: LEAGUE 1:M TEAM 1:M PLAYER. Now each player's team, and through it the league, is known.
 
-### Q4. What is a redundant relationship?
+### Q4. What is a redundant relationship? ⭐
 
 ==A **redundant relationship** exists when there are **multiple paths** between related entities and one of them adds no information.==
 

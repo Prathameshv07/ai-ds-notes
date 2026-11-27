@@ -29,7 +29,7 @@ A DBMS is software that keeps data in one shared, organised place and controls h
 
 ## Explained
 
-### Q1. What are data, a database and a DBMS?
+### Q1. What are data, a database and a DBMS? ⭐
 
 - ==**Data:** raw facts==, such as `Asha`, `9876543210`, `85`.
 - ==**Information:** data processed so that it means something==, such as "Asha scored 85 in DBMS".
@@ -39,7 +39,7 @@ A DBMS is software that keeps data in one shared, organised place and controls h
 
 A **database system** is the whole package. ==A database system consists of the database, the DBMS, application programs and users.==
 
-### Q2. Why not just use files?
+### Q2. Why not just use files? ⭐
 
 Before DBMSs, ==each department wrote its own programs and kept its own files==. This is a **file-processing system**. It causes eight problems (full list in Key facts). The first four are about the data itself:
 
@@ -47,7 +47,7 @@ Before DBMSs, ==each department wrote its own programs and kept its own files==.
 - ==**Hard to access data:**== every new question, such as "fees pending and attendance below 75%", needs a new program.
 - ==**Data isolation:** data is scattered across files== in different formats, so combining it is painful.
 
-### Q3. What other problems do files cause?
+### Q3. What other problems do files cause? ⭐
 
 The other four are about rules, failures, sharing and safety:
 
@@ -70,7 +70,7 @@ The other four are about rules, failures, sharing and safety:
 
 Apps no longer need to know how data is laid out on disk; they simply ask the DBMS. This separation is called **data independence** (see [[levels-of-abstraction]]).
 
-### Q5. What are the advantages and disadvantages?
+### Q5. What are the advantages and disadvantages? ⭐
 
 | Advantages | Disadvantages |
 |---|---|

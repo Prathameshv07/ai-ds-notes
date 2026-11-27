@@ -29,7 +29,7 @@ The ER model describes a database design as entities, their attributes and the r
 
 ## Explained
 
-### Q1. What is the ER model?
+### Q1. What is the ER model? ⭐
 
 ==The entity relationship model (ERM) describes a database as entities, their attributes and the relationships between them.==
 
@@ -46,7 +46,7 @@ The ER model describes a database design as entities, their attributes and the r
 - ==One particular student is an **entity instance** (or occurrence).==
 - Entities are drawn as **rectangles**, with names in capitals and singular: STUDENT, not Students.
 
-### Q3. What types of attributes are there?
+### Q3. What types of attributes are there? ⭐
 
 | Type | Meaning | STUDENT example |
 |---|---|---|
@@ -67,7 +67,7 @@ The set of allowed values of an attribute is its **domain**: marks from 0 to 100
 - ==A relationship works in **both directions**==: a department offers courses, and each course is offered by a department.
 - How many instances link on each side is its **connectivity and cardinality** (see [[connectivity-and-cardinality]]).
 
-### Q5. What are Chen and crow's foot notation?
+### Q5. What are Chen and crow's foot notation? ⭐
 
 | Element | ==**Chen notation**== | ==**Crow's foot notation**== |
 |---|---|---|

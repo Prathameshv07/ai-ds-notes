@@ -28,7 +28,7 @@ The degree of a relationship is the number of entity types in it: unary (one, al
 
 ## Explained
 
-### Q1. What is relationship degree?
+### Q1. What is relationship degree? ⭐
 
 ==The degree of a relationship is the number of entity types associated with it.==
 
@@ -40,7 +40,7 @@ The degree of a relationship is the number of entity types in it: unary (one, al
 
 ==**Binary relationships are the most common**==. Higher degrees (four or more) exist in theory but are rare; designers usually break them down.
 
-### Q2. What is a recursive (unary) relationship?
+### Q2. What is a recursive (unary) relationship? ⭐
 
 ==A recursive relationship exists between instances of the **same** entity.==
 
@@ -57,7 +57,7 @@ The degree of a relationship is the number of entity types in it: unary (one, al
 - The top person (the principal or CEO) has an empty manager_id, so ==the relationship is optional at the top==.
 - An **M:N** recursive relationship, such as course prerequisites, cannot be stored this way; it needs an associative entity (see [[associative-entities]]).
 
-### Q4. What is a ternary relationship?
+### Q4. What is a ternary relationship? ⭐
 
 ==A ternary relationship links three entities at the same time.==
 

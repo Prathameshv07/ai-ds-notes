@@ -28,7 +28,7 @@ An ER diagram is developed iteratively: write the narrative, extract business ru
 
 ## Explained
 
-### Q1. What are the steps to develop an ER diagram?
+### Q1. What are the steps to develop an ER diagram? ⭐
 
 1. ==**Write a detailed narrative**== of how the organisation works.
 2. ==**Identify the business rules**== from the narrative (see [[data-models]]).
@@ -49,7 +49,7 @@ The designer checks the draft with the users and with these questions:
 - ==**Are there multivalued or derived attributes?**== Move multivalued ones into their own entity; don't store derived ones.
 - ==**Does it answer the users' questions?**== Try each required report against the diagram.
 
-### Q3. What are the conflicting goals in database design?
+### Q3. What are the conflicting goals in database design? ⭐
 
 A designer must balance three goals that often pull in different directions:
 

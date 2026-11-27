@@ -37,7 +37,7 @@ A key is one or more attributes that uniquely identify each row; the primary key
 - Example: knowing the roll number tells you the student's name, date of birth and course.
 - A key made of **two or more attributes** is a ==**composite key**==, such as course code + section.
 
-### Q2. What are the types of keys?
+### Q2. What are the types of keys? ⭐
 
 | Key | Meaning | STUDENT example |
 |---|---|---|
@@ -48,7 +48,7 @@ A key is one or more attributes that uniquely identify each row; the primary key
 | ==**Foreign key (FK)**== | An attribute that refers to the PK of another (or the same) table | dept code in STUDENT |
 | ==**Secondary key**== | Used only for searching; need not be unique | last name |
 
-### Q3. What is entity integrity?
+### Q3. What is entity integrity? ⭐
 
 ==Entity integrity means every primary key value is **unique** and **not null**.==
 
@@ -64,7 +64,7 @@ A key is one or more attributes that uniquely identify each row; the primary key
 - Use a natural key when it is unique, stable and short.
 - ==Use a surrogate key when no good natural key exists==, or the natural key is long, made of many attributes, or may change.
 
-### Q5. What makes a good primary key?
+### Q5. What makes a good primary key? ⭐
 
 Coronel, Morris and Rob give six guidelines:
 

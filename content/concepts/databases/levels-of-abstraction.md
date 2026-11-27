@@ -37,7 +37,7 @@ A DBMS describes data at three levels (physical, logical and view), so that each
 - With it, users ask simple questions ("show my marks") and the DBMS works out the details.
 - ==The DBMS achieves this by describing data at **three levels**==, from the closest to the hardware to the closest to the user.
 
-### Q2. What are the three levels?
+### Q2. What are the three levels? ⭐
 
 | Level | Describes | Who works here | College example |
 |---|---|---|---|
@@ -47,7 +47,7 @@ A DBMS describes data at three levels (physical, logical and view), so that each
 
 There is ==**one** physical level and **one** logical level, but **many** views==, one for each kind of user.
 
-### Q3. What are a schema and an instance?
+### Q3. What are a schema and an instance? ⭐
 
 ==A schema is the overall design of the database; an instance is the data stored in it at one moment.==
 
@@ -56,7 +56,7 @@ There is ==**one** physical level and **one** logical level, but **many** views=
 
 ==Each level has its own schema==: a **physical schema**, a **logical schema**, and several **external schemas** (subschemas), one per view.
 
-### Q4. What is the three-schema architecture?
+### Q4. What is the three-schema architecture? ⭐
 
 ==The three-schema (ANSI/SPARC) architecture is the formal name for this design==:
 
@@ -66,7 +66,7 @@ There is ==**one** physical level and **one** logical level, but **many** views=
 
 ==Between the levels sit **mappings**==. When a student asks for marks, the DBMS maps the request from their view to the logical tables, then to the physical files, and maps the answer back up. Users never see these mappings.
 
-### Q5. What is data independence?
+### Q5. What is data independence? ⭐
 
 Data independence is the main payoff of the levels: ==you can change one level without rewriting the level above it==.
 

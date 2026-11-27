@@ -41,20 +41,20 @@ There is no single list of "types". Instead, ==we describe a database by answeri
 
 Every database has one answer to each question. Your college ERP is multiuser, centralised, operational and structured, all at once.
 
-### Q2. What are the types by number of users?
+### Q2. What are the types by number of users? ⭐
 
 - ==**Single-user database:** one user at a time==. When it runs on a personal computer, ==it is called a **desktop database**==. Example: a shopkeeper's billing software on one laptop.
 - ==**Multiuser database:** many users== at the same time.
   - ==**Workgroup database:** a small group, usually fewer than 50 users==, such as one department.
   - ==**Enterprise database:** a whole organisation==, often hundreds or thousands of users across departments. Example: a bank's core banking system.
 
-### Q3. What are the types by location?
+### Q3. What are the types by location? ⭐
 
 - ==**Centralised database:** all data is kept at one site==. Easy to manage, but if that site fails, everyone stops.
 - **Distributed database:** ==A distributed database spreads data across several networked sites, but users see it as one database.== Example: a national booking system with servers in several cities.
 - ==**Cloud database:** created and run on a cloud provider's servers==, such as AWS, Microsoft Azure or Google Cloud. You rent it instead of buying hardware. Underneath, it may be centralised or distributed.
 
-### Q4. What are the types by usage?
+### Q4. What are the types by usage? ⭐
 
 - **Operational database:** ==An operational database records day-to-day transactions as they happen.==
   - Examples: a UPI payment, a seat booking, a new admission.
@@ -65,7 +65,7 @@ Every database has one answer to each question. Your college ERP is multiuser, c
   - Mostly read, rarely changed.
   - ==Called **OLAP**== (online analytical processing). A **data warehouse** is the classic example (see [[data-warehouse]]).
 
-### Q5. What are the types by structure?
+### Q5. What are the types by structure? ⭐
 
 - ==**Structured data** fits fixed rows and columns==, such as a marks table. It is stored in **relational databases** such as MySQL, PostgreSQL and Oracle.
 - **Semi-structured data:** ==Semi-structured data has some structure but no fixed table shape, such as JSON or XML.== On a shopping site, a phone has fields like RAM and battery; a saree has fabric and length.

@@ -28,7 +28,7 @@ A data model is a simple, usually graphical, picture of real-world data: what th
 
 ## Explained
 
-### Q1. What is a data model?
+### Q1. What is a data model? ⭐
 
 ==A data model is a simple, usually graphical, representation of complex real-world data structures.==
 
@@ -38,14 +38,14 @@ A data model is a simple, usually graphical, picture of real-world data: what th
 
 A data model is to a database what a blueprint is to a building.
 
-### Q2. Why are data models important?
+### Q2. Why are data models important? ⭐
 
 - ==**Communication:**== designers, programmers and end users all read the same picture, so misunderstandings appear early.
 - ==**Different views, one model:**== the principal sees "results by department", a clerk sees "fee receipts", a programmer sees tables. The model joins these views into one consistent design.
 - ==**Cheaper mistakes:**== errors caught on paper cost far less than errors found after the database holds a year of data.
 - ==**A good database starts with a good model.**== A bad model gives redundancy and wrong answers, however good the DBMS is.
 
-### Q3. What are the building blocks of a data model?
+### Q3. What are the building blocks of a data model? ⭐
 
 | Block | Meaning | College example |
 |---|---|---|
@@ -68,7 +68,7 @@ Relationships are described by how many of one entity link to how many of the ot
 
 ==Always read a relationship **in both directions**==; only then is its type clear. Unit 2 draws these as ER diagrams (see [[er-model]]).
 
-### Q5. What are business rules?
+### Q5. What are business rules? ⭐
 
 ==A business rule is a brief, precise and unambiguous description of a policy, procedure or principle of an organisation.==
 

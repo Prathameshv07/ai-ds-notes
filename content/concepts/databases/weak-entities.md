@@ -29,7 +29,7 @@ A weak entity cannot exist without its parent and borrows part of its primary ke
 
 ## Explained
 
-### Q1. What is relationship strength?
+### Q1. What is relationship strength? ⭐
 
 Relationship strength depends on how the child entity's primary key is built (see [[keys]]).
 
@@ -37,7 +37,7 @@ Relationship strength depends on how the child entity's primary key is built (se
 - ==**Strong (identifying) relationship**==: the child's primary key **contains** the parent's primary key. Example: CLASS is identified by course code **plus** section.
 - In crow's foot notation, ==a weak relationship is a **dashed line**; a strong relationship is a **solid line**==.
 
-### Q2. What is a weak entity?
+### Q2. What is a weak entity? ⭐
 
 ==A weak entity meets two conditions:==
 
@@ -46,7 +46,7 @@ Relationship strength depends on how the child entity's primary key is built (se
 
 Example: DEPENDENT of an EMPLOYEE. A dependent (such as an employee's child, for medical cover) exists only because the employee exists, and is identified by employee number **plus** dependent number.
 
-### Q3. How do strong and weak entities differ?
+### Q3. How do strong and weak entities differ? ⭐
 
 | | ==Strong (regular) entity== | ==Weak entity== |
 |---|---|---|

@@ -29,7 +29,7 @@ Connectivity names the relationship type (1:1, 1:M, M:N), cardinality gives the 
 
 ## Explained
 
-### Q1. What is connectivity?
+### Q1. What is connectivity? ⭐
 
 ==Connectivity describes the classification of a relationship: 1:1, 1:M or M:N.==
 
@@ -39,7 +39,7 @@ Connectivity names the relationship type (1:1, 1:M, M:N), cardinality gives the 
 
 You met these types in [[data-models]]. Connectivity is simply the ER-diagram name for them.
 
-### Q2. What is cardinality?
+### Q2. What is cardinality? ⭐
 
 ==Cardinality is the minimum and maximum number of instances of one entity that can be linked to one instance of the other.==
 
@@ -61,7 +61,7 @@ Each line end carries two marks: the inner one is the **minimum**, the outer one
 
 A **circle** always means "zero is allowed", that is, optional.
 
-### Q4. What is participation?
+### Q4. What is participation? ⭐
 
 ==Participation says whether an entity must take part in a relationship.==
 
@@ -70,7 +70,7 @@ A **circle** always means "zero is allowed", that is, optional.
 - Optional participation means the **minimum cardinality is 0**; mandatory means it is **at least 1**.
 - Elmasri and Navathe call these **total** and **partial** participation.
 
-### Q5. What is existence dependence?
+### Q5. What is existence dependence? ⭐
 
 ==An entity is **existence-dependent** if it can exist only when it is linked to another entity.==
 

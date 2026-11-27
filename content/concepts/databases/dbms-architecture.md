@@ -29,7 +29,7 @@ DBMS architecture describes the parts of a database system, the people who use a
 
 ## Explained
 
-### Q1. What are the components of a database system?
+### Q1. What are the components of a database system? ⭐
 
 ==A database system has five components==:
 
@@ -42,7 +42,7 @@ DBMS architecture describes the parts of a database system, the people who use a
 4. ==**Procedures:** written rules for using and running the system==, such as "back up every night at 2 a.m."
 5. ==**Data:** the stored facts, plus **metadata**==. ==Metadata is data about the data: table names, column types, rules and owners.==
 
-### Q2. Who are the people in a database system?
+### Q2. Who are the people in a database system? ⭐
 
 | Person | What they do | College example |
 |---|---|---|
@@ -61,7 +61,7 @@ End users come in two kinds:
 - ==**Naive users** only click through ready-made screens==, such as a student paying fees.
 - ==**Sophisticated users** write their own queries==, such as a data analyst using SQL.
 
-### Q4. What is the query processor?
+### Q4. What is the query processor? ⭐
 
 The DBMS has two main parts above the stored data. The first is the query processor. ==The query processor turns user queries into low-level instructions the storage manager can run.== It contains:
 
@@ -69,7 +69,7 @@ The DBMS has two main parts above the stored data. The first is the query proces
 - ==the **DML compiler**, for data commands== (DML, data manipulation language, such as `SELECT` and `INSERT`); it picks a fast plan for each;
 - ==the **query evaluation engine**==, which carries out that plan.
 
-### Q5. What is the storage manager, and what is on disk?
+### Q5. What is the storage manager, and what is on disk? ⭐
 
 ==The storage manager links the stored data with the queries and programs that use it.== It contains:
 

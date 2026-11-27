@@ -27,7 +27,7 @@ Data processing is the series of steps (collect, prepare, input, process, output
 
 ## Explained
 
-### Q1. What is data processing?
+### Q1. What is data processing? ⭐
 
 ==Data processing is the collection and manipulation of raw data to produce meaningful information.==
 
@@ -37,7 +37,7 @@ Data processing is the series of steps (collect, prepare, input, process, output
 
 Data processing is not a one-off task. Its output (stored results) often becomes the input for the next round, ==so it runs as a **cycle**==.
 
-### Q2. What is the data processing cycle?
+### Q2. What is the data processing cycle? ⭐
 
 ==Data processing cycle: collection → preparation → input → processing → output → storage.==
 
@@ -60,7 +60,7 @@ Data processing is not a one-off task. Its output (stored results) often becomes
 
 ==Electronic data processing is the fastest and most accurate==, and it handles huge volumes. Every database system is an example of electronic data processing.
 
-### Q4. What are batch, online and real-time processing?
+### Q4. What are batch, online and real-time processing? ⭐
 
 - **Batch processing:** ==In batch processing, data is collected over a period and processed together as one group.== Example: monthly salary slips; a bank adding interest at the end of the day.
 - **Online processing:** ==In online processing, each transaction is processed immediately while the user waits.== Example: booking a train ticket on IRCTC.

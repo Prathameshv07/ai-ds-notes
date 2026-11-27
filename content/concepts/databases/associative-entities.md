@@ -35,7 +35,7 @@ An associative (composite, bridge) entity turns an M:N relationship into two 1:M
 - Copying a student's row once per course instead ==creates **redundancy** and update problems== (see [[what-is-dbms]]).
 - So ==an M:N relationship must be **broken down** before it becomes tables==.
 
-### Q2. What is an associative entity?
+### Q2. What is an associative entity? ⭐
 
 ==An associative entity is an entity that implements an M:N relationship between two (or more) entities.==
 
@@ -44,7 +44,7 @@ An associative (composite, bridge) entity turns an M:N relationship into two 1:M
 - It can have **its own attributes**: the facts that belong to the pair, such as grade or enrolment date.
 - In Chen notation it is drawn as a **diamond inside a rectangle**.
 
-### Q3. How does it turn M:N into two 1:M relationships?
+### Q3. How does it turn M:N into two 1:M relationships? ⭐
 
 | Before | After |
 |---|---|
