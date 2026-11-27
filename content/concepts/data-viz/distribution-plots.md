@@ -5,7 +5,7 @@ subject: data-viz
 level: foundation
 type: theory
 prerequisites: [central-tendency, quartiles-and-percentiles]
-related: [dispersion, skewness-and-kurtosis, frequency-distribution, exploratory-data-analysis, histogram-practical, box-plot-practical]
+related: [dispersion, skewness-and-kurtosis, frequency-distribution, frequency-polygon-and-ogive, exploratory-data-analysis, histogram-practical, box-plot-practical]
 tags: [interview]
 syllabus: [UDSVI-006]
 unit: 1
@@ -35,7 +35,7 @@ A histogram shows the shape of a numerical variable by counting how many values 
 
 ## Explained
 
-### Q1. What is a distribution, and why graph it?
+### Q1. What is a distribution, and why graph it? [2M]
 
 ==The **distribution** of a variable is the full pattern of its values==: which values occur, and how often.
 
@@ -69,7 +69,7 @@ Building one is building a frequency table ([[frequency-distribution]]) and draw
 
 A chart of "revenue by city" is a bar chart even if the bars look like a histogram.
 
-### Q4. How many bins should a histogram have?
+### Q4. How many bins should a histogram have? [2M]
 
 The bin width changes the picture:
 
@@ -137,6 +137,41 @@ Compare the two halves:
 | Explaining to a manager with no statistics | Histogram (easier to read) |
 
 In exploratory data analysis ([[exploratory-data-analysis]]) use both: ==the histogram for shape, the box plot for outliers== and comparisons.
+
+### Q10. How do you draw a histogram? ⭐
+
+1. ==Find the **range**==: largest value − smallest value.
+2. ==Choose the **number of classes** (bins)==, for example by Sturges' rule (Q4).
+3. ==Fix the **class width**==: range ÷ number of classes, rounded up to a convenient number.
+4. ==Make a **frequency table**==: count the values in each class, lower limit included, upper limit excluded.
+5. ==Draw and label the **axes**==: classes on the x-axis, frequency on the y-axis.
+6. ==Draw **touching bars**==, each as tall as its class frequency, and add a title.
+
+Example: S05 footfall has range 2,486 − 721 = 1,765. Nine classes give width 1,765 ÷ 9 ≈ 196, rounded up to 200, starting at 700 ([[histogram-practical]], Step 2).
+
+### Q11. How do you draw a box plot?
+
+1. ==**Sort** the data and find Q1, the median and Q3== ([[quartiles-and-percentiles]]).
+2. ==Compute the **IQR** and the two **fences**==: Q1 − 1.5 × IQR and Q3 + 1.5 × IQR.
+3. ==Draw a **number line**== covering all the data, vertical or horizontal.
+4. ==Draw the **box** from Q1 to Q3==, with a line across it at the median.
+5. ==Draw the **whiskers**== out to the smallest and largest values inside the fences.
+6. ==Mark each **outlier** as a dot== beyond the whiskers.
+
+Example: the tiffin-service data in the Worked example below gives a box from 46 to 56.5, a median line at 50, whiskers ending at 42 and 58, and one outlier dot at 95.
+
+### Q12. What are the advantages and limitations of histograms and box plots?
+
+| | Advantages | Limitations |
+|---|---|---|
+| Histogram | ==Shows the full shape==: skew, humps and gaps; easy for anyone to read | ==Depends on the bin choice==; hard to compare many groups at once |
+| Box plot | ==Compact; compares many groups== on one axis; flags outliers by a fixed rule | ==Hides humps and gaps==; readers must know what quartiles are |
+
+Use them together: the histogram for shape, the box plot for comparison and outliers (Q9).
+
+### Q13. What is a bimodal distribution? [2M]
+
+==A bimodal distribution has two peaks (humps) in its histogram.== It usually means ==two groups are mixed in one column==, such as the average bills of small Express stores and large Supermarkets. Split the data by the group and describe each part separately: the mean of the mixture can fall in the gap, where almost no actual values lie.
 
 > [!beyond] Beyond the syllabus
 > When bins have **unequal widths**, bar height must show **frequency density** (frequency ÷ width), so that area, not height, is proportional to the count. A **violin plot** combines a box plot with a smoothed histogram on each side, so it shows humps as well as quartiles.

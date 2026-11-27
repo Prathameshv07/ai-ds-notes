@@ -35,6 +35,7 @@
 | discrete-distributions | Discrete Probability Distributions | prob-stats | theory | draft | A discrete probability distribution lists every possible value of a countable random variable together with its… | probability-basics, dispersion |
 | dispersion | Measures of Dispersion | prob-stats | theory | reviewed | A measure of dispersion tells how spread out the values of a dataset are around its centre; the main ones are the… | central-tendency |
 | dispersion-practical | Variance and Standard Deviation of Sales Data | prob-stats | practical | reviewed |  | dispersion, central-tendency-practical |
+| frequency-polygon-and-ogive | Frequency Polygon and Ogive | data-viz | theory | planned | Covers: frequency polygon, less-than and more-than ogives, reading the median and quartiles from an ogive | frequency-distribution, distribution-plots |
 | frequency-distribution | Frequency Distributions | prob-stats | theory | planned | Covers: class intervals, frequency and cumulative frequency tables for discrete and continuous data | types-of-variables |
 | hypothesis-testing | Hypothesis Testing and Type I and II Errors | prob-stats | theory | draft | Hypothesis testing is a procedure that uses sample data to decide whether there is enough evidence to reject a claim… | sampling-distributions, confidence-intervals |
 | hypothesis-testing-practical | Confidence Intervals and Hypothesis Tests on Sales Data | prob-stats | practical | draft |  | hypothesis-testing, confidence-intervals |
