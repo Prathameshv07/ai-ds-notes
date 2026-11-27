@@ -17,9 +17,9 @@ Find your semester, see which stage your courses serve, and add the rest on your
 | Sem | Your courses | Stage they serve | Add on your own |
 |---|---|---|---|
 | 1 | Python Programming, Descriptive Statistics, Office Tools for Data Management | Stage 1: statistics, spreadsheets, Python | Pivot tables and lookups on a real dataset |
-| 2 | Advanced Python, Database Management System (with practicals) | Stage 1 databases; Stage 2 pandas, charts, first SQL | Joins, subqueries and SQL functions beyond the syllabus |
+| 2 | Advanced Python, Database Management System (with practicals), Linear Algebra | Stage 1 databases; Stage 2 pandas, charts, first SQL | Joins, subqueries and SQL functions beyond the syllabus |
 | 3 | Data Warehousing & Mining | Stage 2 data cleaning; Stage 3 data warehouse | Probability distributions; start the EDA project |
-| 4 | Testing of Hypothesis Practical, Big Data Analytics | Stage 3: t-tests, chi-square, ANOVA | Window functions, A/B testing, the SQL project |
+| 4 | Testing of Hypothesis Practical, Introduction to Basic Statistics-II, Big Data Analytics | Stage 3: t-tests, chi-square, ANOVA | Window functions, A/B testing, the SQL project |
 | 5 | Marketing & Retail Analytics (elective), Data Visualization, Project Dissertation | Stage 3: dashboards, storytelling, forecasting, A/B tests | Power BI; the dashboard project; an analytics dissertation topic |
 | 6 | Applied Business Analytics (elective), Project Implementation | Stage 3 business analytics; Stage 4 | Finish all four projects; interview practice |
 
@@ -27,10 +27,10 @@ Find your semester, see which stage your courses serve, and add the rest on your
 
 | Sem | Your courses | Stage they serve | Add on your own |
 |---|---|---|---|
-| 1 | Database Management System (with practical) | Stage 1 databases; Stage 2 SQL | Stage 1 statistics and spreadsheets (not in the IT syllabus) |
-| 2 | MongoDB Practical, Web Programming Practical | Extra SQL practice (PHP-MySQL) | Python basics; probability |
+| 1 | Database Management System (with practical) | Stage 1 databases; Stage 2 SQL | Stage 1 statistics and spreadsheets now (the IT statistics course comes later, and spreadsheets are not in the syllabus) |
+| 2 | MongoDB Practical, Web Programming Practical, Linear Algebra | Extra SQL practice (PHP-MySQL) | Python basics; probability |
 | 3 | Python Programming (with practical) | Stage 1 Python; NumPy arrays | Stage 2 pandas, cleaning, EDA, charts |
-| 4 | Core Java, Computer Networks | None directly | Stage 2 charts; Stage 3 inference |
+| 4 | Core Java, Computer Networks, Introduction to Basic Statistics-II | Stage 1 statistics | Stage 2 charts; Stage 3 inference |
 | 5 | Business Intelligence, Project Dissertation | Stage 3 BI concepts | Power BI hands-on; window functions; A/B testing |
 | 6 | AI & ML (with practical), Project Implementation | A bonus for analysts | Finish all four projects; interview practice |
 
@@ -75,7 +75,7 @@ Find your semester, see which stage your courses serve, and add the rest on your
 
 **Milestone:** You can summarise any column of data the right way, build a pivot table, write small Python programs and read a database schema.
 
-**Free resources:** [Khan Academy: Statistics and Probability](https://www.khanacademy.org/math/statistics-probability) · [GCFGlobal: Excel](https://edu.gcfglobal.org/en/excel/) · [Kaggle Learn: Python](https://www.kaggle.com/learn/python) · [The Python Tutorial](https://docs.python.org/3/tutorial/)
+**Free resources:** [Khan Academy: Statistics and Probability](https://www.khanacademy.org/math/statistics-probability) · [GCFGlobal: Excel](https://edu.gcfglobal.org/en/excel/) · [Kaggle Learn: Python](https://www.kaggle.com/learn/python)
 
 ## Stage 2 · Core
 *Why: query, clean, explore and chart; these four fill most of an analyst's working day.*
@@ -117,7 +117,7 @@ Find your semester, see which stage your courses serve, and add the rest on your
 
 **Milestone:** Given a business question, you can pull the data with SQL, clean it in pandas, explore it, and show the answer in one clear chart.
 
-**Free resources:** [SQLBolt](https://sqlbolt.com/) · [Kaggle Learn: Intro to SQL](https://www.kaggle.com/learn/intro-to-sql) · [Kaggle Learn: Pandas](https://www.kaggle.com/learn/pandas) · [Kaggle Learn: Data Cleaning](https://www.kaggle.com/learn/data-cleaning) · [Kaggle Learn: Data Visualization](https://www.kaggle.com/learn/data-visualization) · [NPTEL: Data Analytics with Python (IIT Roorkee)](https://nptel.ac.in/courses/106107220)
+**Free resources:** [SQLBolt](https://sqlbolt.com/) · [Kaggle Learn: Pandas](https://www.kaggle.com/learn/pandas) · [NPTEL: Data Analytics with Python (IIT Roorkee)](https://nptel.ac.in/courses/106107220)
 
 ## Stage 3 · Specialisation
 *Why: this moves you from "here is what happened" to "here is what we should do, and how sure we are".*

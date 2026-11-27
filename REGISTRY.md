@@ -9,12 +9,16 @@
 |---|---|---|---|---|---|---|
 | eigenvalues-and-eigenvectors | Eigenvalues and Eigenvectors | linear-algebra | theory | planned | Covers: directions a matrix only stretches, computing them for a 2×2 matrix, the link to PCA | matrices |
 | matrices | Matrices and Matrix Operations | linear-algebra | theory | planned | Covers: addition, multiplication, transpose, identity and inverse, a matrix as a data table and as a transformation | vectors |
+| matrix-decompositions | Matrix Decompositions and SVD | linear-algebra | theory | planned | Covers: eigendecomposition, singular value decomposition, low-rank approximation, uses in PCA and recommenders | eigenvalues-and-eigenvectors |
+| vector-spaces | Vector Spaces, Span and Basis | linear-algebra | theory | planned | Covers: linear combinations, span, linear independence, basis, dimension, rank | vectors |
 | vectors | Vectors | linear-algebra | theory | planned | Covers: vectors as lists and as arrows, addition, scalar multiplication, dot product, length (norm), distance |  |
 | derivatives | Derivatives and Gradients | calculus | theory | planned | Covers: rate of change, basic rules, chain rule, partial derivatives, the gradient vector, finding minima |  |
 | gradient-descent | Gradient Descent | calculus | theory | planned | Covers: the update rule, learning rate, convergence, batch and stochastic versions, local minima | derivatives |
+| optimization-basics | Convex Optimisation Basics | calculus | theory | planned | Covers: convex sets and functions, local vs global minima, constrained problems, Lagrange multipliers | gradient-descent |
 | ab-test-analysis-project | A/B Test of a Checkout Page | prob-stats | project | planned | Covers: analyse a simulated website experiment, test significance, estimate the lift, write a recommendation | ab-testing |
 | ab-testing | A/B Testing | prob-stats | theory | planned | Covers: designing an experiment, control and treatment groups, conversion rates, two-proportion z-test, sample size, pitfalls such as peeking | hypothesis-testing |
 | anova | Analysis of Variance (ANOVA) | prob-stats | theory | planned | Covers: comparing three or more means, one-way and two-way ANOVA, F-statistic, the idea of post-hoc tests | t-tests |
+| bayesian-inference | Bayesian Inference | prob-stats | theory | planned | Covers: prior, likelihood and posterior, conjugate priors, MAP vs MLE, credible intervals | conditional-probability, maximum-likelihood-estimation |
 | central-tendency | Measures of Central Tendency | prob-stats | theory | reviewed | A measure of central tendency is a single value that represents the centre, or typical value, of a dataset; the three… |  |
 | central-tendency-practical | Mean, Median and Mode of Sales Data | prob-stats | practical | reviewed |  | central-tendency |
 | chi-square-tests | Chi-Square Tests | prob-stats | theory | planned | Covers: goodness-of-fit test, test of independence, contingency tables, expected counts, categorical data | hypothesis-testing |
@@ -34,6 +38,8 @@
 | frequency-distribution | Frequency Distributions | prob-stats | theory | planned | Covers: class intervals, frequency and cumulative frequency tables for discrete and continuous data | types-of-variables |
 | hypothesis-testing | Hypothesis Testing and Type I and II Errors | prob-stats | theory | draft | Hypothesis testing is a procedure that uses sample data to decide whether there is enough evidence to reject a claim… | sampling-distributions, confidence-intervals |
 | hypothesis-testing-practical | Confidence Intervals and Hypothesis Tests on Sales Data | prob-stats | practical | draft |  | hypothesis-testing, confidence-intervals |
+| information-theory-basics | Entropy, Cross-Entropy and KL Divergence | prob-stats | theory | planned | Covers: information and entropy, cross-entropy as a loss, KL divergence, mutual information | probability-basics |
+| maximum-likelihood-estimation | Maximum Likelihood Estimation | prob-stats | theory | planned | Covers: likelihood and log-likelihood, MLE for Bernoulli and normal data, the link to loss functions | continuous-distributions |
 | multiple-linear-regression | Multiple Linear Regression | prob-stats | theory | planned | Covers: several predictors, interpreting coefficients, adjusted R², dummy variables, multicollinearity, residual checks | simple-linear-regression |
 | normal-distribution | The Normal Distribution | prob-stats | theory | draft | The normal distribution is a symmetric, bell-shaped continuous distribution completely described by its mean μ and… | continuous-distributions, dispersion |
 | normal-distribution-practical | Normal Random Numbers and the Empirical Rule | prob-stats | practical | draft |  | normal-distribution |
@@ -51,10 +57,17 @@
 | t-tests | t-Tests | prob-stats | theory | planned | Covers: one-sample, independent two-sample and paired t-tests, their assumptions, choosing t or z | hypothesis-testing |
 | time-series-analysis | Time Series Analysis and Forecasting | prob-stats | theory | planned | Covers: trend, seasonality and noise, moving averages, exponential smoothing, simple forecasts and forecast error | simple-linear-regression |
 | types-of-variables | Types of Variables and Scales of Measurement | prob-stats | theory | planned | Covers: categorical and numerical variables, discrete and continuous, nominal, ordinal, interval and ratio scales |  |
+| git-and-github | Git and GitHub | python | theory | planned | Covers: commits, branches, merging, pull requests, .gitignore, collaborating on a repository |  |
+| linux-command-line | The Linux Command Line | python | theory | planned | Covers: files and folders, permissions, pipes, environment variables, ssh, simple shell scripts |  |
+| python-apis-and-requests | Working with Web APIs in Python | python | theory | planned | Covers: HTTP methods and status codes, JSON, the requests library, API keys, rate limits, retries | python-files-and-errors |
 | python-basics | Python Basics | python | theory | planned | Covers: running Python in Colab, variables, numbers and strings, input and output, f-strings, comments |  |
 | python-collections | Lists, Tuples, Sets and Dictionaries | python | theory | planned | Covers: creating and changing each collection, slicing, looping, comprehensions, choosing the right one | python-control-flow |
 | python-control-flow | Control Flow in Python | python | theory | planned | Covers: if-elif-else, for and while loops, range, break and continue, simple try-except | python-basics |
+| python-files-and-errors | Files and Exceptions in Python | python | theory | planned | Covers: reading and writing text, CSV and JSON files, the with statement, try-except-finally, raising exceptions | python-functions |
 | python-functions | Functions in Python | python | theory | planned | Covers: defining and calling functions, parameters and defaults, return values, scope, lambda, importing modules | python-control-flow |
+| python-modules-and-packages | Modules, Packages and Virtual Environments | python | theory | planned | Covers: how import works, writing a module, pip, venv, requirements.txt, project layout | python-functions |
+| python-oop | Object-Oriented Python | python | theory | planned | Covers: classes and objects, __init__, methods, inheritance, dataclasses, when a class helps | python-functions |
+| python-testing | Testing Python Code with pytest | python | theory | planned | Covers: assert, writing test functions, fixtures, test layout, running tests automatically | python-functions |
 | acid-properties | ACID Properties | databases | theory | planned | Covers: transactions, atomicity, consistency, isolation, durability |  |
 | associative-entities | Associative (Composite) Entities | databases | theory | draft | An associative (composite, bridge) entity turns an M:N relationship into two 1:M relationships, and stores the facts… | connectivity-and-cardinality, weak-entities |
 | connectivity-and-cardinality | Connectivity, Cardinality and Participation | databases | theory | draft | Connectivity names the relationship type (1:1, 1:M, M:N), cardinality gives the minimum and maximum number of linked… | er-model |
@@ -67,6 +80,7 @@
 | er-model | Entity-Relationship Model | databases | theory | draft | The ER model describes a database design as entities, their attributes and the relationships between them, drawn as an… | data-models |
 | extended-er-model | Extended ER Model and Entity Clustering | databases | theory | draft | The extended ER model adds supertypes and subtypes (with inheritance and constraints) to the ER model, and entity… | er-model, keys |
 | flexible-database-design | Flexible Database Design | databases | theory | draft | Flexible database design handles four common cases correctly: placing the foreign key in 1:1 relationships, keeping… | er-diagram-development, keys |
+| indexing-and-query-optimization | Indexing and Query Optimisation | databases | theory | planned | Covers: B-tree and hash indexes, query plans, EXPLAIN, when an index helps or hurts | sql-joins |
 | keys | Keys and Entity Integrity | databases | theory | draft | A key is one or more attributes that uniquely identify each row; the primary key is the one chosen for this, and entity… | er-model |
 | levels-of-abstraction | Levels of Data Abstraction | databases | theory | reviewed | A DBMS describes data at three levels (physical, logical and view), so that each user sees only what they need and… | data-models |
 | normalization | Normalization | databases | theory | planned | Covers: anomalies, need for normalization, 1NF, 2NF, 3NF, BCNF, denormalization |  |
@@ -132,9 +146,55 @@
 | support-vector-machines | Support Vector Machines | ml | theory | planned | Covers: the maximum-margin line, support vectors, hard and soft margins, the kernel trick | vectors, logistic-regression |
 | train-test-split | Train, Validation and Test Sets | ml | theory | planned | Covers: why data is held out, split ratios, stratified splits, data leakage | ml-workflow |
 | types-of-machine-learning | Types of Machine Learning | ml | theory | planned | Covers: supervised, unsupervised, semi-supervised and reinforcement learning; classification vs regression; examples |  |
+| attention-mechanism | Attention | dl | theory | planned | Covers: why attention, queries, keys and values, scaled dot-product attention, self-attention | lstm-and-gru, matrices |
+| autoencoders | Autoencoders and VAEs | dl | theory | planned | Covers: encoder, bottleneck and decoder, denoising autoencoders, variational autoencoders | neural-networks |
 | backpropagation | Backpropagation | dl | theory | planned | Covers: loss functions, the chain rule through layers, weight updates, vanishing gradients, the training loop | neural-networks, gradient-descent |
+| cnn-architectures | CNN Architectures | dl | theory | planned | Covers: AlexNet, VGG, ResNet and skip connections, why depth helps, efficient CNNs | convolutional-neural-networks |
+| convolutional-neural-networks | Convolutional Neural Networks | dl | theory | planned | Covers: convolution, filters, stride and padding, pooling, feature maps, a CNN for image classification | neural-networks |
+| dl-regularization | Regularisation in Deep Learning | dl | theory | planned | Covers: dropout, batch normalisation, weight decay, early stopping, data augmentation | backpropagation |
+| generative-adversarial-networks | Generative Adversarial Networks | dl | theory | planned | Covers: generator and discriminator, the adversarial loss, mode collapse, uses | neural-networks |
+| lstm-and-gru | LSTM and GRU | dl | theory | planned | Covers: gates and cell state, long-term dependencies, encoder-decoder (sequence-to-sequence) | recurrent-neural-networks |
 | neural-networks | Neural Networks | dl | theory | planned | Covers: the artificial neuron, perceptron, layers, activation functions, forward pass, an MLP solving XOR | logistic-regression, matrices |
+| optimizers | Optimisers: Momentum, RMSprop and Adam | dl | theory | planned | Covers: SGD with momentum, adaptive learning rates, Adam, learning-rate schedules | backpropagation |
+| pytorch-basics | PyTorch Basics | dl | theory | planned | Covers: tensors, autograd, nn.Module, Dataset and DataLoader, the training loop, using a GPU on Colab | neural-networks |
+| recurrent-neural-networks | Recurrent Neural Networks | dl | theory | planned | Covers: sequences, hidden state, unrolling through time, vanishing gradients, bidirectional RNNs | neural-networks |
+| transfer-learning | Transfer Learning and Fine-Tuning | dl | theory | planned | Covers: pre-trained models, feature extraction vs fine-tuning, freezing layers, small datasets | cnn-architectures |
+| transformer-architecture | The Transformer | dl | theory | planned | Covers: multi-head attention, positional encoding, encoder and decoder blocks, residuals and layer norm | attention-mechanism |
+| bert-and-encoder-models | BERT and Encoder Models | nlp | theory | planned | Covers: masked language modelling, fine-tuning for classification and NER, Hugging Face Transformers | transformer-architecture |
+| language-models | Language Models | nlp | theory | planned | Covers: next-token prediction, n-gram models, perplexity, neural language models | word-embeddings |
+| sequence-labelling-ner | Named Entity Recognition and Sequence Labelling | nlp | theory | planned | Covers: BIO tags, part-of-speech tagging, named entity recognition, sequence models | text-classification |
+| text-classification | Text Classification | nlp | theory | planned | Covers: sentiment analysis, Naive Bayes and logistic baselines, fine-tuned transformers, evaluation | text-representation, classification-metrics |
+| text-classifier-project | Text Classification Service | nlp | project | planned | Covers: fine-tune a transformer on product reviews (Hindi or English), evaluate it, serve it with FastAPI | bert-and-encoder-models |
+| text-preprocessing | Text Preprocessing | nlp | theory | planned | Covers: tokenisation, normalisation, stop words, stemming and lemmatisation, Indian-language text | python-collections |
+| text-representation | Bag of Words and TF-IDF | nlp | theory | planned | Covers: vocabulary, count vectors, TF-IDF, n-grams, sparse matrices | text-preprocessing |
+| word-embeddings | Word Embeddings | nlp | theory | planned | Covers: the distributional idea, word2vec, GloVe, similarity and analogies, limits of static embeddings | text-representation, vectors |
+| digital-images | Digital Images | cv | theory | planned | Covers: pixels, channels, colour spaces, resolution, loading and saving images with OpenCV and Pillow | numpy-arrays |
+| image-classifier-project | Crop Disease Image Classifier | cv | project | planned | Covers: classify leaf images with a pre-trained CNN, augment the data, explain errors, serve as an API | transfer-learning |
+| image-processing-basics | Image Processing Basics | cv | theory | planned | Covers: filtering and blurring, edge detection, thresholding, morphological operations | digital-images |
+| image-segmentation | Image Segmentation | cv | theory | planned | Covers: semantic vs instance segmentation, U-Net, Mask R-CNN, Dice and IoU | object-detection |
+| object-detection | Object Detection | cv | theory | planned | Covers: bounding boxes, IoU, anchor boxes, the R-CNN family, YOLO and SSD, mAP | cnn-architectures |
+| vision-transformers | Vision Transformers | cv | theory | planned | Covers: images as patches, ViT, comparison with CNNs, the idea behind CLIP | transformer-architecture, convolutional-neural-networks |
+| apache-kafka | Apache Kafka and Message Queues | data-eng | theory | planned | Covers: producers and consumers, topics, partitions, offsets, consumer groups, delivery guarantees | batch-vs-stream-processing |
+| apache-spark | Apache Spark | data-eng | theory | planned | Covers: driver and executors, RDDs, lazy evaluation, transformations and actions, partitions and shuffles | big-data-and-hadoop |
+| batch-etl-pipeline-project | Batch ETL Pipeline for Sahyadri Mart | data-eng | project | planned | Covers: a daily pipeline loading store sales into a star-schema warehouse with Airflow and dbt, with tests and docs | workflow-orchestration, dimensional-modelling |
+| batch-vs-stream-processing | Batch and Stream Processing | data-eng | theory | planned | Covers: bounded vs unbounded data, latency trade-offs, micro-batching, event time vs processing time | data-engineering-lifecycle |
+| big-data-and-hadoop | Big Data, HDFS and MapReduce | data-eng | theory | planned | Covers: the Vs of big data, distributed storage, HDFS, the MapReduce model, YARN | data-engineering-lifecycle |
+| cloud-data-platforms | Cloud Data Platforms | data-eng | theory | planned | Covers: object storage (S3, GCS), managed warehouses (BigQuery, Redshift, Snowflake), cost and regions | cloud-computing-basics, data-lakes-and-lakehouses |
+| data-engineering-lifecycle | The Data Engineering Lifecycle | data-eng | theory | planned | Covers: generation, ingestion, storage, transformation and serving; undercurrents such as security, orchestration and quality | types-of-databases |
+| data-governance-and-security | Data Governance, Security and Privacy | data-eng | theory | planned | Covers: access control, encryption, personal data, lineage and catalogues, India's DPDP Act basics | data-engineering-lifecycle |
+| data-lakes-and-lakehouses | Data Lakes and Lakehouses | data-eng | theory | planned | Covers: object storage, lake vs warehouse, the lakehouse, table formats such as Delta Lake and Iceberg | data-warehouse, file-formats |
+| data-quality-and-testing | Data Quality and Pipeline Testing | data-eng | theory | planned | Covers: quality dimensions, schema and value checks, tests in pipelines, alerting on bad data | etl-and-elt |
 | data-warehouse | Data Warehouse | data-eng | theory | planned | Covers: OLTP vs OLAP, purpose of a warehouse, ETL basics, star schema | types-of-databases |
+| dbt-transformations | Transformations with dbt | data-eng | theory | planned | Covers: models as SELECT statements, ref, materialisations, tests, documentation, lineage | etl-and-elt |
+| dimensional-modelling | Dimensional Modelling: Star and Snowflake Schemas | data-eng | theory | planned | Covers: fact and dimension tables, grain, star and snowflake schemas, slowly changing dimensions | data-warehouse |
+| etl-and-elt | ETL and ELT | data-eng | theory | planned | Covers: extract, transform, load; ELT in cloud warehouses; batch jobs; incremental and idempotent loads | data-warehouse |
+| file-formats | Data File Formats | data-eng | theory | planned | Covers: CSV, JSON, Parquet and Avro, row vs columnar storage, compression, schema evolution | data-engineering-lifecycle |
+| olap | OLAP and Data Cubes | data-eng | theory | planned | Covers: OLTP vs OLAP, data cubes, roll-up, drill-down, slice, dice and pivot, data marts | dimensional-modelling |
+| spark-big-data-project | Large-Scale Analysis with Spark | data-eng | project | planned | Covers: process a multi-gigabyte public dataset with Spark, partition and write Parquet, compare run times | spark-dataframes-and-sql |
+| spark-dataframes-and-sql | Spark DataFrames and Spark SQL | data-eng | theory | planned | Covers: schemas, column operations, groupBy, joins, window functions, reading and writing Parquet | apache-spark, sql-window-functions |
+| spark-structured-streaming | Stream Processing with Spark | data-eng | theory | planned | Covers: Structured Streaming, windows and watermarks, reading from Kafka, sinks, checkpoints | apache-spark, apache-kafka |
+| streaming-pipeline-project | Real-Time Order Stream | data-eng | project | planned | Covers: simulate food-delivery orders into Kafka, aggregate them per minute with Spark, store and chart the results | spark-structured-streaming |
+| workflow-orchestration | Workflow Orchestration with Airflow | data-eng | theory | planned | Covers: DAGs, tasks and operators, scheduling, retries, backfills, dependencies | etl-and-elt |
 | bi-intro | Why Business Intelligence? | bi | intro | draft |  |  |
 | business-intelligence | Business Intelligence: Tools, Dashboards and Reports | bi | theory | draft | Business intelligence (BI) is the set of tools and processes that collect business data into one place and present it… | business-analytics |
 | dashboard-design | Dashboard Design and KPIs | bi | theory | planned | Covers: choosing KPIs, layout, filters and drill-down, avoiding clutter, designing for the audience | business-intelligence |
@@ -143,4 +203,46 @@
 | sales-dashboard-project | Sales Performance Dashboard | bi | project | planned | Covers: build an interactive KPI dashboard for Sahyadri Mart in Power BI or Excel, with filters and a one-page summary | dashboard-design, power-bi-basics |
 | spreadsheet-basics | Spreadsheet Basics | bi | theory | planned | Covers: workbooks, relative and absolute cell references, formulas, common functions, sorting, filtering, data validation |  |
 | spreadsheet-lookups | Lookup and Logical Functions | bi | theory | planned | Covers: IF and nested IF, COUNTIF and SUMIF, VLOOKUP, XLOOKUP, INDEX-MATCH | spreadsheet-basics |
+| diffusion-models | Diffusion Models | genai | theory | planned | Covers: forward noising and reverse denoising, text-to-image generation, guidance | autoencoders |
+| embeddings-and-vector-search | Embeddings and Vector Search | genai | theory | planned | Covers: sentence embeddings, cosine similarity, vector databases, approximate nearest-neighbour indexes | word-embeddings |
+| fine-tuning-llms | Fine-Tuning LLMs | genai | theory | planned | Covers: fine-tuning vs prompting vs RAG, supervised fine-tuning, LoRA and QLoRA, preparing datasets | large-language-models |
+| fine-tuning-project | Fine-Tune a Small Language Model | genai | project | planned | Covers: LoRA fine-tuning of an open model for an Indian-language or domain task, compared with prompting | fine-tuning-llms |
+| large-language-models | Large Language Models | genai | theory | planned | Covers: decoder-only transformers, pre-training, instruction tuning, tokens and context windows, capabilities and limits | transformer-architecture, language-models |
+| llm-agent-project | Text-to-SQL Agent | genai | project | planned | Covers: an agent that answers business questions by writing SQL against a database, with guardrails and logs | llm-agents, sql-joins |
+| llm-agents | LLM Agents and Tool Use | genai | theory | planned | Covers: tool calling, planning loops, memory, multi-step tasks, guardrails, when not to use an agent | llm-apis |
+| llm-apis | Building with LLM APIs | genai | theory | planned | Covers: chat messages, temperature and token limits, streaming, tool calling, cost and rate limits | prompt-engineering, python-apis-and-requests |
+| llm-evaluation | Evaluating LLM Applications | genai | theory | planned | Covers: test sets, automatic metrics, LLM-as-judge, human review, hallucination checks, regression tests | retrieval-augmented-generation |
+| llm-safety-and-alignment | LLM Safety and Alignment | genai | theory | planned | Covers: the idea of RLHF, prompt injection, jailbreaks, privacy, bias, responsible deployment | large-language-models |
+| prompt-engineering | Prompt Engineering | genai | theory | planned | Covers: clear instructions, examples (few-shot), structured output, step-by-step reasoning, testing prompts | large-language-models |
+| rag-chatbot-project | Document Q&A Chatbot with RAG | genai | project | planned | Covers: a chatbot that answers from college syllabus PDFs with citations, an evaluation set, a Streamlit app | retrieval-augmented-generation, llm-evaluation |
+| retrieval-augmented-generation | Retrieval-Augmented Generation (RAG) | genai | theory | planned | Covers: chunking, retrieval, re-ranking, grounding answers in sources, citations, common failures | embeddings-and-vector-search, llm-apis |
+| ci-cd-for-ml | CI/CD for Machine Learning | mlops | theory | planned | Covers: automated tests, GitHub Actions, training and deployment pipelines, continuous training | python-testing, docker-containers |
+| cloud-computing-basics | Cloud Computing Basics | mlops | theory | planned | Covers: IaaS, PaaS and SaaS, regions, compute, storage, IAM, free tiers, keeping costs under control | linux-command-line |
+| data-and-model-versioning | Data and Model Versioning | mlops | theory | planned | Covers: why Git alone is not enough, DVC, dataset snapshots, versioned models | git-and-github, ml-experiment-tracking |
+| docker-containers | Docker and Containers | mlops | theory | planned | Covers: images and containers, Dockerfile, ports and volumes, docker compose, image size | linux-command-line |
+| end-to-end-mlops-project | End-to-End MLOps Pipeline | mlops | project | planned | Covers: versioned data, tracked experiments, CI/CD, a deployed model with drift monitoring and scheduled retraining | ci-cd-for-ml, model-monitoring |
+| feature-stores | Feature Stores | mlops | theory | planned | Covers: offline and online features, training-serving skew, point-in-time correct joins | ml-pipelines |
+| kubernetes-basics | Kubernetes Basics | mlops | theory | planned | Covers: pods, deployments, services, scaling, config maps and secrets | docker-containers |
+| llm-deployment | Deploying LLM Applications | mlops | theory | planned | Covers: serving open models, quantisation, latency and cost, caching, monitoring LLM apps | model-serving, large-language-models |
+| ml-api-deployment-project | Deploy a Model as an API | mlops | project | planned | Covers: package a trained model with FastAPI in Docker, add tests, deploy to a free cloud tier, log requests | model-deployment, docker-containers |
+| ml-experiment-tracking | Experiment Tracking | mlops | theory | planned | Covers: logging parameters, metrics and artefacts, MLflow, comparing runs, the model registry | ml-workflow |
+| ml-pipelines | ML Pipelines | mlops | theory | planned | Covers: scikit-learn Pipelines, reproducible training scripts, configuration files, feature pipelines | ml-workflow |
 | model-deployment | Deploying a Model | mlops | theory | planned | Covers: saving a model with joblib, batch vs online prediction, serving with FastAPI, demo apps with Streamlit | ml-workflow |
+| model-monitoring | Model Monitoring and Drift | mlops | theory | planned | Covers: data drift and concept drift, tracking live performance, alerts, retraining triggers | model-deployment |
+| model-serving | Model Serving at Scale | mlops | theory | planned | Covers: online vs batch serving, latency and throughput, request batching, model servers, autoscaling | model-deployment, docker-containers |
+| deep-q-networks | Deep Q-Networks | rl | theory | planned | Covers: function approximation, experience replay, target networks, Atari-style tasks | q-learning, neural-networks |
+| dynamic-programming-rl | Dynamic Programming for RL | rl | theory | planned | Covers: policy evaluation, policy iteration, value iteration | markov-decision-processes |
+| markov-decision-processes | Markov Decision Processes | rl | theory | planned | Covers: MDPs, value and action-value functions, Bellman equations, discounting | reinforcement-learning-basics |
+| policy-gradients | Policy Gradient Methods | rl | theory | planned | Covers: REINFORCE, actor-critic, the idea behind PPO | q-learning, backpropagation |
+| q-learning | Temporal-Difference Learning and Q-Learning | rl | theory | planned | Covers: the TD error, SARSA, Q-learning, epsilon-greedy exploration | markov-decision-processes |
+| reinforcement-learning-basics | Reinforcement Learning Basics | rl | theory | planned | Covers: agent and environment, states, actions and rewards, policies, returns, exploration vs exploitation | probability-basics |
+| evaluation-and-benchmarks | Benchmarks and Evaluation | research | theory | planned | Covers: standard benchmarks, leakage and test contamination, choosing metrics, error analysis | experiment-design-ml |
+| experiment-design-ml | Designing ML Experiments | research | theory | planned | Covers: hypotheses, baselines, ablations, controls, random seeds, significance across runs | hypothesis-testing, cross-validation |
+| literature-review | Writing a Literature Review | research | theory | planned | Covers: search strategy, grouping work by theme, finding gaps, citation managers such as Zotero | reading-research-papers |
+| paper-reproduction-project | Reproduce a Paper | research | project | planned | Covers: reproduce the main result of a recent ML paper, document the gaps, publish code and a short report | reproducibility |
+| peer-review-and-publishing | Peer Review and Publishing | research | theory | planned | Covers: choosing venues, the review process, rebuttals, preprints, avoiding predatory journals | research-writing |
+| reading-research-papers | Reading Research Papers | research | theory | planned | Covers: the three-pass method, finding papers (arXiv, Semantic Scholar, Google Scholar), notes, following a field |  |
+| reproducibility | Reproducibility in ML Research | research | theory | planned | Covers: seeds, environment files, releasing code and data, model cards, reporting compute | experiment-design-ml |
+| research-ethics | Research Ethics in AI | research | theory | planned | Covers: consent and data use, bias and fairness, dual use, plagiarism, authorship | reading-research-papers |
+| research-mini-paper-project | Write a Workshop-Style Paper | research | project | planned | Covers: a small original experiment with ablations, written up as a four-page LaTeX paper ready for arXiv | research-writing, experiment-design-ml |
+| research-writing | Writing a Research Paper | research | theory | planned | Covers: structure from abstract to conclusion, figures and tables, LaTeX and Overleaf, related work, revising | literature-review |

@@ -16,10 +16,10 @@ Find your semester, see which stage your courses serve, and add the rest on your
 
 | Sem | Your courses | Stage they serve | Add on your own |
 |---|---|---|---|
-| 1 | Python Programming, Descriptive Statistics (with practical) | Stage 1: statistics, Python | Vectors and matrices |
-| 2 | Advanced Python, Database Management System (with practicals) | Stage 1 SQL; Stage 2 pandas and charts | Probability distributions; derivatives |
+| 1 | Python Programming, Descriptive Statistics (with practical) | Stage 1: statistics, Python | Probability basics |
+| 2 | Advanced Python, Database Management System (with practicals), Linear Algebra | Stage 1 vectors and matrices, SQL; Stage 2 pandas and charts | Probability distributions; derivatives |
 | 3 | Data Warehousing & Mining (with practical), Design and Analysis of Algorithms | Stage 2: cleaning, decision trees, Naive Bayes, kNN, clustering (in WEKA) | Redo the same models in scikit-learn; train-test split and metrics |
-| 4 | Testing of Hypothesis Practical, Artificial Intelligence, Big Data Analytics | Stage 1 inference | Gradient descent; regression; your first ML notebook |
+| 4 | Testing of Hypothesis Practical, Introduction to Basic Statistics-II, Artificial Intelligence, Big Data Analytics | Stage 1 inference | Gradient descent; regression; your first ML notebook |
 | 5 | Data Engineering, Cloud Computing, Data Visualization, Project Dissertation | Stage 3: deployment basics, storytelling | Ensembles, tuning, imbalanced data; an ML dissertation topic |
 | 6 | Machine Learning, Deep Learning (with practicals), Applied Business Analytics (elective), Project Implementation | Stage 2 and 3 in full; neural networks | Finish the projects; deploy one model |
 
@@ -27,10 +27,10 @@ Find your semester, see which stage your courses serve, and add the rest on your
 
 | Sem | Your courses | Stage they serve | Add on your own |
 |---|---|---|---|
-| 1 | Database Management System (with practical) | Stage 1 SQL | Stage 1 statistics (not in the IT syllabus) |
-| 2 | Object Oriented Programming, Web Designing | None directly | Probability; vectors and matrices |
+| 1 | Database Management System (with practical) | Stage 1 SQL | Stage 1 statistics now (the IT statistics course comes later) |
+| 2 | Object Oriented Programming, Web Designing, Linear Algebra | Stage 1 vectors and matrices | Probability |
 | 3 | Python Programming, Data Structures (with practicals) | Stage 1 Python | Stage 2 pandas, EDA, regression |
-| 4 | Core Java, Computer Networks | None directly | Stage 1 inference and maths; Stage 2 ML basics |
+| 4 | Core Java, Computer Networks, Introduction to Basic Statistics-II | Stage 1 statistics | Stage 1 inference and calculus; Stage 2 ML basics |
 | 5 | Business Intelligence, Project Dissertation | Stage 2 ideas: classification, clustering, logistic regression, SVM | scikit-learn practice; ensembles |
 | 6 | AI & ML (with practical), Project Implementation | Stage 2 supervised and unsupervised learning; random forest | Deep learning starter; deploy a project |
 
@@ -89,7 +89,7 @@ Find your semester, see which stage your courses serve, and add the rest on your
 
 **Milestone:** You can describe any dataset with the right statistics, test a simple claim, write clean Python, pull data with SQL, and follow the maths in an ML textbook.
 
-**Free resources:** [Khan Academy: Statistics and Probability](https://www.khanacademy.org/math/statistics-probability) · [Seeing Theory](https://seeing-theory.brown.edu/) · [3Blue1Brown: Linear Algebra](https://www.3blue1brown.com/topics/linear-algebra) · [3Blue1Brown: Calculus](https://www.3blue1brown.com/topics/calculus) · [NPTEL: Python for Data Science (IIT Madras)](https://nptel.ac.in/courses/106106212) · [Kaggle Learn: Python](https://www.kaggle.com/learn/python)
+**Free resources:** [Khan Academy: Statistics and Probability](https://www.khanacademy.org/math/statistics-probability) · [3Blue1Brown: Linear Algebra](https://www.3blue1brown.com/topics/linear-algebra) · [NPTEL: Python for Data Science (IIT Madras)](https://nptel.ac.in/courses/106106212)
 
 ## Stage 2 · Core
 *Why: most of a data scientist's time goes into preparing data and choosing, training and honestly evaluating models.*
@@ -140,7 +140,7 @@ Find your semester, see which stage your courses serve, and add the rest on your
 
 **Milestone:** Given a clear question and a dataset, you can prepare the data, train several models in scikit-learn, compare them with the right metric, and explain which one wins and why.
 
-**Free resources:** [Kaggle Learn: Pandas](https://www.kaggle.com/learn/pandas) · [Kaggle Learn: Intro to Machine Learning](https://www.kaggle.com/learn/intro-to-machine-learning) · [scikit-learn User Guide](https://scikit-learn.org/stable/user_guide.html) · [Google Machine Learning Crash Course](https://developers.google.com/machine-learning/crash-course) · [NPTEL: Introduction to Machine Learning (IIT Madras)](https://nptel.ac.in/courses/106106139)
+**Free resources:** [Kaggle Learn: Intro to Machine Learning](https://www.kaggle.com/learn/intro-to-machine-learning) · [scikit-learn User Guide](https://scikit-learn.org/stable/user_guide.html) · [NPTEL: Introduction to Machine Learning (IIT Madras)](https://nptel.ac.in/courses/106106139)
 
 ## Stage 3 · Specialisation
 *Why: this is what makes a model good enough to trust with real decisions and real users.*
@@ -171,7 +171,7 @@ Find your semester, see which stage your courses serve, and add the rest on your
 
 **Milestone:** You can take a model from baseline to tuned, handle messy real problems (imbalance, time, experiments), and hand it over as a working app or a clear story.
 
-**Free resources:** [Kaggle Learn: Intermediate Machine Learning](https://www.kaggle.com/learn/intermediate-machine-learning) · [Kaggle Learn: Feature Engineering](https://www.kaggle.com/learn/feature-engineering) · [3Blue1Brown: Neural Networks](https://www.3blue1brown.com/topics/neural-networks) · [Streamlit documentation](https://docs.streamlit.io/)
+**Free resources:** [Kaggle Learn: Intermediate Machine Learning](https://www.kaggle.com/learn/intermediate-machine-learning) · [Kaggle Learn: Feature Engineering](https://www.kaggle.com/learn/feature-engineering) · [Streamlit documentation](https://docs.streamlit.io/)
 
 ## Stage 4 · Projects
 *Why: interviewers hire on what you have built and can explain, not on certificates.*
