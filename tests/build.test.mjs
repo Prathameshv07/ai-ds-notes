@@ -569,7 +569,7 @@ test('Section 9 path rules: milestone stops at Free resources line; intro notes,
   assert.deepEqual(m.site.pathList.map((p) => p.id), ['data-analyst', 'data-scientist', 'data-engineer', 'ml-engineer', 'ai-engineer', 'mlops-engineer', 'ai-researcher']);
 });
 
-test('practicals: Before the lab, Steps, Common errors and fixes warn for now; Code no longer required', () => {
+test('practicals: Before the lab, Steps, Common errors and fixes warn on ai-ds-notes, are errors on class-notes; Code no longer required', () => {
   const prac = (sections) => `---\nid: p-practical\ntitle: P\nsubject: databases\nlevel: core\ntype: practical\npractical: 1\nstatus: draft\ntime: 5 min\nsources: [x]\n---\n` +
     sections.map((h) => `## ${h}\n\nPlaceholder.\n`).join('\n');
   let r = build({ root: tree({ 'content/concepts/databases/p-practical.md': prac(['Aim', 'Output', 'Explanation', 'Viva questions', 'Sources']) }) });
@@ -578,10 +578,32 @@ test('practicals: Before the lab, Steps, Common errors and fixes warn for now; C
   assert.deepEqual(w.map((p) => p.msg.match(/## (.*) \(/)[1]), ['Before the lab', 'Steps', 'Common errors and fixes']);
   r = build({ root: tree({ 'content/concepts/databases/p-practical.md': prac(['Aim', 'Before the lab', 'Steps', 'Output', 'Explanation', 'Common errors and fixes', 'Viva questions', 'Sources']) }) });
   assert.ok(!r.problems.some((p) => p.msg.includes('will become an error')));
-  // class-notes profile: same rule
+  // class-notes profile: every practical has them, so they are required (errors that name the fix)
   r = build({ root: tree({ 'content/sec/p-practical.md': prac(['Aim', 'Output', 'Explanation', 'Viva questions', 'Sources']).replace('subject: databases', 'subject: sec'), 'content/sec/_index.md': '---\nid: sec\ntitle: S\ntype: index\n---\n## Practicals\n1. [[p-practical]]\n' }), profile: 'class-notes' });
+  const e = r.problems.filter((p) => p.level === 'error');
+  assert.deepEqual(e.map((p) => p.msg), ['Before the lab', 'Steps', 'Common errors and fixes'].map((x) => `missing required section: ## ${x}`));
+  assert.ok(e.every((p) => p.file === 'content/sec/p-practical.md' && p.fix.includes('templates/practical-note.md')), JSON.stringify(e[0]));
+  assert.ok(!r.problems.some((p) => p.msg.includes('will become an error')));
+});
+
+test('syllabus pages: a note with several codes appears under each; a combined subject is listed once (decisions 49, 50)', () => {
+  const de = (id, unit, type = 'theory', codes = '[UITII-004, UDSII-005]') => cnTheory(id, 'digital-electronics', '').replace('subject: digital-electronics', 'subject: digital-electronics').replace(/unit: 1/, `unit: ${unit}`).replace('syllabus: [UITVI-001]', `syllabus: ${codes}`);
+  const root = tree({
+    'content/digital-electronics/_index.md': cnIndex('digital-electronics', '## Theory\n\n**Unit 1 · Number Systems**\n1. [[bin]]\n2. [[hex]]\n'),
+    'content/digital-electronics/bin.md': de('bin', 1),
+    'content/digital-electronics/hex.md': de('hex', 1),
+  });
+  const r = build({ root, profile: 'class-notes' });
   assert.deepEqual(errors(r), []);
-  assert.equal(r.problems.filter((p) => p.msg.includes('will become an error')).length, 3);
+  assert.ok(!warnings(r).some((x) => x.includes('UITII-004')), 'UITII-004 is a known code');
+  const m = JSON.parse(fs.readFileSync(path.join(root, 'dist/data/manifest.json'), 'utf8'));
+  const page = (c) => m.syllabi.find((s) => s.code === c);
+  for (const [code, prog] of [['UITII-004', 'BSc IT · Semester II'], ['UDSII-005', 'BSc Data Science · Semester II']]) {
+    assert.equal(page(code).title, 'Digital Electronics');
+    assert.equal(page(code).programme, prog);
+    assert.deepEqual(page(code).units.map((u) => [u.title, u.items]), [['Number Systems', ['bin', 'hex']]]);
+  }
+  assert.equal(m.subjects.filter((s) => s.id === 'digital-electronics').length, 1, 'subject listed once');
 });
 
 test('career path: ### intro sections, bold sub-groups and per-stage resources (paths chat layout)', () => {

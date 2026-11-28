@@ -164,9 +164,11 @@ export const PROFILES = {
     REQUIRED_SECTIONS: {
       // "Exam questions" dropped (plan v3.0, decision 48): exam questions are the ⭐ ### questions in Explained
       theory: ['Why should you care?', 'In one line', 'Explained', 'Analogy and real-life example', 'Key points', 'Sources'],
-      practical: ['Aim', 'Output', 'Explanation', 'Viva questions', 'Sources'],
+      // Section 8.2 in full: every class-notes practical has the three guided sections, so they are errors here
+      practical: ['Aim', 'Before the lab', 'Steps', 'Output', 'Explanation', 'Common errors and fixes', 'Viva questions', 'Sources'],
       intro: ['Why this subject matters', 'A short story', 'Where it is used today', 'What you will be able to do', 'Careers that use it', 'Map of the subject', 'Sources'],
     },
+    PENDING_SECTIONS: {},
     WRITE_DOWN_SECTIONS: ['In one line', 'Key points', 'Diagram'],
     templates: { theory: 'templates/theory-note.md', practical: 'templates/practical-note.md', intro: 'templates/intro-note.md' },
     // Unit titles come from the "**Unit N · Title**" lines in each _index.md, so only names are needed here.
@@ -175,6 +177,8 @@ export const PROFILES = {
       'UITIV-006': { title: 'Embedded System Practical', programme: 'BSc IT · Semester IV' },
       'UDSIV-005': { title: 'Embedded System', programme: 'BSc Data Science · Semester IV' },
       'UDSIV-006': { title: 'Embedded System Practical', programme: 'BSc Data Science · Semester IV' },
+      // Digital Electronics: combined FY IT + FY DS lecture; DE notes carry both codes (decisions 49, 50)
+      'UITII-004': { title: 'Digital Electronics', programme: 'BSc IT · Semester II' },
       'UDSII-005': { title: 'Digital Electronics', programme: 'BSc Data Science · Semester II' },
       'UITVI-001': { title: 'Security in Computing', programme: 'BSc IT · Semester VI' },
       'UITVI-002': { title: 'Security in Computing Practical', programme: 'BSc IT · Semester VI' },

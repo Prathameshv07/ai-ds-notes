@@ -35,7 +35,6 @@
 | discrete-distributions | Discrete Probability Distributions | prob-stats | theory | draft | A discrete probability distribution lists every possible value of a countable random variable together with its… | probability-basics, dispersion |
 | dispersion | Measures of Dispersion | prob-stats | theory | reviewed | A measure of dispersion tells how spread out the values of a dataset are around its centre; the main ones are the… | central-tendency |
 | dispersion-practical | Variance and Standard Deviation of Sales Data | prob-stats | practical | reviewed |  | dispersion, central-tendency-practical |
-| frequency-polygon-and-ogive | Frequency Polygon and Ogive | data-viz | theory | planned | Covers: frequency polygon, less-than and more-than ogives, reading the median and quartiles from an ogive | frequency-distribution, distribution-plots |
 | frequency-distribution | Frequency Distributions | prob-stats | theory | planned | Covers: class intervals, frequency and cumulative frequency tables for discrete and continuous data | types-of-variables |
 | hypothesis-testing | Hypothesis Testing and Type I and II Errors | prob-stats | theory | draft | Hypothesis testing is a procedure that uses sample data to decide whether there is enough evidence to reject a claim… | sampling-distributions, confidence-intervals |
 | hypothesis-testing-practical | Confidence Intervals and Hypothesis Tests on Sales Data | prob-stats | practical | draft |  | hypothesis-testing, confidence-intervals |
@@ -115,6 +114,7 @@
 | data-storytelling | Data Storytelling | data-viz | theory | planned | Covers: knowing the audience, one message per chart, decluttering, annotation, structuring a findings presentation | choosing-a-chart |
 | data-viz-intro | Why Data Visualization? | data-viz | intro | draft |  |  |
 | distribution-plots | Graphing a Distribution: Histograms and Box Plots | data-viz | theory | draft | A histogram shows the shape of a numerical variable by counting how many values fall in each interval; a box plot… | central-tendency, quartiles-and-percentiles |
+| frequency-polygon-and-ogive | Frequency Polygon and Ogive | data-viz | theory | planned | Covers: frequency polygon, less-than and more-than ogives, reading the median and quartiles from an ogive | frequency-distribution, distribution-plots |
 | histogram-practical | Histograms of Sales Data | data-viz | practical | draft |  | distribution-plots |
 | plotting-with-matplotlib | Plotting with Matplotlib and Seaborn | data-viz | theory | planned | Covers: figure and axes, line, bar, scatter and histogram plots, labels and legends, subplots, seaborn statistical plots | pandas-dataframes |
 | scatter-plot | Scatter Plot | data-viz | theory | planned | Covers: plotting two numerical variables, reading direction, strength, form and outliers, colouring by group |  |

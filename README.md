@@ -145,7 +145,7 @@ Milestone or Free resources line, more than 3 resource links, and a subject intr
 a path. (The older `## What this job is` / `## Free resources` headings are still read.)
 
 **Practical notes** gain Before the lab, Steps and Common errors and fixes (plan 8.2, both sites).
-They are listed in `PENDING_SECTIONS` in `scripts/config.mjs`, so a missing one is a **warning**
+On class-notes every practical already has them, so they are **required (errors)** there (its profile sets `PENDING_SECTIONS: {}`). On ai-ds-notes they are listed in `PENDING_SECTIONS` in `scripts/config.mjs`, so a missing one is a **warning**
 for now; once the existing practicals have them, move them into `REQUIRED_SECTIONS` to make them
 errors. Code is no longer a required section (it is required only when the practical has code).
 In present mode, a **Steps** slide always reveals one numbered step per press (with its nested
