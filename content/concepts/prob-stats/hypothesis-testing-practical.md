@@ -25,6 +25,13 @@ To calculate confidence intervals and perform hypothesis tests (one-sample and t
 - [[confidence-intervals]]: t-intervals and what 95% confidence means.
 - [[hypothesis-testing]]: H0 and H1, p-values, Type I and II errors.
 
+## Before the lab
+
+- **Open:** a Google account and the *Open in Colab* link in Setup. Nothing to install; it also runs on a phone, but a laptop is easier.
+- **Revise first:** [[confidence-intervals]] Q2, Q3 and Q5, and [[hypothesis-testing]] Q1–Q4.
+- **Know the data:** skim the dataset's data card (`content/assets/data/sahyadri-mart-sales.md`): one row is one store on one day, 16 columns.
+- **Colab basics:** click a cell and press **Shift+Enter** to run it; a cell's output appears just below it.
+
 ## Setup (Colab)
 
 [Open in Colab](https://colab.research.google.com/github/Prathameshv07/ai-ds-notes/blob/main/content/assets/notebooks/prob-stats/hypothesis-testing-practical.ipynb). Nothing to install.
@@ -33,6 +40,18 @@ To calculate confidence intervals and perform hypothesis tests (one-sample and t
 - Steps 1–4 use a random sample of 36 days from S05 (Pune Express); Steps 5–6 use all its ordinary (non-festival) days.
 - The outputs below come from pandas 3.0 and NumPy 2.5; the notebook gives identical numbers on pandas 2.2 and NumPy 2.0 (current Colab).
 - Random numbers use `np.random.default_rng(2026)`, a fixed seed, so your results match these exactly when you run the cells in order.
+
+## Steps
+
+1. Open the notebook with the *Open in Colab* link. You should see the title **Confidence Intervals and Hypothesis Tests on Sales Data (ABA Unit 2, Practical 7)**.
+2. Click *File → Save a copy in Drive*, so your changes are kept. You should see "Copy of" in the notebook's name.
+3. Run the **Step 1** cell (Load the data and take a random sample of 36 days from the Pune Express store (S05)). You should see `n = 36, sample mean 1276.6, sample SD 280.3`.
+4. Run the **Step 2** cell (95% confidence interval for the mean daily footfall, by formula and with scipy). You should see `t* = 2.030, SE = 46.72, margin of error = 94.8`.
+5. Run the **Step 3** cell (What does 95% mean? Build 1,000 intervals from 1,000 samples and count the hits). You should see `Intervals containing the true mean: 952 of 1,000`.
+6. Run the **Step 4** cell (One-sample t-test. Head office claims S05 averages 1,300 visitors a day.). You should see `t = -0.502, two-tailed p-value = 0.6189`.
+7. Run the **Step 5** cell (Two-sample t-test: do display days have higher footfall? (S05, ordinary days only)). You should see `Display days: n = 222, mean 1261.8 | other days: n = 477, mean 1226.4`.
+8. Run the **Step 6** cell (Two-sample t-test: discount days vs no-discount days, with a CI for the difference). You should see `Discount days: n = 310, mean 1311.0 | no discount: n = 389, mean 1179.2`.
+9. Add a new cell below the last step (*+ Code*), type the **Try it** variation and run it. You should see numbers you can check against the collapsed answer.
 
 ## Code
 
@@ -186,6 +205,14 @@ Display days averaged 35.4 more visitors, but $p = 0.055 > 0.05$: **fail to reje
 ### Step 6: discount days, a clear result
 
 Discount days averaged 131.8 more visitors, 95% CI (99.1, 164.5), $p \approx 10^{-14}$: **reject $H_0$**. The interval also gives the size of the effect, which is what the manager needs. Caution: this is observational data. If discounts were given mostly on busy days, part of the difference may come from that, not from the discount itself.
+
+## Common errors and fixes
+
+- **`NameError: name 'df' is not defined`** (or `'rng'`, `'np'`, `'stats'`): a cell was run before Step 1, or Colab restarted and forgot everything. **Fix:** *Runtime → Run before* on the current cell, or run the cells again from Step 1.
+- **`HTTPError: HTTP Error 404: Not Found`** in Step 1: the URL was typed or copied incompletely. **Fix:** copy both `url` lines exactly; the file name is `sahyadri-mart-sales.csv`. With no internet you get a `URLError` instead.
+- **The t-test prints `nan` for t and the p-value (no error):** one of the columns has missing values, such as `rainfall_mm`. **Fix:** drop them first with `.dropna()`, or pass `nan_policy="omit"`.
+- **`TypeError: rv_generic.interval() missing 1 required positional argument: 'confidence'`**: older tutorials write `stats.t.interval(alpha=0.95, ...)`. **Fix:** write `stats.t.interval(0.95, df=n - 1, loc=..., scale=...)` (or `confidence=0.95`).
+- **Your numbers differ slightly from the note:** cells were run out of order or more than once, so the random generator moved on. **Fix:** *Runtime → Restart and run all*.
 
 ## Try it
 

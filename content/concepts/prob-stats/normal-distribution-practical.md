@@ -26,6 +26,13 @@ To generate random numbers from a normal distribution, analyse their properties 
 - [[normal-distribution]]: properties, empirical rule, z-scores.
 - [[skewness-and-kurtosis]]: shape measures used in Steps 2 and 6.
 
+## Before the lab
+
+- **Open:** a Google account and the *Open in Colab* link in Setup. Nothing to install; it also runs on a phone, but a laptop is easier.
+- **Revise first:** [[normal-distribution]] Q1 (properties), Q2 (empirical rule) and Q3 (z-scores).
+- **Know the data:** skim the dataset's data card (`content/assets/data/sahyadri-mart-sales.md`): one row is one store on one day, 16 columns.
+- **Colab basics:** click a cell and press **Shift+Enter** to run it; a cell's output appears just below it.
+
 ## Setup (Colab)
 
 [Open in Colab](https://colab.research.google.com/github/Prathameshv07/ai-ds-notes/blob/main/content/assets/notebooks/prob-stats/normal-distribution-practical.ipynb). Nothing to install.
@@ -34,6 +41,19 @@ To generate random numbers from a normal distribution, analyse their properties 
 - **Dataset:** Sahyadri Mart daily sales (synthetic; its data card in `content/assets/data/` lists every column). One row = one store on one day.
 - The outputs below come from pandas 3.0 and NumPy 2.5; the notebook gives identical numbers on pandas 2.2 and NumPy 2.0 (current Colab).
 - Random numbers use `np.random.default_rng(2026)`, a fixed seed, so your results match these exactly when you run the cells in order.
+
+## Steps
+
+1. Open the notebook with the *Open in Colab* link. You should see the title **Normal Random Numbers and the Empirical Rule (ABA Unit 2, Practical 3)**.
+2. Click *File → Save a copy in Drive*, so your changes are kept. You should see "Copy of" in the notebook's name.
+3. Run the **Step 1** cell (Generate 10,000 butter-packet weights from a normal distribution, mean 502 g, SD 2 g). You should see `First 8 weights: [500.41 502.48 498.21 504.79 503.28 501.42 501.38 502.61]`.
+4. Run the **Step 2** cell (Do the simulated weights have the properties of a normal distribution?). You should see `Mean   501.996  (theory 502)    SD 2.011  (theory 2)`.
+5. Run the **Step 3** cell (Check the empirical rule). You should see `Within 1 SD of the mean: 0.6754   (theory 0.6827)`.
+6. Run the **Step 4** cell (Probabilities: simulation vs the exact normal model (scipy.stats.norm)). You should see `P(weight < 500)       : simulated 0.1654, exact 0.1587`.
+7. Run the **Step 5** cell (Histogram of the simulated weights with the normal curve on top). You should see a histogram of packet weights following an orange bell curve centred on 502 g, with a dashed line at 500 g.
+8. Run the **Step 6** cell (Real data: is S05's ordinary-day footfall close to normal?). You should see `S05 ordinary days: n = 699, mean 1237.6, SD 224.3, skewness 0.57`.
+9. Run the **Step 7** cell (z-scores: which ordinary days were most unusual for S05?). You should see `2025-12-21      Sunday            15          0.0      2077 3.74`.
+10. Add a new cell below the last step (*+ Code*), type the **Try it** variation and run it. You should see numbers you can check against the collapsed answer.
 
 ## Code
 
@@ -205,6 +225,14 @@ The histogram follows the normal curve closely. The part left of the dashed 500 
 - But the skewness is 0.57: a longer right tail, from busy December Sundays and the yearly growth trend.
 - ==A normal model is a reasonable first approximation for this footfall, but the right tail is heavier than normal.==
 - The five most unusual days (|z| ≥ 2.9) are all weekends, four of them December Sundays with discounts. z-scores point straight at the days worth investigating.
+
+## Common errors and fixes
+
+- **`NameError: name 'df' is not defined`** (or `'rng'`, `'np'`, `'stats'`): a cell was run before Step 1, or Colab restarted and forgot everything. **Fix:** *Runtime → Run before* on the current cell, or run the cells again from Step 1.
+- **Your numbers differ slightly from the note:** cells were run out of order or more than once, so the random generator moved on. **Fix:** *Runtime → Restart and run all*.
+- **Probabilities that look too spread out:** the variance (4) was passed instead of the SD (2), as in `stats.norm.cdf(500, 502, 4)`. **Fix:** the third argument is the SD.
+- **`HTTPError: HTTP Error 404: Not Found`** in Step 1: the URL was typed or copied incompletely. **Fix:** copy both `url` lines exactly; the file name is `sahyadri-mart-sales.csv`. With no internet you get a `URLError` instead.
+- **`NameError: name 'plt' is not defined`** in a plotting step: the cell was copied without its `import matplotlib.pyplot as plt` line. **Fix:** run the whole cell, including the import.
 
 ## Try it
 

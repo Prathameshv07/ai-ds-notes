@@ -26,12 +26,32 @@ To calculate descriptive statistics, the mean, median and mode, for a business d
 - [[central-tendency]]: mean, median, mode and weighted mean, and when to use each.
 - [[exploratory-data-analysis-practical]]: the same dataset explored first.
 
+## Before the lab
+
+- **Open:** a Google account and the *Open in Colab* link in Setup. Nothing to install; it also runs on a phone, but a laptop is easier.
+- **Revise first:** [[central-tendency]] Q2 (mean), Q4 (median), Q5 (mode) and Q3 (weighted mean).
+- **Know the data:** skim the dataset's data card (`content/assets/data/sahyadri-mart-sales.md`): one row is one store on one day, 16 columns.
+- **Colab basics:** click a cell and press **Shift+Enter** to run it; a cell's output appears just below it.
+
 ## Setup (Colab)
 
 [Open in Colab](https://colab.research.google.com/github/Prathameshv07/ai-ds-notes/blob/main/content/assets/notebooks/prob-stats/central-tendency-practical.ipynb). Nothing to install.
 
 - **Dataset:** Sahyadri Mart daily sales (synthetic; its data card in `content/assets/data/` lists every column). One row = one store on one day; 12 stores × 731 days.
 - The outputs below come from pandas 3. On pandas 2.x (current Colab) all numbers are the same.
+
+## Steps
+
+1. Open the notebook with the *Open in Colab* link. You should see the title **Central Tendency Practical (ABA Unit 1, Practical 3)**.
+2. Click *File → Save a copy in Drive*, so your changes are kept. You should see "Copy of" in the notebook's name.
+3. Run the **Step 1** cell (Load the data). You should see `Rows, columns: (8772, 16)`.
+4. Run the **Step 2** cell (Mean and median of daily revenue for the whole chain). You should see `Mean revenue   : Rs 444,043`.
+5. Run the **Step 3** cell (Mode: useful for discrete and categorical columns, not for revenue). You should see `Revenue: distinct values = 8136 out of 8772 rows`.
+6. Run the **Step 4** cell (Mean and median by store type). You should see `Express      213056.0  178450.0`.
+7. Run the **Step 5** cell (Extreme days move the mean much more than the median (Mumbai supermarket, S01)). You should see `All days              : mean Rs 1,076,818 | median Rs 1,041,020`.
+8. Run the **Step 6** cell (Weighted mean: the chain's true average bill value). You should see `Simple mean of daily average bills : Rs 490.94`.
+9. Run the **Step 7** cell (Summary for the manager: typical daily footfall of each store). You should see `S01      Mumbai                    Supermarket  2209.0  2135.0`.
+10. Add a new cell below the last step (*+ Code*), type the **Try it** variation and run it. You should see numbers you can check against the collapsed answer.
 
 ## Code
 
@@ -223,6 +243,14 @@ Removing S01's festival days lowers the mean by ₹25,836 but the median by only
 ### Step 7: the manager's table
 
 Mean and median footfall are close for every single store (mean slightly higher everywhere, because of festival peaks). Within one store the data are only mildly skewed, so either average works; across mixed stores, use the median or split the groups.
+
+## Common errors and fixes
+
+- **`NameError: name 'df' is not defined`** (or `'rng'`, `'np'`, `'stats'`): a cell was run before Step 1, or Colab restarted and forgot everything. **Fix:** *Runtime → Run before* on the current cell, or run the cells again from Step 1.
+- **`HTTPError: HTTP Error 404: Not Found`** in Step 1: the URL was typed or copied incompletely. **Fix:** copy both `url` lines exactly; the file name is `sahyadri-mart-sales.csv`. With no internet you get a `URLError` instead.
+- **`KeyError: 'revenue'`**: a column name was mistyped. **Fix:** run `print(df.columns)` and copy the exact name (`revenue_inr`).
+- **`TypeError: Could not convert ['MondayTuesday…'] to numeric`** (pandas 3: `Cannot perform reduction 'mean' with string dtype`): `df.mean()` was called on the whole table, which includes text columns. **Fix:** choose a column, `df["revenue_inr"].mean()`, or use `df.mean(numeric_only=True)`.
+- **`.mode()` prints `0    15` instead of just `15`:** it returns a Series, because a column can have several modes. **Fix:** use `.mode().tolist()`, or `.mode()[0]` for the first mode.
 
 ## Try it
 

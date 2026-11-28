@@ -25,6 +25,12 @@ To generate random numbers from uniform and exponential distributions, compare t
 - [[continuous-distributions]]: uniform and exponential distributions, memorylessness.
 - [[discrete-distributions]]: the Poisson distribution of arrivals per hour.
 
+## Before the lab
+
+- **Open:** a Google account and the *Open in Colab* link in Setup. Nothing to install; it also runs on a phone, but a laptop is easier.
+- **Revise first:** [[continuous-distributions]] Q3 (uniform) and Q4 (exponential); [[discrete-distributions]] Q5 (Poisson).
+- **Colab basics:** click a cell and press **Shift+Enter** to run it; a cell's output appears just below it.
+
 ## Setup (Colab)
 
 [Open in Colab](https://colab.research.google.com/github/Prathameshv07/ai-ds-notes/blob/main/content/assets/notebooks/prob-stats/continuous-distributions-practical.ipynb). Nothing to install.
@@ -32,6 +38,18 @@ To generate random numbers from uniform and exponential distributions, compare t
 - This practical uses simulated numbers only; no dataset is needed.
 - The outputs below come from pandas 3.0 and NumPy 2.5; the notebook gives identical numbers on pandas 2.2 and NumPy 2.0 (current Colab).
 - Random numbers use `np.random.default_rng(2026)`, a fixed seed, so your results match these exactly when you run the cells in order.
+
+## Steps
+
+1. Open the notebook with the *Open in Colab* link. You should see the title **Uniform and Exponential Random Numbers (ABA Unit 2, Practical 4)**.
+2. Click *File → Save a copy in Drive*, so your changes are kept. You should see "Copy of" in the notebook's name.
+3. Run the **Step 1** cell (Uniform: 10,000 delivery times between 20 and 40 minutes). You should see `Mean 30.11 (theory 30.0)   SD 5.76 (theory 5.77)`.
+4. Run the **Step 2** cell (Exponential: 10,000 gaps between customers, mean 2 minutes (30 customers an hour)). You should see `Mean 1.975 (theory 2)   SD 1.991 (theory 2)`.
+5. Run the **Step 3** cell (Memoryless: having waited 3 minutes, is a further 2-minute wait just as likely?). You should see `P(gap > 5 | gap > 3) = 0.3643`.
+6. Run the **Step 4** cell (Histograms with the theoretical density curves). You should see two histograms: a flat uniform one and a falling exponential one, each matching an orange curve.
+7. Run the **Step 5** cell (Simulate 10,000 hours of arrivals by adding up exponential gaps). You should see `Customers per hour: mean 30.12, variance 29.61 (Poisson: both 30)`.
+8. Run the **Step 6** cell (Every distribution can be built from uniform numbers (inverse transform)). You should see `From uniform numbers: mean 1.971, SD 2.001 (exponential theory: 2 and 2)`.
+9. Add a new cell below the last step (*+ Code*), type the **Try it** variation and run it. You should see numbers you can check against the collapsed answer.
 
 ## Code
 
@@ -178,6 +196,13 @@ Adding up exponential gaps gives arrival times; counting arrivals within 60 minu
 ### Step 6: everything from uniform numbers
 
 $-2\ln(1 - U)$ turns uniform numbers $U$ into exponential gaps with mean 2 (the **inverse transform** method). This is how simulation software builds every distribution from one uniform random-number generator.
+
+## Common errors and fixes
+
+- **`NameError: name 'df' is not defined`** (or `'rng'`, `'np'`, `'stats'`): a cell was run before Step 1, or Colab restarted and forgot everything. **Fix:** *Runtime → Run before* on the current cell, or run the cells again from Step 1.
+- **Your numbers differ slightly from the note:** cells were run out of order or more than once, so the random generator moved on. **Fix:** *Runtime → Restart and run all*.
+- **Exponential gaps with mean 0.5 instead of 2:** the rate was passed as `scale`. **Fix:** NumPy's `scale` is the mean, 1/rate: `rng.exponential(scale=2)` for 30 customers an hour.
+- **`NameError: name 'plt' is not defined`** in a plotting step: the cell was copied without its `import matplotlib.pyplot as plt` line. **Fix:** run the whole cell, including the import.
 
 ## Try it
 

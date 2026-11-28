@@ -27,6 +27,13 @@ To apply simple linear regression to find the relationship between advertising e
 - [[simple-linear-regression]]: the least-squares line $\hat{y} = a + bx$ (theory note to come in Unit 3; the formulas needed here are in the Explanation).
 - [[correlation]] and [[correlation-practical]]: r, $r^2$ and the store-size confounder.
 
+## Before the lab
+
+- **Open:** a Google account and the *Open in Colab* link in Setup. Nothing to install; it also runs on a phone, but a laptop is easier.
+- **Revise first:** [[correlation]] Q1–Q4, and the least-squares formulas in this note's Explanation.
+- **Know the data:** skim the dataset's data card (`content/assets/data/sahyadri-mart-sales.md`): one row is one store on one day, 16 columns.
+- **Colab basics:** click a cell and press **Shift+Enter** to run it; a cell's output appears just below it.
+
 ## Setup (Colab)
 
 [Open in Colab](https://colab.research.google.com/github/Prathameshv07/ai-ds-notes/blob/main/content/assets/notebooks/prob-stats/simple-linear-regression-practical.ipynb). Nothing to install.
@@ -34,6 +41,19 @@ To apply simple linear regression to find the relationship between advertising e
 - **Dataset:** Sahyadri Mart daily sales (synthetic; its data card in `content/assets/data/` lists every column). One row = one store on one day.
 - **x** = `ad_spend_inr` (ad spend that day), **y** = `revenue_inr` (revenue that day).
 - The outputs below come from pandas 3. On pandas 2.x (current Colab) all numbers are the same.
+
+## Steps
+
+1. Open the notebook with the *Open in Colab* link. You should see the title **Simple Linear Regression Practical (ABA Unit 1, Practical 8)**.
+2. Click *File → Save a copy in Drive*, so your changes are kept. You should see "Copy of" in the notebook's name.
+3. Run the **Step 1** cell (Load the data). You should see `Rows, columns: (8772, 16)`.
+4. Run the **Step 2** cell (Least-squares line for the whole chain: revenue = a + b * ad_spend). You should see `Slope b     : 72.53  (Rs of revenue per extra Rs 1 of ads)`.
+5. Run the **Step 3** cell (Check with NumPy's built-in least-squares fit). You should see `np.polyfit: slope = 72.53, intercept = 160,589`.
+6. Run the **Step 4** cell (Fit the same line inside each store). You should see `slope_b  intercept_a      r     R2`.
+7. Run the **Step 5** cell (Remove store size: compare each day with its own store's average). You should see `Chain-wide slope   : 72.5`.
+8. Run the **Step 6** cell (Predict S01's revenue on a day with Rs 10,000 of ads: which line?). You should see `S01 average day : ad Rs 6,091, revenue Rs 1,076,818`.
+9. Run the **Step 7** cell (Plot the chain-wide line and two stores' own lines). You should see grey points for all stores, two shallow store lines (blue S01, orange S10) and a steep dashed chain-wide line.
+10. Add a new cell below the last step (*+ Code*), type the **Try it** variation and run it. You should see numbers you can check against the collapsed answer.
 
 ## Code
 
@@ -235,6 +255,15 @@ Each store's own line is shallow; the dashed chain line is steep because it clim
 - Even 16.9 may be too high: within each store, ad spend is about 27% higher on festival days, which have high sales anyway. The Try it tests this.
 - The data card says ad spend has diminishing returns, so a straight line is only an approximation.
 - Regression shows association. Proving that ads *cause* sales needs a controlled experiment.
+
+## Common errors and fixes
+
+- **`NameError: name 'df' is not defined`** (or `'rng'`, `'np'`, `'stats'`): a cell was run before Step 1, or Colab restarted and forgot everything. **Fix:** *Runtime → Run before* on the current cell, or run the cells again from Step 1.
+- **`HTTPError: HTTP Error 404: Not Found`** in Step 1: the URL was typed or copied incompletely. **Fix:** copy both `url` lines exactly; the file name is `sahyadri-mart-sales.csv`. With no internet you get a `URLError` instead.
+- **`KeyError: 'revenue'`**: a column name was mistyped. **Fix:** run `print(df.columns)` and copy the exact name (`revenue_inr`).
+- **A nonsense line such as slope 160,589:** `np.polyfit(x, y, 1)` returns `[slope, intercept]` in that order. **Fix:** unpack as `b, a = np.polyfit(x, y, 1)`, and keep x (ad spend) first.
+- **`LinAlgError: SVD did not converge in Linear Least Squares`**: a column with missing values (such as `rainfall_mm`) was passed to `np.polyfit`. **Fix:** drop missing rows first, for example `d = df[["rainfall_mm", "footfall"]].dropna()`.
+- **`NameError: name 'plt' is not defined`** in a plotting step: the cell was copied without its `import matplotlib.pyplot as plt` line. **Fix:** run the whole cell, including the import.
 
 ## Try it
 

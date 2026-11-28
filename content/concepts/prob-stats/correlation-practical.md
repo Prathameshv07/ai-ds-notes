@@ -26,12 +26,32 @@ To conduct correlation analysis on a business dataset, identify which variables 
 - [[covariance]] and [[correlation]]: Pearson's r, its properties, and confounders.
 - [[exploratory-data-analysis-practical]]: Step 8 of that practical first spotted the ad-spend puzzle studied here.
 
+## Before the lab
+
+- **Open:** a Google account and the *Open in Colab* link in Setup. Nothing to install; it also runs on a phone, but a laptop is easier.
+- **Revise first:** [[covariance]] Q1–Q2 and [[correlation]] Q1 (Pearson's r), Q3 (properties) and Q4 (correlation vs causation).
+- **Know the data:** skim the dataset's data card (`content/assets/data/sahyadri-mart-sales.md`): one row is one store on one day, 16 columns.
+- **Colab basics:** click a cell and press **Shift+Enter** to run it; a cell's output appears just below it.
+
 ## Setup (Colab)
 
 [Open in Colab](https://colab.research.google.com/github/Prathameshv07/ai-ds-notes/blob/main/content/assets/notebooks/prob-stats/correlation-practical.ipynb). Nothing to install.
 
 - **Dataset:** Sahyadri Mart daily sales (synthetic; its data card in `content/assets/data/` lists every column). One row = one store on one day.
 - The outputs below come from pandas 3. On pandas 2.x (current Colab) all numbers are the same.
+
+## Steps
+
+1. Open the notebook with the *Open in Colab* link. You should see the title **Correlation Practical (ABA Unit 1, Practical 7)**.
+2. Click *File → Save a copy in Drive*, so your changes are kept. You should see "Copy of" in the notebook's name.
+3. Run the **Step 1** cell (Load the data). You should see `Rows, columns: (8772, 16)`.
+4. Run the **Step 2** cell (Pearson's r by its formula: footfall vs revenue). You should see `Covariance   : 186,656,844  (visitors x Rs)`.
+5. Run the **Step 3** cell (Change the unit of revenue to Rs lakh: covariance changes, r does not). You should see `Covariance (revenue in Rs lakh): 1,866.57`.
+6. Run the **Step 4** cell (Correlation matrix of the main business variables). You should see `area      1.00      0.62     -0.01  0.00      0.81   0.79     0.89`.
+7. Run the **Step 5** cell (Scatter plot: ad spend vs revenue, coloured by store type). You should see a scatter plot with two separate clouds, orange Express points low and blue Supermarket points high.
+8. Run the **Step 6** cell (Ad spend vs revenue: whole chain, each store type, each store). You should see `Whole chain : r = 0.61`.
+9. Run the **Step 7** cell (The hidden third variable: store size). You should see `S01      Supermarket             9000          6091      1076818`.
+10. Add a new cell below the last step (*+ Code*), type the **Try it** variation and run it. You should see numbers you can check against the collapsed answer.
 
 ## Code
 
@@ -241,6 +261,15 @@ Across the 12 stores, floor area correlates 0.97 with average ad spend and 0.97 
 ### Conclusion for the manager
 
 Footfall is the strongest driver of revenue. Advertising has a real but modest link with revenue within a store (r ≈ 0.27, so $r^2 \approx 0.07$: about 7% of daily variation). Doubling the ad budget on the strength of r = 0.61 would be a mistake. Practical 8 measures how many rupees of revenue each extra rupee of ads brings.
+
+## Common errors and fixes
+
+- **`NameError: name 'df' is not defined`** (or `'rng'`, `'np'`, `'stats'`): a cell was run before Step 1, or Colab restarted and forgot everything. **Fix:** *Runtime → Run before* on the current cell, or run the cells again from Step 1.
+- **`HTTPError: HTTP Error 404: Not Found`** in Step 1: the URL was typed or copied incompletely. **Fix:** copy both `url` lines exactly; the file name is `sahyadri-mart-sales.csv`. With no internet you get a `URLError` instead.
+- **`KeyError: 'revenue'`**: a column name was mistyped. **Fix:** run `print(df.columns)` and copy the exact name (`revenue_inr`).
+- **`ValueError: could not convert string to float: 'Monday'`**: `df.corr()` was called on the whole table, which includes text columns. **Fix:** pick numeric columns first, as Step 4 does, or use `df.corr(numeric_only=True)`.
+- **`DeprecationWarning: DataFrameGroupBy.apply operated on the grouping columns…`** (pandas 2.2): only a warning; the numbers are right. **Fix:** add `include_groups=False` inside `.apply(...)`, as the notebook does.
+- **`NameError: name 'plt' is not defined`** in a plotting step: the cell was copied without its `import matplotlib.pyplot as plt` line. **Fix:** run the whole cell, including the import.
 
 ## Try it
 

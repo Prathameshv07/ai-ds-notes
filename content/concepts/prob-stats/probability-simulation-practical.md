@@ -25,6 +25,13 @@ To simulate probability experiments (coin tosses, dice rolls and customer visits
 - [[probability-basics]]: classical and empirical probability, the law of large numbers.
 - [[discrete-distributions]]: the binomial model for the number of buyers.
 
+## Before the lab
+
+- **Open:** a Google account and the *Open in Colab* link in Setup. Nothing to install; it also runs on a phone, but a laptop is easier.
+- **Revise first:** [[probability-basics]] Q2 (empirical probability) and Q6 (law of large numbers); [[discrete-distributions]] Q4 (binomial).
+- **Know the data:** skim the dataset's data card (`content/assets/data/sahyadri-mart-sales.md`): one row is one store on one day, 16 columns.
+- **Colab basics:** click a cell and press **Shift+Enter** to run it; a cell's output appears just below it.
+
 ## Setup (Colab)
 
 [Open in Colab](https://colab.research.google.com/github/Prathameshv07/ai-ds-notes/blob/main/content/assets/notebooks/prob-stats/probability-simulation-practical.ipynb). Nothing to install.
@@ -33,6 +40,18 @@ To simulate probability experiments (coin tosses, dice rolls and customer visits
 - **Dataset:** Sahyadri Mart daily sales (synthetic; its data card in `content/assets/data/` lists every column). One row = one store on one day.
 - The outputs below come from pandas 3.0 and NumPy 2.5; the notebook gives identical numbers on pandas 2.2 and NumPy 2.0 (current Colab).
 - Random numbers use `np.random.default_rng(2026)`, a fixed seed, so your results match these exactly when you run the cells in order.
+
+## Steps
+
+1. Open the notebook with the *Open in Colab* link. You should see the title **Simulating Probability Experiments (ABA Unit 2, Practical 1)**.
+2. Click *File → Save a copy in Drive*, so your changes are kept. You should see "Copy of" in the notebook's name.
+3. Run the **Step 1** cell (Set up a random number generator (fixed seed: everyone gets the same numbers)). You should see `Ten rolls of a die: [6 2 1 4 3 3 1 3 4 3]`.
+4. Run the **Step 2** cell (Toss a fair coin n times and find the share of heads). You should see `n =      10: share of heads = 0.7000`.
+5. Run the **Step 3** cell (Law of large numbers: the running share of heads settles near 0.5). You should see a line that swings widely at first, then settles on the dashed 0.5 line, then the line `After 10 tosses: 0.40 | after 100: 0.48 | after 5,000: 0.501`.
+6. Run the **Step 4** cell (Roll a die 60,000 times: each face should appear about 1/6 of the time). You should see `1  10038  0.1673`.
+7. Run the **Step 5** cell (Simulate customers: 1,257 visitors a day, each buys with probability 0.64). You should see `Buyers on one simulated day: 816 (expected 804)`.
+8. Run the **Step 6** cell (Compare with the real S05 store: does real conversion vary more than chance alone?). You should see `Real S05 conversion : mean 0.635, SD 0.0393`.
+9. Add a new cell below the last step (*+ Code*), type the **Try it** variation and run it. You should see numbers you can check against the collapsed answer.
 
 ## Code
 
@@ -183,6 +202,14 @@ Each face appeared between 9,941 and 10,038 times in 60,000 rolls: every share i
 - Each simulated visitor buys if a uniform random number is below 0.64. Over 731 simulated days the mean was 805.4 buyers (theory $np = 804$) with SD 16.9 (theory $\sqrt{np(1-p)} = 17.0$).
 - Real S05 conversion has almost the same mean (0.635 vs 0.641) but **three times the spread** (SD 0.039 vs 0.013).
 - ==The simple model gets the average right but not the variation.== Real days differ in discounts, crowd mix and weather, so the buying probability itself changes from day to day. Comparing a simulation with real data is how analysts find what a model leaves out.
+
+## Common errors and fixes
+
+- **`NameError: name 'df' is not defined`** (or `'rng'`, `'np'`, `'stats'`): a cell was run before Step 1, or Colab restarted and forgot everything. **Fix:** *Runtime → Run before* on the current cell, or run the cells again from Step 1.
+- **Your numbers differ slightly from the note:** cells were run out of order or more than once, so the random generator moved on. **Fix:** *Runtime → Restart and run all*.
+- **A die that never shows 6:** `rng.integers(1, 6)` stops *before* the upper limit. **Fix:** use `rng.integers(1, 7)` for faces 1 to 6.
+- **`HTTPError: HTTP Error 404: Not Found`** in Step 1: the URL was typed or copied incompletely. **Fix:** copy both `url` lines exactly; the file name is `sahyadri-mart-sales.csv`. With no internet you get a `URLError` instead.
+- **`NameError: name 'plt' is not defined`** in a plotting step: the cell was copied without its `import matplotlib.pyplot as plt` line. **Fix:** run the whole cell, including the import.
 
 ## Try it
 

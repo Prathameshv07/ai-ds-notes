@@ -25,6 +25,13 @@ To calculate the probabilities of different outcomes from simulated experiments,
 - [[probability-basics]]: classical and empirical probability, addition rule.
 - [[conditional-probability]]: conditional probability, independence, Bayes' theorem.
 
+## Before the lab
+
+- **Open:** a Google account and the *Open in Colab* link in Setup. Nothing to install; it also runs on a phone, but a laptop is easier.
+- **Revise first:** [[conditional-probability]] Q1 (conditional probability), Q3 (independence) and Q4 (Bayes' theorem).
+- **Know the data:** skim the dataset's data card (`content/assets/data/sahyadri-mart-sales.md`): one row is one store on one day, 16 columns.
+- **Colab basics:** click a cell and press **Shift+Enter** to run it; a cell's output appears just below it.
+
 ## Setup (Colab)
 
 [Open in Colab](https://colab.research.google.com/github/Prathameshv07/ai-ds-notes/blob/main/content/assets/notebooks/prob-stats/conditional-probability-practical.ipynb). Nothing to install.
@@ -32,6 +39,18 @@ To calculate the probabilities of different outcomes from simulated experiments,
 - **Dataset:** Sahyadri Mart daily sales (synthetic; its data card in `content/assets/data/` lists every column). One row = one store on one day.
 - The outputs below come from pandas 3.0 and NumPy 2.5; the notebook gives identical numbers on pandas 2.2 and NumPy 2.0 (current Colab).
 - Random numbers use `np.random.default_rng(2026)`, a fixed seed, so your results match these exactly when you run the cells in order.
+
+## Steps
+
+1. Open the notebook with the *Open in Colab* link. You should see the title **Probabilities from Simulations and Sales Data (ABA Unit 2, Practical 2)**.
+2. Click *File → Save a copy in Drive*, so your changes are kept. You should see "Copy of" in the notebook's name.
+3. Run the **Step 1** cell (Load the sales data and set up the random generator). You should see `Rows, columns: (8772, 16)`.
+4. Run the **Step 2** cell (Simulate 100,000 throws of two dice and tabulate the sums). You should see `2      0.0280  0.0278`.
+5. Run the **Step 3** cell (Probabilities of events: simulated vs exact). You should see `P(sum >= 10)           : 0.1656   exact 0.1667`.
+6. Run the **Step 4** cell (Two events in the sales data: festival day, and high-sales day (a store's top 10%)). You should see `P(festival) = 0.0438`.
+7. Run the **Step 5** cell (Joint counts, conditional probabilities and a test of independence). You should see `high            0    1   All`.
+8. Run the **Step 6** cell (Bayes' theorem: P(festival | high), by formula and by direct count). You should see `By Bayes' theorem: 0.290   By direct count: 0.290`.
+9. Add a new cell below the last step (*+ Code*), type the **Try it** variation and run it. You should see numbers you can check against the collapsed answer.
 
 ## Code
 
@@ -192,6 +211,13 @@ A "high-sales day" is a store's own top 10% of days (so a small store's busy day
 ### Step 6: Bayes' theorem
 
 $P(\text{festival} \mid \text{high}) = \frac{0.661 \times 0.0438}{0.0999} = 0.290$, the same as counting directly (254 of 876 high days). Although two-thirds of festival days are high, only 29% of high days are festivals: most high days are ordinary weekends.
+
+## Common errors and fixes
+
+- **`NameError: name 'df' is not defined`** (or `'rng'`, `'np'`, `'stats'`): a cell was run before Step 1, or Colab restarted and forgot everything. **Fix:** *Runtime → Run before* on the current cell, or run the cells again from Step 1.
+- **`HTTPError: HTTP Error 404: Not Found`** in Step 1: the URL was typed or copied incompletely. **Fix:** copy both `url` lines exactly; the file name is `sahyadri-mart-sales.csv`. With no internet you get a `URLError` instead.
+- **`KeyError: 'revenue'`**: a column name was mistyped. **Fix:** run `print(df.columns)` and copy the exact name (`revenue_inr`).
+- **Your numbers differ slightly from the note:** cells were run out of order or more than once, so the random generator moved on. **Fix:** *Runtime → Restart and run all*.
 
 ## Try it
 

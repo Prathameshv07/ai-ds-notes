@@ -25,6 +25,13 @@ To conduct sampling analysis on a business dataset: draw repeated samples, study
 - [[sampling-techniques]]: simple random and stratified sampling.
 - [[sampling-distributions]]: standard error and the central limit theorem.
 
+## Before the lab
+
+- **Open:** a Google account and the *Open in Colab* link in Setup. Nothing to install; it also runs on a phone, but a laptop is easier.
+- **Revise first:** [[sampling-techniques]] Q3 (probability sampling) and [[sampling-distributions]] Q3 (standard error) and Q4 (central limit theorem).
+- **Know the data:** skim the dataset's data card (`content/assets/data/sahyadri-mart-sales.md`): one row is one store on one day, 16 columns.
+- **Colab basics:** click a cell and press **Shift+Enter** to run it; a cell's output appears just below it.
+
 ## Setup (Colab)
 
 [Open in Colab](https://colab.research.google.com/github/Prathameshv07/ai-ds-notes/blob/main/content/assets/notebooks/prob-stats/sampling-distributions-practical.ipynb). Nothing to install.
@@ -33,6 +40,18 @@ To conduct sampling analysis on a business dataset: draw repeated samples, study
 - The 8,772 store-days are treated as the **population**, so we can compare every sample with the true answer.
 - The outputs below come from pandas 3.0 and NumPy 2.5; the notebook gives identical numbers on pandas 2.2 and NumPy 2.0 (current Colab).
 - Random numbers use `np.random.default_rng(2026)`, a fixed seed, so your results match these exactly when you run the cells in order.
+
+## Steps
+
+1. Open the notebook with the *Open in Colab* link. You should see the title **Sampling Distributions and the CLT (ABA Unit 2, Practical 6)**.
+2. Click *File → Save a copy in Drive*, so your changes are kept. You should see "Copy of" in the notebook's name.
+3. Run the **Step 1** cell (The population: daily revenue on all 8,772 store-days). You should see `Population: N = 8772, mean Rs 444,043, SD Rs 336,298, skewness 1.26`.
+4. Run the **Step 2** cell (Two simple random samples of 30 store-days give different means). You should see `Sample 1: mean Rs 438,289`.
+5. Run the **Step 3** cell (5,000 samples for each size: centre, spread and shape of the sample means). You should see `n =   5: mean of means Rs 448,287 | SD of means Rs 151,518 | sigma/sqrt(n) Rs 150,397 |…`.
+6. Run the **Step 4** cell (Plot: the population and the sampling distributions). You should see four histograms: a right-skewed population and three sampling distributions that get narrower and more bell-shaped.
+7. Run the **Step 5** cell (Simple random vs stratified sampling (n = 60), 5,000 repetitions each). You should see `Allocation: 25 Supermarket + 35 Express store-days`.
+8. Run the **Step 6** cell (Sampling distribution of a proportion: share of high-sales days in samples of 400). You should see `Population p = 0.0999`.
+9. Add a new cell below the last step (*+ Code*), type the **Try it** variation and run it. You should see numbers you can check against the collapsed answer.
 
 ## Code
 
@@ -188,6 +207,14 @@ Proportional allocation takes 25 Supermarket and 35 Express store-days (5 of the
 ### Step 6: a proportion
 
 High-sales days are 9.99% of the population. Sample proportions from samples of 400 had SE 0.0147, matching $\sqrt{p(1-p)/n} = 0.0150$.
+
+## Common errors and fixes
+
+- **`NameError: name 'df' is not defined`** (or `'rng'`, `'np'`, `'stats'`): a cell was run before Step 1, or Colab restarted and forgot everything. **Fix:** *Runtime → Run before* on the current cell, or run the cells again from Step 1.
+- **Your numbers differ slightly from the note:** cells were run out of order or more than once, so the random generator moved on. **Fix:** *Runtime → Restart and run all*.
+- **`ValueError: Cannot take a larger sample than population when replace is False`**: the sample size is bigger than the group it is drawn from. **Fix:** keep `size` at most `len(values)`, or use `replace=True` only for bootstrap resampling.
+- **`HTTPError: HTTP Error 404: Not Found`** in Step 1: the URL was typed or copied incompletely. **Fix:** copy both `url` lines exactly; the file name is `sahyadri-mart-sales.csv`. With no internet you get a `URLError` instead.
+- **`NameError: name 'plt' is not defined`** in a plotting step: the cell was copied without its `import matplotlib.pyplot as plt` line. **Fix:** run the whole cell, including the import.
 
 ## Try it
 

@@ -26,6 +26,13 @@ To calculate the variance and standard deviation of a business dataset, by hand 
 - [[dispersion]]: range, variance, standard deviation and CV.
 - [[central-tendency-practical]]: the same dataset and its averages.
 
+## Before the lab
+
+- **Open:** a Google account and the *Open in Colab* link in Setup. Nothing to install; it also runs on a phone, but a laptop is easier.
+- **Revise first:** [[dispersion]] Q3 (variance), Q4 (standard deviation), Q5 (why n − 1) and Q6 (coefficient of variation).
+- **Know the data:** skim the dataset's data card (`content/assets/data/sahyadri-mart-sales.md`): one row is one store on one day, 16 columns.
+- **Colab basics:** click a cell and press **Shift+Enter** to run it; a cell's output appears just below it.
+
 ## Setup (Colab)
 
 [Open in Colab](https://colab.research.google.com/github/Prathameshv07/ai-ds-notes/blob/main/content/assets/notebooks/prob-stats/dispersion-practical.ipynb). Nothing to install.
@@ -33,6 +40,19 @@ To calculate the variance and standard deviation of a business dataset, by hand 
 - **Dataset:** Sahyadri Mart daily sales (synthetic; its data card in `content/assets/data/` lists every column). One row = one store on one day.
 - Most steps use **S05**, the Pune Express store.
 - The outputs below come from pandas 3. On pandas 2.x (current Colab) all numbers are the same.
+
+## Steps
+
+1. Open the notebook with the *Open in Colab* link. You should see the title **Dispersion Practical (ABA Unit 1, Practical 4)**.
+2. Click *File → Save a copy in Drive*, so your changes are kept. You should see "Copy of" in the notebook's name.
+3. Run the **Step 1** cell (Load the data and pick one store: S05, the Pune Express store). You should see `Rows, columns: (8772, 16) | days for S05: 731`.
+4. Run the **Step 2** cell (Variance and standard deviation by hand: S05 footfall, first 7 days). You should see `x  x - mean  (x - mean)^2`.
+5. Run the **Step 3** cell (The same with pandas and NumPy: watch the default divisor). You should see `pandas w.var(), w.std()  : 44438.24 210.8   (divides by n-1)`.
+6. Run the **Step 4** cell (All the measures for S05's daily footfall over two years). You should see `Mean           : 1257.3`.
+7. Run the **Step 5** cell (Which kind of store has steadier daily revenue? Compare SD and CV). You should see `Express      213056.1   94144.6    44.2`.
+8. Run the **Step 6** cell (Rank all 12 stores by the CV of daily footfall). You should see `S06      Kolhapur                    829.7  163.8    19.7`.
+9. Run the **Step 7** cell (Why the range is fragile: drop S01's single busiest day). You should see `All 731 days : range Rs 2,413,570 | SD Rs 250,614`.
+10. Add a new cell below the last step (*+ Code*), type the **Try it** variation and run it. You should see numbers you can check against the collapsed answer.
 
 ## Code
 
@@ -227,6 +247,14 @@ On a typical day S05's footfall is about 1,257 ± 248 visitors (mean ± SD). The
 ### Step 7: range is fragile, SD is steadier
 
 Removing one day out of 731 (a Diwali-season peak) cuts S01's range by 33% (₹24.1 lakh → ₹16.2 lakh) but its SD by only 4% (₹2.51 lakh → ₹2.40 lakh). The range depends on just two values; the SD uses all of them.
+
+## Common errors and fixes
+
+- **`NameError: name 'df' is not defined`** (or `'rng'`, `'np'`, `'stats'`): a cell was run before Step 1, or Colab restarted and forgot everything. **Fix:** *Runtime → Run before* on the current cell, or run the cells again from Step 1.
+- **`HTTPError: HTTP Error 404: Not Found`** in Step 1: the URL was typed or copied incompletely. **Fix:** copy both `url` lines exactly; the file name is `sahyadri-mart-sales.csv`. With no internet you get a `URLError` instead.
+- **`KeyError: 'revenue'`**: a column name was mistyped. **Fix:** run `print(df.columns)` and copy the exact name (`revenue_inr`).
+- **Your SD differs from the note (for example 195.17 instead of 210.80):** `np.std()` divides by n, pandas `.std()` by n − 1. **Fix:** use `np.std(x, ddof=1)` for a sample SD.
+- **`TypeError: Could not convert ['MondayTuesday…'] to numeric`** (pandas 3: `Cannot perform reduction 'mean' with string dtype`): `df.mean()` was called on the whole table, which includes text columns. **Fix:** choose a column, `df["revenue_inr"].mean()`, or use `df.mean(numeric_only=True)`.
 
 ## Try it
 

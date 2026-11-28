@@ -25,6 +25,13 @@ To develop a decision model for a business decision under uncertainty (how large
 - [[decision-analysis]]: payoff tables, criteria, EMV, EOL, EVPI, decision trees.
 - [[probability-basics]]: empirical probabilities from data.
 
+## Before the lab
+
+- **Open:** a Google account and the *Open in Colab* link in Setup. Nothing to install; it also runs on a phone, but a laptop is easier.
+- **Revise first:** [[decision-analysis]] Q3 (criteria), Q4 (EMV), Q5 (EVPI) and Q6 (decision trees).
+- **Know the data:** skim the dataset's data card (`content/assets/data/sahyadri-mart-sales.md`): one row is one store on one day, 16 columns.
+- **Colab basics:** click a cell and press **Shift+Enter** to run it; a cell's output appears just below it.
+
 ## Setup (Colab)
 
 [Open in Colab](https://colab.research.google.com/github/Prathameshv07/ai-ds-notes/blob/main/content/assets/notebooks/prob-stats/decision-analysis-practical.ipynb). Nothing to install.
@@ -32,6 +39,18 @@ To develop a decision model for a business decision under uncertainty (how large
 - **Dataset:** Sahyadri Mart daily sales (synthetic; its data card in `content/assets/data/` lists every column). One row = one store on one day.
 - The payoff table is the one from the [[decision-analysis]] note (profit in ₹ thousand); only the probabilities come from the data.
 - The outputs below come from pandas 3.0 and NumPy 2.5; the notebook gives identical numbers on pandas 2.2 and NumPy 2.0 (current Colab).
+
+## Steps
+
+1. Open the notebook with the *Open in Colab* link. You should see the title **Decision Tree for a Stock Order (ABA Unit 2, Practical 5)**.
+2. Click *File → Save a copy in Drive*, so your changes are kept. You should see "Copy of" in the notebook's name.
+3. Run the **Step 1** cell (Load the data: how much do festival days lift Supermarket sales above a normal day?). You should see `Supermarket festival days: 160`.
+4. Run the **Step 2** cell (States of nature: Low (uplift below 1.3), Medium (1.3 to 1.7), High (1.7 or more)). You should see `High      0.331`.
+5. Run the **Step 3** cell (Payoff table (profit, Rs thousand) and the four criteria without probabilities). You should see `Large order       200      -60     73.3         100`.
+6. Run the **Step 4** cell (With probabilities from the data: EMV, EOL and EVPI). You should see `Large order   82.12  34.88`.
+7. Run the **Step 5** cell (The same decision as a tree, solved by rolling back). You should see `Decision: {'Large': 82.12, 'Medium': 85.12, 'Small': 54.62} -> Medium`.
+8. Run the **Step 6** cell (Sensitivity: how does the best order change with P(High)?). You should see three EMV lines against P(High); the large-order line crosses the medium-order line just right of the dashed data line, then the line `Large overtakes Medium when P(High) exceeds about 0.36`.
+9. Add a new cell below the last step (*+ Code*), type the **Try it** variation and run it. You should see numbers you can check against the collapsed answer.
 
 ## Code
 
@@ -227,6 +246,13 @@ The same four answers as the theory note: maximax → Large, maximin → Small, 
 ### Step 6: sensitivity
 
 Large overtakes Medium once $P(\text{High})$ exceeds about 0.36. The data's estimate, 0.33, is close to that line: the decision is **sensitive**. A small change in festival demand, or an estimate based on more years of data, could flip it. Report that, not just "order medium".
+
+## Common errors and fixes
+
+- **`NameError: name 'df' is not defined`** (or `'rng'`, `'np'`, `'stats'`): a cell was run before Step 1, or Colab restarted and forgot everything. **Fix:** *Runtime → Run before* on the current cell, or run the cells again from Step 1.
+- **`HTTPError: HTTP Error 404: Not Found`** in Step 1: the URL was typed or copied incompletely. **Fix:** copy both `url` lines exactly; the file name is `sahyadri-mart-sales.csv`. With no internet you get a `URLError` instead.
+- **`KeyError: 'High'`**: the state labels in `pd.cut(..., labels=[...])` were typed differently (for example `'high'`). **Fix:** use exactly `"Low", "Medium", "High"`, matching the payoff table's column names.
+- **`NameError: name 'plt' is not defined`** in a plotting step: the cell was copied without its `import matplotlib.pyplot as plt` line. **Fix:** run the whole cell, including the import.
 
 ## Try it
 
