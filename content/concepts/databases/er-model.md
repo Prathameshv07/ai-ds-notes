@@ -88,8 +88,8 @@ An ER diagram is like a seating plan for a wedding. The guests are entity instan
 erDiagram
   accTitle: ER diagram of departments, courses and students
   accDescr: A department offers many courses; each course belongs to one department. A student enrols in many courses and a course has many students. Each entity box lists its attributes, with the identifier marked PK.
-  DEPARTMENT ||--o{ COURSE : offers
-  STUDENT }o--o{ COURSE : "enrols in"
+  DEPARTMENT ||..o{ COURSE : offers
+  STUDENT }o..o{ COURSE : "enrols in"
   DEPARTMENT {
     string dept_code PK
     string dept_name

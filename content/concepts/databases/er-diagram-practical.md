@@ -28,6 +28,13 @@ To design ER diagrams for (a) a **student management system** and (b) a **librar
 - [[associative-entities]]: resolving every M:N relationship.
 - [[keys]]: choosing primary keys.
 
+## Before the lab
+
+- **Revise (10 minutes):** [[er-model]] (entities and attributes), [[connectivity-and-cardinality]] (line-end symbols), [[associative-entities]] (resolving M:N) and [[keys]] (primary keys).
+- **Open:** [mermaid.live](https://mermaid.live) in any browser. Nothing to install; it works on a phone too, but a laptop is easier for typing.
+- **Keep ready:** your practical journal and a pencil, for the hand-drawn version.
+- **Know the symbols:** `||` exactly one, `o|` zero or one, `|{` one or many, `o{` zero or many; a solid line `--` is identifying, a dashed line `..` is non-identifying.
+
 ## Setup
 
 No Python is needed. Use any one tool:
@@ -35,6 +42,18 @@ No Python is needed. Use any one tool:
 - **Mermaid** (recommended, text-based): open [mermaid.live](https://mermaid.live), paste the code below, and the diagram appears on the right. The same code also works in Obsidian notes.
 - **draw.io** (free, drag-and-drop): open [app.diagrams.net](https://app.diagrams.net), choose *Entity Relation* shapes, and draw the same entities and lines.
 - **Paper:** for the journal, draw by hand in Chen or crow's foot notation.
+
+## Steps
+
+1. **Open [mermaid.live](https://mermaid.live).** You should see a code box on the left and a sample diagram on the right.
+2. **Clear the code box and type `erDiagram` on the first line.** The sample disappears and the diagram area is empty, with no red error.
+3. **Type the first relationship: `DEPARTMENT ||..o{ STUDENT : has`.** Two boxes appear, joined by a dashed line: a double bar at DEPARTMENT and a circle with a crow's foot at STUDENT.
+4. **Add the other Part A relationship lines one at a time** (from Code, Part A). Each line adds a box or a connecting line. If a red "Parse error" appears, check Common errors and fixes below before going on.
+5. **Add the attribute blocks** (DEPARTMENT { … } and so on). Each box grows to list its attributes, with PK and FK beside the keys.
+6. **Check each line end against the business rules,** reading every relationship in both directions. Your diagram should match Output, Part A.
+7. **Save your work:** download the diagram as PNG or SVG from the editor's download/export option, or take a screenshot. Paste or print it for the journal.
+8. **Repeat steps 2–7 for Part B** (library). Your diagram should match Output, Part B.
+9. **Hand-draw both diagrams in the journal** in Chen notation: entities as rectangles, attributes as ovals, relationships as diamonds, with 1 and M written on the lines.
 
 ## Code
 
@@ -49,10 +68,10 @@ No Python is needed. Use any one tool:
 
 ```text
 erDiagram
-  DEPARTMENT ||--o{ STUDENT : has
-  DEPARTMENT ||--o{ COURSE : offers
-  DEPARTMENT ||--|{ FACULTY : employs
-  FACULTY ||--o{ COURSE : teaches
+  DEPARTMENT ||..o{ STUDENT : has
+  DEPARTMENT ||..o{ COURSE : offers
+  DEPARTMENT ||..|{ FACULTY : employs
+  FACULTY ||..o{ COURSE : teaches
   STUDENT ||--o{ ENROLMENT : makes
   COURSE ||--o{ ENROLMENT : has
   DEPARTMENT {
@@ -96,12 +115,12 @@ erDiagram
 
 ```text
 erDiagram
-  PUBLISHER ||--o{ BOOK : publishes
-  BOOK ||--|{ BOOK_COPY : "has copies"
+  PUBLISHER ||..o{ BOOK : publishes
+  BOOK ||..|{ BOOK_COPY : "has copies"
   BOOK ||--|{ BOOK_AUTHOR : "written by"
   AUTHOR ||--|{ BOOK_AUTHOR : writes
-  MEMBER ||--o{ ISSUE : borrows
-  BOOK_COPY ||--o{ ISSUE : "issued in"
+  MEMBER ||..o{ ISSUE : borrows
+  BOOK_COPY ||..o{ ISSUE : "issued in"
   BOOK {
     string isbn PK
     string title
@@ -147,10 +166,10 @@ erDiagram
 erDiagram
   accTitle: ER diagram for a student management system
   accDescr: A department has many students, offers many courses and employs one or many faculty. A faculty member teaches many courses; each course has one faculty member. Students and courses are linked through ENROLMENT, whose key is roll number, course code and semester, and which stores marks.
-  DEPARTMENT ||--o{ STUDENT : has
-  DEPARTMENT ||--o{ COURSE : offers
-  DEPARTMENT ||--|{ FACULTY : employs
-  FACULTY ||--o{ COURSE : teaches
+  DEPARTMENT ||..o{ STUDENT : has
+  DEPARTMENT ||..o{ COURSE : offers
+  DEPARTMENT ||..|{ FACULTY : employs
+  FACULTY ||..o{ COURSE : teaches
   STUDENT ||--o{ ENROLMENT : makes
   COURSE ||--o{ ENROLMENT : has
   DEPARTMENT {
@@ -189,12 +208,12 @@ erDiagram
 erDiagram
   accTitle: ER diagram for a library management system
   accDescr: A publisher publishes many books. A book has one or many copies. Books and authors are linked through BOOK_AUTHOR. Members and book copies are linked through ISSUE, which has its own issue ID and stores issue, due and return dates.
-  PUBLISHER ||--o{ BOOK : publishes
-  BOOK ||--|{ BOOK_COPY : "has copies"
+  PUBLISHER ||..o{ BOOK : publishes
+  BOOK ||..|{ BOOK_COPY : "has copies"
   BOOK ||--|{ BOOK_AUTHOR : "written by"
   AUTHOR ||--|{ BOOK_AUTHOR : writes
-  MEMBER ||--o{ ISSUE : borrows
-  BOOK_COPY ||--o{ ISSUE : "issued in"
+  MEMBER ||..o{ ISSUE : borrows
+  BOOK_COPY ||..o{ ISSUE : "issued in"
   BOOK {
     string isbn PK
     string title
@@ -246,7 +265,19 @@ erDiagram
 - **BOOK vs BOOK_COPY:** a title (ISBN) and a physical copy are different things. The library lends copies, so ISSUE links to BOOK_COPY, not BOOK.
 - **BOOK_COPY's key:** the accession number is unique across the library, so BOOK_COPY has its own key. It is existence-dependent on BOOK but **not weak**, and the relationship is non-identifying.
 - **M:N resolved twice:** BOOK–AUTHOR becomes BOOK_AUTHOR; MEMBER–BOOK_COPY becomes ISSUE.
+- **Solid or dashed lines:** only BOOK_AUTHOR (and ENROLMENT in Part A) take their parents' keys into their own primary key, so only their lines are solid (identifying). Every other line is dashed (non-identifying).
 - **Surrogate key in ISSUE:** the same member can borrow the same copy again later, so member + copy is not unique. ISSUE uses a surrogate key, issue_id.
+
+## Common errors and fixes
+
+| What you see | Why it happens | Fix |
+|---|---|---|
+| `Parse error on line 2 … Expecting 'UNICODE_TEXT', 'NUM', 'ENTITY_NAME' … got 'CLASS'` | `CLASS` is a reserved word in Mermaid | Use another name such as `CLASS_SECTION`, or an alias: `CLS["CLASS"]` |
+| `Parse error on line 3 … Expecting 'ATTRIBUTE_WORD' … got 'ATTRIBUTE_KEY'` | An attribute line has no data type, such as `roll_no PK` | Write the type first: `string roll_no PK` |
+| `Parse error on line 2 … Expecting 'COLON' … got 'NEWLINE'` | A relationship line has no label | Add a colon and a verb: `STUDENT ||--o{ ENROLMENT : makes` |
+| No error, but STUDENT and COURSE are joined directly by `}o..o{` | The M:N relationship was not resolved | Add the associative entity ENROLMENT with two 1:M lines |
+| No error, but ISSUE's key is member_id + accession_no | The same member can borrow the same copy again, so the key repeats | Use a surrogate key, issue_id |
+| No error, but ISSUE is linked to BOOK | The library lends physical copies, not titles | Link ISSUE to BOOK_COPY |
 
 ## Try it
 

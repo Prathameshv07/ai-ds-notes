@@ -75,10 +75,10 @@ A family tree is a recursive relationship: PERSON *is parent of* PERSON. Everyon
 erDiagram
   accTitle: Recursive and ternary relationships
   accDescr: An employee manages zero or many employees, and each employee has zero or one manager, which is a recursive one-to-many relationship. A prescription links one doctor, one patient and one drug, which is how a ternary relationship is usually implemented.
-  EMPLOYEE |o--o{ EMPLOYEE : manages
-  DOCTOR ||--o{ PRESCRIPTION : writes
-  PATIENT ||--o{ PRESCRIPTION : receives
-  DRUG ||--o{ PRESCRIPTION : "appears in"
+  EMPLOYEE |o..o{ EMPLOYEE : manages
+  DOCTOR ||..o{ PRESCRIPTION : writes
+  PATIENT ||..o{ PRESCRIPTION : receives
+  DRUG ||..o{ PRESCRIPTION : "appears in"
   EMPLOYEE {
     string emp_id PK
     string name

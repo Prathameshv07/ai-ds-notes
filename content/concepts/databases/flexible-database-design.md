@@ -72,8 +72,8 @@ A school's records register. Writing a new class teacher's name over the old one
 erDiagram
   accTitle: Fixing a fan trap in a sports league
   accDescr: The corrected design links a league to zero or many teams, and each team to zero or many players. Each player belongs to exactly one team, and each team to exactly one league, so a player's team and league are both known.
-  LEAGUE ||--o{ TEAM : has
-  TEAM ||--o{ PLAYER : has
+  LEAGUE ||..o{ TEAM : has
+  TEAM ||..o{ PLAYER : has
   LEAGUE {
     string league_id PK
   }

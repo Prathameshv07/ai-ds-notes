@@ -88,7 +88,7 @@ A cricket team sheet. Each team (one) has many players (connectivity 1:M). A pla
 erDiagram
   accTitle: Professor teaches class, with cardinality and participation
   accDescr: One professor teaches zero or many classes, so a professor's participation is optional. Each class is taught by exactly one professor, so a class's participation is mandatory.
-  PROFESSOR ||--o{ CLS : teaches
+  PROFESSOR ||..o{ CLS : teaches
   PROFESSOR {
     string prof_id PK
     string name

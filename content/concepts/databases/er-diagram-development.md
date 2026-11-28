@@ -73,10 +73,10 @@ Rules: a customer places many orders; each order is from one restaurant and is d
 erDiagram
   accTitle: ER diagram for an online food-delivery app
   accDescr: A customer places zero or many orders. A restaurant receives zero or many orders and offers one or many menu items. A delivery partner delivers zero or many orders. Each order has one or many order items, and each menu item appears in zero or many order items.
-  CUSTOMER ||--o{ ORDER : places
-  RESTAURANT ||--o{ ORDER : receives
-  RESTAURANT ||--|{ MENU_ITEM : offers
-  DELIVERY_PARTNER ||--o{ ORDER : delivers
+  CUSTOMER ||..o{ ORDER : places
+  RESTAURANT ||..o{ ORDER : receives
+  RESTAURANT ||..|{ MENU_ITEM : offers
+  DELIVERY_PARTNER ||..o{ ORDER : delivers
   ORDER ||--|{ ORDER_ITEM : contains
   MENU_ITEM ||--o{ ORDER_ITEM : "appears in"
 ```
@@ -118,9 +118,9 @@ flowchart TB
 erDiagram
   accTitle: ER diagram for a hospital OPD
   accDescr: A department has one or many doctors. A doctor has zero or many appointments, and so does a patient; each appointment has exactly one doctor and one patient. An appointment has zero or many prescription items, and a medicine appears in zero or many prescription items.
-  DEPARTMENT ||--|{ DOCTOR : has
-  DOCTOR ||--o{ APPOINTMENT : attends
-  PATIENT ||--o{ APPOINTMENT : books
+  DEPARTMENT ||..|{ DOCTOR : has
+  DOCTOR ||..o{ APPOINTMENT : attends
+  PATIENT ||..o{ APPOINTMENT : books
   APPOINTMENT ||--o{ PRESCRIPTION_ITEM : includes
   MEDICINE ||--o{ PRESCRIPTION_ITEM : "appears in"
   PRESCRIPTION_ITEM {
