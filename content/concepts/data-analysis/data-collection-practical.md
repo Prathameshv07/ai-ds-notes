@@ -27,6 +27,12 @@ To collect business datasets from real-life scenarios: **secondary data** from a
 - [[types-of-variables]]: each survey question produces a categorical or numerical variable.
 - [[exploratory-data-analysis]]: the next step after collecting data.
 
+## Before the lab
+
+- **Open:** a Google account signed in; the Colab link below opens in your browser. Nothing to install.
+- **Revise:** [[business-analytics]] Q1 (why businesses collect data) and what a CSV file is: a plain-text table, one row per line, values separated by commas.
+- **Prepare your survey (for Steps 8–10):** make a Google Form with 4–5 questions, at least one with numbers (e.g. monthly spend) and one with choices (e.g. how often you shop). Collect at least 10 responses from classmates before the lab.
+
 ## Setup (Colab)
 
 [Open in Colab](https://colab.research.google.com/github/Prathameshv07/ai-ds-notes/blob/main/content/assets/notebooks/data-analysis/data-collection-practical.ipynb). Nothing to install: Colab already has pandas.
@@ -34,6 +40,19 @@ To collect business datasets from real-life scenarios: **secondary data** from a
 - **Dataset:** Sahyadri Mart daily sales, 12 Maharashtra stores, 2024–2025 (synthetic; see its data card in `content/assets/data/`). The code loads it directly from GitHub.
 - **Your own survey (in class):** create a Google Form with 4–5 questions → *Responses* tab → *More* (⋮) → *Download responses (.csv)*. In Colab, run `from google.colab import files; files.upload()`, choose the file, and read it with `pd.read_csv("<file name>.csv", thousands=",")`.
 - The outputs below come from pandas 3. On pandas 2.x (current Colab), text columns show the type `object` instead of `str`; everything else is the same.
+
+## Steps
+
+1. **Open the notebook.** Click *Open in Colab*, then *File → Save a copy in Drive*, so your changes are kept. *You should see:* a notebook titled "Data Collection Practical" with 5 code cells.
+2. **Run Step 1** (click the cell, press Shift+Enter). *You should see:* `Rows, columns: (8772, 16)`, the period 2024-01-01 to 2025-12-31, `Stores: 12`, and 3 rows of sales.
+3. **Run Step 2.** *You should see:* `(6, 5)` and the column types; *Monthly spend (Rs)* is `float64`, a number.
+4. **Run Step 3.** *You should see:* the survey table with short column names and the timestamp as a date-time.
+5. **Run Step 4.** *You should see:* `monthly_spend` with 1 missing value; S04 Pune 4 responses, S05 Pune 2.
+6. **Run Step 5.** *You should see:* `(6, 5) rows and columns saved`, and `customer_survey.csv` in the Files panel (folder icon on the left).
+7. **Read the Explanation** below and note which data is primary and which is secondary.
+8. **Download your own survey.** In your form: *Responses → More (⋮) → Download responses (.csv)*. *You should see:* a ZIP file in your Downloads folder, with the CSV inside.
+9. **Upload it to Colab.** In a new cell, run `from google.colab import files; files.upload()` and choose the ZIP (or the extracted CSV). *You should see:* the file name and size printed under the cell.
+10. **Load it.** Run `my = pd.read_csv("<file name>", thousands=",")` and then `my.shape` and `my.isna().sum()`. *You should see:* one row per response and the count of missing answers in each column. pandas opens a ZIP holding one CSV directly.
 
 ## Code
 
@@ -189,6 +208,18 @@ Data can also be ==**internal** (from inside the company==, like the sales recor
 ### What makes collected data good?
 
 ==Good data is **relevant** to the question, **accurate**, **complete**, **timely**, and **representative**== of the people or events it describes. ==Plan what to ask, whom to ask and how many before collecting.== A survey filled in only by happy weekend customers cannot describe all customers.
+
+## Common errors and fixes
+
+| What you see | Why | Fix |
+|---|---|---|
+| `FileNotFoundError: [Errno 2] No such file or directory: 'your_file.csv'` | The file was not uploaded, or the name is spelt differently | Run `files.upload()` again; copy the exact name from the Files panel |
+| `HTTPError: HTTP Error 404: Not Found` | A typo in the dataset URL | Copy the URL again from the data card or Step 1 |
+| `TypeError` when you take `.mean()` of monthly spend (the wording differs between pandas versions) | Without `thousands=","`, "3,200" is read as text | Add `thousands=","` to `read_csv` |
+| `ValueError: Length mismatch: Expected axis has 6 elements, new values have 5 elements` | The list of new column names has a different length from the columns | Give exactly one new name per column; check with `survey.columns` |
+| `ValueError: time data "20/11/2026 10:02:11" doesn't match format ...` | The date format string does not match the file, e.g. month and day swapped | Use `%d/%m/%Y %H:%M:%S` for day/month/year; check one value first |
+| The downloaded file is a `.zip`, not a `.csv` | Google Forms packs responses into a ZIP | Upload the ZIP and read it directly, or extract the CSV first |
+| `str` where your teacher's screen shows `object` | Different pandas versions name text columns differently | Nothing to fix; both mean text |
 
 ## Try it
 

@@ -30,12 +30,34 @@ To conduct exploratory data analysis (EDA) on a business dataset, two years of d
 - [[quartiles-and-percentiles]]: the IQR rule for outliers in Step 10.
 - [[correlation]]: the relationships in Step 8.
 
+## Before the lab
+
+- **Open:** a Google account signed in; the Colab link below. Nothing to install.
+- **Revise:** [[exploratory-data-analysis]] Q3 (the six steps) and Q6 (outliers), and mean vs median from [[central-tendency]].
+- **Read:** the dataset's data card (`content/assets/data/sahyadri-mart-sales.md`), so you know what one row and each column mean.
+- **Done first:** [[data-collection-practical]], which uses the same `read_csv` call.
+
 ## Setup (Colab)
 
 [Open in Colab](https://colab.research.google.com/github/Prathameshv07/ai-ds-notes/blob/main/content/assets/notebooks/data-analysis/exploratory-data-analysis-practical.ipynb). Nothing to install.
 
 - **Dataset:** Sahyadri Mart daily sales (synthetic; its data card in `content/assets/data/` lists every column). One row = one store on one day.
 - The outputs below come from pandas 3. On pandas 2.x (current Colab), text columns show `object` instead of `str` and dates show `datetime64[ns]`; all numbers are the same.
+
+## Steps
+
+1. **Open the notebook.** Click *Open in Colab*, then *File → Save a copy in Drive*. *You should see:* 10 code cells, one per step.
+2. **Run Step 1 (structure).** *You should see:* `Rows, columns: (8772, 16)` and a type for each column; `date` is a date type.
+3. **Run Step 2 (quality).** *You should see:* only `rainfall_mm` missing (93), at S03 and S10; 0 duplicate rows and 0 duplicate store-days.
+4. **Run Step 3 (categories).** *You should see:* Express 7, Supermarket 5, and the five regions.
+5. **Run Step 4 (numbers).** *You should see:* the summary table; revenue mean about ₹444 thousand against a median of about ₹326 thousand.
+6. **Run Step 5 (groups).** *You should see:* Supermarkets with about twice the footfall and about ₹683 average bill against ₹369.
+7. **Run Step 6 (trend).** *You should see:* a month-by-year table with October highest in both years, and yearly totals of ₹188.5 and ₹201.0 crore.
+8. **Run Step 7 (week).** *You should see:* Sunday highest (1,499) and Tuesday lowest (1,130).
+9. **Run Step 8 (relationships).** *You should see:* footfall–revenue 0.96, ad spend–revenue 0.61, and the within-store median r of 0.27.
+10. **Run Step 9 (festivals and rain).** *You should see:* 3,084 visitors on festival days against 2,169; monsoon footfall falling from dry to heavy rain.
+11. **Run Step 10 (outliers).** *You should see:* 25 outlier days, all high, 15 of them festival days.
+12. **Write your findings.** In a text cell, list five findings in your own words, then compare them with the Summary of findings below.
 
 ## Code
 
@@ -375,6 +397,17 @@ A Supermarket earns about 3.6 times an Express store a day: about twice the visi
 6. High outliers are real festival-season days.
 
 Each finding is a hypothesis for later practicals (correlation, regression, forecasting, hypothesis tests) to test properly.
+
+## Common errors and fixes
+
+| What you see | Why | Fix |
+|---|---|---|
+| `KeyError: 'Revenue'` | Column names are case-sensitive and exact | Use `df.columns` to see the real names, e.g. `revenue_inr` |
+| `AttributeError: Can only use .dt accessor with datetimelike values` | The file was read without `parse_dates=["date"]`, so dates are text | Reload with `parse_dates=["date"]`, or run `df["date"] = pd.to_datetime(df["date"])` |
+| `ValueError: could not convert string to float: '2024-01-01'` from `df.corr()` | Correlation needs numbers, and the table has text columns | Select numerical columns first, as in Step 8: `df[cols].corr()` |
+| A day shows `NaN` in Step 7 | A spelling mistake in the `order` list, e.g. "Wednsday" | Copy the day names exactly; check with `df["day_of_week"].unique()` |
+| Store types show Express 5117, Supermarket 3655 | Counted from all rows, so each store is counted 731 times | Count from `df.drop_duplicates("store_id")`, as in Step 3 |
+| `HTTPError: HTTP Error 404: Not Found` | A typo in the dataset URL | Copy the URL again from Step 1 or the data card |
 
 ## Try it
 
